@@ -24,6 +24,9 @@
     <Compile Update="UserControls\UserControl_Help.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\UserControl_EmployeeImport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\UserControl_ProjectImport.cs">
       <SubType>UserControl</SubType>
     </Compile>

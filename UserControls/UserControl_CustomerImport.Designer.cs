@@ -49,19 +49,19 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_customerDetails = new System.Windows.Forms.Panel();
             this.label_customerNo = new System.Windows.Forms.Label();
             this.label_nickname = new System.Windows.Forms.Label();
-            this.checkBox_defaultIndustryID = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultIndustryName = new System.Windows.Forms.CheckBox();
             this.label_customerSince = new System.Windows.Forms.Label();
-            this.checkBox_defaultSecondaryKAMID = new System.Windows.Forms.CheckBox();
-            this.label_primaryKAMID = new System.Windows.Forms.Label();
-            this.comboBox_industryID = new System.Windows.Forms.ComboBox();
-            this.label_secondaryKAMID = new System.Windows.Forms.Label();
+            this.checkBox_defaultSecondaryKAM = new System.Windows.Forms.CheckBox();
+            this.label_primaryKAM = new System.Windows.Forms.Label();
+            this.comboBox_industryName = new System.Windows.Forms.ComboBox();
+            this.label_secondaryKAM = new System.Windows.Forms.Label();
             this.comboBox_customerSince = new System.Windows.Forms.ComboBox();
-            this.label_industryID = new System.Windows.Forms.Label();
-            this.comboBox_primaryKAMID = new System.Windows.Forms.ComboBox();
-            this.comboBox_secondaryKAMID = new System.Windows.Forms.ComboBox();
+            this.label_industryName = new System.Windows.Forms.Label();
+            this.comboBox_primaryKAM = new System.Windows.Forms.ComboBox();
+            this.comboBox_secondaryKAM = new System.Windows.Forms.ComboBox();
             this.comboBox_nickName = new System.Windows.Forms.ComboBox();
             this.comboBox_customerNo = new System.Windows.Forms.ComboBox();
-            this.checkBox_defaultPrimaryKAMID = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultPrimaryKAM = new System.Windows.Forms.CheckBox();
             this.panel_contactDetailsButton = new System.Windows.Forms.Panel();
             this.label_ContactDetails = new System.Windows.Forms.Label();
             this.button_contactDetails = new System.Windows.Forms.Button();
@@ -157,15 +157,15 @@ namespace TimeLog.DataImporter.UserControls
             this.label_delimiter = new System.Windows.Forms.Label();
             this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
             this.groupBox_customerMandatoryFields = new System.Windows.Forms.GroupBox();
-            this.checkBox_defaultCountryID = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultCustomerStatusID = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultCurrencyID = new System.Windows.Forms.CheckBox();
-            this.label_countryID = new System.Windows.Forms.Label();
-            this.label_customerStatusID = new System.Windows.Forms.Label();
-            this.comboBox_countryID = new System.Windows.Forms.ComboBox();
-            this.comboBox_customerStatusID = new System.Windows.Forms.ComboBox();
-            this.label_currencyID = new System.Windows.Forms.Label();
-            this.comboBox_currencyID = new System.Windows.Forms.ComboBox();
+            this.checkBox_defaultCountryISO = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultCustomerStatus = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultCurrencyISO = new System.Windows.Forms.CheckBox();
+            this.label_countryISO = new System.Windows.Forms.Label();
+            this.label_customerStatus = new System.Windows.Forms.Label();
+            this.comboBox_countryISO = new System.Windows.Forms.ComboBox();
+            this.comboBox_customerStatus = new System.Windows.Forms.ComboBox();
+            this.label_currencyISO = new System.Windows.Forms.Label();
+            this.comboBox_currencyISO = new System.Windows.Forms.ComboBox();
             this.label_customerName = new System.Windows.Forms.Label();
             this.comboBox_customerName = new System.Windows.Forms.ComboBox();
             this.label_customerSetup = new System.Windows.Forms.Label();
@@ -409,19 +409,19 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_customerDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_customerDetails.Controls.Add(this.label_customerNo);
             this.panel_customerDetails.Controls.Add(this.label_nickname);
-            this.panel_customerDetails.Controls.Add(this.checkBox_defaultIndustryID);
+            this.panel_customerDetails.Controls.Add(this.checkBox_defaultIndustryName);
             this.panel_customerDetails.Controls.Add(this.label_customerSince);
-            this.panel_customerDetails.Controls.Add(this.checkBox_defaultSecondaryKAMID);
-            this.panel_customerDetails.Controls.Add(this.label_primaryKAMID);
-            this.panel_customerDetails.Controls.Add(this.comboBox_industryID);
-            this.panel_customerDetails.Controls.Add(this.label_secondaryKAMID);
+            this.panel_customerDetails.Controls.Add(this.checkBox_defaultSecondaryKAM);
+            this.panel_customerDetails.Controls.Add(this.label_primaryKAM);
+            this.panel_customerDetails.Controls.Add(this.comboBox_industryName);
+            this.panel_customerDetails.Controls.Add(this.label_secondaryKAM);
             this.panel_customerDetails.Controls.Add(this.comboBox_customerSince);
-            this.panel_customerDetails.Controls.Add(this.label_industryID);
-            this.panel_customerDetails.Controls.Add(this.comboBox_primaryKAMID);
-            this.panel_customerDetails.Controls.Add(this.comboBox_secondaryKAMID);
+            this.panel_customerDetails.Controls.Add(this.label_industryName);
+            this.panel_customerDetails.Controls.Add(this.comboBox_primaryKAM);
+            this.panel_customerDetails.Controls.Add(this.comboBox_secondaryKAM);
             this.panel_customerDetails.Controls.Add(this.comboBox_nickName);
             this.panel_customerDetails.Controls.Add(this.comboBox_customerNo);
-            this.panel_customerDetails.Controls.Add(this.checkBox_defaultPrimaryKAMID);
+            this.panel_customerDetails.Controls.Add(this.checkBox_defaultPrimaryKAM);
             this.panel_customerDetails.Location = new System.Drawing.Point(3, 41);
             this.panel_customerDetails.MaximumSize = new System.Drawing.Size(426, 203);
             this.panel_customerDetails.MinimumSize = new System.Drawing.Size(426, 0);
@@ -447,17 +447,17 @@ namespace TimeLog.DataImporter.UserControls
             this.label_nickname.TabIndex = 1;
             this.label_nickname.Text = "Nickname";
             // 
-            // checkBox_defaultIndustryID
+            // checkBox_defaultIndustryName
             // 
-            this.checkBox_defaultIndustryID.AutoSize = true;
-            this.checkBox_defaultIndustryID.Location = new System.Drawing.Point(297, 169);
-            this.checkBox_defaultIndustryID.Name = "checkBox_defaultIndustryID";
-            this.checkBox_defaultIndustryID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultIndustryID.TabIndex = 8;
-            this.checkBox_defaultIndustryID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultIndustryID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultIndustryID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultIndustryID.CheckedChanged += new System.EventHandler(this.checkBox_defaultIndustryID_CheckedChanged);
+            this.checkBox_defaultIndustryName.AutoSize = true;
+            this.checkBox_defaultIndustryName.Location = new System.Drawing.Point(297, 169);
+            this.checkBox_defaultIndustryName.Name = "checkBox_defaultIndustryName";
+            this.checkBox_defaultIndustryName.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultIndustryName.TabIndex = 8;
+            this.checkBox_defaultIndustryName.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultIndustryName, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultIndustryName.UseVisualStyleBackColor = true;
+            this.checkBox_defaultIndustryName.CheckedChanged += new System.EventHandler(this.checkBox_defaultIndustryName_CheckedChanged);
             // 
             // label_customerSince
             // 
@@ -468,44 +468,44 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerSince.TabIndex = 1;
             this.label_customerSince.Text = "Customer Since";
             // 
-            // checkBox_defaultSecondaryKAMID
+            // checkBox_defaultSecondaryKAM
             // 
-            this.checkBox_defaultSecondaryKAMID.AutoSize = true;
-            this.checkBox_defaultSecondaryKAMID.Location = new System.Drawing.Point(297, 107);
-            this.checkBox_defaultSecondaryKAMID.Name = "checkBox_defaultSecondaryKAMID";
-            this.checkBox_defaultSecondaryKAMID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultSecondaryKAMID.TabIndex = 8;
-            this.checkBox_defaultSecondaryKAMID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultSecondaryKAMID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultSecondaryKAMID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultSecondaryKAMID.CheckedChanged += new System.EventHandler(this.checkBox_defaultSecondaryKAMID_CheckedChanged);
+            this.checkBox_defaultSecondaryKAM.AutoSize = true;
+            this.checkBox_defaultSecondaryKAM.Location = new System.Drawing.Point(297, 107);
+            this.checkBox_defaultSecondaryKAM.Name = "checkBox_defaultSecondaryKAM";
+            this.checkBox_defaultSecondaryKAM.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultSecondaryKAM.TabIndex = 8;
+            this.checkBox_defaultSecondaryKAM.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultSecondaryKAM, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultSecondaryKAM.UseVisualStyleBackColor = true;
+            this.checkBox_defaultSecondaryKAM.CheckedChanged += new System.EventHandler(this.checkBox_defaultSecondaryKAM_CheckedChanged);
             // 
-            // label_primaryKAMID
+            // label_primaryKAM
             // 
-            this.label_primaryKAMID.AutoSize = true;
-            this.label_primaryKAMID.Location = new System.Drawing.Point(10, 77);
-            this.label_primaryKAMID.Name = "label_primaryKAMID";
-            this.label_primaryKAMID.Size = new System.Drawing.Size(106, 17);
-            this.label_primaryKAMID.TabIndex = 1;
-            this.label_primaryKAMID.Text = "Primary KAM ID";
+            this.label_primaryKAM.AutoSize = true;
+            this.label_primaryKAM.Location = new System.Drawing.Point(10, 77);
+            this.label_primaryKAM.Name = "label_primaryKAM";
+            this.label_primaryKAM.Size = new System.Drawing.Size(89, 17);
+            this.label_primaryKAM.TabIndex = 1;
+            this.label_primaryKAM.Text = "Primary KAM";
             // 
-            // comboBox_industryID
+            // comboBox_industryName
             // 
-            this.comboBox_industryID.FormattingEnabled = true;
-            this.comboBox_industryID.Location = new System.Drawing.Point(153, 167);
-            this.comboBox_industryID.Name = "comboBox_industryID";
-            this.comboBox_industryID.Size = new System.Drawing.Size(138, 25);
-            this.comboBox_industryID.TabIndex = 3;
-            this.comboBox_industryID.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryID_SelectedIndexChanged);
+            this.comboBox_industryName.FormattingEnabled = true;
+            this.comboBox_industryName.Location = new System.Drawing.Point(153, 167);
+            this.comboBox_industryName.Name = "comboBox_industryName";
+            this.comboBox_industryName.Size = new System.Drawing.Size(138, 25);
+            this.comboBox_industryName.TabIndex = 3;
+            this.comboBox_industryName.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryName_SelectedIndexChanged);
             // 
-            // label_secondaryKAMID
+            // label_secondaryKAM
             // 
-            this.label_secondaryKAMID.AutoSize = true;
-            this.label_secondaryKAMID.Location = new System.Drawing.Point(10, 108);
-            this.label_secondaryKAMID.Name = "label_secondaryKAMID";
-            this.label_secondaryKAMID.Size = new System.Drawing.Size(122, 17);
-            this.label_secondaryKAMID.TabIndex = 1;
-            this.label_secondaryKAMID.Text = "Secondary KAM ID";
+            this.label_secondaryKAM.AutoSize = true;
+            this.label_secondaryKAM.Location = new System.Drawing.Point(10, 108);
+            this.label_secondaryKAM.Name = "label_secondaryKAM";
+            this.label_secondaryKAM.Size = new System.Drawing.Size(105, 17);
+            this.label_secondaryKAM.TabIndex = 1;
+            this.label_secondaryKAM.Text = "Secondary KAM";
             // 
             // comboBox_customerSince
             // 
@@ -516,32 +516,32 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerSince.TabIndex = 3;
             this.comboBox_customerSince.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerSince_SelectedIndexChanged);
             // 
-            // label_industryID
+            // label_industryName
             // 
-            this.label_industryID.AutoSize = true;
-            this.label_industryID.Location = new System.Drawing.Point(10, 170);
-            this.label_industryID.Name = "label_industryID";
-            this.label_industryID.Size = new System.Drawing.Size(77, 17);
-            this.label_industryID.TabIndex = 1;
-            this.label_industryID.Text = "Industry ID";
+            this.label_industryName.AutoSize = true;
+            this.label_industryName.Location = new System.Drawing.Point(10, 170);
+            this.label_industryName.Name = "label_industryName";
+            this.label_industryName.Size = new System.Drawing.Size(100, 17);
+            this.label_industryName.TabIndex = 1;
+            this.label_industryName.Text = "Industry Name";
             // 
-            // comboBox_primaryKAMID
+            // comboBox_primaryKAM
             // 
-            this.comboBox_primaryKAMID.FormattingEnabled = true;
-            this.comboBox_primaryKAMID.Location = new System.Drawing.Point(153, 74);
-            this.comboBox_primaryKAMID.Name = "comboBox_primaryKAMID";
-            this.comboBox_primaryKAMID.Size = new System.Drawing.Size(138, 25);
-            this.comboBox_primaryKAMID.TabIndex = 3;
-            this.comboBox_primaryKAMID.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAMID_SelectedIndexChanged);
+            this.comboBox_primaryKAM.FormattingEnabled = true;
+            this.comboBox_primaryKAM.Location = new System.Drawing.Point(153, 74);
+            this.comboBox_primaryKAM.Name = "comboBox_primaryKAM";
+            this.comboBox_primaryKAM.Size = new System.Drawing.Size(138, 25);
+            this.comboBox_primaryKAM.TabIndex = 3;
+            this.comboBox_primaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAM_SelectedIndexChanged);
             // 
-            // comboBox_secondaryKAMID
+            // comboBox_secondaryKAM
             // 
-            this.comboBox_secondaryKAMID.FormattingEnabled = true;
-            this.comboBox_secondaryKAMID.Location = new System.Drawing.Point(153, 105);
-            this.comboBox_secondaryKAMID.Name = "comboBox_secondaryKAMID";
-            this.comboBox_secondaryKAMID.Size = new System.Drawing.Size(138, 25);
-            this.comboBox_secondaryKAMID.TabIndex = 3;
-            this.comboBox_secondaryKAMID.SelectedIndexChanged += new System.EventHandler(this.comboBox_secondaryKAMID_SelectedIndexChanged);
+            this.comboBox_secondaryKAM.FormattingEnabled = true;
+            this.comboBox_secondaryKAM.Location = new System.Drawing.Point(153, 105);
+            this.comboBox_secondaryKAM.Name = "comboBox_secondaryKAM";
+            this.comboBox_secondaryKAM.Size = new System.Drawing.Size(138, 25);
+            this.comboBox_secondaryKAM.TabIndex = 3;
+            this.comboBox_secondaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_secondaryKAM_SelectedIndexChanged);
             // 
             // comboBox_nickName
             // 
@@ -561,17 +561,17 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerNo.TabIndex = 3;
             this.comboBox_customerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerNo_SelectedIndexChanged);
             // 
-            // checkBox_defaultPrimaryKAMID
+            // checkBox_defaultPrimaryKAM
             // 
-            this.checkBox_defaultPrimaryKAMID.AutoSize = true;
-            this.checkBox_defaultPrimaryKAMID.Location = new System.Drawing.Point(297, 81);
-            this.checkBox_defaultPrimaryKAMID.Name = "checkBox_defaultPrimaryKAMID";
-            this.checkBox_defaultPrimaryKAMID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultPrimaryKAMID.TabIndex = 8;
-            this.checkBox_defaultPrimaryKAMID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultPrimaryKAMID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultPrimaryKAMID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultPrimaryKAMID.CheckedChanged += new System.EventHandler(this.checkBox_defaultPrimaryKAMID_CheckedChanged);
+            this.checkBox_defaultPrimaryKAM.AutoSize = true;
+            this.checkBox_defaultPrimaryKAM.Location = new System.Drawing.Point(297, 76);
+            this.checkBox_defaultPrimaryKAM.Name = "checkBox_defaultPrimaryKAM";
+            this.checkBox_defaultPrimaryKAM.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultPrimaryKAM.TabIndex = 8;
+            this.checkBox_defaultPrimaryKAM.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultPrimaryKAM, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultPrimaryKAM.UseVisualStyleBackColor = true;
+            this.checkBox_defaultPrimaryKAM.CheckedChanged += new System.EventHandler(this.checkBox_defaultPrimaryKAM_CheckedChanged);
             // 
             // panel_contactDetailsButton
             // 
@@ -1523,7 +1523,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_delimiter
             // 
             this.label_delimiter.AutoSize = true;
-            this.label_delimiter.Location = new System.Drawing.Point(14, 75);
+            this.label_delimiter.Location = new System.Drawing.Point(10, 75);
             this.label_delimiter.Name = "label_delimiter";
             this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
@@ -1539,15 +1539,15 @@ namespace TimeLog.DataImporter.UserControls
             // 
             // groupBox_customerMandatoryFields
             // 
-            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCountryID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCustomerStatusID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCurrencyID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.label_countryID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.label_customerStatusID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_countryID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_customerStatusID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.label_currencyID);
-            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_currencyID);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCountryISO);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCustomerStatus);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.checkBox_defaultCurrencyISO);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.label_countryISO);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.label_customerStatus);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_countryISO);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_customerStatus);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.label_currencyISO);
+            this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_currencyISO);
             this.groupBox_customerMandatoryFields.Controls.Add(this.label_customerName);
             this.groupBox_customerMandatoryFields.Controls.Add(this.comboBox_customerName);
             this.groupBox_customerMandatoryFields.Location = new System.Drawing.Point(169, 75);
@@ -1557,95 +1557,95 @@ namespace TimeLog.DataImporter.UserControls
             this.groupBox_customerMandatoryFields.TabStop = false;
             this.groupBox_customerMandatoryFields.Text = "Mandatory";
             // 
-            // checkBox_defaultCountryID
+            // checkBox_defaultCountryISO
             // 
-            this.checkBox_defaultCountryID.AutoSize = true;
-            this.checkBox_defaultCountryID.Location = new System.Drawing.Point(277, 123);
-            this.checkBox_defaultCountryID.Name = "checkBox_defaultCountryID";
-            this.checkBox_defaultCountryID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultCountryID.TabIndex = 8;
-            this.checkBox_defaultCountryID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultCountryID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultCountryID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultCountryID.CheckedChanged += new System.EventHandler(this.checkBox_defaultCountryID_CheckedChanged);
+            this.checkBox_defaultCountryISO.AutoSize = true;
+            this.checkBox_defaultCountryISO.Location = new System.Drawing.Point(277, 123);
+            this.checkBox_defaultCountryISO.Name = "checkBox_defaultCountryISO";
+            this.checkBox_defaultCountryISO.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultCountryISO.TabIndex = 8;
+            this.checkBox_defaultCountryISO.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultCountryISO, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultCountryISO.UseVisualStyleBackColor = true;
+            this.checkBox_defaultCountryISO.CheckedChanged += new System.EventHandler(this.checkBox_defaultCountryISO_CheckedChanged);
             // 
-            // checkBox_defaultCustomerStatusID
+            // checkBox_defaultCustomerStatus
             // 
-            this.checkBox_defaultCustomerStatusID.AutoSize = true;
-            this.checkBox_defaultCustomerStatusID.Location = new System.Drawing.Point(277, 92);
-            this.checkBox_defaultCustomerStatusID.Name = "checkBox_defaultCustomerStatusID";
-            this.checkBox_defaultCustomerStatusID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultCustomerStatusID.TabIndex = 8;
-            this.checkBox_defaultCustomerStatusID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultCustomerStatusID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultCustomerStatusID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultCustomerStatusID.CheckedChanged += new System.EventHandler(this.checkBox_defaultCustomerStatusID_CheckedChanged);
+            this.checkBox_defaultCustomerStatus.AutoSize = true;
+            this.checkBox_defaultCustomerStatus.Location = new System.Drawing.Point(277, 92);
+            this.checkBox_defaultCustomerStatus.Name = "checkBox_defaultCustomerStatus";
+            this.checkBox_defaultCustomerStatus.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultCustomerStatus.TabIndex = 8;
+            this.checkBox_defaultCustomerStatus.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultCustomerStatus, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultCustomerStatus.UseVisualStyleBackColor = true;
+            this.checkBox_defaultCustomerStatus.CheckedChanged += new System.EventHandler(this.checkBox_defaultCustomerStatus_CheckedChanged);
             // 
-            // checkBox_defaultCurrencyID
+            // checkBox_defaultCurrencyISO
             // 
-            this.checkBox_defaultCurrencyID.AutoSize = true;
-            this.checkBox_defaultCurrencyID.Location = new System.Drawing.Point(277, 63);
-            this.checkBox_defaultCurrencyID.Name = "checkBox_defaultCurrencyID";
-            this.checkBox_defaultCurrencyID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultCurrencyID.TabIndex = 8;
-            this.checkBox_defaultCurrencyID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultCurrencyID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultCurrencyID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultCurrencyID.CheckedChanged += new System.EventHandler(this.checkBox_defaultCurrencyID_CheckedChanged);
+            this.checkBox_defaultCurrencyISO.AutoSize = true;
+            this.checkBox_defaultCurrencyISO.Location = new System.Drawing.Point(277, 63);
+            this.checkBox_defaultCurrencyISO.Name = "checkBox_defaultCurrencyISO";
+            this.checkBox_defaultCurrencyISO.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultCurrencyISO.TabIndex = 8;
+            this.checkBox_defaultCurrencyISO.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultCurrencyISO, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultCurrencyISO.UseVisualStyleBackColor = true;
+            this.checkBox_defaultCurrencyISO.CheckedChanged += new System.EventHandler(this.checkBox_defaultCurrencyISO_CheckedChanged);
             // 
-            // label_countryID
+            // label_countryISO
             // 
-            this.label_countryID.AutoSize = true;
-            this.label_countryID.Location = new System.Drawing.Point(6, 124);
-            this.label_countryID.Name = "label_countryID";
-            this.label_countryID.Size = new System.Drawing.Size(75, 17);
-            this.label_countryID.TabIndex = 5;
-            this.label_countryID.Text = "Country ID";
+            this.label_countryISO.AutoSize = true;
+            this.label_countryISO.Location = new System.Drawing.Point(6, 124);
+            this.label_countryISO.Name = "label_countryISO";
+            this.label_countryISO.Size = new System.Drawing.Size(83, 17);
+            this.label_countryISO.TabIndex = 5;
+            this.label_countryISO.Text = "Country ISO";
             // 
-            // label_customerStatusID
+            // label_customerStatus
             // 
-            this.label_customerStatusID.AutoSize = true;
-            this.label_customerStatusID.Location = new System.Drawing.Point(5, 93);
-            this.label_customerStatusID.Name = "label_customerStatusID";
-            this.label_customerStatusID.Size = new System.Drawing.Size(126, 17);
-            this.label_customerStatusID.TabIndex = 5;
-            this.label_customerStatusID.Text = "Customer Status ID";
+            this.label_customerStatus.AutoSize = true;
+            this.label_customerStatus.Location = new System.Drawing.Point(5, 93);
+            this.label_customerStatus.Name = "label_customerStatus";
+            this.label_customerStatus.Size = new System.Drawing.Size(109, 17);
+            this.label_customerStatus.TabIndex = 5;
+            this.label_customerStatus.Text = "Customer Status";
             // 
-            // comboBox_countryID
+            // comboBox_countryISO
             // 
-            this.comboBox_countryID.FormattingEnabled = true;
-            this.comboBox_countryID.Location = new System.Drawing.Point(138, 121);
-            this.comboBox_countryID.Name = "comboBox_countryID";
-            this.comboBox_countryID.Size = new System.Drawing.Size(133, 25);
-            this.comboBox_countryID.TabIndex = 7;
-            this.comboBox_countryID.SelectedIndexChanged += new System.EventHandler(this.comboBox_countryID_SelectedIndexChanged);
+            this.comboBox_countryISO.FormattingEnabled = true;
+            this.comboBox_countryISO.Location = new System.Drawing.Point(138, 121);
+            this.comboBox_countryISO.Name = "comboBox_countryISO";
+            this.comboBox_countryISO.Size = new System.Drawing.Size(133, 25);
+            this.comboBox_countryISO.TabIndex = 7;
+            this.comboBox_countryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_countryISO_SelectedIndexChanged);
             // 
-            // comboBox_customerStatusID
+            // comboBox_customerStatus
             // 
-            this.comboBox_customerStatusID.FormattingEnabled = true;
-            this.comboBox_customerStatusID.Location = new System.Drawing.Point(138, 90);
-            this.comboBox_customerStatusID.Name = "comboBox_customerStatusID";
-            this.comboBox_customerStatusID.Size = new System.Drawing.Size(133, 25);
-            this.comboBox_customerStatusID.TabIndex = 6;
-            this.comboBox_customerStatusID.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerStatusID_SelectedIndexChanged);
+            this.comboBox_customerStatus.FormattingEnabled = true;
+            this.comboBox_customerStatus.Location = new System.Drawing.Point(138, 90);
+            this.comboBox_customerStatus.Name = "comboBox_customerStatus";
+            this.comboBox_customerStatus.Size = new System.Drawing.Size(133, 25);
+            this.comboBox_customerStatus.TabIndex = 6;
+            this.comboBox_customerStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerStatus_SelectedIndexChanged);
             // 
-            // label_currencyID
+            // label_currencyISO
             // 
-            this.label_currencyID.AutoSize = true;
-            this.label_currencyID.Location = new System.Drawing.Point(6, 62);
-            this.label_currencyID.Name = "label_currencyID";
-            this.label_currencyID.Size = new System.Drawing.Size(79, 17);
-            this.label_currencyID.TabIndex = 5;
-            this.label_currencyID.Text = "Currency ID";
+            this.label_currencyISO.AutoSize = true;
+            this.label_currencyISO.Location = new System.Drawing.Point(6, 62);
+            this.label_currencyISO.Name = "label_currencyISO";
+            this.label_currencyISO.Size = new System.Drawing.Size(87, 17);
+            this.label_currencyISO.TabIndex = 5;
+            this.label_currencyISO.Text = "Currency ISO";
             // 
-            // comboBox_currencyID
+            // comboBox_currencyISO
             // 
-            this.comboBox_currencyID.FormattingEnabled = true;
-            this.comboBox_currencyID.Location = new System.Drawing.Point(138, 59);
-            this.comboBox_currencyID.Name = "comboBox_currencyID";
-            this.comboBox_currencyID.Size = new System.Drawing.Size(133, 25);
-            this.comboBox_currencyID.TabIndex = 4;
-            this.comboBox_currencyID.SelectedIndexChanged += new System.EventHandler(this.comboBox_currencyID_SelectedIndexChanged);
+            this.comboBox_currencyISO.FormattingEnabled = true;
+            this.comboBox_currencyISO.Location = new System.Drawing.Point(138, 59);
+            this.comboBox_currencyISO.Name = "comboBox_currencyISO";
+            this.comboBox_currencyISO.Size = new System.Drawing.Size(133, 25);
+            this.comboBox_currencyISO.TabIndex = 4;
+            this.comboBox_currencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_currencyISO_SelectedIndexChanged);
             // 
             // label_customerName
             // 
@@ -1669,7 +1669,7 @@ namespace TimeLog.DataImporter.UserControls
             // 
             this.label_customerSetup.AutoSize = true;
             this.label_customerSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_customerSetup.Location = new System.Drawing.Point(8, 16);
+            this.label_customerSetup.Location = new System.Drawing.Point(6, 16);
             this.label_customerSetup.Name = "label_customerSetup";
             this.label_customerSetup.Size = new System.Drawing.Size(260, 32);
             this.label_customerSetup.TabIndex = 0;
@@ -1682,7 +1682,7 @@ namespace TimeLog.DataImporter.UserControls
             this.button_customerSelectFile.FlatAppearance.BorderSize = 0;
             this.button_customerSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_customerSelectFile.ForeColor = System.Drawing.Color.White;
-            this.button_customerSelectFile.Location = new System.Drawing.Point(13, 101);
+            this.button_customerSelectFile.Location = new System.Drawing.Point(13, 111);
             this.button_customerSelectFile.Name = "button_customerSelectFile";
             this.button_customerSelectFile.Size = new System.Drawing.Size(80, 29);
             this.button_customerSelectFile.TabIndex = 4;
@@ -1814,19 +1814,19 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.Label label_customerSetup;
         private System.Windows.Forms.Button button_customerSelectFile;
         private System.Windows.Forms.TextBox textBox_customerImportMessages;
-        private System.Windows.Forms.ComboBox comboBox_currencyID;
-        private System.Windows.Forms.Label label_currencyID;
-        private System.Windows.Forms.ComboBox comboBox_countryID;
-        private System.Windows.Forms.ComboBox comboBox_customerStatusID;
+        private System.Windows.Forms.ComboBox comboBox_currencyISO;
+        private System.Windows.Forms.Label label_currencyISO;
+        private System.Windows.Forms.ComboBox comboBox_countryISO;
+        private System.Windows.Forms.ComboBox comboBox_customerStatus;
         private System.Windows.Forms.Label label_invoiceAddressToUse;
         private System.Windows.Forms.Label label_invoicingAddressCountryID;
-        private System.Windows.Forms.Label label_countryID;
-        private System.Windows.Forms.Label label_customerStatusID;
+        private System.Windows.Forms.Label label_countryISO;
+        private System.Windows.Forms.Label label_customerStatus;
         private System.Windows.Forms.Label label_eanNo;
-        private System.Windows.Forms.Label label_secondaryKAMID;
-        private System.Windows.Forms.Label label_primaryKAMID;
+        private System.Windows.Forms.Label label_secondaryKAM;
+        private System.Windows.Forms.Label label_primaryKAM;
         private System.Windows.Forms.Label label_email;
-        private System.Windows.Forms.Label label_industryID;
+        private System.Windows.Forms.Label label_industryName;
         private System.Windows.Forms.Label label_defaultMileageDistance;
         private System.Windows.Forms.Label label_customerNo;
         private System.Windows.Forms.Label label_useEanNo;
@@ -1861,9 +1861,9 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.Label label_customerSince;
         private System.Windows.Forms.Label label_nickname;
         private System.Windows.Forms.ComboBox comboBox_customerNo;
-        private System.Windows.Forms.ComboBox comboBox_secondaryKAMID;
-        private System.Windows.Forms.CheckBox checkBox_defaultCurrencyID;
-        private System.Windows.Forms.CheckBox checkBox_defaultPrimaryKAMID;
+        private System.Windows.Forms.ComboBox comboBox_secondaryKAM;
+        private System.Windows.Forms.CheckBox checkBox_defaultCurrencyISO;
+        private System.Windows.Forms.CheckBox checkBox_defaultPrimaryKAM;
         private System.Windows.Forms.ComboBox comboBox_useInvoicingAddress;
         private System.Windows.Forms.ComboBox comboBox_organizationNo;
         private System.Windows.Forms.ComboBox comboBox_eanNo;
@@ -1878,9 +1878,9 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.ComboBox comboBox_email;
         private System.Windows.Forms.ComboBox comboBox_faxNo;
         private System.Windows.Forms.ComboBox comboBox_phoneNo;
-        private System.Windows.Forms.ComboBox comboBox_industryID;
+        private System.Windows.Forms.ComboBox comboBox_industryName;
         private System.Windows.Forms.ComboBox comboBox_customerSince;
-        private System.Windows.Forms.ComboBox comboBox_primaryKAMID;
+        private System.Windows.Forms.ComboBox comboBox_primaryKAM;
         private System.Windows.Forms.ComboBox comboBox_nickName;
         private System.Windows.Forms.ComboBox comboBox_VATNo;
         private System.Windows.Forms.ComboBox comboBox_VATPercentage;
@@ -1902,12 +1902,12 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.ComboBox comboBox_invoicingAddress3;
         private System.Windows.Forms.ComboBox comboBox_invoicingAddress2;
         private System.Windows.Forms.ComboBox comboBox_invoicingAddress;
-        private System.Windows.Forms.CheckBox checkBox_defaultCountryID;
-        private System.Windows.Forms.CheckBox checkBox_defaultCustomerStatusID;
+        private System.Windows.Forms.CheckBox checkBox_defaultCountryISO;
+        private System.Windows.Forms.CheckBox checkBox_defaultCustomerStatus;
         private System.Windows.Forms.CheckBox checkBox_defaultVATPercentage;
         private System.Windows.Forms.CheckBox checkBox_defaultPaymentTermID;
-        private System.Windows.Forms.CheckBox checkBox_defaultIndustryID;
-        private System.Windows.Forms.CheckBox checkBox_defaultSecondaryKAMID;
+        private System.Windows.Forms.CheckBox checkBox_defaultIndustryName;
+        private System.Windows.Forms.CheckBox checkBox_defaultSecondaryKAM;
         private System.Windows.Forms.Label label_delimiter;
         private System.Windows.Forms.ComboBox comboBox_delimiter;
         private System.Windows.Forms.ToolTip defaultToolTip;

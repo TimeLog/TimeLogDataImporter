@@ -11,8 +11,10 @@ namespace TimeLog.DataImporter.Handlers
 {
     public class BaseHandler
     {
+        #region Variable and enum declarations
+
         public List<string> FileColumnHeaders = new List<string>();
-        private readonly List<string> _delimiterList = new List<string>{",",";","|"};
+        private readonly List<string> _delimiterList = new List<string> { ",", ";", "|" };
 
         // The state of expanding or collapsing panel
         public enum ExpandState
@@ -23,20 +25,24 @@ namespace TimeLog.DataImporter.Handlers
             Collapsed,
         }
 
+        #endregion
+
+        #region Helper - Get methods
+
         public DataTable GetFileContent(string selectedDelimiter)
         {
             try
             {
                 OpenFileDialog _dialog = new OpenFileDialog();
                 _dialog.ShowDialog();
-                
+
                 if (_dialog.FileName != "")
                 {
                     if (_dialog.FileName.EndsWith(".csv"))
                     {
                         DataTable _fileData = new DataTable();
                         _fileData = GetDataTableFromCSVFile(_dialog.FileName, selectedDelimiter);
-                        
+
                         if (_fileData != null)
                         {
                             if (_fileData.Rows.Count > 0)
@@ -121,6 +127,24 @@ namespace TimeLog.DataImporter.Handlers
             return _delimiterList;
         }
 
+        public int GetIDFromFieldValue(List<KeyValuePair<int, string>> keyValuePairList, string fieldValue)
+        {
+            foreach (var _field in keyValuePairList)
+            {
+                if (_field.Value == fieldValue)
+                {
+                    var _fieldKey = _field.Key;
+                    return _fieldKey;
+                }
+            }
+
+            return -1;
+        }
+
+        #endregion
+
+        #region Get methods for default values
+
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
             var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCurrencyEndpoint;
@@ -152,6 +176,10 @@ namespace TimeLog.DataImporter.Handlers
 
             return null;
         }
+
+        #endregion
+
+        #region Helper - Process API response methods
 
         public DefaultApiResponse ProcessApiResponseContent(WebException webEx, string responseContent, out BusinessRulesApiResponse businessRulesApiResponse)
         {
@@ -186,104 +214,207 @@ namespace TimeLog.DataImporter.Handlers
             return _apiResponse;
         }
 
-        public string CheckAndGetString(object columnValue)
+        #endregion
+
+        #region Helper - Get data of different type methods
+
+        public string CheckAndGetString(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
-            return columnValue.ToString();
+            return dataGridView.Columns[columnName] != null ? dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString() : string.Empty;
         }
 
-        public bool CheckAndGetBoolean(string columnName, object columnValue)
+        public bool CheckAndGetBoolean(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
-            var _value = columnValue.ToString();
-
-            if (_value != "")
+            if (dataGridView.Columns[columnName] != null)
             {
-                if (bool.TryParse(_value, out var _result))
-                {
-                    return _result;
-                }
+                var _value = dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString();
 
-                if (_value == "1")
+                if (_value != "")
                 {
-                    return true;
-                }
+                    if (bool.TryParse(_value, out var _result))
+                    {
+                        return _result;
+                    }
 
-                if (_value == "0")
-                {
-                    return false;
-                }
+                    if (_value == "1")
+                    {
+                        return true;
+                    }
 
-                throw new FormatException("String format cannot be converted to boolean for column [" + columnName + "]. Please recheck input.");
+                    if (_value == "0")
+                    {
+                        return false;
+                    }
+
+                    throw new FormatException("String format cannot be converted to boolean for column [" + columnName + "]. Please recheck input.");
+                }
             }
 
             return false;
         }
 
-        public int CheckAndGetInteger(string columnName, object columnValue)
-        {
-            try
-            {
-                if (columnValue != DBNull.Value && columnValue.ToString() != "")
-                {
-                    return Convert.ToInt32(columnValue);
-                }
+        //public bool CheckAndGetBoolean(string columnName, object columnValue)
+        //{
+        //    var _value = columnValue.ToString();
 
-                return 0;
-            }
-            catch (Exception)
+        //    if (_value != "")
+        //    {
+        //        if (bool.TryParse(_value, out var _result))
+        //        {
+        //            return _result;
+        //        }
+
+        //        if (_value == "1")
+        //        {
+        //            return true;
+        //        }
+
+        //        if (_value == "0")
+        //        {
+        //            return false;
+        //        }
+
+        //        throw new FormatException("String format cannot be converted to boolean for column [" + columnName + "]. Please recheck input.");
+        //    }
+
+        //    return false;
+        //}
+
+        public int CheckAndGetInteger(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
+        {
+            if (dataGridView.Columns[columnName] != null)
             {
-                throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value != DBNull.Value 
+                        && dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString() != "")
+                    {
+                        return Convert.ToInt32(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
+                }
             }
+
+            return 0;
         }
 
-        public int? CheckAndGetNullableInteger(string columnName, object columnValue)
-        {
-            try
-            {
-                if (columnValue == DBNull.Value | columnValue.ToString() == "")
-                {
-                    return null;
-                }
+        //public int CheckAndGetInteger(string columnName, object columnValue)
+        //{
+        //    try
+        //    {
+        //        if (columnValue != DBNull.Value && columnValue.ToString() != "")
+        //        {
+        //            return Convert.ToInt32(columnValue);
+        //        }
 
-                return Convert.ToInt32(columnValue);
-            }
-            catch (Exception)
+        //        return 0;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
+        //    }
+        //}
+
+        public int? CheckAndGetNullableInteger(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
+        {
+            if (dataGridView.Columns[columnName] != null)
             {
-                throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value == DBNull.Value | dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString() == "")
+                    {
+                        return null;
+                    }
+
+                    return Convert.ToInt32(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
+                }
             }
+
+            return null;
         }
 
-        public double CheckAndGetDouble(string columnName, object columnValue)
+        public double CheckAndGetDouble(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
-            try
+            if (dataGridView.Columns[columnName] != null)
             {
-                if (columnValue != DBNull.Value)
+                try
                 {
-                    return Convert.ToDouble(columnValue);
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value != DBNull.Value)
+                    {
+                        return Convert.ToDouble(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                    }
                 }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to double for column [" + columnName + "]. Please recheck input.");
+                }
+            }
 
-                return 0;
-            }
-            catch (Exception)
-            {
-                throw new FormatException("String format cannot be converted to double for column [" + columnName + "]. Please recheck input.");
-            }
+            return 0;
         }
 
-        public DateTime CheckAndGetDate(string columnName, object columnValue)
-        {
-            try
-            {
-                if (columnValue != DBNull.Value)
-                {
-                    return Convert.ToDateTime(columnValue);
-                }
+        //public double CheckAndGetDouble(string columnName, object columnValue)
+        //{
+        //    try
+        //    {
+        //        if (columnValue != DBNull.Value)
+        //        {
+        //            return Convert.ToDouble(columnValue);
+        //        }
 
-                return DateTime.Now;
-            }
-            catch (Exception)
+        //        return 0;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new FormatException("String format cannot be converted to double for column [" + columnName + "]. Please recheck input.");
+        //    }
+        //}
+
+        public DateTime CheckAndGetDate(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
+        {
+            if (dataGridView.Columns[columnName] != null)
             {
-                throw new FormatException("String format cannot be converted to datetime for column [" + columnName + "]. Please recheck input.");
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value != DBNull.Value)
+                    {
+                        return Convert.ToDateTime(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to datetime for column [" +
+                                              columnName + "]. Please recheck input.");
+                }
             }
+
+            return DateTime.Now;
         }
+
+        //public DateTime CheckAndGetDate(string columnName, object columnValue)
+        //{
+        //    try
+        //    {
+        //        if (columnValue != DBNull.Value)
+        //        {
+        //            return Convert.ToDateTime(columnValue);
+        //        }
+
+        //        return DateTime.Now;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new FormatException("String format cannot be converted to datetime for column [" + columnName + "]. Please recheck input.");
+        //    }
+        //}
+
+        #endregion
     }
 }

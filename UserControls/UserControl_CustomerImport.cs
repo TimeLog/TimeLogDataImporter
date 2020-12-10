@@ -19,26 +19,27 @@ namespace TimeLog.DataImporter.UserControls
         private Button _senderButton;
         private bool _isRowValid = true;
         private int _errorRowCount;
+        private bool _isMappingFieldValueToIDCorrect = true;
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
             {0, "Customer Name"},
-            {1, "Currency ID"},
-            {2, "Customer Status ID"},
-            {3, "Country ID"}
+            {1, "Currency ISO"},
+            {2, "Customer Status"},
+            {3, "Country ISO"}
         };
 
         //all column header variables
         private readonly string _customerName = "Customer Name";
-        private readonly string _currencyID = "Currency ID";
-        private readonly string _customerStatusID = "Customer Status ID";
-        private readonly string _countryID = "Country ID";
+        private readonly string _currencyISO = "Currency ISO";
+        private readonly string _customerStatus = "Customer Status";
+        private readonly string _countryISO = "Country ISO";
         private readonly string _customerNo = "Customer No";
         private readonly string _nickname = "Nickname";
-        private readonly string _primaryKAMID = "Primary KAM ID";
-        private readonly string _secondaryKAMID = "Secondary KAM ID";
+        private readonly string _primaryKAM = "Primary KAM";
+        private readonly string _secondaryKAM = "Secondary KAM";
         private readonly string _customerSince = "Customer Since";
-        private readonly string _industryID = "Industry ID";
+        private readonly string _industryName = "Industry Name";
         private readonly string _phoneNo = "Phone No";
         private readonly string _faxNo = "Fax No";
         private readonly string _email = "Email";
@@ -80,12 +81,12 @@ namespace TimeLog.DataImporter.UserControls
         private List<string> _VATPercentageList;
 
         //default value lists from API 
-        private List<KeyValuePair<int, string>> _currencyIDList;
-        private List<KeyValuePair<int, string>> _countryIDList;
-        private List<KeyValuePair<int, string>> _customerStatusIDList;
-        private List<KeyValuePair<int, string>> _primaryKAMIDList;
-        private List<KeyValuePair<int, string>> _secondaryKAMIDList;
-        private List<KeyValuePair<int, string>> _industryIDList;
+        private List<KeyValuePair<int, string>> _currencyISOList;
+        private List<KeyValuePair<int, string>> _countryISOList;
+        private List<KeyValuePair<int, string>> _customerStatusList;
+        private List<KeyValuePair<int, string>> _primaryKAMList;
+        private List<KeyValuePair<int, string>> _secondaryKAMList;
+        private List<KeyValuePair<int, string>> _industryNameList;
         private List<KeyValuePair<int, string>> _paymentTermIDList; // not yet added, to be implemented
 
         //expanding panels' current states, expand panels, expand buttons
@@ -105,6 +106,7 @@ namespace TimeLog.DataImporter.UserControls
             InitializeExpandCollapsePanels();
             AddRowNumberToDataTable();
             InitializeCustomerDataTable();
+            InitializeAllDefaultValues();
             dataGridView_customer.DataSource = _customerTable;
             button_import.Enabled = false;
         }
@@ -167,6 +169,16 @@ namespace TimeLog.DataImporter.UserControls
             {
                 _customerTable.Columns.Add(_mandatoryField.Value);
             }
+        }
+
+        private void InitializeAllDefaultValues()
+        {
+            GetAllCurrencyFromApi();
+            GetAllCountryFromApi();
+            GetAllCustomerStatusFromApi();
+            GetAllPrimaryKAMFromApi();
+            GetAllSecondaryKAMFromApi();
+            GetAllIndustryFromApi();
         }
 
         #endregion
@@ -345,117 +357,79 @@ namespace TimeLog.DataImporter.UserControls
                             break;
                         }
 
+                        _isMappingFieldValueToIDCorrect = true;
+
                         if (_row.DataBoundItem != null)
                         {
                             CustomerCreateModel _newCustomer = new CustomerCreateModel
                             {
-                                Name = (dataGridView_customer.Columns[_customerName] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_customerName].Index].Value) : string.Empty,
-                                CurrencyID = (dataGridView_customer.Columns[_currencyID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_currencyID, _row.Cells[dataGridView_customer.Columns[_currencyID].Index].Value) : 0,
-                                CustomerStatusID = (dataGridView_customer.Columns[_customerStatusID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_customerStatusID, _row.Cells[dataGridView_customer.Columns[_customerStatusID].Index].Value) : 0,
-                                CountryID = (dataGridView_customer.Columns[_countryID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_countryID, _row.Cells[dataGridView_customer.Columns[_countryID].Index].Value) : 0,
-                                CustomerNo = (dataGridView_customer.Columns[_customerNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_customerNo].Index].Value) : string.Empty,
-                                NickName = (dataGridView_customer.Columns[_nickname] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_nickname].Index].Value) : string.Empty,
-                                PrimaryKAMID = (dataGridView_customer.Columns[_primaryKAMID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetNullableInteger(_primaryKAMID, _row.Cells[dataGridView_customer.Columns[_primaryKAMID].Index].Value) : null,
-                                SecondaryKAMID = (dataGridView_customer.Columns[_secondaryKAMID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetNullableInteger(_secondaryKAMID, _row.Cells[dataGridView_customer.Columns[_secondaryKAMID].Index].Value) : null,
-                                CustomerSince = (dataGridView_customer.Columns[_customerSince] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetDate(_customerSince, _row.Cells[dataGridView_customer.Columns[_customerSince].Index].Value) : DateTime.Now,
-                                IndustryID = (dataGridView_customer.Columns[_industryID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetNullableInteger(_industryID, _row.Cells[dataGridView_customer.Columns[_industryID].Index].Value) : null,
-                                Phone = (dataGridView_customer.Columns[_phoneNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_phoneNo].Index].Value) : string.Empty,
-                                Fax = (dataGridView_customer.Columns[_faxNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_faxNo].Index].Value) : string.Empty,
-                                Email = (dataGridView_customer.Columns[_email] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_email].Index].Value) : string.Empty,
-                                Website = (dataGridView_customer.Columns[_website] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_website].Index].Value) : string.Empty,
-                                Address = (dataGridView_customer.Columns[_address] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_address].Index].Value) : string.Empty,
-                                Address2 = (dataGridView_customer.Columns[_address2] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_address2].Index].Value) : string.Empty,
-                                Address3 = (dataGridView_customer.Columns[_address3] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_address3].Index].Value) : string.Empty,
-                                ZipCode = (dataGridView_customer.Columns[_zipCode] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_zipCode].Index].Value) : string.Empty,
-                                City = (dataGridView_customer.Columns[_city] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_city].Index].Value) : string.Empty,
-                                State = (dataGridView_customer.Columns[_state] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_state].Index].Value) : string.Empty,
-                                UseEanNo = (dataGridView_customer.Columns[_useEanNo] != null) &&
-                                           CustomerHandler.Instance.CheckAndGetBoolean(_useEanNo, _row.Cells[dataGridView_customer.Columns[_useEanNo].Index].Value),
-                                EanNo = (dataGridView_customer.Columns[_eanNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_eanNo].Index].Value) : string.Empty,
-                                OrganizationNo = (dataGridView_customer.Columns[_organizationNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_organizationNo].Index].Value) : string.Empty,
-                                VatNo = (dataGridView_customer.Columns[_VATNo] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_VATNo].Index].Value) : string.Empty,
-                                UseInvoicingAddress = (dataGridView_customer.Columns[_useInvoicingAddress] != null) &&
-                                            CustomerHandler.Instance.CheckAndGetBoolean(_useInvoicingAddress, _row.Cells[dataGridView_customer.Columns[_useInvoicingAddress].Index].Value),
-                                InvoicingAddress = (dataGridView_customer.Columns[_invoicingAddress] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddress].Index].Value) : string.Empty,
-                                InvoicingAddress2 = (dataGridView_customer.Columns[_invoicingAddress2] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddress2].Index].Value) : string.Empty,
-                                InvoicingAddress3 = (dataGridView_customer.Columns[_invoicingAddress3] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddress3].Index].Value) : string.Empty,
-                                InvoicingAddressZipCode = (dataGridView_customer.Columns[_invoicingAddressZipCode] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddressZipCode].Index].Value) : string.Empty,
-                                InvoicingAddressCity = (dataGridView_customer.Columns[_invoicingAddressCity] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddressCity].Index].Value) : string.Empty,
-                                InvoicingAddressState = (dataGridView_customer.Columns[_invoicingAddressState] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetString(_row.Cells[dataGridView_customer.Columns[_invoicingAddressState].Index].Value) : string.Empty,
-                                InvoicingAddressCountryID = (dataGridView_customer.Columns[_invoicingAddressCountryID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_invoicingAddressCountryID, _row.Cells[dataGridView_customer.Columns[_invoicingAddressCountryID].Index].Value) : 0,
-                                DefaultMileageDistance = (dataGridView_customer.Columns[_defaultMileageDistance] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_defaultMileageDistance, _row.Cells[dataGridView_customer.Columns[_defaultMileageDistance].Index].Value) : 0,
-                                ExpenseIsBillable = (dataGridView_customer.Columns[_expenseIsBillable] != null) &&
-                                            CustomerHandler.Instance.CheckAndGetBoolean(_expenseIsBillable, _row.Cells[dataGridView_customer.Columns[_expenseIsBillable].Index].Value),
-                                MileageIsBillable = (dataGridView_customer.Columns[_mileageIsBillable] != null) &&
-                                            CustomerHandler.Instance.CheckAndGetBoolean(_mileageIsBillable, _row.Cells[dataGridView_customer.Columns[_mileageIsBillable].Index].Value),
-                                DefaultDistIsMaxBillable = (dataGridView_customer.Columns[_defaultDistIsMaxBillable] != null) &&
-                                            CustomerHandler.Instance.CheckAndGetBoolean(_defaultDistIsMaxBillable, _row.Cells[dataGridView_customer.Columns[_defaultDistIsMaxBillable].Index].Value),
-                                ContactID = (dataGridView_customer.Columns[_contactID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_contactID, _row.Cells[dataGridView_customer.Columns[_contactID].Index].Value) : 0,
-                                InvoiceAddressToUse = (dataGridView_customer.Columns[_invoiceAddressToUse] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_invoiceAddressToUse, _row.Cells[dataGridView_customer.Columns[_invoiceAddressToUse].Index].Value) : 0,
-                                InternalReferenceID = (dataGridView_customer.Columns[_internalReferenceID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_internalReferenceID, _row.Cells[dataGridView_customer.Columns[_internalReferenceID].Index].Value) : 0,
-                                CustomerReferenceID = (dataGridView_customer.Columns[_customerReferenceID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_customerReferenceID, _row.Cells[dataGridView_customer.Columns[_customerReferenceID].Index].Value) : 0,
-                                PaymentTermID = (dataGridView_customer.Columns[_paymentTermID] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetInteger(_paymentTermID, _row.Cells[dataGridView_customer.Columns[_paymentTermID].Index].Value) : 0,
-                                DiscountPercentage = (dataGridView_customer.Columns[_discountPercentage] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetDouble(_discountPercentage, _row.Cells[dataGridView_customer.Columns[_discountPercentage].Index].Value) : 0,
-                                CalculateVat = (dataGridView_customer.Columns[_calculateVAT] != null) &&
-                                            CustomerHandler.Instance.CheckAndGetBoolean(_calculateVAT, _row.Cells[dataGridView_customer.Columns[_calculateVAT].Index].Value),
-                                VatPercentage = (dataGridView_customer.Columns[_VATPercentage] != null)
-                                    ? CustomerHandler.Instance.CheckAndGetDouble(_VATPercentage, _row.Cells[dataGridView_customer.Columns[_VATPercentage].Index].Value) : 0
+                                Name = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerName, _row),
+                                CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
+                                CustomerStatusID = (int) MapFieldValueToID(_customerStatus, _row, false),
+                                CountryID = (int) MapFieldValueToID(_countryISO, _row, false),
+                                CustomerNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerNo, _row),
+                                NickName = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _nickname, _row),
+                                PrimaryKAMID = MapFieldValueToID(_primaryKAM, _row, true),
+                                SecondaryKAMID = MapFieldValueToID(_secondaryKAM, _row, true),
+                                CustomerSince = CustomerHandler.Instance.CheckAndGetDate(dataGridView_customer, _customerSince, _row),
+                                IndustryID = MapFieldValueToID(_industryName, _row, true),
+                                Phone = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _phoneNo, _row),
+                                Fax = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _faxNo, _row),
+                                Email = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _email, _row),
+                                Website = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _website, _row),
+                                Address = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _address, _row),
+                                Address2 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _address2, _row),
+                                Address3 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _address3, _row),
+                                ZipCode = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _zipCode, _row),
+                                City = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _city, _row),
+                                State = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _state, _row),
+                                UseEanNo = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _useEanNo, _row),
+                                EanNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _eanNo, _row),
+                                OrganizationNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _organizationNo, _row),
+                                VatNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _VATNo, _row),
+                                UseInvoicingAddress = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _useInvoicingAddress, _row),
+                                InvoicingAddress = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress, _row),
+                                InvoicingAddress2 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress2, _row),
+                                InvoicingAddress3 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress3, _row),
+                                InvoicingAddressZipCode = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressZipCode, _row),
+                                InvoicingAddressCity = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressCity, _row),
+                                InvoicingAddressState = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressState, _row),
+                                InvoicingAddressCountryID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _invoicingAddressCountryID, _row),
+                                DefaultMileageDistance = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _defaultMileageDistance, _row),
+                                ExpenseIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _expenseIsBillable, _row),
+                                MileageIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _mileageIsBillable, _row),
+                                DefaultDistIsMaxBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _defaultDistIsMaxBillable, _row),
+                                ContactID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _contactID, _row),
+                                InvoiceAddressToUse = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _invoiceAddressToUse, _row),
+                                InternalReferenceID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _internalReferenceID, _row),
+                                CustomerReferenceID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _customerReferenceID, _row),
+                                PaymentTermID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _paymentTermID, _row),
+                                DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
+                                CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
+                                VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row)
                             };
 
-                            DefaultApiResponse _defaultApiResponse;
-
-                            if (_senderButton.Name == button_validate.Name)
+                            if (_isMappingFieldValueToIDCorrect)
                             {
-                                _defaultApiResponse = CustomerHandler.Instance.ValidateCustomer(_newCustomer,
-                                    AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                DefaultApiResponse _defaultApiResponse;
 
-                                HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
-                            }
-                            else
-                            {
-                                _defaultApiResponse = CustomerHandler.Instance.ImportCustomer(_newCustomer,
-                                    AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                if (_senderButton.Name == button_validate.Name)
+                                {
+                                    _defaultApiResponse = CustomerHandler.Instance.ValidateCustomer(_newCustomer,
+                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
+                                    HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
 
-                                _isRowValid = false;
+                                }
+                                else
+                                {
+                                    _defaultApiResponse = CustomerHandler.Instance.ImportCustomer(_newCustomer,
+                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+
+                                    HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
+
+                                    _isRowValid = false;
+                                }
                             }
                         }
                     }
@@ -578,15 +552,15 @@ namespace TimeLog.DataImporter.UserControls
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);
-            comboBox_currencyID.Items.AddRange(fileColumnHeaderArray);
-            comboBox_customerStatusID.Items.AddRange(fileColumnHeaderArray);
-            comboBox_countryID.Items.AddRange(fileColumnHeaderArray);
+            comboBox_currencyISO.Items.AddRange(fileColumnHeaderArray);
+            comboBox_customerStatus.Items.AddRange(fileColumnHeaderArray);
+            comboBox_countryISO.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_nickName.Items.AddRange(fileColumnHeaderArray);
-            comboBox_primaryKAMID.Items.AddRange(fileColumnHeaderArray);
-            comboBox_secondaryKAMID.Items.AddRange(fileColumnHeaderArray);
+            comboBox_primaryKAM.Items.AddRange(fileColumnHeaderArray);
+            comboBox_secondaryKAM.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerSince.Items.AddRange(fileColumnHeaderArray);
-            comboBox_industryID.Items.AddRange(fileColumnHeaderArray);
+            comboBox_industryName.Items.AddRange(fileColumnHeaderArray);
             comboBox_phoneNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_faxNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_email.Items.AddRange(fileColumnHeaderArray);
@@ -647,6 +621,77 @@ namespace TimeLog.DataImporter.UserControls
             dataGridView_customer.Focus();
         }
 
+        private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
+        {
+            if (dataGridView_customer.Columns[columnName] != null)
+            {
+                var _fieldValue = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, columnName, row);
+                int _result = -1;
+
+                if (columnName == _currencyISO)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_currencyISOList, _fieldValue);
+                }
+                else if (columnName == _countryISO)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_countryISOList, _fieldValue);
+                }
+                else if (columnName == _customerStatus)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_customerStatusList, _fieldValue);
+                }
+                else if (columnName == _primaryKAM)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_primaryKAMList, _fieldValue);
+                }
+                else if (columnName == _secondaryKAM)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_secondaryKAMList, _fieldValue);
+                }
+                else if (columnName == _industryName)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_industryNameList, _fieldValue);
+                }
+
+                if (_result != -1)
+                {
+                    return _result;
+                }
+
+                //if can't match, display error message
+                HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue);
+            }
+
+            if (isNullableField)
+            {
+                return null;
+            }
+
+            return 0;
+        }
+
+        private void HandleInvalidFieldValueToIDMapping(string columnName, DataGridViewRow row, string fieldValue)
+        {
+            Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+            Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText(Environment.NewLine)));
+
+            if (string.IsNullOrEmpty(fieldValue))
+            {
+                Invoke((MethodInvoker) (() => textBox_customerImportMessages.AppendText("Row " + (row.Index + 1) +
+                    " - " + columnName + " is empty.")));
+            }
+            else
+            {
+                Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Row " + (row.Index + 1) +
+                    " - " + columnName + " '" + fieldValue + "' doesn't exist in TimeLog.")));
+            }
+
+            _isMappingFieldValueToIDCorrect = false;
+            _errorRowCount++;
+            _isRowValid = false;
+            WorkerFetcher.CancelAsync();
+        }
+
         private void CheckAndAddColumn(string columnName)
         {
             if (!_customerTable.Columns.Contains(columnName))
@@ -692,24 +737,24 @@ namespace TimeLog.DataImporter.UserControls
         {
             comboBox_customerName.ResetText();
             comboBox_customerName.Items.Clear();
-            comboBox_currencyID.ResetText();
-            comboBox_currencyID.Items.Clear();
-            comboBox_customerStatusID.ResetText();
-            comboBox_customerStatusID.Items.Clear();
-            comboBox_countryID.ResetText();
-            comboBox_countryID.Items.Clear();
+            comboBox_currencyISO.ResetText();
+            comboBox_currencyISO.Items.Clear();
+            comboBox_customerStatus.ResetText();
+            comboBox_customerStatus.Items.Clear();
+            comboBox_countryISO.ResetText();
+            comboBox_countryISO.Items.Clear();
             comboBox_customerNo.ResetText();
             comboBox_customerNo.Items.Clear();
             comboBox_nickName.ResetText();
             comboBox_nickName.Items.Clear();
-            comboBox_primaryKAMID.ResetText();
-            comboBox_primaryKAMID.Items.Clear();
-            comboBox_secondaryKAMID.ResetText();
-            comboBox_secondaryKAMID.Items.Clear();
+            comboBox_primaryKAM.ResetText();
+            comboBox_primaryKAM.Items.Clear();
+            comboBox_secondaryKAM.ResetText();
+            comboBox_secondaryKAM.Items.Clear();
             comboBox_customerSince.ResetText();
             comboBox_customerSince.Items.Clear();
-            comboBox_industryID.ResetText();
-            comboBox_industryID.Items.Clear();
+            comboBox_industryName.ResetText();
+            comboBox_industryName.Items.Clear();
             comboBox_phoneNo.ResetText();
             comboBox_phoneNo.Items.Clear();
             comboBox_faxNo.ResetText();
@@ -784,12 +829,12 @@ namespace TimeLog.DataImporter.UserControls
 
         private void ClearAndResetAllCheckBoxes()
         {
-            checkBox_defaultCurrencyID.Checked = false;
-            checkBox_defaultCustomerStatusID.Checked = false;
-            checkBox_defaultCountryID.Checked = false;
-            checkBox_defaultPrimaryKAMID.Checked = false;
-            checkBox_defaultSecondaryKAMID.Checked = false;
-            checkBox_defaultIndustryID.Checked = false;
+            checkBox_defaultCurrencyISO.Checked = false;
+            checkBox_defaultCustomerStatus.Checked = false;
+            checkBox_defaultCountryISO.Checked = false;
+            checkBox_defaultPrimaryKAM.Checked = false;
+            checkBox_defaultSecondaryKAM.Checked = false;
+            checkBox_defaultIndustryName.Checked = false;
             checkBox_defaultExpenseIsBillable.Checked = false;
             checkBox_defaultMileageIsBillable.Checked = false;
             checkBox_defaultPaymentTermID.Checked = false;
@@ -806,11 +851,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _currencyIDList = new List<KeyValuePair<int, string>>();
+                _currencyISOList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _currency in _apiResponse)
                 {
-                    _currencyIDList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.DescriptiveName));
+                    _currencyISOList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.CurrencyABB));
                 }
             }
         }
@@ -821,11 +866,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _countryIDList = new List<KeyValuePair<int, string>>();
+                _countryISOList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _country in _apiResponse)
                 {
-                    _countryIDList.Add(new KeyValuePair<int, string>(_country.CountryID, _country.CountryName));
+                    _countryISOList.Add(new KeyValuePair<int, string>(_country.CountryID, _country.ISO));
                 }
             }
         }
@@ -836,12 +881,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _customerStatusIDList = new List<KeyValuePair<int, string>>();
+                _customerStatusList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _customerStatus in _apiResponse)
                 {
-                    _customerStatusIDList.Add(new KeyValuePair<int, string>(_customerStatus.CustomerStatusID,
-                        _customerStatus.Name));
+                    _customerStatusList.Add(new KeyValuePair<int, string>(_customerStatus.CustomerStatusID, _customerStatus.Name));
                 }
             }
         }
@@ -852,11 +896,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _primaryKAMIDList = new List<KeyValuePair<int, string>>();
+                _primaryKAMList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _primaryKAM in _apiResponse)
                 {
-                    _primaryKAMIDList.Add(new KeyValuePair<int, string>(_primaryKAM.UserID, _primaryKAM.Initials));
+                    _primaryKAMList.Add(new KeyValuePair<int, string>(_primaryKAM.UserID, _primaryKAM.Initials));
                 }
             }
         }
@@ -867,12 +911,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _secondaryKAMIDList = new List<KeyValuePair<int, string>>();
+                _secondaryKAMList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _secondaryKAM in _apiResponse)
                 {
-                    _secondaryKAMIDList.Add(new KeyValuePair<int, string>(_secondaryKAM.UserID,
-                        _secondaryKAM.Initials));
+                    _secondaryKAMList.Add(new KeyValuePair<int, string>(_secondaryKAM.UserID, _secondaryKAM.Initials));
                 }
             }
         }
@@ -883,11 +926,11 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                _industryIDList = new List<KeyValuePair<int, string>>();
+                _industryNameList = new List<KeyValuePair<int, string>>();
 
                 foreach (var _industry in _apiResponse)
                 {
-                    _industryIDList.Add(new KeyValuePair<int, string>(_industry.IndustryID, _industry.IndustryName));
+                    _industryNameList.Add(new KeyValuePair<int, string>(_industry.IndustryID, _industry.IndustryName));
                 }
             }
         }
@@ -914,84 +957,84 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddKeyValuePairListToCurrencyIDComboBox()
         {
-            comboBox_currencyID.DisplayMember = "Value";
-            comboBox_currencyID.ValueMember = "Key";
+            comboBox_currencyISO.DisplayMember = "Value";
+            comboBox_currencyISO.ValueMember = "Key";
 
-            if (_currencyIDList != null)
+            if (_currencyISOList != null)
             {
-                foreach (var _currency in _currencyIDList)
+                foreach (var _currency in _currencyISOList)
                 {
-                    comboBox_currencyID.Items.Add(new {_currency.Key, _currency.Value});
+                    comboBox_currencyISO.Items.Add(new {_currency.Key, _currency.Value});
                 }
             }
         }
 
         private void AddKeyValuePairListToCountryIDComboBox()
         {
-            comboBox_countryID.DisplayMember = "Value";
-            comboBox_countryID.ValueMember = "Key";
+            comboBox_countryISO.DisplayMember = "Value";
+            comboBox_countryISO.ValueMember = "Key";
 
-            if (_countryIDList != null)
+            if (_countryISOList != null)
             {
-                foreach (var _country in _countryIDList)
+                foreach (var _country in _countryISOList)
                 {
-                    comboBox_countryID.Items.Add(new {_country.Key, _country.Value});
+                    comboBox_countryISO.Items.Add(new {_country.Key, _country.Value});
                 }
             }
         }
 
         private void AddKeyValuePairListToCustomerStatusIDComboBox()
         {
-            comboBox_customerStatusID.DisplayMember = "Value";
-            comboBox_customerStatusID.ValueMember = "Key";
+            comboBox_customerStatus.DisplayMember = "Value";
+            comboBox_customerStatus.ValueMember = "Key";
 
-            if (_customerStatusIDList != null)
+            if (_customerStatusList != null)
             {
-                foreach (var _customerStatus in _customerStatusIDList)
+                foreach (var _customerStatus in _customerStatusList)
                 {
-                    comboBox_customerStatusID.Items.Add(new {_customerStatus.Key, _customerStatus.Value});
+                    comboBox_customerStatus.Items.Add(new {_customerStatus.Key, _customerStatus.Value});
                 }
             }
         }
 
         private void AddKeyValuePairListToPrimaryKAMIDComboBox()
         {
-            comboBox_primaryKAMID.DisplayMember = "Value";
-            comboBox_primaryKAMID.ValueMember = "Key";
+            comboBox_primaryKAM.DisplayMember = "Value";
+            comboBox_primaryKAM.ValueMember = "Key";
 
-            if (_primaryKAMIDList != null)
+            if (_primaryKAMList != null)
             {
-                foreach (var _primaryKAM in _primaryKAMIDList)
+                foreach (var _primaryKAM in _primaryKAMList)
                 {
-                    comboBox_primaryKAMID.Items.Add(new {_primaryKAM.Key, _primaryKAM.Value});
+                    comboBox_primaryKAM.Items.Add(new {_primaryKAM.Key, _primaryKAM.Value});
                 }
             }
         }
 
         private void AddKeyValuePairListToSecondaryKAMIDComboBox()
         {
-            comboBox_secondaryKAMID.DisplayMember = "Value";
-            comboBox_secondaryKAMID.ValueMember = "Key";
+            comboBox_secondaryKAM.DisplayMember = "Value";
+            comboBox_secondaryKAM.ValueMember = "Key";
 
-            if (_secondaryKAMIDList != null)
+            if (_secondaryKAMList != null)
             {
-                foreach (var _secondaryKAM in _secondaryKAMIDList)
+                foreach (var _secondaryKAM in _secondaryKAMList)
                 {
-                    comboBox_secondaryKAMID.Items.Add(new {_secondaryKAM.Key, _secondaryKAM.Value});
+                    comboBox_secondaryKAM.Items.Add(new {_secondaryKAM.Key, _secondaryKAM.Value});
                 }
             }
         }
 
         private void AddKeyValuePairListToIndustryIDComboBox()
         {
-            comboBox_industryID.DisplayMember = "Value";
-            comboBox_industryID.ValueMember = "Key";
+            comboBox_industryName.DisplayMember = "Value";
+            comboBox_industryName.ValueMember = "Key";
 
-            if (_industryIDList != null)
+            if (_industryNameList != null)
             {
-                foreach (var _industry in _industryIDList)
+                foreach (var _industry in _industryNameList)
                 {
-                    comboBox_industryID.Items.Add(new {_industry.Key, _industry.Value});
+                    comboBox_industryName.Items.Add(new {_industry.Key, _industry.Value});
                 }
             }
         }
@@ -1027,21 +1070,21 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_currencyID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_currencyISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyISO);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultCurrencyID.Checked)
+            if (!checkBox_defaultCurrencyISO.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_currencyID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_currencyISO.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_currencyID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_currencyISO.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1049,21 +1092,21 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_customerStatusID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_customerStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatusID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatus);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultCustomerStatusID.Checked)
+            if (!checkBox_defaultCustomerStatus.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerStatusID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerStatus.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_customerStatusID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_customerStatus.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1071,21 +1114,21 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_countryID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_countryISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryISO);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultCountryID.Checked)
+            if (!checkBox_defaultCountryISO.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_countryID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_countryISO.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_countryID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_countryISO.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1123,23 +1166,23 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_primaryKAMID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_primaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_primaryKAMID);
+            CheckAndAddColumn(_primaryKAM);
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAMID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAM);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultPrimaryKAMID.Checked)
+            if (!checkBox_defaultPrimaryKAM.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_primaryKAMID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_primaryKAM.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_primaryKAMID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_primaryKAM.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1147,23 +1190,23 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_secondaryKAMID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_secondaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_secondaryKAMID);
+            CheckAndAddColumn(_secondaryKAM);
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAMID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAM);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultSecondaryKAMID.Checked)
+            if (!checkBox_defaultSecondaryKAM.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_secondaryKAMID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_secondaryKAM.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_secondaryKAMID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_secondaryKAM.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1186,23 +1229,23 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_industryID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_industryName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_industryID);
+            CheckAndAddColumn(_industryName);
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryName);
 
             ClearColumn(_tableColumnIndex);
 
-            if (!checkBox_defaultIndustryID.Checked)
+            if (!checkBox_defaultIndustryName.Checked)
             {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_industryID.SelectedItem.ToString());
+                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_industryName.SelectedItem.ToString());
 
                 MapFileContentToTable(_tableColumnIndex, _columnIndex);
             }
             else
             {
-                var _defaultValue = (comboBox_industryID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_industryName.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1694,7 +1737,7 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                var _defaultValue = (comboBox_paymentTermID.SelectedItem as dynamic).Key.ToString();
+                var _defaultValue = (comboBox_paymentTermID.SelectedItem as dynamic).Value.ToString();
 
                 MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
             }
@@ -1760,14 +1803,14 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Checkbox implementations
 
-        private void checkBox_defaultCurrencyID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultCurrencyISO_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_currencyID.ResetText();
-            comboBox_currencyID.Items.Clear();
+            comboBox_currencyISO.ResetText();
+            comboBox_currencyISO.Items.Clear();
 
-            if (checkBox_defaultCurrencyID.Checked)
+            if (checkBox_defaultCurrencyISO.Checked)
             {
-                if (_currencyIDList == null)
+                if (_currencyISOList == null)
                 {
                     GetAllCurrencyFromApi();
                 }
@@ -1776,10 +1819,10 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_currencyID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                comboBox_currencyISO.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyISO);
 
             if (_tableColumnIndex != -1)
             {
@@ -1791,14 +1834,14 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void checkBox_defaultCustomerStatusID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultCustomerStatus_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_customerStatusID.ResetText();
-            comboBox_customerStatusID.Items.Clear();
+            comboBox_customerStatus.ResetText();
+            comboBox_customerStatus.Items.Clear();
 
-            if (checkBox_defaultCustomerStatusID.Checked)
+            if (checkBox_defaultCustomerStatus.Checked)
             {
-                if (_customerStatusIDList == null)
+                if (_customerStatusList == null)
                 {
                     GetAllCustomerStatusFromApi();
                 }
@@ -1807,11 +1850,11 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_customerStatusID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
+                comboBox_customerStatus.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
                     .ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatusID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatus);
 
             if (_tableColumnIndex != -1)
             {
@@ -1823,14 +1866,14 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void checkBox_defaultCountryID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultCountryISO_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_countryID.ResetText();
-            comboBox_countryID.Items.Clear();
+            comboBox_countryISO.ResetText();
+            comboBox_countryISO.Items.Clear();
 
-            if (checkBox_defaultCountryID.Checked)
+            if (checkBox_defaultCountryISO.Checked)
             {
-                if (_countryIDList == null)
+                if (_countryISOList == null)
                 {
                     GetAllCountryFromApi();
                 }
@@ -1839,10 +1882,10 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_countryID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                comboBox_countryISO.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryISO);
 
             if (_tableColumnIndex != -1)
             {
@@ -1854,14 +1897,14 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void checkBox_defaultPrimaryKAMID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultPrimaryKAM_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_primaryKAMID.ResetText();
-            comboBox_primaryKAMID.Items.Clear();
+            comboBox_primaryKAM.ResetText();
+            comboBox_primaryKAM.Items.Clear();
 
-            if (checkBox_defaultPrimaryKAMID.Checked)
+            if (checkBox_defaultPrimaryKAM.Checked)
             {
-                if (_primaryKAMIDList == null)
+                if (_primaryKAMList == null)
                 {
                     GetAllPrimaryKAMFromApi();
                 }
@@ -1870,11 +1913,11 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_primaryKAMID.Items.AddRange(
+                comboBox_primaryKAM.Items.AddRange(
                     CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAMID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAM);
 
             if (_tableColumnIndex != -1)
             {
@@ -1886,14 +1929,14 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void checkBox_defaultSecondaryKAMID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultSecondaryKAM_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_secondaryKAMID.ResetText();
-            comboBox_secondaryKAMID.Items.Clear();
+            comboBox_secondaryKAM.ResetText();
+            comboBox_secondaryKAM.Items.Clear();
 
-            if (checkBox_defaultSecondaryKAMID.Checked)
+            if (checkBox_defaultSecondaryKAM.Checked)
             {
-                if (_secondaryKAMIDList == null)
+                if (_secondaryKAMList == null)
                 {
                     GetAllSecondaryKAMFromApi();
                 }
@@ -1902,11 +1945,11 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_secondaryKAMID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
+                comboBox_secondaryKAM.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
                     .ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAMID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAM);
 
             if (_tableColumnIndex != -1)
             {
@@ -1918,14 +1961,14 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void checkBox_defaultIndustryID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultIndustryName_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_industryID.ResetText();
-            comboBox_industryID.Items.Clear();
+            comboBox_industryName.ResetText();
+            comboBox_industryName.Items.Clear();
 
-            if (checkBox_defaultIndustryID.Checked)
+            if (checkBox_defaultIndustryName.Checked)
             {
-                if (_industryIDList == null)
+                if (_industryNameList == null)
                 {
                     GetAllIndustryFromApi();
                 }
@@ -1934,10 +1977,10 @@ namespace TimeLog.DataImporter.UserControls
             }
             else
             {
-                comboBox_industryID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                comboBox_industryName.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
             }
 
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryID);
+            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryName);
 
             if (_tableColumnIndex != -1)
             {
@@ -2051,7 +2094,6 @@ namespace TimeLog.DataImporter.UserControls
                 CheckCellsForNullOrEmpty(_tableColumnIndex);
             }
         }
-
 
         #endregion
     }
