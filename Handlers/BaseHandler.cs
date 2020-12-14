@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -143,7 +146,7 @@ namespace TimeLog.DataImporter.Handlers
 
         #endregion
 
-        #region Get methods for default values
+        #region Get methods for shared default values
 
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
@@ -175,43 +178,6 @@ namespace TimeLog.DataImporter.Handlers
             }
 
             return null;
-        }
-
-        #endregion
-
-        #region Helper - Process API response methods
-
-        public DefaultApiResponse ProcessApiResponseContent(WebException webEx, string responseContent, out BusinessRulesApiResponse businessRulesApiResponse)
-        {
-            DefaultApiResponse _apiResponse = null;
-            businessRulesApiResponse = null;
-
-            if (webEx.Message == "The remote server returned an error: (401) Unauthorized.")
-            {
-                _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
-                _apiResponse.Code = 401;
-            }
-            else
-            {
-                dynamic _apiResponseObject = JsonConvert.DeserializeObject<dynamic>(responseContent);
-
-                if (_apiResponseObject.Code.ToString() == "200")
-                {
-                    _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
-                    _apiResponse.Code = 201;
-                }
-                else if (_apiResponseObject.Code.ToString() == "102")
-                {
-                    businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
-                    businessRulesApiResponse.Code = 102;
-                }
-                else
-                {
-                    MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-
-            return _apiResponse;
         }
 
         #endregion
@@ -253,33 +219,6 @@ namespace TimeLog.DataImporter.Handlers
             return false;
         }
 
-        //public bool CheckAndGetBoolean(string columnName, object columnValue)
-        //{
-        //    var _value = columnValue.ToString();
-
-        //    if (_value != "")
-        //    {
-        //        if (bool.TryParse(_value, out var _result))
-        //        {
-        //            return _result;
-        //        }
-
-        //        if (_value == "1")
-        //        {
-        //            return true;
-        //        }
-
-        //        if (_value == "0")
-        //        {
-        //            return false;
-        //        }
-
-        //        throw new FormatException("String format cannot be converted to boolean for column [" + columnName + "]. Please recheck input.");
-        //    }
-
-        //    return false;
-        //}
-
         public int CheckAndGetInteger(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
             if (dataGridView.Columns[columnName] != null)
@@ -300,23 +239,6 @@ namespace TimeLog.DataImporter.Handlers
 
             return 0;
         }
-
-        //public int CheckAndGetInteger(string columnName, object columnValue)
-        //{
-        //    try
-        //    {
-        //        if (columnValue != DBNull.Value && columnValue.ToString() != "")
-        //        {
-        //            return Convert.ToInt32(columnValue);
-        //        }
-
-        //        return 0;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new FormatException("String format cannot be converted to integer for column [" + columnName + "]. Please recheck input.");
-        //    }
-        //}
 
         public int? CheckAndGetNullableInteger(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
@@ -360,23 +282,6 @@ namespace TimeLog.DataImporter.Handlers
             return 0;
         }
 
-        //public double CheckAndGetDouble(string columnName, object columnValue)
-        //{
-        //    try
-        //    {
-        //        if (columnValue != DBNull.Value)
-        //        {
-        //            return Convert.ToDouble(columnValue);
-        //        }
-
-        //        return 0;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new FormatException("String format cannot be converted to double for column [" + columnName + "]. Please recheck input.");
-        //    }
-        //}
-
         public DateTime CheckAndGetDate(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
             if (dataGridView.Columns[columnName] != null)
@@ -398,22 +303,252 @@ namespace TimeLog.DataImporter.Handlers
             return DateTime.Now;
         }
 
-        //public DateTime CheckAndGetDate(string columnName, object columnValue)
-        //{
-        //    try
-        //    {
-        //        if (columnValue != DBNull.Value)
-        //        {
-        //            return Convert.ToDateTime(columnValue);
-        //        }
+        #endregion
 
-        //        return DateTime.Now;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new FormatException("String format cannot be converted to datetime for column [" + columnName + "]. Please recheck input.");
-        //    }
-        //}
+        #region Helper - Initialization, mapping and checking methods
+
+        public void InitializeDelimiterComboBox(ComboBox delimiterComboBox)
+        {
+            delimiterComboBox.Items.AddRange(GetDelimiterList().Cast<object>().ToArray());
+            delimiterComboBox.SelectedIndex = 0;
+        }
+
+        public DataTable InitializeDomainDataTable(Dictionary<int, string> mandatoryFields)
+        {
+            DataTable _domainTable = new DataTable();
+
+            foreach (var _mandatoryField in mandatoryFields)
+            {
+                _domainTable.Columns.Add(_mandatoryField.Value);
+            }
+
+            return _domainTable;
+        }
+
+        public void MapMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
+        {
+            var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
+        //for fields with default value checkbox
+        public void MapMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, CheckBox checkBox)
+        {
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            if (!checkBox.Checked)
+            {
+                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+            }
+            else
+            {
+                var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
+
+                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+            }
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
+        public void MapNonMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
+        {
+            var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+            CheckAndAddColumn(domainTable, columnName);
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
+        //for fields with default value checkbox
+        public void MapNonMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, CheckBox checkBox)
+        {
+            CheckAndAddColumn(domainTable, columnName);
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            if (!checkBox.Checked)
+            {
+                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+            }
+            else
+            {
+                var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
+
+                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+            }
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
+        public void MapValuesToComboBoxByCheckboxStatus(DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, 
+            CheckBox checkBox, List<KeyValuePair<int, string>> keyValuePairList, object[] fileColumnHeaderArray)
+        {
+            comboBox.ResetText();
+            comboBox.Items.Clear();
+
+            if (checkBox.Checked)
+            {
+                AddKeyValuePairListToDomainComboBox(comboBox, keyValuePairList);
+            }
+            else
+            {
+                comboBox.Items.AddRange(fileColumnHeaderArray);
+            }
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            if (_tableColumnIndex != -1)
+            {
+                ClearColumn(dataGridView, _tableColumnIndex);
+
+                ClearRow(domainTable, _tableColumnIndex);
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+            }
+        }
+
+        //for default non-key value pair list that is not from API
+        public void MapNonKeyValuePairToComboBoxByCheckboxStatus(DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName,
+            CheckBox checkBox, List<string> defaultValueList, object[] fileColumnHeaderArray)
+        {
+            comboBox.ResetText();
+            comboBox.Items.Clear();
+
+            comboBox.Items.AddRange(checkBox.Checked ? defaultValueList.Cast<object>().ToArray() : fileColumnHeaderArray);
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            if (_tableColumnIndex != -1)
+            {
+                ClearColumn(dataGridView, _tableColumnIndex);
+
+                ClearRow(domainTable, _tableColumnIndex);
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+            }
+        }
+
+        private void AddKeyValuePairListToDomainComboBox(ComboBox comboBox, List<KeyValuePair<int, string>> keyValuePairList)
+        {
+            comboBox.DisplayMember = "Value";
+            comboBox.ValueMember = "Key";
+
+            if (keyValuePairList != null)
+            {
+                foreach (var _domain in keyValuePairList)
+                {
+                    comboBox.Items.Add(new { _domain.Key, _domain.Value });
+                }
+            }
+        }
+
+        private void MapFileContentToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, int fileColumnIndex)
+        {
+            for (int i = 0; i < fileContent.Rows.Count; i++)
+            {
+                //Invoke((MethodInvoker)(() => _customerTable.Rows[i][tableColumnIndex] = fileContent.Rows[i][fileColumnIndex]));
+                domainTable.Rows[i][tableColumnIndex] = fileContent.Rows[i][fileColumnIndex];
+            }
+
+            dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
+            dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
+            dataGridView.Focus();
+        }
+
+        private void MapDefaultValueToTable(DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, string defaultValue)
+        {
+            for (int i = 0; i < domainTable.Rows.Count; i++)
+            {
+                //Invoke((MethodInvoker)(() =>domainTable.Rows[i][tableColumnIndex] = defaultValue));
+                domainTable.Rows[i][tableColumnIndex] = defaultValue;
+            }
+
+            dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
+            dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
+            dataGridView.Focus();
+        }
+
+        private void CheckAndAddColumn(DataTable domainTable, string columnName)
+        {
+            if (!domainTable.Columns.Contains(columnName))
+            {
+                domainTable.Columns.Add(columnName);
+            }
+        }
+
+        private void CheckCellsForNullOrEmpty(DataGridView dataGridView, int columnIndex)
+        {
+            foreach (DataGridViewRow _row in dataGridView.Rows)
+            {
+                if (_row.Cells[columnIndex].Value == null ||
+                    string.IsNullOrEmpty(_row.Cells[columnIndex].Value.ToString()))
+                {
+                    if (_row.DataBoundItem != null)
+                    {
+                        _row.Cells[columnIndex].Style.BackColor = Color.Red;
+                    }
+                }
+            }
+        }
+
+        private void ClearColumn(DataGridView dataGridView, int columnIndex)
+        {
+            if (dataGridView!= null && dataGridView.Columns.Count - 1 >= columnIndex)
+            {
+                var _tmpCol = dataGridView.Columns[columnIndex];
+                dataGridView.Columns.Remove(dataGridView.Columns[columnIndex]);
+                dataGridView.Columns.Insert(columnIndex, _tmpCol);
+            }
+        }
+
+        private void ClearRow(DataTable domainTable, int tableColumnIndex)
+        {
+            for (int i = 0; i < domainTable.Rows.Count; i++)
+            {
+                domainTable.Rows[i][tableColumnIndex] = "";
+                //MethodInvoker((MethodInvoker)(() => domainTable.Rows[i][tableColumnIndex] = ""));
+            }
+        }
+
+        public void HandleInvalidFieldValueToIDMapping(string columnName, DataGridViewRow row, string fieldValue, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control)
+        {
+            control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+
+            if (string.IsNullOrEmpty(fieldValue))
+            {
+                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) +
+                                                                               " - " + columnName + " is empty.")));
+            }
+            else
+            {
+                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) +
+                                                                               " - " + columnName + " '" + fieldValue + "' doesn't exist in TimeLog.")));
+            }
+
+            workerFetcher.CancelAsync();
+        }
 
         #endregion
     }

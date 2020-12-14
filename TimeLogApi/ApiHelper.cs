@@ -1,7 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Text;
+using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace TimeLog.DataImporter.TimeLogApi
 {
@@ -53,6 +57,100 @@ namespace TimeLog.DataImporter.TimeLogApi
             _client.Headers.Add("Accept", "application/json");
             _client.Headers.Add("Content-Type", "application/json");
             return _client;
+        }
+
+        public DefaultApiResponse ProcessApiResponseContent(WebException webEx, string responseContent, out BusinessRulesApiResponse businessRulesApiResponse)
+        {
+            DefaultApiResponse _apiResponse = null;
+            businessRulesApiResponse = null;
+
+            if (webEx.Message == "The remote server returned an error: (401) Unauthorized.")
+            {
+                _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
+                _apiResponse.Code = 401;
+            }
+            else
+            {
+                dynamic _apiResponseObject = JsonConvert.DeserializeObject<dynamic>(responseContent);
+
+                if (_apiResponseObject.Code.ToString() == "200")
+                {
+                    _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
+                    _apiResponse.Code = 201;
+                }
+                else if (_apiResponseObject.Code.ToString() == "102")
+                {
+                    businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
+                    businessRulesApiResponse.Code = 102;
+                }
+                else
+                {
+                    MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            return _apiResponse;
+        }
+
+        public int HandleApiResponse(DefaultApiResponse defaultResponse, DataGridViewRow row, BusinessRulesApiResponse businessRulesResponse, TextBox domainTextBox, int errorRowCount, BackgroundWorker workerFetcher, Control control)
+        {
+            if (defaultResponse != null)
+            {
+                if (defaultResponse.Code == 200)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.LimeGreen));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                }
+                else if (defaultResponse.Code == 401)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                    errorRowCount++;
+                    //return to login page if token has expired
+                    RedirectToLoginPage(workerFetcher, control);
+                }
+                else if (defaultResponse.Code == 201)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
+                                                    + " - " + defaultResponse.Message + " Details: " + string.Join("  ", defaultResponse.Details))));
+                    errorRowCount++;
+                }
+                else if (defaultResponse.Code == 500)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                    errorRowCount++;
+                }
+            }
+            else
+            {
+                if (businessRulesResponse.Code == 102)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
+                                                    + " - " + businessRulesResponse.Message + " Details: "
+                                                    + string.Join("  ", businessRulesResponse.Details.Select(x => x.Message)))));
+                    errorRowCount++;
+                }
+            }
+
+            return errorRowCount;
+        }
+
+        private void RedirectToLoginPage(BackgroundWorker workerFetcher, Control control)
+        {
+            MessageBox.Show("Authentication token has expired. You will be redirected to the Login page to login again.",
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            workerFetcher.CancelAsync();
+            control.Invoke((MethodInvoker)(() => Login.MainForm.Hide()));
+            control.Invoke((MethodInvoker)(() => Program.LoginForm.Show()));
         }
     }
 }

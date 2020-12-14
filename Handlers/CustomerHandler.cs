@@ -44,7 +44,7 @@ namespace TimeLog.DataImporter.Handlers
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
 
-                return ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
             }
         }
 
@@ -71,7 +71,7 @@ namespace TimeLog.DataImporter.Handlers
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
 
-                return ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
             }
         }
 

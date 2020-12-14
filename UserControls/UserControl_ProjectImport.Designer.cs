@@ -554,9 +554,9 @@
             this.label_projectManagerID.AutoSize = true;
             this.label_projectManagerID.Location = new System.Drawing.Point(6, 120);
             this.label_projectManagerID.Name = "label_projectManagerID";
-            this.label_projectManagerID.Size = new System.Drawing.Size(125, 17);
+            this.label_projectManagerID.Size = new System.Drawing.Size(79, 17);
             this.label_projectManagerID.TabIndex = 1;
-            this.label_projectManagerID.Text = "Project Manager ID";
+            this.label_projectManagerID.Text = "P. M. Initials";
             // 
             // comboBox_projectManagerID
             // 

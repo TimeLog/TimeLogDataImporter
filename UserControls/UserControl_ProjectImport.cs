@@ -66,11 +66,11 @@ namespace TimeLog.DataImporter.UserControls
         public UserControl_ProjectImport()
         {
             InitializeComponent();
-            InitializeDelimiterComboBox();
+            ProjectHandler.Instance.InitializeDelimiterComboBox(comboBox_delimiter);
             InitializeExpandCollapsePanels();
             AddRowNumberToDataTable();
-            InitializeProjectDataTable();
             InitializeAllDefaultValues();
+            _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_project.DataSource = _projectTable;
             button_import.Enabled = false;
         }
@@ -104,21 +104,21 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void InitializeDelimiterComboBox()
-        {
-            comboBox_delimiter.Items.AddRange(ProjectHandler.Instance.GetDelimiterList().Cast<object>().ToArray());
-            comboBox_delimiter.SelectedIndex = 0;
-        }
+        //private void InitializeDelimiterComboBox()
+        //{
+        //    comboBox_delimiter.Items.AddRange(ProjectHandler.Instance.GetDelimiterList().Cast<object>().ToArray());
+        //    comboBox_delimiter.SelectedIndex = 0;
+        //}
 
-        private void InitializeProjectDataTable()
-        {
-            _projectTable = new DataTable();
+        //private void InitializeProjectDataTable()
+        //{
+        //    _projectTable = new DataTable();
 
-            foreach (var _mandatoryField in MandatoryFields)
-            {
-                _projectTable.Columns.Add(_mandatoryField.Value);
-            }
-        }
+        //    foreach (var _mandatoryField in MandatoryFields)
+        //    {
+        //        _projectTable.Columns.Add(_mandatoryField.Value);
+        //    }
+        //}
 
         private void InitializeAllDefaultValues()
         {
@@ -149,7 +149,8 @@ namespace TimeLog.DataImporter.UserControls
                 if (dataGridView_project.RowCount > 1)
                 {
                     dataGridView_project.DataSource = null;
-                    InitializeProjectDataTable();
+                    _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
+                    //InitializeProjectDataTable();
                     dataGridView_project.DataSource = _projectTable;
                 }
 
@@ -194,7 +195,7 @@ namespace TimeLog.DataImporter.UserControls
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_project.DataSource = null;
-            InitializeProjectDataTable();
+            _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_project.DataSource = _projectTable;
         }
 
@@ -327,11 +328,9 @@ namespace TimeLog.DataImporter.UserControls
 
                             if (_isMappingFieldValueToIDCorrect)
                             {
-                                DefaultApiResponse _defaultApiResponse;
-
                                 if (_senderButton.Name == button_validate.Name)
                                 {
-                                    _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
+                                    var _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
@@ -339,7 +338,7 @@ namespace TimeLog.DataImporter.UserControls
                                 }
                                 else
                                 {
-                                    _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
+                                    var _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse);
