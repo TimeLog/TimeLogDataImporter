@@ -21,6 +21,14 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string EmployeeCreateEndpoint = "/api/v1/user/create";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
+        public string GetAllDepartmentEndpoint = "/api/v1/Department?$page=1&$pagesize=300";
+        //public string GetAllDefaultHourlyRateEndpoint = "/api/v1/default-hourly-rate?$page=1&$pagesize=300";
+        //public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";
+        //public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";
+        //public string GetAllPublicHolidayCalendarEndpoint = "/api/v1/public-holiday-calendar?$page=1&$pagesize=300";
+        //public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page=1&$pagesize=300";
+        //public string GetAllNormalWorkingTimeEndpoint = "/api/v1/normal-working-time?$page=1&$pagesize=300";
+        //public string GetAllSalaryGroupEndpoint = "/api/v1/salary-group?$page=1&$pagesize=300";
         public string GetAllIndustryEndpoint = "/api/v1/industry/get-all?$page=1&$pagesize=50";
         public string GetAllCurrencyEndpoint = "/api/v1/currency/active?$page=1&$pagesize=300";
         public string GetAllCustomerStatusEndpoint = "/api/v1/customerstatus?$page=1&$pagesize=30";
@@ -116,7 +124,7 @@ namespace TimeLog.DataImporter.TimeLogApi
                     control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                    + " - " + defaultResponse.Message + " Details: " + string.Join("  ", defaultResponse.Details))));
+                                                    + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
                     errorRowCount++;
                 }
                 else if (defaultResponse.Code == 500)
@@ -135,7 +143,7 @@ namespace TimeLog.DataImporter.TimeLogApi
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
                                                     + " - " + businessRulesResponse.Message + " Details: "
-                                                    + string.Join("  ", businessRulesResponse.Details.Select(x => x.Message)))));
+                                                    + string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message)))));
                     errorRowCount++;
                 }
             }

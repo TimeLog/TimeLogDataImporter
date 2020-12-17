@@ -180,6 +180,38 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<LegalEntityReadModel> GetAllLegalEntity(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllLegalEntityEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<LegalEntityReadModel> _apiResponse = new List<LegalEntityReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<LegalEntityReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default legal entity ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Get data of different type methods
@@ -262,6 +294,48 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public int[] CheckAndGetIntegerArray(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow, string selectFileDelimiter, string fieldDelimiter)
+        {
+            if (selectFileDelimiter == fieldDelimiter)
+            {
+                throw new FormatException("Delimiter for column [" + columnName + "] cannot be the same delimiter as file delimiter. Please recheck input.");
+            }
+
+            var _intList = new List<int>();
+
+            if (dataGridView.Columns[columnName] != null)
+            {
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value != DBNull.Value
+                        && !string.IsNullOrEmpty(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString()))
+                    {
+                        foreach (var _value in dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString().Split(fieldDelimiter))
+                        {
+                            if (int.TryParse(_value, out var _num))
+                            {
+                                _intList.Add(_num);
+                            }
+                            else
+                            {
+                                throw new ArgumentException();
+                            }
+                        }
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    throw new FormatException("[" + columnName + "] has wrong delimiter or invalid data. Please recheck.");
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to integer array for column [" + columnName + "]. Please recheck input.");
+                }
+            }
+
+            return _intList.ToArray();
+        }
+
         public double CheckAndGetDouble(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
             if (dataGridView.Columns[columnName] != null)
@@ -305,12 +379,18 @@ namespace TimeLog.DataImporter.Handlers
 
         #endregion
 
-        #region Helper - Initialization, mapping and checking methods
+        #region Helper - Initialization methods
 
         public void InitializeDelimiterComboBox(ComboBox delimiterComboBox)
         {
             delimiterComboBox.Items.AddRange(GetDelimiterList().Cast<object>().ToArray());
             delimiterComboBox.SelectedIndex = 0;
+        }
+
+        public void InitializeDelimiterComboBox(ComboBox delimiterComboBox, int selectedIndex)
+        {
+            delimiterComboBox.Items.AddRange(GetDelimiterList().Cast<object>().ToArray());
+            delimiterComboBox.SelectedIndex = selectedIndex;
         }
 
         public DataTable InitializeDomainDataTable(Dictionary<int, string> mandatoryFields)
@@ -324,6 +404,10 @@ namespace TimeLog.DataImporter.Handlers
 
             return _domainTable;
         }
+
+        #endregion
+
+        #region Helper - Mapping methods
 
         public void MapMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
         {
@@ -449,6 +533,37 @@ namespace TimeLog.DataImporter.Handlers
             }
         }
 
+        private void MapFileContentToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, int fileColumnIndex)
+        {
+            if (domainTable.Rows.Count >= fileContent.Rows.Count)
+            {
+                for (int i = 0; i < fileContent.Rows.Count; i++)
+                {
+                    domainTable.Rows[i][tableColumnIndex] = fileContent.Rows[i][fileColumnIndex];
+                }
+
+                dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
+                dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
+                dataGridView.Focus();
+            }
+        }
+
+        private void MapDefaultValueToTable(DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, string defaultValue)
+        {
+            for (int i = 0; i < domainTable.Rows.Count; i++)
+            {
+                domainTable.Rows[i][tableColumnIndex] = defaultValue;
+            }
+
+            dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
+            dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
+            dataGridView.Focus();
+        }
+
+        #endregion
+
+        #region Helper - Checking and adding methods
+
         private void AddKeyValuePairListToDomainComboBox(ComboBox comboBox, List<KeyValuePair<int, string>> keyValuePairList)
         {
             comboBox.DisplayMember = "Value";
@@ -461,32 +576,6 @@ namespace TimeLog.DataImporter.Handlers
                     comboBox.Items.Add(new { _domain.Key, _domain.Value });
                 }
             }
-        }
-
-        private void MapFileContentToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, int fileColumnIndex)
-        {
-            for (int i = 0; i < fileContent.Rows.Count; i++)
-            {
-                //Invoke((MethodInvoker)(() => _customerTable.Rows[i][tableColumnIndex] = fileContent.Rows[i][fileColumnIndex]));
-                domainTable.Rows[i][tableColumnIndex] = fileContent.Rows[i][fileColumnIndex];
-            }
-
-            dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
-            dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
-            dataGridView.Focus();
-        }
-
-        private void MapDefaultValueToTable(DataGridView dataGridView, DataTable domainTable, int tableColumnIndex, string defaultValue)
-        {
-            for (int i = 0; i < domainTable.Rows.Count; i++)
-            {
-                //Invoke((MethodInvoker)(() =>domainTable.Rows[i][tableColumnIndex] = defaultValue));
-                domainTable.Rows[i][tableColumnIndex] = defaultValue;
-            }
-
-            dataGridView.Rows[0].Cells[tableColumnIndex].Selected = true;
-            dataGridView.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
-            dataGridView.Focus();
         }
 
         private void CheckAndAddColumn(DataTable domainTable, string columnName)
@@ -527,9 +616,12 @@ namespace TimeLog.DataImporter.Handlers
             for (int i = 0; i < domainTable.Rows.Count; i++)
             {
                 domainTable.Rows[i][tableColumnIndex] = "";
-                //MethodInvoker((MethodInvoker)(() => domainTable.Rows[i][tableColumnIndex] = ""));
             }
         }
+
+        #endregion
+
+        #region Helper - Error handling and UI display methods
 
         public void HandleInvalidFieldValueToIDMapping(string columnName, DataGridViewRow row, string fieldValue, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control)
         {
@@ -548,6 +640,119 @@ namespace TimeLog.DataImporter.Handlers
             }
 
             workerFetcher.CancelAsync();
+        }
+
+        public void DisplayErrorRowCountAndSuccessMessage(int errorRowCount, Button importButton, Button validateButton, Button senderButton, TextBox domainTextBox, Control control)
+        {
+            //show error row count at the end
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine + Environment.NewLine)));
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Invalid data input row count: " + errorRowCount)));
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine + Environment.NewLine)));
+
+            //display success message after import / validation is done
+            if (errorRowCount == 0)
+            {
+                if (senderButton.Name == validateButton.Name)
+                {
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Validation completed successfully with no error. You may press the Import button to start importing data right away.")));
+                    control.Invoke((MethodInvoker)(() => importButton.Enabled = true));
+                }
+                else
+                {
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Data import completed successfully with no error. Excellent!")));
+                    control.Invoke((MethodInvoker)(() => importButton.Enabled = false));
+                }
+            }
+            else
+            {
+                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Validation completed successfully with " + errorRowCount + " error(s). You may modify the invalid input data and then press Validate button again.")));
+                control.Invoke((MethodInvoker)(() => importButton.Enabled = false));
+            }
+        }
+
+        public void HighlightDataTableRowByTextBoxClick(MouseEventArgs e, DataGridView dataGridView, TextBox domainTextBox)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var _position = domainTextBox.GetCharIndexFromPosition(e.Location);
+                var _lineNo = domainTextBox.GetLineFromCharIndex(_position) - 1;
+
+                for (var i = 0; i < dataGridView.Rows.Count - 1; i++)
+                {
+                    if (i == _lineNo)
+                    {
+                        dataGridView.Rows[i].Selected = true;
+                        dataGridView.FirstDisplayedScrollingRowIndex = i;
+                        dataGridView.Focus();
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void ExpandCollapseFieldByButtonClick(object sender, ExpandState[] expandStates, Button[] expandButtons, Timer tmrExpand)
+        {
+            Button _button = sender as Button;
+            int _index = (int)_button.Tag;
+
+            // Get this panel's current expand state and set its new state
+            ExpandState _oldState = expandStates[_index];
+
+            if (_oldState == ExpandState.Collapsed || _oldState == ExpandState.Collapsing)
+            {
+                expandStates[_index] = ExpandState.Expanding;
+                expandButtons[_index].BackgroundImage = Properties.Resources.upload;
+            }
+            else
+            {
+                expandStates[_index] = ExpandState.Collapsing;
+                expandButtons[_index].BackgroundImage = Properties.Resources.download;
+            }
+
+            tmrExpand.Enabled = true;
+        }
+
+        public void ProcessExpandCollapseFieldForPanel(Panel[] expandPanels, ExpandState[] expandStates, int expansionPerTick, Timer tmrExpand)
+        {
+            bool _notDone = false;
+
+            for (int i = 0; i < expandPanels.Length; i++)
+            {
+                Panel _panel = expandPanels[i];
+                int _newHeight = _panel.Height;
+
+                if (expandStates[i] == ExpandState.Expanding)
+                {
+                    _newHeight = _panel.Height + expansionPerTick;
+
+                    if (_newHeight <= _panel.MaximumSize.Height)
+                    {
+                        _newHeight = _panel.MaximumSize.Height;
+                    }
+                    else
+                    {
+                        _notDone = true;
+                    }
+                }
+                else if (expandStates[i] == ExpandState.Collapsing)
+                {
+                    _newHeight = _panel.Height - expansionPerTick;
+
+                    if (_newHeight <= _panel.MinimumSize.Height)
+                    {
+                        _newHeight = _panel.MinimumSize.Height;
+                    }
+                    else
+                    {
+                        _notDone = true;
+                    }
+                }
+
+                _panel.Height = _newHeight;
+            }
+
+            // If we are done, disable the timer
+            tmrExpand.Enabled = _notDone;
         }
 
         #endregion

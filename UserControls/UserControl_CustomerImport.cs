@@ -77,16 +77,16 @@ namespace TimeLog.DataImporter.UserControls
         //default value lists
         private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
         private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
-        private List<string> _VATPercentageList = new List<string>();
+        private static readonly List<string> VATPercentageList = new List<string>();
 
         //default value lists from API 
-        private List<KeyValuePair<int, string>> _currencyISOList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _countryISOList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _customerStatusList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _primaryKAMList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _secondaryKAMList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _industryNameList = new List<KeyValuePair<int, string>>();
-        private List<KeyValuePair<int, string>> _paymentTermIDList = new List<KeyValuePair<int, string>>(); // not yet added, to be implemented
+        private static readonly List<KeyValuePair<int, string>> CurrencyISOList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> CountryISOList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> CustomerStatusList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> PrimaryKAMList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> PaymentTermIDList = new List<KeyValuePair<int, string>>(); // not yet added, to be implemented
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -184,7 +184,6 @@ namespace TimeLog.DataImporter.UserControls
                 if (dataGridView_customer.RowCount > 1)
                 {
                     dataGridView_customer.DataSource = null;
-                    //_customerTable = new DataTable();
                     _customerTable = CustomerHandler.Instance.InitializeDomainDataTable(MandatoryFields);
                     dataGridView_customer.DataSource = _customerTable;
                 }
@@ -230,95 +229,23 @@ namespace TimeLog.DataImporter.UserControls
             Invoke((MethodInvoker) (() => button_import.Enabled = false));
 
             dataGridView_customer.DataSource = null;
-            //_customerTable = new DataTable();
             _customerTable = CustomerHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-            //CustomerHandler.Instance.InitializeDomainDataTable(_customerTable, MandatoryFields);
             dataGridView_customer.DataSource = _customerTable;
         }
 
         private void textBox_customerImportMessages_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                var _position = textBox_customerImportMessages.GetCharIndexFromPosition(e.Location);
-                var _lineNo = textBox_customerImportMessages.GetLineFromCharIndex(_position) - 1;
-
-                for (int i = 0; i < dataGridView_customer.Rows.Count - 1; i++)
-                {
-                    if (i == _lineNo)
-                    {
-                        Invoke((MethodInvoker)(() => dataGridView_customer.Rows[i].Selected = true));
-                        dataGridView_customer.FirstDisplayedScrollingRowIndex = i;
-                        dataGridView_customer.Focus();
-                        break;
-                    }
-                }
-            }
+            CustomerHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_customer, textBox_customerImportMessages);
         }
 
         private void button_expand_Click(object sender, EventArgs e)
         {
-            Button _button = sender as Button;
-            int _index = (int)_button.Tag;
-
-            // Get this panel's current expand state and set its new state
-            BaseHandler.ExpandState _oldState = _expandStates[_index];
-
-            if (_oldState == BaseHandler.ExpandState.Collapsed || _oldState == BaseHandler.ExpandState.Collapsing)
-            {
-                _expandStates[_index] = BaseHandler.ExpandState.Expanding;
-                _expandButtons[_index].BackgroundImage = Properties.Resources.upload;
-            }
-            else
-            {
-                _expandStates[_index] = BaseHandler.ExpandState.Collapsing;
-                _expandButtons[_index].BackgroundImage = Properties.Resources.download;
-            }
-
-            tmrExpand.Enabled = true;
+            CustomerHandler.Instance.ExpandCollapseFieldByButtonClick(sender, _expandStates, _expandButtons, tmrExpand);
         }
 
         private void tmrExpand_Tick(object sender, EventArgs e)
         {
-            bool _notDone = false;
-
-            for (int i = 0; i < _expandPanels.Length; i++)
-            {
-                Panel _panel = _expandPanels[i];
-                int _newHeight = _panel.Height;
-
-                if (_expandStates[i] == BaseHandler.ExpandState.Expanding)
-                {
-                    _newHeight = _panel.Height + ExpansionPerTick;
-
-                    if (_newHeight <= _panel.MaximumSize.Height)
-                    {
-                        _newHeight = _panel.MaximumSize.Height;
-                    }
-                    else
-                    {
-                        _notDone = true;
-                    }
-                }
-                else if (_expandStates[i] == BaseHandler.ExpandState.Collapsing)
-                {
-                    _newHeight = _panel.Height - ExpansionPerTick;
-
-                    if (_newHeight <= _panel.MinimumSize.Height)
-                    {
-                        _newHeight = _panel.MinimumSize.Height;
-                    }
-                    else
-                    {
-                        _notDone = true;
-                    }
-                }
-
-                _panel.Height = _newHeight;
-            }
-
-            // If we are done, disable the timer
-            tmrExpand.Enabled = _notDone;
+            CustomerHandler.Instance.ProcessExpandCollapseFieldForPanel(_expandPanels, _expandStates, ExpansionPerTick, tmrExpand);
         }
 
         private void WorkerFetcherDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -416,30 +343,7 @@ namespace TimeLog.DataImporter.UserControls
                         }
                     }
 
-                    //show error row count at the end
-                    Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText(Environment.NewLine + Environment.NewLine)));
-                    Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Invalid data input row count: " + _errorRowCount)));
-                    Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText(Environment.NewLine + Environment.NewLine)));
-
-                    //display success message after import / validation is done
-                    if (_errorRowCount == 0)
-                    {
-                        if (_senderButton.Name == button_validate.Name)
-                        {
-                            Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Validation completed successfully with no error. You may press the Import button to start importing data right away.")));
-                            Invoke((MethodInvoker)(() => button_import.Enabled = true)); 
-                        }
-                        else
-                        {
-                            Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Data import completed successfully with no error. Excellent!")));
-                            Invoke((MethodInvoker)(() => button_import.Enabled = false));
-                        }
-                    }
-                    else
-                    {
-                        Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Validation completed successfully with " + _errorRowCount + " error(s). You may modify the invalid input data and then press Validate button again.")));
-                        Invoke((MethodInvoker)(() => button_import.Enabled = false));
-                    }
+                    CustomerHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_customerImportMessages, this);
                 }
                 catch (FormatException _ex)
                 {
@@ -542,27 +446,27 @@ namespace TimeLog.DataImporter.UserControls
 
                 if (columnName == _currencyISO)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_currencyISOList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(CurrencyISOList, _fieldValue);
                 }
                 else if (columnName == _countryISO)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_countryISOList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
                 }
                 else if (columnName == _customerStatus)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_customerStatusList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(CustomerStatusList, _fieldValue);
                 }
                 else if (columnName == _primaryKAM)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_primaryKAMList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(PrimaryKAMList, _fieldValue);
                 }
                 else if (columnName == _secondaryKAM)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_secondaryKAMList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(SecondaryKAMList, _fieldValue);
                 }
                 else if (columnName == _industryName)
                 {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(_industryNameList, _fieldValue);
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(IndustryNameList, _fieldValue);
                 }
 
                 if (_result != -1)
@@ -745,7 +649,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _currency in _apiResponse)
                 {
-                    _currencyISOList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.CurrencyABB));
+                    CurrencyISOList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.CurrencyABB));
                 }
             }
         }
@@ -758,7 +662,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _country in _apiResponse)
                 {
-                    _countryISOList.Add(new KeyValuePair<int, string>(_country.CountryID, _country.ISO));
+                    CountryISOList.Add(new KeyValuePair<int, string>(_country.CountryID, _country.ISO));
                 }
             }
         }
@@ -771,7 +675,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _customerStatus in _apiResponse)
                 {
-                    _customerStatusList.Add(new KeyValuePair<int, string>(_customerStatus.CustomerStatusID, _customerStatus.Name));
+                    CustomerStatusList.Add(new KeyValuePair<int, string>(_customerStatus.CustomerStatusID, _customerStatus.Name));
                 }
             }
         }
@@ -784,7 +688,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _primaryKAM in _apiResponse)
                 {
-                    _primaryKAMList.Add(new KeyValuePair<int, string>(_primaryKAM.UserID, _primaryKAM.Initials));
+                    PrimaryKAMList.Add(new KeyValuePair<int, string>(_primaryKAM.UserID, _primaryKAM.Initials));
                 }
             }
         }
@@ -797,7 +701,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _secondaryKAM in _apiResponse)
                 {
-                    _secondaryKAMList.Add(new KeyValuePair<int, string>(_secondaryKAM.UserID, _secondaryKAM.Initials));
+                    SecondaryKAMList.Add(new KeyValuePair<int, string>(_secondaryKAM.UserID, _secondaryKAM.Initials));
                 }
             }
         }
@@ -810,7 +714,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _industry in _apiResponse)
                 {
-                    _industryNameList.Add(new KeyValuePair<int, string>(_industry.IndustryID, _industry.IndustryName));
+                    IndustryNameList.Add(new KeyValuePair<int, string>(_industry.IndustryID, _industry.IndustryName));
                 }
             }
         }
@@ -823,7 +727,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _paymentTerm in _apiResponse)
                 {
-                    _paymentTermIDList.Add(new KeyValuePair<int, string>(_paymentTerm.PaymentMethodID,
+                    PaymentTermIDList.Add(new KeyValuePair<int, string>(_paymentTerm.PaymentMethodID,
                         _paymentTerm.Name));
                 }
             }
@@ -838,9 +742,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_currencyISO.DisplayMember = "Value";
             comboBox_currencyISO.ValueMember = "Key";
 
-            if (_currencyISOList != null)
+            if (CurrencyISOList != null)
             {
-                foreach (var _currency in _currencyISOList)
+                foreach (var _currency in CurrencyISOList)
                 {
                     comboBox_currencyISO.Items.Add(new {_currency.Key, _currency.Value});
                 }
@@ -852,9 +756,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_countryISO.DisplayMember = "Value";
             comboBox_countryISO.ValueMember = "Key";
 
-            if (_countryISOList != null)
+            if (CountryISOList != null)
             {
-                foreach (var _country in _countryISOList)
+                foreach (var _country in CountryISOList)
                 {
                     comboBox_countryISO.Items.Add(new {_country.Key, _country.Value});
                 }
@@ -866,9 +770,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_customerStatus.DisplayMember = "Value";
             comboBox_customerStatus.ValueMember = "Key";
 
-            if (_customerStatusList != null)
+            if (CustomerStatusList != null)
             {
-                foreach (var _customerStatus in _customerStatusList)
+                foreach (var _customerStatus in CustomerStatusList)
                 {
                     comboBox_customerStatus.Items.Add(new {_customerStatus.Key, _customerStatus.Value});
                 }
@@ -880,9 +784,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_primaryKAM.DisplayMember = "Value";
             comboBox_primaryKAM.ValueMember = "Key";
 
-            if (_primaryKAMList != null)
+            if (PrimaryKAMList != null)
             {
-                foreach (var _primaryKAM in _primaryKAMList)
+                foreach (var _primaryKAM in PrimaryKAMList)
                 {
                     comboBox_primaryKAM.Items.Add(new {_primaryKAM.Key, _primaryKAM.Value});
                 }
@@ -894,9 +798,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_secondaryKAM.DisplayMember = "Value";
             comboBox_secondaryKAM.ValueMember = "Key";
 
-            if (_secondaryKAMList != null)
+            if (SecondaryKAMList != null)
             {
-                foreach (var _secondaryKAM in _secondaryKAMList)
+                foreach (var _secondaryKAM in SecondaryKAMList)
                 {
                     comboBox_secondaryKAM.Items.Add(new {_secondaryKAM.Key, _secondaryKAM.Value});
                 }
@@ -908,9 +812,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_industryName.DisplayMember = "Value";
             comboBox_industryName.ValueMember = "Key";
 
-            if (_industryNameList != null)
+            if (IndustryNameList != null)
             {
-                foreach (var _industry in _industryNameList)
+                foreach (var _industry in IndustryNameList)
                 {
                     comboBox_industryName.Items.Add(new {_industry.Key, _industry.Value});
                 }
@@ -922,9 +826,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_paymentTermID.DisplayMember = "Value";
             comboBox_paymentTermID.ValueMember = "Key";
 
-            if (_paymentTermIDList != null)
+            if (PaymentTermIDList != null)
             {
-                foreach (var _paymentTerm in _paymentTermIDList)
+                foreach (var _paymentTerm in PaymentTermIDList)
                 {
                     comboBox_paymentTermID.Items.Add(new {_paymentTerm.Key, _paymentTerm.Value});
                 }
@@ -1700,7 +1604,7 @@ namespace TimeLog.DataImporter.UserControls
         private void checkBox_defaultCurrencyISO_CheckedChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_currencyISO, 
-                _currencyISO, checkBox_defaultCurrencyISO, _currencyISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                _currencyISO, checkBox_defaultCurrencyISO, CurrencyISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
             //comboBox_currencyISO.ResetText();
             //comboBox_currencyISO.Items.Clear();
@@ -1738,7 +1642,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (checkBox_defaultCustomerStatus.Checked)
             {
-                if (_customerStatusList == null)
+                if (CustomerStatusList == null)
                 {
                     GetAllCustomerStatusFromApi();
                 }
@@ -1770,7 +1674,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (checkBox_defaultCountryISO.Checked)
             {
-                if (_countryISOList == null)
+                if (CountryISOList == null)
                 {
                     GetAllCountryFromApi();
                 }
@@ -1801,7 +1705,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (checkBox_defaultPrimaryKAM.Checked)
             {
-                if (_primaryKAMList == null)
+                if (PrimaryKAMList == null)
                 {
                     GetAllPrimaryKAMFromApi();
                 }
@@ -1833,7 +1737,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (checkBox_defaultSecondaryKAM.Checked)
             {
-                if (_secondaryKAMList == null)
+                if (SecondaryKAMList == null)
                 {
                     GetAllSecondaryKAMFromApi();
                 }
@@ -1865,7 +1769,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (checkBox_defaultIndustryName.Checked)
             {
-                if (_industryNameList == null)
+                if (IndustryNameList == null)
                 {
                     GetAllIndustryFromApi();
                 }
@@ -1974,11 +1878,11 @@ namespace TimeLog.DataImporter.UserControls
 
             for (int i = 0; i <= 100; i++)
             {
-                _VATPercentageList.Add(i.ToString());
+                VATPercentageList.Add(i.ToString());
             }
 
             comboBox_VATPercentage.Items.AddRange(checkBox_defaultVATPercentage.Checked
-                ? _VATPercentageList.Cast<object>().ToArray()
+                ? VATPercentageList.Cast<object>().ToArray()
                 : CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
             var _tableColumnIndex = _customerTable.Columns.IndexOf(_VATPercentage);

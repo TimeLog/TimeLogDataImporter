@@ -110,38 +110,6 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<LegalEntityReadModel> GetAllLegalEntity(string token)
-        {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllLegalEntityEndpoint;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<LegalEntityReadModel> _apiResponse = new List<LegalEntityReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<LegalEntityReadModel>(_property.Value.ToString()));
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain default legal entity ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            return null;
-        }
-
         public List<ProjectTypeReadModel> GetAllProjectType(string token)
         {
             var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectTypeEndpoint;
