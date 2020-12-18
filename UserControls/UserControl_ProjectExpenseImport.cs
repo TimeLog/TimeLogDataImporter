@@ -9,7 +9,7 @@ using TimeLog.DataImporter.TimeLogApi.Model;
 
 namespace TimeLog.DataImporter.UserControls
 {
-    public partial class UserControl_EmployeeImport : UserControl
+    public partial class UserControl_ProjectExpenseImport : UserControl
     {
         #region Variable declarations
 
@@ -78,7 +78,7 @@ namespace TimeLog.DataImporter.UserControls
 
         #endregion
 
-        public UserControl_EmployeeImport()
+        public UserControl_ProjectExpenseImport()
         {
             InitializeComponent();
             EmployeeHandler.Instance.InitializeDelimiterComboBox(comboBox_delimiter);
@@ -87,7 +87,7 @@ namespace TimeLog.DataImporter.UserControls
             AddRowNumberToDataTable();
             InitializeAllDefaultValues();
             _employeeTable = EmployeeHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-            dataGridView_employee.DataSource = _employeeTable;
+            dataGridView_projectExpense.DataSource = _employeeTable;
             button_import.Enabled = false;
         }
 
@@ -124,14 +124,6 @@ namespace TimeLog.DataImporter.UserControls
         {
             GetAllLegalEntityFromApi();
             GetAllDepartmentFromApi();
-            GetAllEmployeeTypeFromApi();
-            GetAllDefaultHourlyRateFromApi();
-            GetAllCostPriceFromApi();
-            GetAllPublicHolidayCalendarFromApi();
-            GetAllAllowanceLegislationFromApi();
-            GetAllNormalWorkingTimeFromApi();
-            GetAllSalaryGroupFromApi();
-            GetAllManagerFromApi();
         }
 
         #endregion
@@ -146,16 +138,16 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_fileContent != null)
             {
-                textBox_employeeImportMessages.Text = string.Empty;
+                textBox_projectExpenseImportMessages.Text = string.Empty;
                 ClearAndResetAllCheckBoxes();
                 ClearAndResetAllComboBoxes();
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
-                if (dataGridView_employee.RowCount > 1)
+                if (dataGridView_projectExpense.RowCount > 1)
                 {
-                    dataGridView_employee.DataSource = null;
+                    dataGridView_projectExpense.DataSource = null;
                     _employeeTable = EmployeeHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_employee.DataSource = _employeeTable;
+                    dataGridView_projectExpense.DataSource = _employeeTable;
                 }
 
                 foreach (DataRow _fileContentRow in _fileContent.Rows)
@@ -173,7 +165,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_validate_Click(object sender, EventArgs e)
         {
-            textBox_employeeImportMessages.Text = string.Empty;
+            textBox_projectExpenseImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -185,7 +177,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_import_Click(object sender, EventArgs e)
         {
-            textBox_employeeImportMessages.Text = string.Empty;
+            textBox_projectExpenseImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -193,19 +185,19 @@ namespace TimeLog.DataImporter.UserControls
         private void button_clear_Click(object sender, EventArgs e)
         {
             EmployeeHandler.Instance.FileColumnHeaders = new List<string>();
-            textBox_employeeImportMessages.Text = string.Empty;
+            textBox_projectExpenseImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
-            dataGridView_employee.DataSource = null;
+            dataGridView_projectExpense.DataSource = null;
             _employeeTable = EmployeeHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-            dataGridView_employee.DataSource = _employeeTable;
+            dataGridView_projectExpense.DataSource = _employeeTable;
         }
 
         private void textBox_employeeImportMessages_MouseClick(object sender, MouseEventArgs e)
         {
-            EmployeeHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_employee, textBox_employeeImportMessages);
+            EmployeeHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_projectExpense, textBox_projectExpenseImportMessages);
         }
 
         private void button_expand_Click(object sender, EventArgs e)
@@ -220,7 +212,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void WorkerFetcherDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            if (dataGridView_employee != null && dataGridView_employee.RowCount > 1)
+            if (dataGridView_projectExpense != null && dataGridView_projectExpense.RowCount > 1)
             {
                 _errorRowCount = 0;
 
@@ -228,7 +220,7 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
-                Invoke((MethodInvoker)(() => button_employeeSelectFile.Enabled = false));
+                Invoke((MethodInvoker)(() => button_projectExpenseSelectFile.Enabled = false));
 
                 //get strings of delimiters chosen
                 var _fileDelimiter = (string) comboBox_delimiter.Invoke(new Func<string>(() => comboBox_delimiter.SelectedItem.ToString()));
@@ -236,7 +228,7 @@ namespace TimeLog.DataImporter.UserControls
 
                 try
                 {
-                    foreach (DataGridViewRow _row in dataGridView_employee.Rows)
+                    foreach (DataGridViewRow _row in dataGridView_projectExpense.Rows)
                     {
                         if (WorkerFetcher.CancellationPending)
                         {
@@ -250,25 +242,25 @@ namespace TimeLog.DataImporter.UserControls
                         {
                             EmployeeCreateModel _newEmployee = new EmployeeCreateModel
                             {
-                                UserName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, UserName, _row),
-                                FirstName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, FirstName, _row),
-                                LastName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, LastName, _row),
-                                Initials = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, Initials, _row),
-                                Email = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, Email, _row),
-                                Title = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, JobTitle, _row),
-                                EmployeeNo = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, EmployeeNo, _row),
-                                EmploymentDate = EmployeeHandler.Instance.CheckAndGetDate(dataGridView_employee, EmploymentDate, _row),
+                                UserName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, UserName, _row),
+                                FirstName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, FirstName, _row),
+                                LastName = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, LastName, _row),
+                                Initials = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, Initials, _row),
+                                Email = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, Email, _row),
+                                Title = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, JobTitle, _row),
+                                EmployeeNo = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, EmployeeNo, _row),
+                                EmploymentDate = EmployeeHandler.Instance.CheckAndGetDate(dataGridView_projectExpense, EmploymentDate, _row),
                                 LegalEntityID = (int) MapFieldValueToID(LegalEntity, _row, false),
                                 DepartmentID = (int) MapFieldValueToID(Department, _row, false),
                                 ApprovalManagerID = (int) MapFieldValueToID(ManagerInitials, _row, false),
-                                EmployeeTypeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, EmployeeType, _row),
-                                StandardHourlyRateID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, DefaultHourlyRate, _row),
-                                CostPriceID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, CostPrice, _row),
-                                PublicHolidayCalendarID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, PublicHolidayCalendar, _row),
-                                AllowanceLegislationID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, AllowanceLegislation, _row),
-                                NormalWorkingTimeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, NormalWorkingTime, _row),
-                                SalaryGroupID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, SalaryGroup, _row),
-                                UserRoleIDs = EmployeeHandler.Instance.CheckAndGetIntegerArray(dataGridView_employee, UserRoleNames, _row, _fileDelimiter, _userRoleDelimiter)
+                                EmployeeTypeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, EmployeeType, _row),
+                                StandardHourlyRateID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, DefaultHourlyRate, _row),
+                                CostPriceID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, CostPrice, _row),
+                                PublicHolidayCalendarID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, PublicHolidayCalendar, _row),
+                                AllowanceLegislationID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, AllowanceLegislation, _row),
+                                NormalWorkingTimeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, NormalWorkingTime, _row),
+                                SalaryGroupID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_projectExpense, SalaryGroup, _row),
+                                UserRoleIDs = EmployeeHandler.Instance.CheckAndGetIntegerArray(dataGridView_projectExpense, UserRoleNames, _row, _fileDelimiter, _userRoleDelimiter)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -279,7 +271,7 @@ namespace TimeLog.DataImporter.UserControls
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_employeeImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        textBox_projectExpenseImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                                 else
                                 {
@@ -287,13 +279,13 @@ namespace TimeLog.DataImporter.UserControls
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_employeeImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        textBox_projectExpenseImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                             }
                         }
                     }
 
-                    EmployeeHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_employeeImportMessages, this);
+                    EmployeeHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_projectExpenseImportMessages, this);
                 }
                 catch (FormatException _ex)
                 {
@@ -307,7 +299,7 @@ namespace TimeLog.DataImporter.UserControls
                 //reactivate buttons after work is done
                 Invoke((MethodInvoker)(() => button_validate.Enabled = true));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = true));
-                Invoke((MethodInvoker)(() => button_employeeSelectFile.Enabled = true));
+                Invoke((MethodInvoker)(() => button_projectExpenseSelectFile.Enabled = true));
             }
         }
 
@@ -340,9 +332,9 @@ namespace TimeLog.DataImporter.UserControls
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
         {
-            if (dataGridView_employee.Columns[columnName] != null)
+            if (dataGridView_projectExpense.Columns[columnName] != null)
             {
-                var _fieldValue = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, columnName, row);
+                var _fieldValue = EmployeeHandler.Instance.CheckAndGetString(dataGridView_projectExpense, columnName, row);
                 int _result = -1;
 
                 if (columnName == LegalEntity)
@@ -392,7 +384,7 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //if can't match, display error message
-                _errorRowCount = EmployeeHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_employeeImportMessages, 
+                _errorRowCount = EmployeeHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_projectExpenseImportMessages, 
                     WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
                 _isMappingFieldValueToIDCorrect = false;
                 _isFirstTimeInvalidMapping = false;
@@ -491,225 +483,121 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllEmployeeTypeFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllDefaultHourlyRateFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllCostPriceFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllPublicHolidayCalendarFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllAllowanceLegislationFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllNormalWorkingTimeFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllSalaryGroupFromApi()
-        {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllManagerFromApi()
-        {
-            var _apiResponse = EmployeeHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _manager in _apiResponse)
-                {
-                    ManagerInitialsList.Add(new KeyValuePair<int, string>(_manager.UserID, _manager.Initials));
-                }
-            }
-        }
-
         #endregion
 
         #region Combobox implementations
 
         private void comboBox_userName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_userName, UserName);
         }
 
         private void comboBox_firstName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_firstName, FirstName);
         }
 
         private void comboBox_lastName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_lastName, LastName);
         }
 
         private void comboBox_initials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_initials, Initials);
         }
 
         private void comboBox_email_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_email, Email);
         }
 
         private void comboBox_managerInitials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_managerInitials, ManagerInitials);
         }
 
         private void comboBox_costPrice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_costPrice, CostPrice, checkBox_defaultCostPrice);
         }
 
         private void comboBox_publicHolidayCalendar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_publicHolidayCalendar, PublicHolidayCalendar, checkBox_defaultPublicHolidayCalendar);
         }
 
         private void comboBox_normalWorkingTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_normalWorkingTime, NormalWorkingTime, checkBox_defaultNormalWorkingTime);
         }
 
         private void comboBox_salaryGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_salaryGroup, SalaryGroup, checkBox_defaultSalaryGroup);
         }
 
         private void comboBox_jobTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_jobTitle, JobTitle);
         }
 
         private void comboBox_employeeNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_employeeNo, EmployeeNo);
         }
 
         private void comboBox_employmentDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_employmentDate, EmploymentDate);
         }
 
         private void comboBox_legalEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_legalEntity, LegalEntity, checkBox_defaultLegalEntity);
         }
 
         private void comboBox_defaultHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_defaultHourlyRate, DefaultHourlyRate, checkBox_defaultHourlyRate);
         }
 
         private void comboBox_department_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_department, Department, checkBox_defaultDepartment);
         }
 
         private void comboBox_employeeType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_employeeType, EmployeeType, checkBox_defaultEmployeeType);
         }
 
         private void comboBox_allowanceLegislation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_allowanceLegislation, AllowanceLegislation, checkBox_defaultAllowanceLegislation);
         }
 
         private void comboBox_userRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_projectExpense, _employeeTable,
                 comboBox_userRoles, UserRoleNames);
         }
 
@@ -719,55 +607,55 @@ namespace TimeLog.DataImporter.UserControls
 
         private void checkBox_defaultEmployeeType_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_employeeType,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_employeeType,
                EmployeeType, checkBox_defaultEmployeeType, EmployeeTypeList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultLegalEntity_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_legalEntity,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_legalEntity,
                 LegalEntity, checkBox_defaultLegalEntity, LegalEntityList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultCostPrice_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_costPrice,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_costPrice,
                 CostPrice, checkBox_defaultCostPrice, CostPriceList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultHourlyRate_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_defaultHourlyRate,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_defaultHourlyRate,
                 DefaultHourlyRate, checkBox_defaultHourlyRate, DefaultHourlyRateList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultDepartment_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_department,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_department,
                 Department, checkBox_defaultDepartment, DepartmentList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultPublicHolidayCalendar_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_publicHolidayCalendar,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_publicHolidayCalendar,
                 PublicHolidayCalendar, checkBox_defaultPublicHolidayCalendar, PublicHolidayCalendarList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultNormalWorkingTime_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_normalWorkingTime,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_normalWorkingTime,
                 NormalWorkingTime, checkBox_defaultNormalWorkingTime, NormalWorkingTimeList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultSalaryGroup_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_salaryGroup,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_salaryGroup,
                 SalaryGroup, checkBox_defaultSalaryGroup, SalaryGroupList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultAllowanceLegislation_CheckedChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_allowanceLegislation,
+            EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_projectExpense, _employeeTable, comboBox_allowanceLegislation,
                 AllowanceLegislation, checkBox_defaultAllowanceLegislation, AllowanceLegislationList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 

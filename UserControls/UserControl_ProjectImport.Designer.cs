@@ -68,13 +68,13 @@
             this.label_projectCurrencyISO = new System.Windows.Forms.Label();
             this.label_projectType = new System.Windows.Forms.Label();
             this.comboBox_projectCurrencyISO = new System.Windows.Forms.ComboBox();
-            this.label_projectManagerID = new System.Windows.Forms.Label();
-            this.comboBox_projectManagerID = new System.Windows.Forms.ComboBox();
+            this.label_projectManager = new System.Windows.Forms.Label();
+            this.comboBox_projectManager = new System.Windows.Forms.ComboBox();
             this.label_projectTemplate = new System.Windows.Forms.Label();
             this.comboBox_projectType = new System.Windows.Forms.ComboBox();
             this.comboBox_projectTemplate = new System.Windows.Forms.ComboBox();
-            this.label_projectCustomerID = new System.Windows.Forms.Label();
-            this.comboBox_projectCustomerID = new System.Windows.Forms.ComboBox();
+            this.label_projectCustomerNo = new System.Windows.Forms.Label();
+            this.comboBox_projectCustomerNo = new System.Windows.Forms.ComboBox();
             this.label_projectName = new System.Windows.Forms.Label();
             this.comboBox_projectName = new System.Windows.Forms.ComboBox();
             this.label_projectSetup = new System.Windows.Forms.Label();
@@ -440,13 +440,13 @@
             this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectCurrencyISO);
             this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectType);
             this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectCurrencyISO);
-            this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectManagerID);
-            this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectManagerID);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectManager);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectManager);
             this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectTemplate);
             this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectType);
             this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectTemplate);
-            this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectCustomerID);
-            this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectCustomerID);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectCustomerNo);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectCustomerNo);
             this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectName);
             this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectName);
             this.groupBox_projectMandatoryFields.Location = new System.Drawing.Point(184, 62);
@@ -549,23 +549,23 @@
             this.comboBox_projectCurrencyISO.TabIndex = 3;
             this.comboBox_projectCurrencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCurrencyISO_SelectedIndexChanged);
             // 
-            // label_projectManagerID
+            // label_projectManager
             // 
-            this.label_projectManagerID.AutoSize = true;
-            this.label_projectManagerID.Location = new System.Drawing.Point(6, 120);
-            this.label_projectManagerID.Name = "label_projectManagerID";
-            this.label_projectManagerID.Size = new System.Drawing.Size(79, 17);
-            this.label_projectManagerID.TabIndex = 1;
-            this.label_projectManagerID.Text = "P. M. Initials";
+            this.label_projectManager.AutoSize = true;
+            this.label_projectManager.Location = new System.Drawing.Point(6, 120);
+            this.label_projectManager.Name = "label_projectManager";
+            this.label_projectManager.Size = new System.Drawing.Size(79, 17);
+            this.label_projectManager.TabIndex = 1;
+            this.label_projectManager.Text = "P. M. Initials";
             // 
-            // comboBox_projectManagerID
+            // comboBox_projectManager
             // 
-            this.comboBox_projectManagerID.FormattingEnabled = true;
-            this.comboBox_projectManagerID.Location = new System.Drawing.Point(138, 117);
-            this.comboBox_projectManagerID.Name = "comboBox_projectManagerID";
-            this.comboBox_projectManagerID.Size = new System.Drawing.Size(139, 25);
-            this.comboBox_projectManagerID.TabIndex = 3;
-            this.comboBox_projectManagerID.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectManager_SelectedIndexChanged);
+            this.comboBox_projectManager.FormattingEnabled = true;
+            this.comboBox_projectManager.Location = new System.Drawing.Point(138, 117);
+            this.comboBox_projectManager.Name = "comboBox_projectManager";
+            this.comboBox_projectManager.Size = new System.Drawing.Size(139, 25);
+            this.comboBox_projectManager.TabIndex = 3;
+            this.comboBox_projectManager.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectManager_SelectedIndexChanged);
             // 
             // label_projectTemplate
             // 
@@ -594,23 +594,23 @@
             this.comboBox_projectTemplate.TabIndex = 3;
             this.comboBox_projectTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectTemplate_SelectedIndexChanged);
             // 
-            // label_projectCustomerID
+            // label_projectCustomerNo
             // 
-            this.label_projectCustomerID.AutoSize = true;
-            this.label_projectCustomerID.Location = new System.Drawing.Point(6, 58);
-            this.label_projectCustomerID.Name = "label_projectCustomerID";
-            this.label_projectCustomerID.Size = new System.Drawing.Size(84, 17);
-            this.label_projectCustomerID.TabIndex = 1;
-            this.label_projectCustomerID.Text = "Customer ID";
+            this.label_projectCustomerNo.AutoSize = true;
+            this.label_projectCustomerNo.Location = new System.Drawing.Point(6, 58);
+            this.label_projectCustomerNo.Name = "label_projectCustomerNo";
+            this.label_projectCustomerNo.Size = new System.Drawing.Size(89, 17);
+            this.label_projectCustomerNo.TabIndex = 1;
+            this.label_projectCustomerNo.Text = "Customer No";
             // 
-            // comboBox_projectCustomerID
+            // comboBox_projectCustomerNo
             // 
-            this.comboBox_projectCustomerID.FormattingEnabled = true;
-            this.comboBox_projectCustomerID.Location = new System.Drawing.Point(138, 55);
-            this.comboBox_projectCustomerID.Name = "comboBox_projectCustomerID";
-            this.comboBox_projectCustomerID.Size = new System.Drawing.Size(139, 25);
-            this.comboBox_projectCustomerID.TabIndex = 3;
-            this.comboBox_projectCustomerID.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomer_SelectedIndexChanged);
+            this.comboBox_projectCustomerNo.FormattingEnabled = true;
+            this.comboBox_projectCustomerNo.Location = new System.Drawing.Point(138, 55);
+            this.comboBox_projectCustomerNo.Name = "comboBox_projectCustomerNo";
+            this.comboBox_projectCustomerNo.Size = new System.Drawing.Size(139, 25);
+            this.comboBox_projectCustomerNo.TabIndex = 3;
+            this.comboBox_projectCustomerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomerNo_SelectedIndexChanged);
             // 
             // label_projectName
             // 
@@ -730,14 +730,14 @@
         private System.Windows.Forms.TextBox textBox_projectImportMessages;
         private System.Windows.Forms.Label label_projectTemplate;
         private System.Windows.Forms.ComboBox comboBox_projectTemplate;
-        private System.Windows.Forms.Label label_projectCustomerID;
-        private System.Windows.Forms.ComboBox comboBox_projectCustomerID;
+        private System.Windows.Forms.Label label_projectCustomerNo;
+        private System.Windows.Forms.ComboBox comboBox_projectCustomerNo;
         private System.Windows.Forms.Label label_projectLegalEntity;
         private System.Windows.Forms.ComboBox comboBox_projectLegalEntity;
         private System.Windows.Forms.Label label_projectCurrencyISO;
         private System.Windows.Forms.ComboBox comboBox_projectCurrencyISO;
-        private System.Windows.Forms.Label label_projectManagerID;
-        private System.Windows.Forms.ComboBox comboBox_projectManagerID;
+        private System.Windows.Forms.Label label_projectManager;
+        private System.Windows.Forms.ComboBox comboBox_projectManager;
         private System.Windows.Forms.Label label_delimiter;
         private System.Windows.Forms.ComboBox comboBox_delimiter;
         private System.Windows.Forms.Label label_projectCategory;

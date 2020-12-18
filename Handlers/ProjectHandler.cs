@@ -62,7 +62,7 @@ namespace TimeLog.DataImporter.Handlers
             {
                 var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
 
-                if (_jsonResult == "null")
+                if (_jsonResult != "null")
                 {
                     return new DefaultApiResponse(200, "OK", new string[] { });
                 }
@@ -169,6 +169,41 @@ namespace TimeLog.DataImporter.Handlers
             catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project category ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<CustomerReadModel> GetAllCustomer(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCustomerEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<CustomerReadModel> _apiResponse = new List<CustomerReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default customer ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;

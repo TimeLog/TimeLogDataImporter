@@ -212,6 +212,41 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<EmployeeReadModel> GetAllEmployee(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllEmployeeEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<EmployeeReadModel> _apiResponse = new List<EmployeeReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<EmployeeReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default primary and secondary KAM ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Get data of different type methods
@@ -623,23 +658,41 @@ namespace TimeLog.DataImporter.Handlers
 
         #region Helper - Error handling and UI display methods
 
-        public void HandleInvalidFieldValueToIDMapping(string columnName, DataGridViewRow row, string fieldValue, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control)
+        public int HandleInvalidFieldValueToIDMapping(string columnName, DataGridViewRow row, string fieldValue, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control, bool isFirstTimeInvalidMapping, int errorRowCount)
         {
             control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
 
-            if (string.IsNullOrEmpty(fieldValue))
+            if (isFirstTimeInvalidMapping)
             {
-                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) +
-                                                                               " - " + columnName + " is empty.")));
+                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+
+                if (string.IsNullOrEmpty(fieldValue))
+                {
+                    control.Invoke((MethodInvoker) (() => domainTextBox.AppendText("Row " + (row.Index + 1) +
+                        " - " + columnName + " is empty.")));
+                }
+                else
+                {
+                    control.Invoke((MethodInvoker) (() => domainTextBox.AppendText("Row " + (row.Index + 1) +
+                        " - " + columnName + " '" + fieldValue + "' doesn't exist in TimeLog.")));
+                }
+
+                errorRowCount++;
             }
             else
             {
-                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) +
-                                                                               " - " + columnName + " '" + fieldValue + "' doesn't exist in TimeLog.")));
+                if (string.IsNullOrEmpty(fieldValue))
+                {
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(" | " + columnName + " is empty.")));
+                }
+                else
+                {
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(" | " + columnName + " '" + fieldValue + "' doesn't exist in TimeLog.")));
+                }
             }
 
             workerFetcher.CancelAsync();
+            return errorRowCount;
         }
 
         public void DisplayErrorRowCountAndSuccessMessage(int errorRowCount, Button importButton, Button validateButton, Button senderButton, TextBox domainTextBox, Control control)

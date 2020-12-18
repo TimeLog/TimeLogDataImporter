@@ -8,24 +8,25 @@ using TimeLog.DataImporter.TimeLogApi.Model;
 
 namespace TimeLog.DataImporter.Handlers
 {
-    public class EmployeeHandler : BaseHandler
+    public class ProjectExpenseHandler : BaseHandler
     {
-        private static EmployeeHandler _instance;
+        private static ProjectExpenseHandler _instance;
 
-        private EmployeeHandler()
+        private ProjectExpenseHandler()
         {
         }
 
-        public static EmployeeHandler Instance
+        public static ProjectExpenseHandler Instance
         {
-            get { return _instance ??= new EmployeeHandler(); }
+            get { return _instance ??= new ProjectExpenseHandler(); }
         }
 
-        public DefaultApiResponse ValidateEmployee(EmployeeCreateModel employee, string token, out BusinessRulesApiResponse businessRulesApiResponse)
+        public DefaultApiResponse ValidateProjectExpense(ProjectExpenseCreateModel projectExpense, string token, out BusinessRulesApiResponse businessRulesApiResponse)
         {
-            var _data = JsonConvert.SerializeObject(employee, Newtonsoft.Json.Formatting.None, 
+            var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None, 
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.EmployeeValidateEndpoint;
+            //lack of validate endpoint
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -37,7 +38,7 @@ namespace TimeLog.DataImporter.Handlers
                     return new DefaultApiResponse(200, "OK", new string[] { });
                 }
 
-                return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Employee", new string[] { });
+                return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Project Expense", new string[] { });
             }
             catch (WebException _webEx)
             {
@@ -48,11 +49,11 @@ namespace TimeLog.DataImporter.Handlers
             }
         }
 
-        public DefaultApiResponse ImportEmployee(EmployeeCreateModel employee, string token, out BusinessRulesApiResponse businessRulesApiResponse)
+        public DefaultApiResponse ImportProjectExpense(ProjectExpenseCreateModel projectExpense, string token, out BusinessRulesApiResponse businessRulesApiResponse)
         {
-            var _data = JsonConvert.SerializeObject(employee, Newtonsoft.Json.Formatting.None,
+            var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.EmployeeCreateEndpoint;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -64,7 +65,7 @@ namespace TimeLog.DataImporter.Handlers
                     return new DefaultApiResponse(200, "OK", new string[] { });
                 }
 
-                return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Employee", new string[] { });
+                return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Project Expense", new string[] { });
             }
             catch (WebException _webEx)
             {

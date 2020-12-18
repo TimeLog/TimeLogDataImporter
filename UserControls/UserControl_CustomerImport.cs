@@ -19,6 +19,7 @@ namespace TimeLog.DataImporter.UserControls
         private Button _senderButton;
         private int _errorRowCount;
         private bool _isMappingFieldValueToIDCorrect;
+        private bool _isFirstTimeInvalidMapping;
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
@@ -270,6 +271,7 @@ namespace TimeLog.DataImporter.UserControls
                         }
 
                         _isMappingFieldValueToIDCorrect = true;
+                        _isFirstTimeInvalidMapping = true;
 
                         if (_row.DataBoundItem != null)
                         {
@@ -475,9 +477,10 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //if can't match, display error message
-                CustomerHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_customerImportMessages, WorkerFetcher, this);
+                _errorRowCount = CustomerHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_customerImportMessages,
+                    WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
                 _isMappingFieldValueToIDCorrect = false;
-                _errorRowCount++;
+                _isFirstTimeInvalidMapping = false;
             }
 
             if (isNullableField)

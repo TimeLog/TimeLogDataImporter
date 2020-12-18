@@ -24,9 +24,9 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
             {0, "Project Name"},
-            {1, "Customer ID"},
+            {1, "Customer No"},
             {2, "Project Template"},
-            {3, "Project Manager ID"},
+            {3, "Project Manager Initials"},
             {4, "Currency ISO"},
             {5, "Legal Entity"},
             {6, "Project Type"}
@@ -34,9 +34,9 @@ namespace TimeLog.DataImporter.UserControls
 
         //all column header variables
         private readonly string _projectName = "Project Name";
-        private readonly string _customerID = "Customer ID";
+        private readonly string _customerNo = "Customer No";
         private readonly string _projectTemplate = "Project Template";
-        private readonly string _projectManagerID = "Project Manager ID";
+        private readonly string _projectManager = "Project Manager Initials";
         private readonly string _currencyISO = "Currency ISO";
         private readonly string _legalEntity = "Legal Entity";
         private readonly string _projectNo = "Project No";
@@ -52,6 +52,8 @@ namespace TimeLog.DataImporter.UserControls
         private List<KeyValuePair<int, string>> _legalEntityList;
         private List<KeyValuePair<int, string>> _projectTypeList;
         private List<KeyValuePair<int, string>> _projectCategoryList;
+        private List<KeyValuePair<int, string>> _customerNoList;
+        private List<KeyValuePair<int, string>> _projectManagerList;
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -104,22 +106,6 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        //private void InitializeDelimiterComboBox()
-        //{
-        //    comboBox_delimiter.Items.AddRange(ProjectHandler.Instance.GetDelimiterList().Cast<object>().ToArray());
-        //    comboBox_delimiter.SelectedIndex = 0;
-        //}
-
-        //private void InitializeProjectDataTable()
-        //{
-        //    _projectTable = new DataTable();
-
-        //    foreach (var _mandatoryField in MandatoryFields)
-        //    {
-        //        _projectTable.Columns.Add(_mandatoryField.Value);
-        //    }
-        //}
-
         private void InitializeAllDefaultValues()
         {
             GetAllProjectTemplateFromApi();
@@ -127,6 +113,8 @@ namespace TimeLog.DataImporter.UserControls
             GetAllLegalEntityFromApi();
             GetAllProjectTypeFromApi();
             GetAllProjectCategoryFromApi();
+            GetAllProjectManagerFromApi();
+            GetAllCustomerFromApi();
         }
 
         #endregion
@@ -313,9 +301,9 @@ namespace TimeLog.DataImporter.UserControls
                             ProjectCreateModel _newProject = new ProjectCreateModel
                             {
                                 Name = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectName, _row),
-                                CustomerID = ProjectHandler.Instance.CheckAndGetInteger(dataGridView_project, _customerID, _row),
+                                CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
                                 ProjectTemplateID = (int) MapFieldValueToID(_projectTemplate, _row, false),
-                                ProjectManagerID = ProjectHandler.Instance.CheckAndGetInteger(dataGridView_project, _projectManagerID, _row),
+                                ProjectManagerID = (int) MapFieldValueToID(_projectManager, _row, false),
                                 CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
                                 LegalEntityID = (int) MapFieldValueToID(_legalEntity, _row, false),
                                 ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectNo, _row),
@@ -467,8 +455,8 @@ namespace TimeLog.DataImporter.UserControls
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_projectName.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectCustomerID.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectManagerID.Items.AddRange(fileColumnHeaderArray);
+            comboBox_projectCustomerNo.Items.AddRange(fileColumnHeaderArray);
+            comboBox_projectManager.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectTemplate.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectCurrencyISO.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectLegalEntity.Items.AddRange(fileColumnHeaderArray);
@@ -530,6 +518,14 @@ namespace TimeLog.DataImporter.UserControls
                 else if (columnName == _projectCategory)
                 {
                     _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectCategoryList, _fieldValue);
+                }
+                else if (columnName == _projectManager)
+                {
+                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectManagerList, _fieldValue);
+                }
+                else if (columnName == _customerNo)
+                {
+                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_customerNoList, _fieldValue);
                 }
 
                 if (_result != -1)
@@ -615,12 +611,12 @@ namespace TimeLog.DataImporter.UserControls
         {
             comboBox_projectName.ResetText();
             comboBox_projectName.Items.Clear();
-            comboBox_projectCustomerID.ResetText();
-            comboBox_projectCustomerID.Items.Clear();
+            comboBox_projectCustomerNo.ResetText();
+            comboBox_projectCustomerNo.Items.Clear();
             comboBox_projectTemplate.ResetText();
             comboBox_projectTemplate.Items.Clear();
-            comboBox_projectManagerID.ResetText();
-            comboBox_projectManagerID.Items.Clear();
+            comboBox_projectManager.ResetText();
+            comboBox_projectManager.Items.Clear();
             comboBox_projectCurrencyISO.ResetText();
             comboBox_projectCurrencyISO.Items.Clear();
             comboBox_projectLegalEntity.ResetText();
@@ -727,6 +723,36 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
+        private void GetAllProjectManagerFromApi()
+        {
+            var _apiResponse = ProjectHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                _projectManagerList = new List<KeyValuePair<int, string>>();
+
+                foreach (var _projectManager in _apiResponse)
+                {
+                    _projectManagerList.Add(new KeyValuePair<int, string>(_projectManager.UserID, _projectManager.Initials));
+                }
+            }
+        }
+
+        private void GetAllCustomerFromApi()
+        {
+            var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                _customerNoList = new List<KeyValuePair<int, string>>();
+
+                foreach (var _customer in _apiResponse)
+                {
+                    _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
+                }
+            }
+        }
+
         #endregion
 
         #region Add default key value pair list to Combobox
@@ -818,11 +844,11 @@ namespace TimeLog.DataImporter.UserControls
             CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
-        private void comboBox_projectCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_projectCustomerNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_projectCustomerID.SelectedItem.ToString());
+            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_projectCustomerNo.SelectedItem.ToString());
 
-            var _tableColumnIndex = _projectTable.Columns.IndexOf(_customerID);
+            var _tableColumnIndex = _projectTable.Columns.IndexOf(_customerNo);
 
             ClearColumn(_tableColumnIndex);
 
@@ -855,9 +881,9 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_projectManager_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_projectManagerID.SelectedItem.ToString());
+            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_projectManager.SelectedItem.ToString());
 
-            var _tableColumnIndex = _projectTable.Columns.IndexOf(_projectManagerID);
+            var _tableColumnIndex = _projectTable.Columns.IndexOf(_projectManager);
 
             ClearColumn(_tableColumnIndex);
 
