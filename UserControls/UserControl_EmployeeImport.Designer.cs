@@ -366,6 +366,7 @@
             this.checkBox_defaultAllowanceLegislation.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultAllowanceLegislation.TabIndex = 11;
             this.checkBox_defaultAllowanceLegislation.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultAllowanceLegislation, "Set default values for all rows of a particular column field");
             this.checkBox_defaultAllowanceLegislation.UseVisualStyleBackColor = true;
             this.checkBox_defaultAllowanceLegislation.CheckedChanged += new System.EventHandler(this.checkBox_defaultAllowanceLegislation_CheckedChanged);
             // 
@@ -610,6 +611,7 @@
             this.checkBox_defaultSalaryGroup.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultSalaryGroup.TabIndex = 13;
             this.checkBox_defaultSalaryGroup.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultSalaryGroup, "Set default values for all rows of a particular column field");
             this.checkBox_defaultSalaryGroup.UseVisualStyleBackColor = true;
             this.checkBox_defaultSalaryGroup.CheckedChanged += new System.EventHandler(this.checkBox_defaultSalaryGroup_CheckedChanged);
             // 
@@ -621,6 +623,7 @@
             this.checkBox_defaultNormalWorkingTime.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultNormalWorkingTime.TabIndex = 12;
             this.checkBox_defaultNormalWorkingTime.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultNormalWorkingTime, "Set default values for all rows of a particular column field");
             this.checkBox_defaultNormalWorkingTime.UseVisualStyleBackColor = true;
             this.checkBox_defaultNormalWorkingTime.CheckedChanged += new System.EventHandler(this.checkBox_defaultNormalWorkingTime_CheckedChanged);
             // 
@@ -632,6 +635,7 @@
             this.checkBox_defaultPublicHolidayCalendar.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPublicHolidayCalendar.TabIndex = 11;
             this.checkBox_defaultPublicHolidayCalendar.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultPublicHolidayCalendar, "Set default values for all rows of a particular column field");
             this.checkBox_defaultPublicHolidayCalendar.UseVisualStyleBackColor = true;
             this.checkBox_defaultPublicHolidayCalendar.CheckedChanged += new System.EventHandler(this.checkBox_defaultPublicHolidayCalendar_CheckedChanged);
             // 

@@ -45,58 +45,47 @@
             this.label_nonMandatoryFields = new System.Windows.Forms.Label();
             this.button_expandNonMandatory = new System.Windows.Forms.Button();
             this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
-            this.comboBox_userRoleDelimiter = new System.Windows.Forms.ComboBox();
-            this.label_userRoleDelimiter = new System.Windows.Forms.Label();
-            this.checkBox_defaultAllowanceLegislation = new System.Windows.Forms.CheckBox();
-            this.comboBox_userRoles = new System.Windows.Forms.ComboBox();
-            this.comboBox_allowanceLegislation = new System.Windows.Forms.ComboBox();
-            this.comboBox_employeeType = new System.Windows.Forms.ComboBox();
-            this.label_userRoleNames = new System.Windows.Forms.Label();
-            this.label_allowanceLegislation = new System.Windows.Forms.Label();
-            this.label_employeeType = new System.Windows.Forms.Label();
-            this.checkBox_defaultDepartment = new System.Windows.Forms.CheckBox();
-            this.label_jobTitle = new System.Windows.Forms.Label();
-            this.comboBox_jobTitle = new System.Windows.Forms.ComboBox();
-            this.checkBox_defaultLegalEntity = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultEmployeeType = new System.Windows.Forms.CheckBox();
-            this.label_department = new System.Windows.Forms.Label();
-            this.comboBox_employeeNo = new System.Windows.Forms.ComboBox();
-            this.comboBox_department = new System.Windows.Forms.ComboBox();
-            this.label_employeeNo = new System.Windows.Forms.Label();
-            this.comboBox_employmentDate = new System.Windows.Forms.ComboBox();
-            this.label_employmentDate = new System.Windows.Forms.Label();
-            this.label_legalEntity = new System.Windows.Forms.Label();
-            this.comboBox_legalEntity = new System.Windows.Forms.ComboBox();
+            this.comboBox_profitRatio = new System.Windows.Forms.ComboBox();
+            this.label_profitRatio = new System.Windows.Forms.Label();
+            this.label_externalID = new System.Windows.Forms.Label();
+            this.comboBox_externalID = new System.Windows.Forms.ComboBox();
+            this.label_supplierInvoiceNo = new System.Windows.Forms.Label();
+            this.comboBox_supplierInvoiceNo = new System.Windows.Forms.ComboBox();
+            this.comboBox_comment = new System.Windows.Forms.ComboBox();
+            this.label_comment = new System.Windows.Forms.Label();
+            this.label_supplierNo = new System.Windows.Forms.Label();
+            this.comboBox_supplierNo = new System.Windows.Forms.ComboBox();
             this.label_delimiter = new System.Windows.Forms.Label();
             this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
             this.groupBox_projectExpenseMandatoryFields = new System.Windows.Forms.GroupBox();
-            this.checkBox_defaultSalaryGroup = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultNormalWorkingTime = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultPublicHolidayCalendar = new System.Windows.Forms.CheckBox();
-            this.comboBox_salaryGroup = new System.Windows.Forms.ComboBox();
-            this.comboBox_normalWorkingTime = new System.Windows.Forms.ComboBox();
-            this.comboBox_publicHolidayCalendar = new System.Windows.Forms.ComboBox();
-            this.comboBox_costPrice = new System.Windows.Forms.ComboBox();
-            this.label_salaryGroup = new System.Windows.Forms.Label();
-            this.label_normalWorkingTime = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label_costPrice = new System.Windows.Forms.Label();
-            this.checkBox_defaultCostPrice = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultHourlyRate = new System.Windows.Forms.CheckBox();
-            this.label_managerInitials = new System.Windows.Forms.Label();
-            this.comboBox_managerInitials = new System.Windows.Forms.ComboBox();
-            this.label_email = new System.Windows.Forms.Label();
-            this.label_defaultHourlyRate = new System.Windows.Forms.Label();
-            this.comboBox_email = new System.Windows.Forms.ComboBox();
-            this.label_initials = new System.Windows.Forms.Label();
-            this.comboBox_initials = new System.Windows.Forms.ComboBox();
-            this.label_lastName = new System.Windows.Forms.Label();
-            this.comboBox_defaultHourlyRate = new System.Windows.Forms.ComboBox();
-            this.comboBox_lastName = new System.Windows.Forms.ComboBox();
-            this.label_firstName = new System.Windows.Forms.Label();
-            this.comboBox_firstName = new System.Windows.Forms.ComboBox();
-            this.label_userName = new System.Windows.Forms.Label();
-            this.comboBox_userName = new System.Windows.Forms.ComboBox();
+            this.checkBox_defaultIsBillable = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultExpenseCurrencyISO = new System.Windows.Forms.CheckBox();
+            this.comboBox_contractName = new System.Windows.Forms.ComboBox();
+            this.comboBox_expenseCurrencyISO = new System.Windows.Forms.ComboBox();
+            this.comboBox_VATAmount = new System.Windows.Forms.ComboBox();
+            this.comboBox_expenseNo = new System.Windows.Forms.ComboBox();
+            this.label_contractName = new System.Windows.Forms.Label();
+            this.label_expenseCurrencyISO = new System.Windows.Forms.Label();
+            this.label_VATAmountCurrency = new System.Windows.Forms.Label();
+            this.label_expenseNo = new System.Windows.Forms.Label();
+            this.checkBox_defaultExpenseType = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultPaymentMethod = new System.Windows.Forms.CheckBox();
+            this.label_salesPriceAmount = new System.Windows.Forms.Label();
+            this.comboBox_salesPriceAmount = new System.Windows.Forms.ComboBox();
+            this.comboBox_exchangeRate = new System.Windows.Forms.ComboBox();
+            this.label_amountIncludingVAT = new System.Windows.Forms.Label();
+            this.label_isBillable = new System.Windows.Forms.Label();
+            this.label_exchangeRate = new System.Windows.Forms.Label();
+            this.comboBox_amountIncludingVAT = new System.Windows.Forms.ComboBox();
+            this.label_expenseType = new System.Windows.Forms.Label();
+            this.comboBox_expenseType = new System.Windows.Forms.ComboBox();
+            this.label_paymentMethod = new System.Windows.Forms.Label();
+            this.comboBox_isBillable = new System.Windows.Forms.ComboBox();
+            this.comboBox_paymentMethod = new System.Windows.Forms.ComboBox();
+            this.label_purchaseDate = new System.Windows.Forms.Label();
+            this.comboBox_purchaseDate = new System.Windows.Forms.ComboBox();
+            this.label_projectNo = new System.Windows.Forms.Label();
+            this.comboBox_projectNo = new System.Windows.Forms.ComboBox();
             this.label_projectExpenseSetup = new System.Windows.Forms.Label();
             this.button_projectExpenseSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
@@ -165,7 +154,7 @@
             this.textBox_projectExpenseImportMessages.Size = new System.Drawing.Size(1006, 184);
             this.textBox_projectExpenseImportMessages.TabIndex = 0;
             this.defaultToolTip.SetToolTip(this.textBox_projectExpenseImportMessages, "Validation or import status");
-            this.textBox_projectExpenseImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_employeeImportMessages_MouseClick);
+            this.textBox_projectExpenseImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_projectExpenseImportMessages_MouseClick);
             // 
             // panel_projectExpenseButtons
             // 
@@ -272,7 +261,7 @@
             this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryFields);
             this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(572, 60);
             this.flowLayoutPanel_nonMandatoryFields.Name = "flowLayoutPanel_nonMandatoryFields";
-            this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(390, 330);
+            this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(390, 215);
             this.flowLayoutPanel_nonMandatoryFields.TabIndex = 7;
             // 
             // panel_NonMandatoryButton
@@ -312,242 +301,112 @@
             // panel_NonMandatoryFields
             // 
             this.panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_userRoleDelimiter);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_userRoleDelimiter);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultAllowanceLegislation);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_userRoles);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_allowanceLegislation);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employeeType);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_userRoleNames);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_allowanceLegislation);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_employeeType);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultDepartment);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_jobTitle);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_jobTitle);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultLegalEntity);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultEmployeeType);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_department);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employeeNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_department);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_employeeNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employmentDate);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_employmentDate);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_legalEntity);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_legalEntity);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_profitRatio);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_profitRatio);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_externalID);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_externalID);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_supplierInvoiceNo);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_supplierInvoiceNo);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_comment);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_comment);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_supplierNo);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_supplierNo);
             this.panel_NonMandatoryFields.Location = new System.Drawing.Point(3, 41);
-            this.panel_NonMandatoryFields.MaximumSize = new System.Drawing.Size(382, 289);
+            this.panel_NonMandatoryFields.MaximumSize = new System.Drawing.Size(382, 165);
             this.panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(382, 0);
             this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
-            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(382, 289);
+            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(382, 165);
             this.panel_NonMandatoryFields.TabIndex = 1;
             // 
-            // comboBox_userRoleDelimiter
+            // comboBox_profitRatio
             // 
-            this.comboBox_userRoleDelimiter.FormattingEnabled = true;
-            this.comboBox_userRoleDelimiter.Location = new System.Drawing.Point(153, 224);
-            this.comboBox_userRoleDelimiter.Name = "comboBox_userRoleDelimiter";
-            this.comboBox_userRoleDelimiter.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_userRoleDelimiter.TabIndex = 12;
+            this.comboBox_profitRatio.FormattingEnabled = true;
+            this.comboBox_profitRatio.Location = new System.Drawing.Point(153, 131);
+            this.comboBox_profitRatio.Name = "comboBox_profitRatio";
+            this.comboBox_profitRatio.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_profitRatio.TabIndex = 10;
+            this.comboBox_profitRatio.SelectedIndexChanged += new System.EventHandler(this.comboBox_profitRatio_SelectedIndexChanged);
             // 
-            // label_userRoleDelimiter
+            // label_profitRatio
             // 
-            this.label_userRoleDelimiter.AutoSize = true;
-            this.label_userRoleDelimiter.Location = new System.Drawing.Point(10, 227);
-            this.label_userRoleDelimiter.Name = "label_userRoleDelimiter";
-            this.label_userRoleDelimiter.Size = new System.Drawing.Size(123, 17);
-            this.label_userRoleDelimiter.TabIndex = 1;
-            this.label_userRoleDelimiter.Text = "User Role Delimiter";
+            this.label_profitRatio.AutoSize = true;
+            this.label_profitRatio.Location = new System.Drawing.Point(10, 134);
+            this.label_profitRatio.Name = "label_profitRatio";
+            this.label_profitRatio.Size = new System.Drawing.Size(76, 17);
+            this.label_profitRatio.TabIndex = 1;
+            this.label_profitRatio.Text = "Profit Ratio";
             // 
-            // checkBox_defaultAllowanceLegislation
+            // label_externalID
             // 
-            this.checkBox_defaultAllowanceLegislation.AutoSize = true;
-            this.checkBox_defaultAllowanceLegislation.Location = new System.Drawing.Point(309, 195);
-            this.checkBox_defaultAllowanceLegislation.Name = "checkBox_defaultAllowanceLegislation";
-            this.checkBox_defaultAllowanceLegislation.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultAllowanceLegislation.TabIndex = 11;
-            this.checkBox_defaultAllowanceLegislation.Text = "Default";
-            this.checkBox_defaultAllowanceLegislation.UseVisualStyleBackColor = true;
-            this.checkBox_defaultAllowanceLegislation.CheckedChanged += new System.EventHandler(this.checkBox_defaultAllowanceLegislation_CheckedChanged);
+            this.label_externalID.AutoSize = true;
+            this.label_externalID.Location = new System.Drawing.Point(10, 10);
+            this.label_externalID.Name = "label_externalID";
+            this.label_externalID.Size = new System.Drawing.Size(74, 17);
+            this.label_externalID.TabIndex = 1;
+            this.label_externalID.Text = "External ID";
             // 
-            // comboBox_userRoles
+            // comboBox_externalID
             // 
-            this.comboBox_userRoles.FormattingEnabled = true;
-            this.comboBox_userRoles.Location = new System.Drawing.Point(153, 255);
-            this.comboBox_userRoles.Name = "comboBox_userRoles";
-            this.comboBox_userRoles.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_userRoles.TabIndex = 10;
-            this.comboBox_userRoles.SelectedIndexChanged += new System.EventHandler(this.comboBox_userRoles_SelectedIndexChanged);
+            this.comboBox_externalID.FormattingEnabled = true;
+            this.comboBox_externalID.Location = new System.Drawing.Point(153, 7);
+            this.comboBox_externalID.Name = "comboBox_externalID";
+            this.comboBox_externalID.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_externalID.TabIndex = 3;
+            this.comboBox_externalID.SelectedIndexChanged += new System.EventHandler(this.comboBox_externalID_SelectedIndexChanged);
             // 
-            // comboBox_allowanceLegislation
+            // label_supplierInvoiceNo
             // 
-            this.comboBox_allowanceLegislation.FormattingEnabled = true;
-            this.comboBox_allowanceLegislation.Location = new System.Drawing.Point(153, 193);
-            this.comboBox_allowanceLegislation.Name = "comboBox_allowanceLegislation";
-            this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_allowanceLegislation.TabIndex = 10;
-            this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
+            this.label_supplierInvoiceNo.AutoSize = true;
+            this.label_supplierInvoiceNo.Location = new System.Drawing.Point(10, 103);
+            this.label_supplierInvoiceNo.Name = "label_supplierInvoiceNo";
+            this.label_supplierInvoiceNo.Size = new System.Drawing.Size(126, 17);
+            this.label_supplierInvoiceNo.TabIndex = 1;
+            this.label_supplierInvoiceNo.Text = "Supplier Invoice No";
             // 
-            // comboBox_employeeType
+            // comboBox_supplierInvoiceNo
             // 
-            this.comboBox_employeeType.FormattingEnabled = true;
-            this.comboBox_employeeType.Location = new System.Drawing.Point(153, 162);
-            this.comboBox_employeeType.Name = "comboBox_employeeType";
-            this.comboBox_employeeType.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_employeeType.TabIndex = 10;
-            this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
+            this.comboBox_supplierInvoiceNo.FormattingEnabled = true;
+            this.comboBox_supplierInvoiceNo.Location = new System.Drawing.Point(153, 100);
+            this.comboBox_supplierInvoiceNo.Name = "comboBox_supplierInvoiceNo";
+            this.comboBox_supplierInvoiceNo.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_supplierInvoiceNo.TabIndex = 3;
+            this.comboBox_supplierInvoiceNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_supplierInvoiceNo_SelectedIndexChanged);
             // 
-            // label_userRoleNames
+            // comboBox_comment
             // 
-            this.label_userRoleNames.AutoSize = true;
-            this.label_userRoleNames.Location = new System.Drawing.Point(10, 258);
-            this.label_userRoleNames.Name = "label_userRoleNames";
-            this.label_userRoleNames.Size = new System.Drawing.Size(111, 17);
-            this.label_userRoleNames.TabIndex = 1;
-            this.label_userRoleNames.Text = "User Role Names";
+            this.comboBox_comment.FormattingEnabled = true;
+            this.comboBox_comment.Location = new System.Drawing.Point(153, 38);
+            this.comboBox_comment.Name = "comboBox_comment";
+            this.comboBox_comment.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_comment.TabIndex = 3;
+            this.comboBox_comment.SelectedIndexChanged += new System.EventHandler(this.comboBox_comment_SelectedIndexChanged);
             // 
-            // label_allowanceLegislation
+            // label_comment
             // 
-            this.label_allowanceLegislation.AutoSize = true;
-            this.label_allowanceLegislation.Location = new System.Drawing.Point(10, 196);
-            this.label_allowanceLegislation.Name = "label_allowanceLegislation";
-            this.label_allowanceLegislation.Size = new System.Drawing.Size(137, 17);
-            this.label_allowanceLegislation.TabIndex = 1;
-            this.label_allowanceLegislation.Text = "Allowance Legislation";
+            this.label_comment.AutoSize = true;
+            this.label_comment.Location = new System.Drawing.Point(10, 41);
+            this.label_comment.Name = "label_comment";
+            this.label_comment.Size = new System.Drawing.Size(68, 17);
+            this.label_comment.TabIndex = 1;
+            this.label_comment.Text = "Comment";
             // 
-            // label_employeeType
+            // label_supplierNo
             // 
-            this.label_employeeType.AutoSize = true;
-            this.label_employeeType.Location = new System.Drawing.Point(10, 165);
-            this.label_employeeType.Name = "label_employeeType";
-            this.label_employeeType.Size = new System.Drawing.Size(99, 17);
-            this.label_employeeType.TabIndex = 1;
-            this.label_employeeType.Text = "Employee Type";
+            this.label_supplierNo.AutoSize = true;
+            this.label_supplierNo.Location = new System.Drawing.Point(10, 72);
+            this.label_supplierNo.Name = "label_supplierNo";
+            this.label_supplierNo.Size = new System.Drawing.Size(79, 17);
+            this.label_supplierNo.TabIndex = 1;
+            this.label_supplierNo.Text = "Supplier No";
             // 
-            // checkBox_defaultDepartment
+            // comboBox_supplierNo
             // 
-            this.checkBox_defaultDepartment.AutoSize = true;
-            this.checkBox_defaultDepartment.Location = new System.Drawing.Point(309, 133);
-            this.checkBox_defaultDepartment.Name = "checkBox_defaultDepartment";
-            this.checkBox_defaultDepartment.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultDepartment.TabIndex = 5;
-            this.checkBox_defaultDepartment.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultDepartment, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultDepartment.UseVisualStyleBackColor = true;
-            this.checkBox_defaultDepartment.CheckedChanged += new System.EventHandler(this.checkBox_defaultDepartment_CheckedChanged);
-            // 
-            // label_jobTitle
-            // 
-            this.label_jobTitle.AutoSize = true;
-            this.label_jobTitle.Location = new System.Drawing.Point(10, 10);
-            this.label_jobTitle.Name = "label_jobTitle";
-            this.label_jobTitle.Size = new System.Drawing.Size(58, 17);
-            this.label_jobTitle.TabIndex = 1;
-            this.label_jobTitle.Text = "Job Title";
-            // 
-            // comboBox_jobTitle
-            // 
-            this.comboBox_jobTitle.FormattingEnabled = true;
-            this.comboBox_jobTitle.Location = new System.Drawing.Point(153, 7);
-            this.comboBox_jobTitle.Name = "comboBox_jobTitle";
-            this.comboBox_jobTitle.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_jobTitle.TabIndex = 3;
-            this.comboBox_jobTitle.SelectedIndexChanged += new System.EventHandler(this.comboBox_jobTitle_SelectedIndexChanged);
-            // 
-            // checkBox_defaultLegalEntity
-            // 
-            this.checkBox_defaultLegalEntity.AutoSize = true;
-            this.checkBox_defaultLegalEntity.Location = new System.Drawing.Point(309, 102);
-            this.checkBox_defaultLegalEntity.Name = "checkBox_defaultLegalEntity";
-            this.checkBox_defaultLegalEntity.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultLegalEntity.TabIndex = 5;
-            this.checkBox_defaultLegalEntity.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultLegalEntity, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultLegalEntity.UseVisualStyleBackColor = true;
-            this.checkBox_defaultLegalEntity.CheckedChanged += new System.EventHandler(this.checkBox_defaultLegalEntity_CheckedChanged);
-            // 
-            // checkBox_defaultEmployeeType
-            // 
-            this.checkBox_defaultEmployeeType.AutoSize = true;
-            this.checkBox_defaultEmployeeType.Location = new System.Drawing.Point(309, 164);
-            this.checkBox_defaultEmployeeType.Name = "checkBox_defaultEmployeeType";
-            this.checkBox_defaultEmployeeType.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultEmployeeType.TabIndex = 4;
-            this.checkBox_defaultEmployeeType.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultEmployeeType, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultEmployeeType.UseVisualStyleBackColor = true;
-            this.checkBox_defaultEmployeeType.CheckedChanged += new System.EventHandler(this.checkBox_defaultEmployeeType_CheckedChanged);
-            // 
-            // label_department
-            // 
-            this.label_department.AutoSize = true;
-            this.label_department.Location = new System.Drawing.Point(10, 134);
-            this.label_department.Name = "label_department";
-            this.label_department.Size = new System.Drawing.Size(81, 17);
-            this.label_department.TabIndex = 1;
-            this.label_department.Text = "Department";
-            // 
-            // comboBox_employeeNo
-            // 
-            this.comboBox_employeeNo.FormattingEnabled = true;
-            this.comboBox_employeeNo.Location = new System.Drawing.Point(153, 38);
-            this.comboBox_employeeNo.Name = "comboBox_employeeNo";
-            this.comboBox_employeeNo.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_employeeNo.TabIndex = 3;
-            this.comboBox_employeeNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeNo_SelectedIndexChanged);
-            // 
-            // comboBox_department
-            // 
-            this.comboBox_department.FormattingEnabled = true;
-            this.comboBox_department.Location = new System.Drawing.Point(153, 131);
-            this.comboBox_department.Name = "comboBox_department";
-            this.comboBox_department.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_department.TabIndex = 3;
-            this.comboBox_department.SelectedIndexChanged += new System.EventHandler(this.comboBox_department_SelectedIndexChanged);
-            // 
-            // label_employeeNo
-            // 
-            this.label_employeeNo.AutoSize = true;
-            this.label_employeeNo.Location = new System.Drawing.Point(10, 41);
-            this.label_employeeNo.Name = "label_employeeNo";
-            this.label_employeeNo.Size = new System.Drawing.Size(89, 17);
-            this.label_employeeNo.TabIndex = 1;
-            this.label_employeeNo.Text = "Employee No";
-            // 
-            // comboBox_employmentDate
-            // 
-            this.comboBox_employmentDate.FormattingEnabled = true;
-            this.comboBox_employmentDate.Location = new System.Drawing.Point(153, 69);
-            this.comboBox_employmentDate.Name = "comboBox_employmentDate";
-            this.comboBox_employmentDate.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_employmentDate.TabIndex = 3;
-            this.comboBox_employmentDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_employmentDate_SelectedIndexChanged);
-            // 
-            // label_employmentDate
-            // 
-            this.label_employmentDate.AutoSize = true;
-            this.label_employmentDate.Location = new System.Drawing.Point(10, 72);
-            this.label_employmentDate.Name = "label_employmentDate";
-            this.label_employmentDate.Size = new System.Drawing.Size(117, 17);
-            this.label_employmentDate.TabIndex = 1;
-            this.label_employmentDate.Text = "Employment Date";
-            // 
-            // label_legalEntity
-            // 
-            this.label_legalEntity.AutoSize = true;
-            this.label_legalEntity.Location = new System.Drawing.Point(10, 103);
-            this.label_legalEntity.Name = "label_legalEntity";
-            this.label_legalEntity.Size = new System.Drawing.Size(78, 17);
-            this.label_legalEntity.TabIndex = 1;
-            this.label_legalEntity.Text = "Legal Entity";
-            // 
-            // comboBox_legalEntity
-            // 
-            this.comboBox_legalEntity.FormattingEnabled = true;
-            this.comboBox_legalEntity.Location = new System.Drawing.Point(153, 100);
-            this.comboBox_legalEntity.Name = "comboBox_legalEntity";
-            this.comboBox_legalEntity.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_legalEntity.TabIndex = 3;
-            this.comboBox_legalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_legalEntity_SelectedIndexChanged);
+            this.comboBox_supplierNo.FormattingEnabled = true;
+            this.comboBox_supplierNo.Location = new System.Drawing.Point(153, 69);
+            this.comboBox_supplierNo.Name = "comboBox_supplierNo";
+            this.comboBox_supplierNo.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_supplierNo.TabIndex = 3;
+            this.comboBox_supplierNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_supplierNo_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -568,294 +427,307 @@
             // 
             // groupBox_projectExpenseMandatoryFields
             // 
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultSalaryGroup);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultNormalWorkingTime);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultPublicHolidayCalendar);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_salaryGroup);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_normalWorkingTime);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_publicHolidayCalendar);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_costPrice);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_salaryGroup);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_normalWorkingTime);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label2);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_costPrice);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultCostPrice);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultHourlyRate);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_managerInitials);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_managerInitials);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_email);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_defaultHourlyRate);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_email);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_initials);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_initials);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_lastName);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_defaultHourlyRate);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_lastName);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_firstName);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_firstName);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_userName);
-            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_userName);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultIsBillable);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultExpenseCurrencyISO);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_contractName);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_expenseCurrencyISO);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_VATAmount);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_expenseNo);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_contractName);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_expenseCurrencyISO);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_VATAmountCurrency);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_expenseNo);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultExpenseType);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.checkBox_defaultPaymentMethod);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_salesPriceAmount);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_salesPriceAmount);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_exchangeRate);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_amountIncludingVAT);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_isBillable);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_exchangeRate);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_amountIncludingVAT);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_expenseType);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_expenseType);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_paymentMethod);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_isBillable);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_paymentMethod);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_purchaseDate);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_purchaseDate);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_projectNo);
+            this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_projectNo);
             this.groupBox_projectExpenseMandatoryFields.Location = new System.Drawing.Point(160, 62);
             this.groupBox_projectExpenseMandatoryFields.Name = "groupBox_projectExpenseMandatoryFields";
-            this.groupBox_projectExpenseMandatoryFields.Size = new System.Drawing.Size(394, 370);
+            this.groupBox_projectExpenseMandatoryFields.Size = new System.Drawing.Size(394, 405);
             this.groupBox_projectExpenseMandatoryFields.TabIndex = 5;
             this.groupBox_projectExpenseMandatoryFields.TabStop = false;
             this.groupBox_projectExpenseMandatoryFields.Text = "Mandatory";
             // 
-            // checkBox_defaultSalaryGroup
+            // checkBox_defaultIsBillable
             // 
-            this.checkBox_defaultSalaryGroup.AutoSize = true;
-            this.checkBox_defaultSalaryGroup.Location = new System.Drawing.Point(323, 336);
-            this.checkBox_defaultSalaryGroup.Name = "checkBox_defaultSalaryGroup";
-            this.checkBox_defaultSalaryGroup.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultSalaryGroup.TabIndex = 13;
-            this.checkBox_defaultSalaryGroup.Text = "Default";
-            this.checkBox_defaultSalaryGroup.UseVisualStyleBackColor = true;
-            this.checkBox_defaultSalaryGroup.CheckedChanged += new System.EventHandler(this.checkBox_defaultSalaryGroup_CheckedChanged);
+            this.checkBox_defaultIsBillable.AutoSize = true;
+            this.checkBox_defaultIsBillable.Location = new System.Drawing.Point(323, 212);
+            this.checkBox_defaultIsBillable.Name = "checkBox_defaultIsBillable";
+            this.checkBox_defaultIsBillable.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultIsBillable.TabIndex = 14;
+            this.checkBox_defaultIsBillable.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultIsBillable, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultIsBillable.UseVisualStyleBackColor = true;
+            this.checkBox_defaultIsBillable.CheckedChanged += new System.EventHandler(this.checkBox_defaultIsBillable_CheckedChanged);
             // 
-            // checkBox_defaultNormalWorkingTime
+            // checkBox_defaultExpenseCurrencyISO
             // 
-            this.checkBox_defaultNormalWorkingTime.AutoSize = true;
-            this.checkBox_defaultNormalWorkingTime.Location = new System.Drawing.Point(323, 305);
-            this.checkBox_defaultNormalWorkingTime.Name = "checkBox_defaultNormalWorkingTime";
-            this.checkBox_defaultNormalWorkingTime.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultNormalWorkingTime.TabIndex = 12;
-            this.checkBox_defaultNormalWorkingTime.Text = "Default";
-            this.checkBox_defaultNormalWorkingTime.UseVisualStyleBackColor = true;
-            this.checkBox_defaultNormalWorkingTime.CheckedChanged += new System.EventHandler(this.checkBox_defaultNormalWorkingTime_CheckedChanged);
+            this.checkBox_defaultExpenseCurrencyISO.AutoSize = true;
+            this.checkBox_defaultExpenseCurrencyISO.Location = new System.Drawing.Point(323, 305);
+            this.checkBox_defaultExpenseCurrencyISO.Name = "checkBox_defaultExpenseCurrencyISO";
+            this.checkBox_defaultExpenseCurrencyISO.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultExpenseCurrencyISO.TabIndex = 12;
+            this.checkBox_defaultExpenseCurrencyISO.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultExpenseCurrencyISO, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultExpenseCurrencyISO.UseVisualStyleBackColor = true;
+            this.checkBox_defaultExpenseCurrencyISO.CheckedChanged += new System.EventHandler(this.checkBox_defaultExpenseCurrencyISO_CheckedChanged);
             // 
-            // checkBox_defaultPublicHolidayCalendar
+            // comboBox_contractName
             // 
-            this.checkBox_defaultPublicHolidayCalendar.AutoSize = true;
-            this.checkBox_defaultPublicHolidayCalendar.Location = new System.Drawing.Point(323, 274);
-            this.checkBox_defaultPublicHolidayCalendar.Name = "checkBox_defaultPublicHolidayCalendar";
-            this.checkBox_defaultPublicHolidayCalendar.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultPublicHolidayCalendar.TabIndex = 11;
-            this.checkBox_defaultPublicHolidayCalendar.Text = "Default";
-            this.checkBox_defaultPublicHolidayCalendar.UseVisualStyleBackColor = true;
-            this.checkBox_defaultPublicHolidayCalendar.CheckedChanged += new System.EventHandler(this.checkBox_defaultPublicHolidayCalendar_CheckedChanged);
+            this.comboBox_contractName.FormattingEnabled = true;
+            this.comboBox_contractName.Location = new System.Drawing.Point(163, 334);
+            this.comboBox_contractName.Name = "comboBox_contractName";
+            this.comboBox_contractName.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_contractName.TabIndex = 10;
+            this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
             // 
-            // comboBox_salaryGroup
+            // comboBox_expenseCurrencyISO
             // 
-            this.comboBox_salaryGroup.FormattingEnabled = true;
-            this.comboBox_salaryGroup.Location = new System.Drawing.Point(163, 334);
-            this.comboBox_salaryGroup.Name = "comboBox_salaryGroup";
-            this.comboBox_salaryGroup.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_salaryGroup.TabIndex = 10;
-            this.comboBox_salaryGroup.SelectedIndexChanged += new System.EventHandler(this.comboBox_salaryGroup_SelectedIndexChanged);
+            this.comboBox_expenseCurrencyISO.FormattingEnabled = true;
+            this.comboBox_expenseCurrencyISO.Location = new System.Drawing.Point(163, 303);
+            this.comboBox_expenseCurrencyISO.Name = "comboBox_expenseCurrencyISO";
+            this.comboBox_expenseCurrencyISO.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseCurrencyISO.TabIndex = 9;
+            this.comboBox_expenseCurrencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseCurrencyISO_SelectedIndexChanged);
             // 
-            // comboBox_normalWorkingTime
+            // comboBox_VATAmount
             // 
-            this.comboBox_normalWorkingTime.FormattingEnabled = true;
-            this.comboBox_normalWorkingTime.Location = new System.Drawing.Point(163, 303);
-            this.comboBox_normalWorkingTime.Name = "comboBox_normalWorkingTime";
-            this.comboBox_normalWorkingTime.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_normalWorkingTime.TabIndex = 9;
-            this.comboBox_normalWorkingTime.SelectedIndexChanged += new System.EventHandler(this.comboBox_normalWorkingTime_SelectedIndexChanged);
+            this.comboBox_VATAmount.FormattingEnabled = true;
+            this.comboBox_VATAmount.Location = new System.Drawing.Point(163, 272);
+            this.comboBox_VATAmount.Name = "comboBox_VATAmount";
+            this.comboBox_VATAmount.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_VATAmount.TabIndex = 8;
+            this.comboBox_VATAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATAmount_SelectedIndexChanged);
             // 
-            // comboBox_publicHolidayCalendar
+            // comboBox_expenseNo
             // 
-            this.comboBox_publicHolidayCalendar.FormattingEnabled = true;
-            this.comboBox_publicHolidayCalendar.Location = new System.Drawing.Point(163, 272);
-            this.comboBox_publicHolidayCalendar.Name = "comboBox_publicHolidayCalendar";
-            this.comboBox_publicHolidayCalendar.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_publicHolidayCalendar.TabIndex = 8;
-            this.comboBox_publicHolidayCalendar.SelectedIndexChanged += new System.EventHandler(this.comboBox_publicHolidayCalendar_SelectedIndexChanged);
+            this.comboBox_expenseNo.FormattingEnabled = true;
+            this.comboBox_expenseNo.Location = new System.Drawing.Point(163, 241);
+            this.comboBox_expenseNo.Name = "comboBox_expenseNo";
+            this.comboBox_expenseNo.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseNo.TabIndex = 7;
+            this.comboBox_expenseNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseNo_SelectedIndexChanged);
             // 
-            // comboBox_costPrice
+            // label_contractName
             // 
-            this.comboBox_costPrice.FormattingEnabled = true;
-            this.comboBox_costPrice.Location = new System.Drawing.Point(163, 241);
-            this.comboBox_costPrice.Name = "comboBox_costPrice";
-            this.comboBox_costPrice.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_costPrice.TabIndex = 7;
-            this.comboBox_costPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_costPrice_SelectedIndexChanged);
+            this.label_contractName.AutoSize = true;
+            this.label_contractName.Location = new System.Drawing.Point(6, 337);
+            this.label_contractName.Name = "label_contractName";
+            this.label_contractName.Size = new System.Drawing.Size(100, 17);
+            this.label_contractName.TabIndex = 1;
+            this.label_contractName.Text = "Contract Name";
             // 
-            // label_salaryGroup
+            // label_expenseCurrencyISO
             // 
-            this.label_salaryGroup.AutoSize = true;
-            this.label_salaryGroup.Location = new System.Drawing.Point(6, 337);
-            this.label_salaryGroup.Name = "label_salaryGroup";
-            this.label_salaryGroup.Size = new System.Drawing.Size(87, 17);
-            this.label_salaryGroup.TabIndex = 1;
-            this.label_salaryGroup.Text = "Salary Group";
+            this.label_expenseCurrencyISO.AutoSize = true;
+            this.label_expenseCurrencyISO.Location = new System.Drawing.Point(6, 306);
+            this.label_expenseCurrencyISO.Name = "label_expenseCurrencyISO";
+            this.label_expenseCurrencyISO.Size = new System.Drawing.Size(141, 17);
+            this.label_expenseCurrencyISO.TabIndex = 1;
+            this.label_expenseCurrencyISO.Text = "Expense Currency ISO";
             // 
-            // label_normalWorkingTime
+            // label_VATAmountCurrency
             // 
-            this.label_normalWorkingTime.AutoSize = true;
-            this.label_normalWorkingTime.Location = new System.Drawing.Point(6, 306);
-            this.label_normalWorkingTime.Name = "label_normalWorkingTime";
-            this.label_normalWorkingTime.Size = new System.Drawing.Size(142, 17);
-            this.label_normalWorkingTime.TabIndex = 1;
-            this.label_normalWorkingTime.Text = "Normal Working Time";
+            this.label_VATAmountCurrency.AutoSize = true;
+            this.label_VATAmountCurrency.Location = new System.Drawing.Point(6, 275);
+            this.label_VATAmountCurrency.Name = "label_VATAmountCurrency";
+            this.label_VATAmountCurrency.Size = new System.Drawing.Size(84, 17);
+            this.label_VATAmountCurrency.TabIndex = 1;
+            this.label_VATAmountCurrency.Text = "VAT Amount";
+            this.defaultToolTip.SetToolTip(this.label_VATAmountCurrency, "In expense currency");
             // 
-            // label2
+            // label_expenseNo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 275);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Public Holiday Calendar";
+            this.label_expenseNo.AutoSize = true;
+            this.label_expenseNo.Location = new System.Drawing.Point(6, 244);
+            this.label_expenseNo.Name = "label_expenseNo";
+            this.label_expenseNo.Size = new System.Drawing.Size(80, 17);
+            this.label_expenseNo.TabIndex = 1;
+            this.label_expenseNo.Text = "Expense No";
             // 
-            // label_costPrice
+            // checkBox_defaultExpenseType
             // 
-            this.label_costPrice.AutoSize = true;
-            this.label_costPrice.Location = new System.Drawing.Point(6, 244);
-            this.label_costPrice.Name = "label_costPrice";
-            this.label_costPrice.Size = new System.Drawing.Size(68, 17);
-            this.label_costPrice.TabIndex = 1;
-            this.label_costPrice.Text = "Cost Price";
+            this.checkBox_defaultExpenseType.AutoSize = true;
+            this.checkBox_defaultExpenseType.Location = new System.Drawing.Point(323, 119);
+            this.checkBox_defaultExpenseType.Name = "checkBox_defaultExpenseType";
+            this.checkBox_defaultExpenseType.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultExpenseType.TabIndex = 6;
+            this.checkBox_defaultExpenseType.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultExpenseType, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultExpenseType.UseVisualStyleBackColor = true;
+            this.checkBox_defaultExpenseType.CheckedChanged += new System.EventHandler(this.checkBox_defaultExpenseType_CheckedChanged);
             // 
-            // checkBox_defaultCostPrice
+            // checkBox_defaultPaymentMethod
             // 
-            this.checkBox_defaultCostPrice.AutoSize = true;
-            this.checkBox_defaultCostPrice.Location = new System.Drawing.Point(323, 243);
-            this.checkBox_defaultCostPrice.Name = "checkBox_defaultCostPrice";
-            this.checkBox_defaultCostPrice.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultCostPrice.TabIndex = 6;
-            this.checkBox_defaultCostPrice.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultCostPrice, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultCostPrice.UseVisualStyleBackColor = true;
-            this.checkBox_defaultCostPrice.CheckedChanged += new System.EventHandler(this.checkBox_defaultCostPrice_CheckedChanged);
+            this.checkBox_defaultPaymentMethod.AutoSize = true;
+            this.checkBox_defaultPaymentMethod.Location = new System.Drawing.Point(323, 88);
+            this.checkBox_defaultPaymentMethod.Name = "checkBox_defaultPaymentMethod";
+            this.checkBox_defaultPaymentMethod.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultPaymentMethod.TabIndex = 4;
+            this.checkBox_defaultPaymentMethod.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentMethod, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultPaymentMethod.UseVisualStyleBackColor = true;
+            this.checkBox_defaultPaymentMethod.CheckedChanged += new System.EventHandler(this.checkBox_defaultPaymentMethod_CheckedChanged);
             // 
-            // checkBox_defaultHourlyRate
+            // label_salesPriceAmount
             // 
-            this.checkBox_defaultHourlyRate.AutoSize = true;
-            this.checkBox_defaultHourlyRate.Location = new System.Drawing.Point(323, 212);
-            this.checkBox_defaultHourlyRate.Name = "checkBox_defaultHourlyRate";
-            this.checkBox_defaultHourlyRate.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultHourlyRate.TabIndex = 4;
-            this.checkBox_defaultHourlyRate.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultHourlyRate, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultHourlyRate.UseVisualStyleBackColor = true;
-            this.checkBox_defaultHourlyRate.CheckedChanged += new System.EventHandler(this.checkBox_defaultHourlyRate_CheckedChanged);
+            this.label_salesPriceAmount.AutoSize = true;
+            this.label_salesPriceAmount.Location = new System.Drawing.Point(6, 182);
+            this.label_salesPriceAmount.Name = "label_salesPriceAmount";
+            this.label_salesPriceAmount.Size = new System.Drawing.Size(125, 17);
+            this.label_salesPriceAmount.TabIndex = 1;
+            this.label_salesPriceAmount.Text = "Sales Price Amount";
+            this.defaultToolTip.SetToolTip(this.label_salesPriceAmount, "In project currency");
             // 
-            // label_managerInitials
+            // comboBox_salesPriceAmount
             // 
-            this.label_managerInitials.AutoSize = true;
-            this.label_managerInitials.Location = new System.Drawing.Point(6, 182);
-            this.label_managerInitials.Name = "label_managerInitials";
-            this.label_managerInitials.Size = new System.Drawing.Size(105, 17);
-            this.label_managerInitials.TabIndex = 1;
-            this.label_managerInitials.Text = "Manager Initials";
+            this.comboBox_salesPriceAmount.FormattingEnabled = true;
+            this.comboBox_salesPriceAmount.Location = new System.Drawing.Point(163, 179);
+            this.comboBox_salesPriceAmount.Name = "comboBox_salesPriceAmount";
+            this.comboBox_salesPriceAmount.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_salesPriceAmount.TabIndex = 3;
+            this.comboBox_salesPriceAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_salesPriceAmount_SelectedIndexChanged);
             // 
-            // comboBox_managerInitials
+            // comboBox_exchangeRate
             // 
-            this.comboBox_managerInitials.FormattingEnabled = true;
-            this.comboBox_managerInitials.Location = new System.Drawing.Point(163, 179);
-            this.comboBox_managerInitials.Name = "comboBox_managerInitials";
-            this.comboBox_managerInitials.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_managerInitials.TabIndex = 3;
-            this.comboBox_managerInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_managerInitials_SelectedIndexChanged);
+            this.comboBox_exchangeRate.FormattingEnabled = true;
+            this.comboBox_exchangeRate.Location = new System.Drawing.Point(163, 365);
+            this.comboBox_exchangeRate.Name = "comboBox_exchangeRate";
+            this.comboBox_exchangeRate.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_exchangeRate.TabIndex = 3;
+            this.comboBox_exchangeRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_exchangeRate_SelectedIndexChanged);
             // 
-            // label_email
+            // label_amountIncludingVAT
             // 
-            this.label_email.AutoSize = true;
-            this.label_email.Location = new System.Drawing.Point(6, 151);
-            this.label_email.Name = "label_email";
-            this.label_email.Size = new System.Drawing.Size(40, 17);
-            this.label_email.TabIndex = 1;
-            this.label_email.Text = "Email";
+            this.label_amountIncludingVAT.AutoSize = true;
+            this.label_amountIncludingVAT.Location = new System.Drawing.Point(6, 151);
+            this.label_amountIncludingVAT.Name = "label_amountIncludingVAT";
+            this.label_amountIncludingVAT.Size = new System.Drawing.Size(108, 17);
+            this.label_amountIncludingVAT.TabIndex = 1;
+            this.label_amountIncludingVAT.Text = "Amount inc. VAT";
+            this.defaultToolTip.SetToolTip(this.label_amountIncludingVAT, "In expense currency");
             // 
-            // label_defaultHourlyRate
+            // label_isBillable
             // 
-            this.label_defaultHourlyRate.AutoSize = true;
-            this.label_defaultHourlyRate.Location = new System.Drawing.Point(6, 213);
-            this.label_defaultHourlyRate.Name = "label_defaultHourlyRate";
-            this.label_defaultHourlyRate.Size = new System.Drawing.Size(127, 17);
-            this.label_defaultHourlyRate.TabIndex = 1;
-            this.label_defaultHourlyRate.Text = "Default Hourly Rate";
+            this.label_isBillable.AutoSize = true;
+            this.label_isBillable.Location = new System.Drawing.Point(6, 213);
+            this.label_isBillable.Name = "label_isBillable";
+            this.label_isBillable.Size = new System.Drawing.Size(64, 17);
+            this.label_isBillable.TabIndex = 1;
+            this.label_isBillable.Text = "Is Billable";
             // 
-            // comboBox_email
+            // label_exchangeRate
             // 
-            this.comboBox_email.FormattingEnabled = true;
-            this.comboBox_email.Location = new System.Drawing.Point(163, 148);
-            this.comboBox_email.Name = "comboBox_email";
-            this.comboBox_email.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_email.TabIndex = 3;
-            this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
+            this.label_exchangeRate.AutoSize = true;
+            this.label_exchangeRate.Location = new System.Drawing.Point(6, 368);
+            this.label_exchangeRate.Name = "label_exchangeRate";
+            this.label_exchangeRate.Size = new System.Drawing.Size(97, 17);
+            this.label_exchangeRate.TabIndex = 1;
+            this.label_exchangeRate.Text = "Exchange Rate";
             // 
-            // label_initials
+            // comboBox_amountIncludingVAT
             // 
-            this.label_initials.AutoSize = true;
-            this.label_initials.Location = new System.Drawing.Point(6, 120);
-            this.label_initials.Name = "label_initials";
-            this.label_initials.Size = new System.Drawing.Size(47, 17);
-            this.label_initials.TabIndex = 1;
-            this.label_initials.Text = "Initials";
+            this.comboBox_amountIncludingVAT.FormattingEnabled = true;
+            this.comboBox_amountIncludingVAT.Location = new System.Drawing.Point(163, 148);
+            this.comboBox_amountIncludingVAT.Name = "comboBox_amountIncludingVAT";
+            this.comboBox_amountIncludingVAT.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_amountIncludingVAT.TabIndex = 3;
+            this.comboBox_amountIncludingVAT.SelectedIndexChanged += new System.EventHandler(this.comboBox_amountIncludingVAT_SelectedIndexChanged);
             // 
-            // comboBox_initials
+            // label_expenseType
             // 
-            this.comboBox_initials.FormattingEnabled = true;
-            this.comboBox_initials.Location = new System.Drawing.Point(163, 117);
-            this.comboBox_initials.Name = "comboBox_initials";
-            this.comboBox_initials.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_initials.TabIndex = 3;
-            this.comboBox_initials.SelectedIndexChanged += new System.EventHandler(this.comboBox_initials_SelectedIndexChanged);
+            this.label_expenseType.AutoSize = true;
+            this.label_expenseType.Location = new System.Drawing.Point(6, 120);
+            this.label_expenseType.Name = "label_expenseType";
+            this.label_expenseType.Size = new System.Drawing.Size(90, 17);
+            this.label_expenseType.TabIndex = 1;
+            this.label_expenseType.Text = "Expense Type";
             // 
-            // label_lastName
+            // comboBox_expenseType
             // 
-            this.label_lastName.AutoSize = true;
-            this.label_lastName.Location = new System.Drawing.Point(6, 89);
-            this.label_lastName.Name = "label_lastName";
-            this.label_lastName.Size = new System.Drawing.Size(72, 17);
-            this.label_lastName.TabIndex = 1;
-            this.label_lastName.Text = "Last Name";
+            this.comboBox_expenseType.FormattingEnabled = true;
+            this.comboBox_expenseType.Location = new System.Drawing.Point(163, 117);
+            this.comboBox_expenseType.Name = "comboBox_expenseType";
+            this.comboBox_expenseType.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseType.TabIndex = 3;
+            this.comboBox_expenseType.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseType_SelectedIndexChanged);
             // 
-            // comboBox_defaultHourlyRate
+            // label_paymentMethod
             // 
-            this.comboBox_defaultHourlyRate.FormattingEnabled = true;
-            this.comboBox_defaultHourlyRate.Location = new System.Drawing.Point(163, 210);
-            this.comboBox_defaultHourlyRate.Name = "comboBox_defaultHourlyRate";
-            this.comboBox_defaultHourlyRate.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_defaultHourlyRate.TabIndex = 3;
-            this.comboBox_defaultHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultHourlyRate_SelectedIndexChanged);
+            this.label_paymentMethod.AutoSize = true;
+            this.label_paymentMethod.Location = new System.Drawing.Point(6, 89);
+            this.label_paymentMethod.Name = "label_paymentMethod";
+            this.label_paymentMethod.Size = new System.Drawing.Size(114, 17);
+            this.label_paymentMethod.TabIndex = 1;
+            this.label_paymentMethod.Text = "Payment Method";
             // 
-            // comboBox_lastName
+            // comboBox_isBillable
             // 
-            this.comboBox_lastName.FormattingEnabled = true;
-            this.comboBox_lastName.Location = new System.Drawing.Point(163, 86);
-            this.comboBox_lastName.Name = "comboBox_lastName";
-            this.comboBox_lastName.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_lastName.TabIndex = 3;
-            this.comboBox_lastName.SelectedIndexChanged += new System.EventHandler(this.comboBox_lastName_SelectedIndexChanged);
+            this.comboBox_isBillable.FormattingEnabled = true;
+            this.comboBox_isBillable.Location = new System.Drawing.Point(163, 210);
+            this.comboBox_isBillable.Name = "comboBox_isBillable";
+            this.comboBox_isBillable.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_isBillable.TabIndex = 3;
+            this.comboBox_isBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_isBillable_SelectedIndexChanged);
             // 
-            // label_firstName
+            // comboBox_paymentMethod
             // 
-            this.label_firstName.AutoSize = true;
-            this.label_firstName.Location = new System.Drawing.Point(6, 58);
-            this.label_firstName.Name = "label_firstName";
-            this.label_firstName.Size = new System.Drawing.Size(74, 17);
-            this.label_firstName.TabIndex = 1;
-            this.label_firstName.Text = "First Name";
+            this.comboBox_paymentMethod.FormattingEnabled = true;
+            this.comboBox_paymentMethod.Location = new System.Drawing.Point(163, 86);
+            this.comboBox_paymentMethod.Name = "comboBox_paymentMethod";
+            this.comboBox_paymentMethod.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_paymentMethod.TabIndex = 3;
+            this.comboBox_paymentMethod.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentMethod_SelectedIndexChanged);
             // 
-            // comboBox_firstName
+            // label_purchaseDate
             // 
-            this.comboBox_firstName.FormattingEnabled = true;
-            this.comboBox_firstName.Location = new System.Drawing.Point(163, 55);
-            this.comboBox_firstName.Name = "comboBox_firstName";
-            this.comboBox_firstName.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_firstName.TabIndex = 3;
-            this.comboBox_firstName.SelectedIndexChanged += new System.EventHandler(this.comboBox_firstName_SelectedIndexChanged);
+            this.label_purchaseDate.AutoSize = true;
+            this.label_purchaseDate.Location = new System.Drawing.Point(6, 58);
+            this.label_purchaseDate.Name = "label_purchaseDate";
+            this.label_purchaseDate.Size = new System.Drawing.Size(95, 17);
+            this.label_purchaseDate.TabIndex = 1;
+            this.label_purchaseDate.Text = "Purchase Date";
             // 
-            // label_userName
+            // comboBox_purchaseDate
             // 
-            this.label_userName.AutoSize = true;
-            this.label_userName.Location = new System.Drawing.Point(6, 27);
-            this.label_userName.Name = "label_userName";
-            this.label_userName.Size = new System.Drawing.Size(69, 17);
-            this.label_userName.TabIndex = 1;
-            this.label_userName.Text = "Username";
+            this.comboBox_purchaseDate.FormattingEnabled = true;
+            this.comboBox_purchaseDate.Location = new System.Drawing.Point(163, 55);
+            this.comboBox_purchaseDate.Name = "comboBox_purchaseDate";
+            this.comboBox_purchaseDate.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_purchaseDate.TabIndex = 3;
+            this.comboBox_purchaseDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_purchaseDate_SelectedIndexChanged);
             // 
-            // comboBox_userName
+            // label_projectNo
             // 
-            this.comboBox_userName.FormattingEnabled = true;
-            this.comboBox_userName.Location = new System.Drawing.Point(163, 24);
-            this.comboBox_userName.Name = "comboBox_userName";
-            this.comboBox_userName.Size = new System.Drawing.Size(154, 25);
-            this.comboBox_userName.TabIndex = 3;
-            this.comboBox_userName.SelectedIndexChanged += new System.EventHandler(this.comboBox_userName_SelectedIndexChanged);
+            this.label_projectNo.AutoSize = true;
+            this.label_projectNo.Location = new System.Drawing.Point(6, 27);
+            this.label_projectNo.Name = "label_projectNo";
+            this.label_projectNo.Size = new System.Drawing.Size(72, 17);
+            this.label_projectNo.TabIndex = 1;
+            this.label_projectNo.Text = "Project No";
+            // 
+            // comboBox_projectNo
+            // 
+            this.comboBox_projectNo.FormattingEnabled = true;
+            this.comboBox_projectNo.Location = new System.Drawing.Point(163, 24);
+            this.comboBox_projectNo.Name = "comboBox_projectNo";
+            this.comboBox_projectNo.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_projectNo.TabIndex = 3;
+            this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
             // 
             // label_projectExpenseSetup
             // 
@@ -950,40 +822,37 @@
         private System.Windows.Forms.Button button_stop;
         private System.Windows.Forms.Panel panel_projectExpenseFieldMapping;
         private System.Windows.Forms.GroupBox groupBox_projectExpenseMandatoryFields;
-        private System.Windows.Forms.ComboBox comboBox_userName;
-        private System.Windows.Forms.Label label_userName;
+        private System.Windows.Forms.ComboBox comboBox_projectNo;
+        private System.Windows.Forms.Label label_projectNo;
         private System.Windows.Forms.Label label_projectExpenseSetup;
         private System.Windows.Forms.Button button_projectExpenseSelectFile;
         private System.Windows.Forms.TextBox textBox_projectExpenseImportMessages;
-        private System.Windows.Forms.Label label_lastName;
-        private System.Windows.Forms.ComboBox comboBox_lastName;
-        private System.Windows.Forms.Label label_firstName;
-        private System.Windows.Forms.ComboBox comboBox_firstName;
-        private System.Windows.Forms.Label label_managerInitials;
-        private System.Windows.Forms.ComboBox comboBox_managerInitials;
-        private System.Windows.Forms.Label label_email;
-        private System.Windows.Forms.ComboBox comboBox_email;
-        private System.Windows.Forms.Label label_initials;
-        private System.Windows.Forms.ComboBox comboBox_initials;
+        private System.Windows.Forms.Label label_paymentMethod;
+        private System.Windows.Forms.ComboBox comboBox_paymentMethod;
+        private System.Windows.Forms.Label label_purchaseDate;
+        private System.Windows.Forms.ComboBox comboBox_purchaseDate;
+        private System.Windows.Forms.Label label_salesPriceAmount;
+        private System.Windows.Forms.ComboBox comboBox_salesPriceAmount;
+        private System.Windows.Forms.Label label_amountIncludingVAT;
+        private System.Windows.Forms.ComboBox comboBox_amountIncludingVAT;
+        private System.Windows.Forms.Label label_expenseType;
+        private System.Windows.Forms.ComboBox comboBox_expenseType;
         private System.Windows.Forms.Label label_delimiter;
         private System.Windows.Forms.ComboBox comboBox_delimiter;
-        private System.Windows.Forms.Label label_department;
-        private System.Windows.Forms.ComboBox comboBox_department;
-        private System.Windows.Forms.Label label_defaultHourlyRate;
-        private System.Windows.Forms.ComboBox comboBox_defaultHourlyRate;
-        private System.Windows.Forms.Label label_legalEntity;
-        private System.Windows.Forms.ComboBox comboBox_legalEntity;
-        private System.Windows.Forms.Label label_employmentDate;
-        private System.Windows.Forms.ComboBox comboBox_employmentDate;
-        private System.Windows.Forms.Label label_employeeNo;
-        private System.Windows.Forms.ComboBox comboBox_employeeNo;
-        private System.Windows.Forms.Label label_jobTitle;
-        private System.Windows.Forms.ComboBox comboBox_jobTitle;
-        private System.Windows.Forms.CheckBox checkBox_defaultEmployeeType;
-        private System.Windows.Forms.CheckBox checkBox_defaultDepartment;
-        private System.Windows.Forms.CheckBox checkBox_defaultHourlyRate;
-        private System.Windows.Forms.CheckBox checkBox_defaultCostPrice;
-        private System.Windows.Forms.CheckBox checkBox_defaultLegalEntity;
+        private System.Windows.Forms.Label label_supplierInvoiceNo;
+        private System.Windows.Forms.ComboBox comboBox_supplierInvoiceNo;
+        private System.Windows.Forms.Label label_isBillable;
+        private System.Windows.Forms.ComboBox comboBox_isBillable;
+        private System.Windows.Forms.Label label_supplierNo;
+        private System.Windows.Forms.ComboBox comboBox_supplierNo;
+        private System.Windows.Forms.Label label_comment;
+        private System.Windows.Forms.ComboBox comboBox_comment;
+        private System.Windows.Forms.Label label_exchangeRate;
+        private System.Windows.Forms.ComboBox comboBox_exchangeRate;
+        private System.Windows.Forms.Label label_externalID;
+        private System.Windows.Forms.ComboBox comboBox_externalID;
+        private System.Windows.Forms.CheckBox checkBox_defaultPaymentMethod;
+        private System.Windows.Forms.CheckBox checkBox_defaultExpenseType;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_nonMandatoryFields;
         private System.Windows.Forms.Panel panel_NonMandatoryButton;
         private System.Windows.Forms.Panel panel_NonMandatoryFields;
@@ -991,25 +860,17 @@
         private System.Windows.Forms.Button button_expandNonMandatory;
         private System.Windows.Forms.Timer tmrExpand;
         private System.Windows.Forms.ToolTip defaultToolTip;
-        private System.Windows.Forms.Label label_normalWorkingTime;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label_costPrice;
-        private System.Windows.Forms.ComboBox comboBox_salaryGroup;
-        private System.Windows.Forms.ComboBox comboBox_normalWorkingTime;
-        private System.Windows.Forms.ComboBox comboBox_publicHolidayCalendar;
-        private System.Windows.Forms.ComboBox comboBox_costPrice;
-        private System.Windows.Forms.Label label_salaryGroup;
-        private System.Windows.Forms.Label label_employeeType;
-        private System.Windows.Forms.Label label_userRoleNames;
-        private System.Windows.Forms.Label label_allowanceLegislation;
-        private System.Windows.Forms.ComboBox comboBox_userRoles;
-        private System.Windows.Forms.ComboBox comboBox_allowanceLegislation;
-        private System.Windows.Forms.ComboBox comboBox_employeeType;
-        private System.Windows.Forms.CheckBox checkBox_defaultSalaryGroup;
-        private System.Windows.Forms.CheckBox checkBox_defaultNormalWorkingTime;
-        private System.Windows.Forms.CheckBox checkBox_defaultPublicHolidayCalendar;
-        private System.Windows.Forms.CheckBox checkBox_defaultAllowanceLegislation;
-        private System.Windows.Forms.ComboBox comboBox_userRoleDelimiter;
-        private System.Windows.Forms.Label label_userRoleDelimiter;
+        private System.Windows.Forms.Label label_expenseCurrencyISO;
+        private System.Windows.Forms.Label label_VATAmountCurrency;
+        private System.Windows.Forms.Label label_expenseNo;
+        private System.Windows.Forms.ComboBox comboBox_contractName;
+        private System.Windows.Forms.ComboBox comboBox_expenseCurrencyISO;
+        private System.Windows.Forms.ComboBox comboBox_VATAmount;
+        private System.Windows.Forms.ComboBox comboBox_expenseNo;
+        private System.Windows.Forms.Label label_contractName;
+        private System.Windows.Forms.Label label_profitRatio;
+        private System.Windows.Forms.ComboBox comboBox_profitRatio;
+        private System.Windows.Forms.CheckBox checkBox_defaultExpenseCurrencyISO;
+        private System.Windows.Forms.CheckBox checkBox_defaultIsBillable;
     }
 }

@@ -23,6 +23,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string ProjectExpenseCreateEndpoint = "/api/v1/project-expense";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
+        public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
         public string GetAllCustomerEndpoint = "/api/v1/customer?$page=1&$pagesize=300";
         public string GetAllDepartmentEndpoint = "/api/v1/Department?$page=1&$pagesize=300";
         //public string GetAllDefaultHourlyRateEndpoint = "/api/v1/default-hourly-rate?$page=1&$pagesize=300";
@@ -36,7 +37,10 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllCurrencyEndpoint = "/api/v1/currency/active?$page=1&$pagesize=300";
         public string GetAllCustomerStatusEndpoint = "/api/v1/customerstatus?$page=1&$pagesize=30";
         public string GetAllEmployeeEndpoint = "/api/v1/user?$page=1&$pagesize=500";
+        public string GetAllExpenseTypeEndpoint = "/api/v1/expense-type?$page=1&$pagesize=300";
         public string GetAllPaymentTermEndpoint = "/api/v1/payment-method?$page=1&$pagesize=30";  //endpoint coming soon, no payment term yet
+        public string GetAllPaymentMethodEndpoint = "/api/v1/payment-method?$page=1&$pagesize=30";
+        public string GetAllProjectEndpoint = "/api/v1/project/get-all?$page=1&$pagesize=500";
         public string GetAllProjectTemplateEndpoint = "/api/v1/project-template/get-all?$page=1&$pagesize=500";
         public string GetAllLegalEntityEndpoint = "/api/v1/LegalEntity?$page=1&$pagesize=500";
         public string GetAllProjectTypeEndpoint = "/api/v1/ProjectType?$page=1&$pagesize=500";

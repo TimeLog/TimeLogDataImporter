@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TimeLog.DataImporter.TimeLogApi.Model
 {
-    public class PaymentTermReadModel
+    public class PaymentMethodReadModel
     {
         /// <summary>
         /// Gets or sets the payment method identifier.

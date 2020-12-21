@@ -247,6 +247,41 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<CustomerReadModel> GetAllCustomer(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCustomerEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<CustomerReadModel> _apiResponse = new List<CustomerReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default customer ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Get data of different type methods
@@ -480,6 +515,29 @@ namespace TimeLog.DataImporter.Handlers
             CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
         }
 
+        //for fields with non key value pair default value checkbox
+        public void MapMandatoryNonKeyValuePairSelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, CheckBox checkBox)
+        {
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            if (!checkBox.Checked)
+            {
+                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+            }
+            else
+            {
+                var _defaultValue = comboBox.SelectedItem.ToString();
+
+                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+            }
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
         public void MapNonMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
         {
             var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
@@ -513,6 +571,31 @@ namespace TimeLog.DataImporter.Handlers
             else
             {
                 var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
+
+                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+            }
+
+            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+        }
+
+        //for fields with non key value pair default value checkbox
+        public void MapNonMandatoryNonKeyValuePairSelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, CheckBox checkBox)
+        {
+            CheckAndAddColumn(domainTable, columnName);
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            ClearColumn(dataGridView, _tableColumnIndex);
+
+            if (!checkBox.Checked)
+            {
+                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+            }
+            else
+            {
+                var _defaultValue = comboBox.SelectedItem.ToString();
 
                 MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
             }
