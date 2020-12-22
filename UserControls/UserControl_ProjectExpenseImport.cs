@@ -123,7 +123,6 @@ namespace TimeLog.DataImporter.UserControls
             GetAllPaymentMethodFromApi();
             GetAllExpenseTypeFromApi();
             GetAllExpenseCurrencyISOFromApi();
-            GetAllContractFromApi();
             GetAllSupplierFromApi();
         }
 
@@ -333,6 +332,10 @@ namespace TimeLog.DataImporter.UserControls
                 if (columnName == ProjectNo)
                 {
                     _result = ProjectExpenseHandler.Instance.GetIDFromFieldValue(ProjectNoList, _fieldValue);
+                    if (_result != -1)
+                    {
+                        GetAllContractFromApi(_result);
+                    }
                 }
                 else if (columnName == PaymentMethod)
                 {
@@ -473,11 +476,9 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllContractFromApi()
+        private void GetAllContractFromApi(int projectID)
         {
-            int _projectID = 1;  //temporary for testing purpose
-
-            var _apiResponse = ProjectExpenseHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, _projectID);
+            var _apiResponse = ProjectExpenseHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, projectID);
 
             if (_apiResponse != null)
             {
