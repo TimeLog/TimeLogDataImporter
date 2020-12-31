@@ -38,7 +38,7 @@ namespace TimeLog.DataImporter.UserControls
 
         //all column header variables
         private const string ProjectNo = "Project No";   
-        private const string PurchaseDate = "Purchase Date";
+        private const string PurchaseDate = "Purchase Date";  //let them choose default
         private const string PaymentMethod = "Payment Method";
         private const string ExpenseType = "Expense Type";
         private const string AmountIncludingVAT = "Amount inc. VAT";

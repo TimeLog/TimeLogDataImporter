@@ -18,6 +18,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserControls\UserControl_TaskImport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\UserControl_ProjectExpenseImport.cs">
       <SubType>UserControl</SubType>
     </Compile>

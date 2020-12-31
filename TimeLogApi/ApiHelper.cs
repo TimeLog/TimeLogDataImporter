@@ -21,6 +21,8 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string EmployeeCreateEndpoint = "/api/v1/user/create";
         //public string ProjectExpenseValidateEndpoint = "/api/v1/project-expense/validate-new-project-expense";
         public string ProjectExpenseCreateEndpoint = "/api/v1/project-expense";
+        public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
+        public string TaskCreateEndpoint = "/api/v1/task/create";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
         public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";

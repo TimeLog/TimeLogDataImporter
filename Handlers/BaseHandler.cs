@@ -447,6 +447,27 @@ namespace TimeLog.DataImporter.Handlers
             return DateTime.Now;
         }
 
+        public DateTime? CheckAndGetNullableDate(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
+        {
+            if (dataGridView.Columns[columnName] != null)
+            {
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value != DBNull.Value)
+                    {
+                        return Convert.ToDateTime(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to datetime for column [" +
+                                              columnName + "]. Please recheck input.");
+                }
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Initialization methods
