@@ -23,13 +23,14 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string ProjectExpenseCreateEndpoint = "/api/v1/project-expense";
         public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
         public string TaskCreateEndpoint = "/api/v1/task/create";
+        public string SubTaskCreateEndpoint = "/api/v1/task/create-sub-task";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
         public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
         public string GetAllCustomerEndpoint = "/api/v1/customer?$page=1&$pagesize=300";
         public string GetAllDepartmentEndpoint = "/api/v1/Department?$page=1&$pagesize=300";
-        //public string GetAllDefaultHourlyRateEndpoint = "/api/v1/default-hourly-rate?$page=1&$pagesize=300";
-        //public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";
+        public string GetAllHourlyRateEndpoint = "/api/v1/hourly-rate?$page=1&$pagesize=300";
+        //public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";  //user-type endpoint
         //public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";
         //public string GetAllPublicHolidayCalendarEndpoint = "/api/v1/public-holiday-calendar?$page=1&$pagesize=300";
         //public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page=1&$pagesize=300";
@@ -47,6 +48,9 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllLegalEntityEndpoint = "/api/v1/LegalEntity?$page=1&$pagesize=500";
         public string GetAllProjectTypeEndpoint = "/api/v1/ProjectType?$page=1&$pagesize=500";
         public string GetAllProjectCategoryEndpoint = "/api/v1/ProjectCategory?$page=1&$pagesize=500";
+        public string GetAllTaskEndpoint = "/api/v1/task?$page=1&$pagesize=300";
+        public string GetAllTaskTypeEndpoint = "/api/v1/TaskType?$page=1&$pagesize=300";
+        public string GetAllProductEndpoint = "/api/v1/product?$page=1&$pagesize=300";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();

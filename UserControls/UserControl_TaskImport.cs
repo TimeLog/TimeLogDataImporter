@@ -44,7 +44,7 @@ namespace TimeLog.DataImporter.UserControls
         private const string TaskType = "Task Type";//lookup tasktypeid
         private const string HourlyRate = "Hourly Rate";  //use name to lookup hourlyrateid
         private const string ProjectNo = "Project No"; //lookup projectid
-        private const string ParentTaskNo = "Parent Task No";  //lookup parenttaskid  //if fillup,call create sub task api
+        private const string ParentTaskNo = "Parent Task No";  //lookup parenttaskid  //if fillup,call create sub task api///////
         private const string IsBillable = "Is Billable";
         private const string PaymentRecognitionModel = "Payment Recognition Model";  //pass in name to lookup enum value
         private const string PaymentAmount = "Payment Amount";
@@ -62,10 +62,10 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> TaskTypeList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> HourlyRateList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentRecognitionModelList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> PaymentProductNoList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> PaymentProductNoList = new List<KeyValuePair<int, string>>(); //get all product number/project product number?
         private static readonly List<KeyValuePair<int, string>> ContractNameList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> ProjectNoList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> ParentTaskNoList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ParentTaskNoList = new List<KeyValuePair<int, string>>();  //get all normal tasks or parent task id of normal tasks?
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -120,11 +120,11 @@ namespace TimeLog.DataImporter.UserControls
 
         private void InitializeAllDefaultValues()
         {
+            GetAllHourlyRateFromApi();
+            GetAllPaymentProductNoFromApi();
+            GetAllTaskTypeFromApi();
             GetAllProjectFromApi();
-            GetAllPaymentMethodFromApi();
-            GetAllExpenseTypeFromApi();
-            GetAllExpenseCurrencyISOFromApi();
-            GetAllSupplierFromApi();
+            GetAllPaymentRecognitionModel();
         }
 
         #endregion
@@ -344,6 +344,7 @@ namespace TimeLog.DataImporter.UserControls
                     if (_result != -1)
                     {
                         GetAllContractFromApi(_result);
+                        GetAllTaskFromApi(_result);
                     }
                 }
                 else if (columnName == TaskType)
@@ -361,10 +362,6 @@ namespace TimeLog.DataImporter.UserControls
                 else if (columnName == PaymentRecognitionModel)
                 {
                     _result = TaskHandler.Instance.GetIDFromFieldValue(PaymentRecognitionModelList, _fieldValue);
-                }
-                else if (columnName == PaymentProductNo)
-                {
-                    _result = TaskHandler.Instance.GetIDFromFieldValue(PaymentProductNoList, _fieldValue);
                 }
                 else if (columnName == ParentTaskNo)
                 {
@@ -452,6 +449,45 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Get default values from API
 
+        private void GetAllTaskTypeFromApi()
+        {
+            var _apiResponse = TaskHandler.Instance.GetAllTaskType(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _taskType in _apiResponse)
+                {
+                    TaskTypeList.Add(new KeyValuePair<int, string>(_taskType.TaskTypeID, _taskType.Name));
+                }
+            }
+        }
+
+        private void GetAllHourlyRateFromApi()
+        {
+            var _apiResponse = TaskHandler.Instance.GetAllHourlyRate(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _hourlyRate in _apiResponse)
+                {
+                    HourlyRateList.Add(new KeyValuePair<int, string>(_hourlyRate.HourlyRateID, _hourlyRate.HourlyRateName));
+                }
+            }
+        }
+
+        private void GetAllPaymentProductNoFromApi()
+        {
+            var _apiResponse = TaskHandler.Instance.GetAllProduct(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _product in _apiResponse)
+                {
+                    PaymentProductNoList.Add(new KeyValuePair<int, string>(_product.ProductNumberID, _product.ProductNumber));
+                }
+            }
+        }
+
         private void GetAllProjectFromApi()
         {
             var _apiResponse = TaskHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
@@ -463,45 +499,6 @@ namespace TimeLog.DataImporter.UserControls
                     ProjectNoList.Add(new KeyValuePair<int, string>(_project.ProjectID, _project.No));
                 }
             }
-        }
-
-        private void GetAllPaymentMethodFromApi()
-        {
-            //var _apiResponse = TaskHandler.Instance.GetAllPaymentMethod(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _paymentMethod in _apiResponse)
-            //    {
-            //        PaymentMethodList.Add(new KeyValuePair<int, string>(_paymentMethod.PaymentMethodID, _paymentMethod.Name));
-            //    }
-            //}
-        }
-
-        private void GetAllExpenseTypeFromApi()
-        {
-            //var _apiResponse = TaskHandler.Instance.GetAllExpenseType(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _expenseType in _apiResponse)
-            //    {
-            //        ExpenseTypeList.Add(new KeyValuePair<int, string>(_expenseType.ExpenseTypeID, _expenseType.ExpenseTypeName));
-            //    }
-            //}
-        }
-
-        private void GetAllExpenseCurrencyISOFromApi()
-        {
-            //var _apiResponse = TaskHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
-
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _currency in _apiResponse)
-            //    {
-            //        ExpenseCurrencyISOList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.CurrencyABB));
-            //    }
-            //}
         }
 
         private void GetAllContractFromApi(int projectID)
@@ -517,17 +514,26 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllSupplierFromApi()
+        private void GetAllTaskFromApi(int projectID)
         {
-            //var _apiResponse = TaskHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
+            var _apiResponse = TaskHandler.Instance.GetAllTask(AuthenticationHandler.Instance.Token, projectID);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _supplier in _apiResponse)
-            //    {
-            //        SupplierNoList.Add(new KeyValuePair<int, string>(_supplier.CustomerID, _supplier.No));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _task in _apiResponse)
+                {
+                    ParentTaskNoList.Add(new KeyValuePair<int, string>(_task.TaskID, _task.No));
+                }
+            }
+        }
+
+        private void GetAllPaymentRecognitionModel()
+        {
+            //get all from enum  //pls further test
+            foreach (var _model in Enum.GetNames(typeof(PaymentRecognitionModelTypes)))
+            {
+                PaymentRecognitionModelList.Add(new KeyValuePair<int, string>((int)(PaymentRecognitionModelTypes)Enum.Parse(typeof(PaymentRecognitionModelTypes), _model), _model));
+            }
         }
 
         #endregion

@@ -282,6 +282,73 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<ProjectReadModel> GetAllProject(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProjectReadModel> _apiResponse = new List<ProjectReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<ProjectReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default project ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProjectSubContractReadModel> _apiResponse = new List<ProjectSubContractReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default project sub contract ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Get data of different type methods

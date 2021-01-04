@@ -75,9 +75,9 @@ namespace TimeLog.DataImporter.Handlers
             }
         }
 
-        public List<ProjectReadModel> GetAllProject(string token)
+        public List<TaskTypeReadModel> GetAllTaskType(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectEndpoint;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllTaskTypeEndpoint;
 
             try
             {
@@ -86,16 +86,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<ProjectReadModel> _apiResponse = new List<ProjectReadModel>();
+                    List<TaskTypeReadModel> _apiResponse = new List<TaskTypeReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            if (_property.Name == "Properties")
-                            {
-                                _apiResponse.Add(JsonConvert.DeserializeObject<ProjectReadModel>(_property.Value.ToString()));
-                            }
+                            _apiResponse.Add(JsonConvert.DeserializeObject<TaskTypeReadModel>(_property.Value.ToString()));
                         }
                     }
 
@@ -104,15 +101,15 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain default project ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain default task type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
         }
 
-        public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
+        public List<HourlyRateReadModel> GetAllHourlyRate(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllPaymentMethodEndpoint;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllHourlyRateEndpoint;
 
             try
             {
@@ -121,13 +118,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
+                    List<HourlyRateReadModel> _apiResponse = new List<HourlyRateReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentMethodReadModel>(_property.Value.ToString()));
+                            _apiResponse.Add(JsonConvert.DeserializeObject<HourlyRateReadModel>(_property.Value.ToString()));
                         }
                     }
 
@@ -136,15 +133,15 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain default hourly rate ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
         }
 
-        public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
+        public List<ProductReadModel> GetAllProduct(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllExpenseTypeEndpoint;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProductEndpoint;
 
             try
             {
@@ -153,13 +150,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<ExpenseTypeReadModel> _apiResponse = new List<ExpenseTypeReadModel>();
+                    List<ProductReadModel> _apiResponse = new List<ProductReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ExpenseTypeReadModel>(_property.Value.ToString()));
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ProductReadModel>(_property.Value.ToString()));
                         }
                     }
 
@@ -168,15 +165,15 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain default expense type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain default product ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
         }
 
-        public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
+        public List<TaskReadModel> GetAllTask(string token, int projectID)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID ;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID;
 
             try
             {
@@ -185,13 +182,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<ProjectSubContractReadModel> _apiResponse = new List<ProjectSubContractReadModel>();
+                    List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
+                            _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
                         }
                     }
 
@@ -200,7 +197,7 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain default project sub contract ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain default task ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
