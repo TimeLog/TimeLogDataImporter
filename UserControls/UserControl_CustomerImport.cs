@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
@@ -70,7 +69,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _invoiceAddressToUse = "Invoice Address To Use";
         private readonly string _internalReferenceID = "Internal Reference ID";
         private readonly string _customerReferenceID = "Customer Reference ID";
-        private readonly string _paymentTermID = "Payment Term ID";
+        private readonly string _paymentTerm = "Payment Term";
         private readonly string _discountPercentage = "Discount Percentage";
         private readonly string _calculateVAT = "Calculate VAT";
         private readonly string _VATPercentage = "VAT Percentage";
@@ -87,7 +86,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> PrimaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> PaymentTermIDList = new List<KeyValuePair<int, string>>(); // not yet added, to be implemented
+        private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>(); // just added, pls test more
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -163,6 +162,8 @@ namespace TimeLog.DataImporter.UserControls
             GetAllPrimaryKAMFromApi();
             GetAllSecondaryKAMFromApi();
             GetAllIndustryFromApi();
+            GetAllPaymentTermFromApi();
+            InitializeVATPercentageList();
         }
 
         #endregion
@@ -317,7 +318,7 @@ namespace TimeLog.DataImporter.UserControls
                                 InvoiceAddressToUse = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _invoiceAddressToUse, _row),
                                 InternalReferenceID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _internalReferenceID, _row),
                                 CustomerReferenceID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _customerReferenceID, _row),
-                                PaymentTermID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _paymentTermID, _row),
+                                PaymentTermID = (int) MapFieldValueToID(_paymentTerm, _row, false),
                                 DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
                                 CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
                                 VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row)
@@ -367,6 +368,14 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Helper methods
 
+        private void InitializeVATPercentageList()
+        {
+            for (int i = 0; i <= 100; i++)
+            {
+                VATPercentageList.Add(i.ToString());
+            }
+        }
+
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);
@@ -409,34 +418,10 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_invoiceAddressToUse.Items.AddRange(fileColumnHeaderArray);
             comboBox_internalReferenceID.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerReferenceID.Items.AddRange(fileColumnHeaderArray);
-            comboBox_paymentTermID.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentTerm.Items.AddRange(fileColumnHeaderArray);
             comboBox_discountPercentage.Items.AddRange(fileColumnHeaderArray);
             comboBox_calculateVAT.Items.AddRange(fileColumnHeaderArray);
             comboBox_VATPercentage.Items.AddRange(fileColumnHeaderArray);
-        }
-
-        private void MapFileContentToTable(int tableColumnIndex, int fileColumnIndex)
-        {
-            for (int i = 0; i < _fileContent.Rows.Count; i++)
-            {
-                Invoke((MethodInvoker) (() => _customerTable.Rows[i][tableColumnIndex] = _fileContent.Rows[i][fileColumnIndex]));
-            }
-
-            dataGridView_customer.Rows[0].Cells[tableColumnIndex].Selected = true;
-            dataGridView_customer.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
-            dataGridView_customer.Focus();
-        }
-
-        private void MapDefaultValueToTable(int tableColumnIndex, string defaultValue)
-        {
-            for (int i = 0; i < _customerTable.Rows.Count; i++)
-            {
-                Invoke((MethodInvoker) (() => _customerTable.Rows[i][tableColumnIndex] = defaultValue));
-            }
-
-            dataGridView_customer.Rows[0].Cells[tableColumnIndex].Selected = true;
-            dataGridView_customer.FirstDisplayedScrollingColumnIndex = tableColumnIndex;
-            dataGridView_customer.Focus();
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -470,6 +455,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(IndustryNameList, _fieldValue);
                 }
+                else if (columnName == _paymentTerm)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(PaymentTermList, _fieldValue);
+                }
 
                 if (_result != -1)
                 {
@@ -489,47 +478,6 @@ namespace TimeLog.DataImporter.UserControls
             }
 
             return 0;
-        }
-
-        private void CheckAndAddColumn(string columnName)
-        {
-            if (!_customerTable.Columns.Contains(columnName))
-            {
-                _customerTable.Columns.Add(columnName);
-            }
-        }
-
-        private void CheckCellsForNullOrEmpty(int columnIndex)
-        {
-            foreach (DataGridViewRow _row in dataGridView_customer.Rows)
-            {
-                if (_row.Cells[columnIndex].Value == null ||
-                    string.IsNullOrEmpty(_row.Cells[columnIndex].Value.ToString()))
-                {
-                    if (_row.DataBoundItem != null)
-                    {
-                        _row.Cells[columnIndex].Style.BackColor = Color.Red;
-                    }
-                }
-            }
-        }
-
-        private void ClearColumn(int columnIndex)
-        {
-            if (dataGridView_customer != null && dataGridView_customer.Columns.Count - 1 >= columnIndex)
-            {
-                var _tmpCol = dataGridView_customer.Columns[columnIndex];
-                dataGridView_customer.Columns.Remove(dataGridView_customer.Columns[columnIndex]);
-                dataGridView_customer.Columns.Insert(columnIndex, _tmpCol);
-            }
-        }
-
-        private void ClearRow(int tableColumnIndex)
-        {
-            for (int i = 0; i < _customerTable.Rows.Count; i++)
-            {
-                Invoke((MethodInvoker) (() => _customerTable.Rows[i][tableColumnIndex] = ""));
-            }
         }
 
         private void ClearAndResetAllComboBoxes()
@@ -614,8 +562,8 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_internalReferenceID.Items.Clear();
             comboBox_customerReferenceID.ResetText();
             comboBox_customerReferenceID.Items.Clear();
-            comboBox_paymentTermID.ResetText();
-            comboBox_paymentTermID.Items.Clear();
+            comboBox_paymentTerm.ResetText();
+            comboBox_paymentTerm.Items.Clear();
             comboBox_invoicingAddress.ResetText();
             comboBox_invoicingAddress.Items.Clear();
             comboBox_discountPercentage.ResetText();
@@ -636,7 +584,7 @@ namespace TimeLog.DataImporter.UserControls
             checkBox_defaultIndustryName.Checked = false;
             checkBox_defaultExpenseIsBillable.Checked = false;
             checkBox_defaultMileageIsBillable.Checked = false;
-            checkBox_defaultPaymentTermID.Checked = false;
+            checkBox_defaultPaymentTerm.Checked = false;
             checkBox_defaultVATPercentage.Checked = false;
         }
 
@@ -730,110 +678,8 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _paymentTerm in _apiResponse)
                 {
-                    PaymentTermIDList.Add(new KeyValuePair<int, string>(_paymentTerm.PaymentMethodID,
+                    PaymentTermList.Add(new KeyValuePair<int, string>(_paymentTerm.ID,
                         _paymentTerm.Name));
-                }
-            }
-        }
-
-        #endregion
-
-        #region Add default key value pair list to Combobox
-
-        private void AddKeyValuePairListToCurrencyIDComboBox()
-        {
-            comboBox_currencyISO.DisplayMember = "Value";
-            comboBox_currencyISO.ValueMember = "Key";
-
-            if (CurrencyISOList != null)
-            {
-                foreach (var _currency in CurrencyISOList)
-                {
-                    comboBox_currencyISO.Items.Add(new {_currency.Key, _currency.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToCountryIDComboBox()
-        {
-            comboBox_countryISO.DisplayMember = "Value";
-            comboBox_countryISO.ValueMember = "Key";
-
-            if (CountryISOList != null)
-            {
-                foreach (var _country in CountryISOList)
-                {
-                    comboBox_countryISO.Items.Add(new {_country.Key, _country.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToCustomerStatusIDComboBox()
-        {
-            comboBox_customerStatus.DisplayMember = "Value";
-            comboBox_customerStatus.ValueMember = "Key";
-
-            if (CustomerStatusList != null)
-            {
-                foreach (var _customerStatus in CustomerStatusList)
-                {
-                    comboBox_customerStatus.Items.Add(new {_customerStatus.Key, _customerStatus.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToPrimaryKAMIDComboBox()
-        {
-            comboBox_primaryKAM.DisplayMember = "Value";
-            comboBox_primaryKAM.ValueMember = "Key";
-
-            if (PrimaryKAMList != null)
-            {
-                foreach (var _primaryKAM in PrimaryKAMList)
-                {
-                    comboBox_primaryKAM.Items.Add(new {_primaryKAM.Key, _primaryKAM.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToSecondaryKAMIDComboBox()
-        {
-            comboBox_secondaryKAM.DisplayMember = "Value";
-            comboBox_secondaryKAM.ValueMember = "Key";
-
-            if (SecondaryKAMList != null)
-            {
-                foreach (var _secondaryKAM in SecondaryKAMList)
-                {
-                    comboBox_secondaryKAM.Items.Add(new {_secondaryKAM.Key, _secondaryKAM.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToIndustryIDComboBox()
-        {
-            comboBox_industryName.DisplayMember = "Value";
-            comboBox_industryName.ValueMember = "Key";
-
-            if (IndustryNameList != null)
-            {
-                foreach (var _industry in IndustryNameList)
-                {
-                    comboBox_industryName.Items.Add(new {_industry.Key, _industry.Value});
-                }
-            }
-        }
-
-        private void AddKeyValuePairListToPaymentTermIDComboBox()
-        {
-            comboBox_paymentTermID.DisplayMember = "Value";
-            comboBox_paymentTermID.ValueMember = "Key";
-
-            if (PaymentTermIDList != null)
-            {
-                foreach (var _paymentTerm in PaymentTermIDList)
-                {
-                    comboBox_paymentTermID.Items.Add(new {_paymentTerm.Key, _paymentTerm.Value});
                 }
             }
         }
@@ -846,758 +692,264 @@ namespace TimeLog.DataImporter.UserControls
         {
             CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
                 comboBox_customerName, _customerName);
-
-            //var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerName.SelectedItem.ToString());
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerName);
-
-            //ClearColumn(_tableColumnIndex);
-
-            //CustomerHandler.Instance.MapFileContentToTable(_fileContent, dataGridView_customer, _customerTable,_tableColumnIndex, _columnIndex);
-
-            //CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
         private void comboBox_currencyISO_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
                 comboBox_currencyISO, _currencyISO, checkBox_defaultCurrencyISO);
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyISO);
-
-            //ClearColumn(_tableColumnIndex);
-
-            //if (!checkBox_defaultCurrencyISO.Checked)
-            //{
-            //    var _columnIndex = _fileContent.Columns.IndexOf(comboBox_currencyISO.SelectedItem.ToString());
-
-            //    MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            //}
-            //else
-            //{
-            //    var _defaultValue = (comboBox_currencyISO.SelectedItem as dynamic).Value.ToString();
-
-            //    MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            //}
-
-            //CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
         private void comboBox_customerStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
                 comboBox_customerStatus, _customerStatus, checkBox_defaultCustomerStatus);
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatus);
-
-            //ClearColumn(_tableColumnIndex);
-
-            //if (!checkBox_defaultCustomerStatus.Checked)
-            //{
-            //    var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerStatus.SelectedItem.ToString());
-
-            //    MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            //}
-            //else
-            //{
-            //    var _defaultValue = (comboBox_customerStatus.SelectedItem as dynamic).Value.ToString();
-
-            //    MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            //}
-
-            //CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
         private void comboBox_countryISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryISO);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultCountryISO.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_countryISO.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = (comboBox_countryISO.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_countryISO, _countryISO, checkBox_defaultCountryISO);
         }
 
         private void comboBox_customerNo_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
                 comboBox_customerNo, _customerNo);
-
-            //var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerNo.SelectedItem.ToString());
-
-            //CheckAndAddColumn(_customerNo);
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerNo);
-
-            //ClearColumn(_tableColumnIndex);
-
-            //CustomerHandler.Instance.MapFileContentToTable(_fileContent, dataGridView_customer, _customerTable, _tableColumnIndex, _columnIndex);
-            ////MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            //CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
         private void comboBox_nickName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_nickName.SelectedItem.ToString());
-
-            CheckAndAddColumn(_nickname);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_nickname);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_nickName, _nickname);
         }
 
         private void comboBox_primaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
                 comboBox_primaryKAM, _primaryKAM, checkBox_defaultPrimaryKAM);
-
-            //CheckAndAddColumn(_primaryKAM);
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAM);
-
-            //ClearColumn(_tableColumnIndex);
-
-            //if (!checkBox_defaultPrimaryKAM.Checked)
-            //{
-            //    var _columnIndex = _fileContent.Columns.IndexOf(comboBox_primaryKAM.SelectedItem.ToString());
-
-            //    MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            //}
-            //else
-            //{
-            //    var _defaultValue = (comboBox_primaryKAM.SelectedItem as dynamic).Value.ToString();
-
-            //    MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            //}
-
-            //CheckCellsForNullOrEmpty(_tableColumnIndex);
         }
 
         private void comboBox_secondaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_secondaryKAM);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAM);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultSecondaryKAM.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_secondaryKAM.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = (comboBox_secondaryKAM.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_secondaryKAM, _secondaryKAM, checkBox_defaultSecondaryKAM);
         }
 
         private void comboBox_customerSince_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerSince.SelectedItem.ToString());
-
-            CheckAndAddColumn(_customerSince);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerSince);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_customerSince, _customerSince);
         }
 
         private void comboBox_industryName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_industryName);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryName);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultIndustryName.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_industryName.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = (comboBox_industryName.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_industryName, _industryName, checkBox_defaultIndustryName);
         }
 
         private void comboBox_phoneNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_phoneNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_phoneNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_phoneNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_phoneNo, _phoneNo);
         }
 
         private void comboBox_faxNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_faxNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_faxNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_faxNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_faxNo, _faxNo);
         }
 
         private void comboBox_email_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_email.SelectedItem.ToString());
-
-            CheckAndAddColumn(_email);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_email);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_email, _email);
         }
 
         private void comboBox_website_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_website.SelectedItem.ToString());
-
-            CheckAndAddColumn(_website);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_website);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_website, _website);
         }
 
         private void comboBox_address_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_address.SelectedItem.ToString());
-
-            CheckAndAddColumn(_address);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_address);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_address, _address);
         }
 
         private void comboBox_address2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_address2.SelectedItem.ToString());
-
-            CheckAndAddColumn(_address2);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_address2);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_address2, _address2);
         }
 
         private void comboBox_address3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_address3.SelectedItem.ToString());
-
-            CheckAndAddColumn(_address3);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_address3);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_address3, _address3);
         }
 
         private void comboBox_zipCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_zipCode.SelectedItem.ToString());
-
-            CheckAndAddColumn(_zipCode);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_zipCode);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_zipCode, _zipCode);
         }
 
         private void comboBox_city_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_city.SelectedItem.ToString());
-
-            CheckAndAddColumn(_city);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_city);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_city, _city);
         }
 
         private void comboBox_state_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_state.SelectedItem.ToString());
-
-            CheckAndAddColumn(_state);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_state);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_state, _state);
         }
 
         private void comboBox_useEanNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_useEanNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_useEanNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_useEanNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_useEanNo, _useEanNo);
         }
 
         private void comboBox_eanNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_eanNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_eanNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_eanNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_eanNo, _eanNo);
         }
 
         private void comboBox_organizationNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_organizationNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_organizationNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_organizationNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_organizationNo, _organizationNo);
         }
 
         private void comboBox_VATNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_VATNo.SelectedItem.ToString());
-
-            CheckAndAddColumn(_VATNo);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_VATNo);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_VATNo, _VATNo);
         }
 
         private void comboBox_useInvoicingAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_useInvoicingAddress.SelectedItem.ToString());
-
-            CheckAndAddColumn(_useInvoicingAddress);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_useInvoicingAddress);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_useInvoicingAddress, _useInvoicingAddress);
         }
 
         private void comboBox_invoicingAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddress.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddress);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddress);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddress, _invoicingAddress);
         }
 
         private void comboBox_invoicingAddress2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddress2.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddress2);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddress2);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddress2, _invoicingAddress2);
         }
 
         private void comboBox_invoicingAddress3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddress3.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddress3);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddress3);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddress3, _invoicingAddress3);
         }
 
         private void comboBox_invoicingAddressZipCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddressZipCode.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddressZipCode);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddressZipCode);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddressZipCode, _invoicingAddressZipCode);
         }
 
         private void comboBox_invoicingAddressCity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddressCity.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddressCity);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddressCity);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddressCity, _invoicingAddressCity);
         }
 
         private void comboBox_invoicingAddressState_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddressState.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddressState);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddressState);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddressState, _invoicingAddressState);
         }
 
         private void comboBox_invoicingAddressCountryID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoicingAddressCountryID.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoicingAddressCountryID);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoicingAddressCountryID);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoicingAddressCountryID, _invoicingAddressCountryID);
         }
 
         private void comboBox_defaultMileageDistance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_defaultMileageDistance.SelectedItem.ToString());
-
-            CheckAndAddColumn(_defaultMileageDistance);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_defaultMileageDistance);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_defaultMileageDistance, _defaultMileageDistance);
         }
 
         private void comboBox_expenseIsBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_expenseIsBillable);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_expenseIsBillable);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultExpenseIsBillable.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_expenseIsBillable.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = comboBox_expenseIsBillable.SelectedItem.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_expenseIsBillable, _expenseIsBillable, checkBox_defaultExpenseIsBillable);
         }
 
         private void comboBox_mileageIsBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_mileageIsBillable);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_mileageIsBillable);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultMileageIsBillable.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_mileageIsBillable.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = comboBox_mileageIsBillable.SelectedItem.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_mileageIsBillable, _mileageIsBillable, checkBox_defaultMileageIsBillable);
         }
 
         private void comboBox_defaultDistIsMaxBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_defaultDistIsMaxBillable.SelectedItem.ToString());
-
-            CheckAndAddColumn(_defaultDistIsMaxBillable);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_defaultDistIsMaxBillable);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_defaultDistIsMaxBillable, _defaultDistIsMaxBillable);
         }
 
         private void comboBox_contactID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_contactID.SelectedItem.ToString());
-
-            CheckAndAddColumn(_contactID);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_contactID);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_contactID, _contactID);
         }
 
         private void comboBox_invoiceAddressToUse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_invoiceAddressToUse.SelectedItem.ToString());
-
-            CheckAndAddColumn(_invoiceAddressToUse);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_invoiceAddressToUse);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_invoiceAddressToUse, _invoiceAddressToUse);
         }
 
         private void comboBox_internalReferenceID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_internalReferenceID.SelectedItem.ToString());
-
-            CheckAndAddColumn(_internalReferenceID);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_internalReferenceID);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_internalReferenceID, _internalReferenceID);
         }
 
         private void comboBox_customerReferenceID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_customerReferenceID.SelectedItem.ToString());
-
-            CheckAndAddColumn(_customerReferenceID);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerReferenceID);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_customerReferenceID, _customerReferenceID);
         }
 
-        private void comboBox_paymentTermID_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentTerm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_paymentTermID);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_paymentTermID);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultPaymentTermID.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_paymentTermID.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = (comboBox_paymentTermID.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_paymentTerm, _paymentTerm, checkBox_defaultPaymentTerm);
         }
 
         private void comboBox_discountPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_discountPercentage.SelectedItem.ToString());
-
-            CheckAndAddColumn(_discountPercentage);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_discountPercentage);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_discountPercentage, _discountPercentage);
         }
 
         private void comboBox_calculateVAT_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var _columnIndex = _fileContent.Columns.IndexOf(comboBox_calculateVAT.SelectedItem.ToString());
-
-            CheckAndAddColumn(_calculateVAT);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_calculateVAT);
-
-            ClearColumn(_tableColumnIndex);
-
-            MapFileContentToTable(_tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_calculateVAT, _calculateVAT);
         }
 
         private void comboBox_VATPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CheckAndAddColumn(_VATPercentage);
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_VATPercentage);
-
-            ClearColumn(_tableColumnIndex);
-
-            if (!checkBox_defaultVATPercentage.Checked)
-            {
-                var _columnIndex = _fileContent.Columns.IndexOf(comboBox_VATPercentage.SelectedItem.ToString());
-
-                MapFileContentToTable(_tableColumnIndex, _columnIndex);
-            }
-            else
-            {
-                var _defaultValue = comboBox_VATPercentage.SelectedItem.ToString();
-
-                MapDefaultValueToTable(_tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(_tableColumnIndex);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
+                comboBox_VATPercentage, _VATPercentage, checkBox_defaultVATPercentage);
         }
 
         #endregion
@@ -1608,296 +960,60 @@ namespace TimeLog.DataImporter.UserControls
         {
             CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_currencyISO, 
                 _currencyISO, checkBox_defaultCurrencyISO, CurrencyISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-
-            //comboBox_currencyISO.ResetText();
-            //comboBox_currencyISO.Items.Clear();
-
-            //if (checkBox_defaultCurrencyISO.Checked)
-            //{
-            //    if (_currencyISOList == null)
-            //    {
-            //        GetAllCurrencyFromApi();
-            //    }
-
-            //    AddKeyValuePairListToCurrencyIDComboBox();
-            //}
-            //else
-            //{
-            //    comboBox_currencyISO.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-            //}
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_currencyISO);
-
-            //if (_tableColumnIndex != -1)
-            //{
-            //    ClearColumn(_tableColumnIndex);
-
-            //    ClearRow(_tableColumnIndex);
-
-            //    CheckCellsForNullOrEmpty(_tableColumnIndex);
-            //}
         }
 
         private void checkBox_defaultCustomerStatus_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_customerStatus.ResetText();
-            comboBox_customerStatus.Items.Clear();
-
-            if (checkBox_defaultCustomerStatus.Checked)
-            {
-                if (CustomerStatusList == null)
-                {
-                    GetAllCustomerStatusFromApi();
-                }
-
-                AddKeyValuePairListToCustomerStatusIDComboBox();
-            }
-            else
-            {
-                comboBox_customerStatus.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
-                    .ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_customerStatus);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_customerStatus,
+                _customerStatus, checkBox_defaultCustomerStatus, CustomerStatusList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultCountryISO_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_countryISO.ResetText();
-            comboBox_countryISO.Items.Clear();
-
-            if (checkBox_defaultCountryISO.Checked)
-            {
-                if (CountryISOList == null)
-                {
-                    GetAllCountryFromApi();
-                }
-
-                AddKeyValuePairListToCountryIDComboBox();
-            }
-            else
-            {
-                comboBox_countryISO.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_countryISO);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_countryISO,
+                _countryISO, checkBox_defaultCountryISO, CountryISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultPrimaryKAM_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_primaryKAM.ResetText();
-            comboBox_primaryKAM.Items.Clear();
-
-            if (checkBox_defaultPrimaryKAM.Checked)
-            {
-                if (PrimaryKAMList == null)
-                {
-                    GetAllPrimaryKAMFromApi();
-                }
-
-                AddKeyValuePairListToPrimaryKAMIDComboBox();
-            }
-            else
-            {
-                comboBox_primaryKAM.Items.AddRange(
-                    CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_primaryKAM);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_primaryKAM,
+                _primaryKAM, checkBox_defaultPrimaryKAM, PrimaryKAMList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultSecondaryKAM_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_secondaryKAM.ResetText();
-            comboBox_secondaryKAM.Items.Clear();
-
-            if (checkBox_defaultSecondaryKAM.Checked)
-            {
-                if (SecondaryKAMList == null)
-                {
-                    GetAllSecondaryKAMFromApi();
-                }
-
-                AddKeyValuePairListToSecondaryKAMIDComboBox();
-            }
-            else
-            {
-                comboBox_secondaryKAM.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
-                    .ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_secondaryKAM);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_secondaryKAM,
+                _secondaryKAM, checkBox_defaultSecondaryKAM, SecondaryKAMList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultIndustryName_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_industryName.ResetText();
-            comboBox_industryName.Items.Clear();
-
-            if (checkBox_defaultIndustryName.Checked)
-            {
-                if (IndustryNameList == null)
-                {
-                    GetAllIndustryFromApi();
-                }
-
-                AddKeyValuePairListToIndustryIDComboBox();
-            }
-            else
-            {
-                comboBox_industryName.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_industryName);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_industryName,
+                _industryName, checkBox_defaultIndustryName, IndustryNameList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultExpenseIsBillable_CheckedChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapNonKeyValuePairToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_expenseIsBillable,
                 _expenseIsBillable, checkBox_defaultExpenseIsBillable, ExpenseIsBillableList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-
-            //comboBox_expenseIsBillable.ResetText();
-            //comboBox_expenseIsBillable.Items.Clear();
-
-            //comboBox_expenseIsBillable.Items.AddRange(checkBox_defaultExpenseIsBillable.Checked
-            //    ? ExpenseIsBillableList.Cast<object>().ToArray()
-            //    : CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-
-            //var _tableColumnIndex = _customerTable.Columns.IndexOf(_expenseIsBillable);
-
-            //if (_tableColumnIndex != -1)
-            //{
-            //    ClearColumn(_tableColumnIndex);
-
-            //    ClearRow(_tableColumnIndex);
-
-            //    CheckCellsForNullOrEmpty(_tableColumnIndex);
-            //}
         }
 
         private void checkBox_defaultMileageIsBillable_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_mileageIsBillable.ResetText();
-            comboBox_mileageIsBillable.Items.Clear();
-
-            comboBox_mileageIsBillable.Items.AddRange(checkBox_defaultMileageIsBillable.Checked
-                ? MileageIsBillableList.Cast<object>().ToArray()
-                : CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_mileageIsBillable);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapNonKeyValuePairToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_mileageIsBillable,
+                _mileageIsBillable, checkBox_defaultMileageIsBillable, MileageIsBillableList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
-        private void checkBox_defaultPaymentTermID_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_defaultPaymentTerm_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_paymentTermID.ResetText();
-            comboBox_paymentTermID.Items.Clear();
-
-            if (checkBox_defaultPaymentTermID.Checked)
-            {
-                //default values for payment term ID to be implemented later due to lack of API
-                //if (_paymentTermIDList == null)
-                //{
-                //    GetAllPaymentTermFromApi();
-                //}
-
-                //AddKeyValuePairListToPaymentTermIDComboBox();
-            }
-            else
-            {
-                comboBox_paymentTermID.Items.AddRange(CustomerHandler.Instance.FileColumnHeaders.Cast<object>()
-                    .ToArray());
-            }
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_paymentTermID);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_paymentTerm,
+                _paymentTerm, checkBox_defaultPaymentTerm, PaymentTermList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultVATPercentage_CheckedChanged(object sender, EventArgs e)
         {
-            comboBox_VATPercentage.ResetText();
-            comboBox_VATPercentage.Items.Clear();
-
-            for (int i = 0; i <= 100; i++)
-            {
-                VATPercentageList.Add(i.ToString());
-            }
-
-            comboBox_VATPercentage.Items.AddRange(checkBox_defaultVATPercentage.Checked
-                ? VATPercentageList.Cast<object>().ToArray()
-                : CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-
-            var _tableColumnIndex = _customerTable.Columns.IndexOf(_VATPercentage);
-
-            if (_tableColumnIndex != -1)
-            {
-                ClearColumn(_tableColumnIndex);
-
-                ClearRow(_tableColumnIndex);
-
-                CheckCellsForNullOrEmpty(_tableColumnIndex);
-            }
+            CustomerHandler.Instance.MapNonKeyValuePairToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_VATPercentage,
+                _VATPercentage, checkBox_defaultVATPercentage, VATPercentageList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         #endregion

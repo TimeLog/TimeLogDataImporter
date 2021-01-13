@@ -171,7 +171,7 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<PaymentMethodReadModel> GetAllPaymentTerm(string token)
+        public List<PaymentTermReadModel> GetAllPaymentTerm(string token)
         {
             var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllPaymentTermEndpoint;
 
@@ -182,13 +182,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
+                    List<PaymentTermReadModel> _apiResponse = new List<PaymentTermReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentMethodReadModel>(_property.Value.ToString()));
+                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentTermReadModel>(_property.Value.ToString()));
                         }
                     }
 

@@ -126,8 +126,8 @@ namespace TimeLog.DataImporter.UserControls
             this.label_contactID = new System.Windows.Forms.Label();
             this.label_internalReferenceID = new System.Windows.Forms.Label();
             this.label_customerReferenceID = new System.Windows.Forms.Label();
-            this.checkBox_defaultPaymentTermID = new System.Windows.Forms.CheckBox();
-            this.label_paymentTermID = new System.Windows.Forms.Label();
+            this.checkBox_defaultPaymentTerm = new System.Windows.Forms.CheckBox();
+            this.label_paymentTerm = new System.Windows.Forms.Label();
             this.label_discountPercentage = new System.Windows.Forms.Label();
             this.label_calculateVAT = new System.Windows.Forms.Label();
             this.comboBox_VATPercentage = new System.Windows.Forms.ComboBox();
@@ -136,7 +136,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoiceAddressToUse = new System.Windows.Forms.Label();
             this.comboBox_discountPercentage = new System.Windows.Forms.ComboBox();
             this.comboBox_contactID = new System.Windows.Forms.ComboBox();
-            this.comboBox_paymentTermID = new System.Windows.Forms.ComboBox();
+            this.comboBox_paymentTerm = new System.Windows.Forms.ComboBox();
             this.comboBox_invoiceAddressToUse = new System.Windows.Forms.ComboBox();
             this.comboBox_customerReferenceID = new System.Windows.Forms.ComboBox();
             this.comboBox_internalReferenceID = new System.Windows.Forms.ComboBox();
@@ -1182,8 +1182,8 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_contactID);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_internalReferenceID);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_customerReferenceID);
-            this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultPaymentTermID);
-            this.panel_defaultInvoiceSettings.Controls.Add(this.label_paymentTermID);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultPaymentTerm);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.label_paymentTerm);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_discountPercentage);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_calculateVAT);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_VATPercentage);
@@ -1192,7 +1192,7 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_invoiceAddressToUse);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_discountPercentage);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_contactID);
-            this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_paymentTermID);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_paymentTerm);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_invoiceAddressToUse);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_customerReferenceID);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_internalReferenceID);
@@ -1242,26 +1242,26 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerReferenceID.TabIndex = 1;
             this.label_customerReferenceID.Text = "Customer Reference ID";
             // 
-            // checkBox_defaultPaymentTermID
+            // checkBox_defaultPaymentTerm
             // 
-            this.checkBox_defaultPaymentTermID.AutoSize = true;
-            this.checkBox_defaultPaymentTermID.Location = new System.Drawing.Point(327, 137);
-            this.checkBox_defaultPaymentTermID.Name = "checkBox_defaultPaymentTermID";
-            this.checkBox_defaultPaymentTermID.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultPaymentTermID.TabIndex = 8;
-            this.checkBox_defaultPaymentTermID.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentTermID, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultPaymentTermID.UseVisualStyleBackColor = true;
-            this.checkBox_defaultPaymentTermID.CheckedChanged += new System.EventHandler(this.checkBox_defaultPaymentTermID_CheckedChanged);
+            this.checkBox_defaultPaymentTerm.AutoSize = true;
+            this.checkBox_defaultPaymentTerm.Location = new System.Drawing.Point(327, 137);
+            this.checkBox_defaultPaymentTerm.Name = "checkBox_defaultPaymentTerm";
+            this.checkBox_defaultPaymentTerm.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultPaymentTerm.TabIndex = 8;
+            this.checkBox_defaultPaymentTerm.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentTerm, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultPaymentTerm.UseVisualStyleBackColor = true;
+            this.checkBox_defaultPaymentTerm.CheckedChanged += new System.EventHandler(this.checkBox_defaultPaymentTerm_CheckedChanged);
             // 
-            // label_paymentTermID
+            // label_paymentTerm
             // 
-            this.label_paymentTermID.AutoSize = true;
-            this.label_paymentTermID.Location = new System.Drawing.Point(10, 138);
-            this.label_paymentTermID.Name = "label_paymentTermID";
-            this.label_paymentTermID.Size = new System.Drawing.Size(113, 17);
-            this.label_paymentTermID.TabIndex = 1;
-            this.label_paymentTermID.Text = "Payment Term ID";
+            this.label_paymentTerm.AutoSize = true;
+            this.label_paymentTerm.Location = new System.Drawing.Point(10, 138);
+            this.label_paymentTerm.Name = "label_paymentTerm";
+            this.label_paymentTerm.Size = new System.Drawing.Size(96, 17);
+            this.label_paymentTerm.TabIndex = 1;
+            this.label_paymentTerm.Text = "Payment Term";
             // 
             // label_discountPercentage
             // 
@@ -1335,14 +1335,14 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_contactID.TabIndex = 3;
             this.comboBox_contactID.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactID_SelectedIndexChanged);
             // 
-            // comboBox_paymentTermID
+            // comboBox_paymentTerm
             // 
-            this.comboBox_paymentTermID.FormattingEnabled = true;
-            this.comboBox_paymentTermID.Location = new System.Drawing.Point(169, 136);
-            this.comboBox_paymentTermID.Name = "comboBox_paymentTermID";
-            this.comboBox_paymentTermID.Size = new System.Drawing.Size(152, 25);
-            this.comboBox_paymentTermID.TabIndex = 3;
-            this.comboBox_paymentTermID.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTermID_SelectedIndexChanged);
+            this.comboBox_paymentTerm.FormattingEnabled = true;
+            this.comboBox_paymentTerm.Location = new System.Drawing.Point(169, 136);
+            this.comboBox_paymentTerm.Name = "comboBox_paymentTerm";
+            this.comboBox_paymentTerm.Size = new System.Drawing.Size(152, 25);
+            this.comboBox_paymentTerm.TabIndex = 3;
+            this.comboBox_paymentTerm.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTerm_SelectedIndexChanged);
             // 
             // comboBox_invoiceAddressToUse
             // 
@@ -1833,7 +1833,7 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.Label label_vatPercentage;
         private System.Windows.Forms.Label label_calculateVAT;
         private System.Windows.Forms.Label label_discountPercentage;
-        private System.Windows.Forms.Label label_paymentTermID;
+        private System.Windows.Forms.Label label_paymentTerm;
         private System.Windows.Forms.Label label_customerReferenceID;
         private System.Windows.Forms.Label label_internalReferenceID;
         private System.Windows.Forms.Label label_contactID;
@@ -1886,7 +1886,6 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.ComboBox comboBox_VATPercentage;
         private System.Windows.Forms.ComboBox comboBox_calculateVAT;
         private System.Windows.Forms.ComboBox comboBox_discountPercentage;
-        private System.Windows.Forms.ComboBox comboBox_paymentTermID;
         private System.Windows.Forms.ComboBox comboBox_customerReferenceID;
         private System.Windows.Forms.ComboBox comboBox_internalReferenceID;
         private System.Windows.Forms.ComboBox comboBox_invoiceAddressToUse;
@@ -1905,7 +1904,7 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.CheckBox checkBox_defaultCountryISO;
         private System.Windows.Forms.CheckBox checkBox_defaultCustomerStatus;
         private System.Windows.Forms.CheckBox checkBox_defaultVATPercentage;
-        private System.Windows.Forms.CheckBox checkBox_defaultPaymentTermID;
+        private System.Windows.Forms.CheckBox checkBox_defaultPaymentTerm;
         private System.Windows.Forms.CheckBox checkBox_defaultIndustryName;
         private System.Windows.Forms.CheckBox checkBox_defaultSecondaryKAM;
         private System.Windows.Forms.Label label_delimiter;
@@ -1942,5 +1941,6 @@ namespace TimeLog.DataImporter.UserControls
         private Label label_customerDetails;
         private CheckBox checkBox_defaultMileageIsBillable;
         private CheckBox checkBox_defaultExpenseIsBillable;
+        private ComboBox comboBox_paymentTerm;
     }
 }
