@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.WorkerFetcher = new System.ComponentModel.BackgroundWorker();
-            this.panel_employeeDataTable = new System.Windows.Forms.Panel();
+            this.panel_taskDataTable = new System.Windows.Forms.Panel();
             this.dataGridView_task = new System.Windows.Forms.DataGridView();
             this.panel_projectMessage = new System.Windows.Forms.Panel();
             this.textBox_taskImportMessages = new System.Windows.Forms.TextBox();
@@ -101,7 +101,7 @@
             this.button_taskSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel_employeeDataTable.SuspendLayout();
+            this.panel_taskDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_task)).BeginInit();
             this.panel_projectMessage.SuspendLayout();
             this.panel_taskButtons.SuspendLayout();
@@ -118,15 +118,15 @@
             this.WorkerFetcher.WorkerSupportsCancellation = true;
             this.WorkerFetcher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.WorkerFetcherDoWork);
             // 
-            // panel_employeeDataTable
+            // panel_taskDataTable
             // 
-            this.panel_employeeDataTable.Controls.Add(this.dataGridView_task);
-            this.panel_employeeDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_employeeDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_employeeDataTable.Location = new System.Drawing.Point(0, 581);
-            this.panel_employeeDataTable.Name = "panel_employeeDataTable";
-            this.panel_employeeDataTable.Size = new System.Drawing.Size(1006, 361);
-            this.panel_employeeDataTable.TabIndex = 6;
+            this.panel_taskDataTable.Controls.Add(this.dataGridView_task);
+            this.panel_taskDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_taskDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_taskDataTable.Location = new System.Drawing.Point(0, 581);
+            this.panel_taskDataTable.Name = "panel_taskDataTable";
+            this.panel_taskDataTable.Size = new System.Drawing.Size(1006, 361);
+            this.panel_taskDataTable.TabIndex = 6;
             // 
             // dataGridView_task
             // 
@@ -270,7 +270,7 @@
             // 
             this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryButton);
             this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryFields);
-            this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(532, 60);
+            this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(526, 60);
             this.flowLayoutPanel_nonMandatoryFields.Name = "flowLayoutPanel_nonMandatoryFields";
             this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(447, 524);
             this.flowLayoutPanel_nonMandatoryFields.TabIndex = 7;
@@ -728,7 +728,7 @@
             this.groupBox_taskMandatoryFields.Controls.Add(this.comboBox_startDate);
             this.groupBox_taskMandatoryFields.Controls.Add(this.label_taskName);
             this.groupBox_taskMandatoryFields.Controls.Add(this.comboBox_taskName);
-            this.groupBox_taskMandatoryFields.Location = new System.Drawing.Point(160, 62);
+            this.groupBox_taskMandatoryFields.Location = new System.Drawing.Point(149, 62);
             this.groupBox_taskMandatoryFields.Name = "groupBox_taskMandatoryFields";
             this.groupBox_taskMandatoryFields.Size = new System.Drawing.Size(366, 221);
             this.groupBox_taskMandatoryFields.TabIndex = 5;
@@ -899,11 +899,11 @@
             this.Controls.Add(this.panel_taskFieldMapping);
             this.Controls.Add(this.panel_taskButtons);
             this.Controls.Add(this.panel_projectMessage);
-            this.Controls.Add(this.panel_employeeDataTable);
+            this.Controls.Add(this.panel_taskDataTable);
             this.Name = "UserControl_TaskImport";
             this.Size = new System.Drawing.Size(1006, 942);
             this.Load += new System.EventHandler(this.UserControl1_Load);
-            this.panel_employeeDataTable.ResumeLayout(false);
+            this.panel_taskDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_task)).EndInit();
             this.panel_projectMessage.ResumeLayout(false);
             this.panel_projectMessage.PerformLayout();
@@ -939,7 +939,7 @@
 
 
         private System.ComponentModel.BackgroundWorker WorkerFetcher;
-        private System.Windows.Forms.Panel panel_employeeDataTable;
+        private System.Windows.Forms.Panel panel_taskDataTable;
         private System.Windows.Forms.DataGridView dataGridView_task;
         private System.Windows.Forms.Panel panel_projectMessage;
         private System.Windows.Forms.Panel panel_taskButtons;

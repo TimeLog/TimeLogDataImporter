@@ -163,7 +163,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllSecondaryKAMFromApi();
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
-            InitializeVATPercentageList();
+            GetAllVATPercentages();
         }
 
         #endregion
@@ -368,7 +368,7 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Helper methods
 
-        private void InitializeVATPercentageList()
+        private void GetAllVATPercentages()
         {
             for (int i = 0; i <= 100; i++)
             {

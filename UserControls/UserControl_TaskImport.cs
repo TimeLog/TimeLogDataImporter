@@ -306,6 +306,15 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Helper methods
 
+        private void GetAllPaymentRecognitionModel()
+        {
+            //get all from enum  //pls further test
+            foreach (var _model in Enum.GetNames(typeof(PaymentRecognitionModelTypes)))
+            {
+                PaymentRecognitionModelList.Add(new KeyValuePair<int, string>((int)(PaymentRecognitionModelTypes)Enum.Parse(typeof(PaymentRecognitionModelTypes), _model), _model));
+            }
+        }
+
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_taskName.Items.AddRange(fileColumnHeaderArray);
@@ -524,15 +533,6 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     ParentTaskNoList.Add(new KeyValuePair<int, string>(_task.TaskID, _task.No));
                 }
-            }
-        }
-
-        private void GetAllPaymentRecognitionModel()
-        {
-            //get all from enum  //pls further test
-            foreach (var _model in Enum.GetNames(typeof(PaymentRecognitionModelTypes)))
-            {
-                PaymentRecognitionModelList.Add(new KeyValuePair<int, string>((int)(PaymentRecognitionModelTypes)Enum.Parse(typeof(PaymentRecognitionModelTypes), _model), _model));
             }
         }
 
