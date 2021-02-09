@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using TimeLog.DataImporter.TimeLogApi;
@@ -79,7 +80,7 @@ namespace TimeLog.DataImporter.Handlers
             {
                 if (csvFilePath.EndsWith(".csv"))
                 {
-                    using Microsoft.VisualBasic.FileIO.TextFieldParser _csvReader = new Microsoft.VisualBasic.FileIO.TextFieldParser(csvFilePath);
+                    using Microsoft.VisualBasic.FileIO.TextFieldParser _csvReader = new Microsoft.VisualBasic.FileIO.TextFieldParser(csvFilePath,Encoding.GetEncoding("iso-8859-1"));
                     _csvReader.SetDelimiters(new string[]
                     {
                             selectedDelimiter

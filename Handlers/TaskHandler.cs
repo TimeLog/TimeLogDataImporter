@@ -107,9 +107,9 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<HourlyRateReadModel> GetAllHourlyRate(string token)
+        public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllHourlyRateEndpoint;
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllContractHourlyRatesEndpoint;
 
             try
             {
@@ -118,13 +118,13 @@ namespace TimeLog.DataImporter.Handlers
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
-                    List<HourlyRateReadModel> _apiResponse = new List<HourlyRateReadModel>();
+                    List<ContractHourlyRateReadModel> _apiResponse = new List<ContractHourlyRateReadModel>();
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<HourlyRateReadModel>(_property.Value.ToString()));
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ContractHourlyRateReadModel>(_property.Value.ToString()));
                         }
                     }
 
@@ -133,7 +133,7 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain default hourly rate ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain contract hourly rate ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;

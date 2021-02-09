@@ -42,7 +42,7 @@ namespace TimeLog.DataImporter.UserControls
         private const string ContractName = "Contract Name";  //lookup projectsubcontractid
         private const string IsReadyForInvoicing = "Is Ready For Invoicing";
         private const string TaskType = "Task Type";//lookup tasktypeid
-        private const string HourlyRate = "Hourly Rate";  //use name to lookup hourlyrateid
+        private const string ContractHourlyRate = "Hourly Rate";  //use name to lookup hourlyrateid
         private const string ProjectNo = "Project No"; //lookup projectid
         private const string ParentTaskNo = "Parent Task No";  //lookup parenttaskid  //if fillup,call create sub task api///////
         private const string IsBillable = "Is Billable";
@@ -60,7 +60,7 @@ namespace TimeLog.DataImporter.UserControls
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> TaskTypeList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> HourlyRateList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ContractHourlyRateList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentRecognitionModelList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentProductNoList = new List<KeyValuePair<int, string>>(); //get all product number/project product number?
         private static readonly List<KeyValuePair<int, string>> ContractNameList = new List<KeyValuePair<int, string>>();
@@ -120,7 +120,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void InitializeAllDefaultValues()
         {
-            GetAllHourlyRateFromApi();
+            GetAllContractHourlyRatesFromApi();
             GetAllPaymentProductNoFromApi();
             GetAllTaskTypeFromApi();
             GetAllProjectFromApi();
@@ -250,7 +250,7 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectSubContractID = (int) MapFieldValueToID(ContractName, _row, false),
                                 IsReadyForInvoicing = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsReadyForInvoicing, _row),
                                 TaskTypeID = MapFieldValueToID(TaskType, _row, true),
-                                HourlyRateID = (int) MapFieldValueToID(HourlyRate, _row, false),
+                                HourlyRateID = (int) MapFieldValueToID(ContractHourlyRate, _row, false),
                                 ProjectID = (int) MapFieldValueToID(ProjectNo, _row, false),
                                 ParentTaskID = MapFieldValueToID(ParentTaskNo, _row, true),
                                 IsBillable = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsBillable, _row),
@@ -360,9 +360,9 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = TaskHandler.Instance.GetIDFromFieldValue(TaskTypeList, _fieldValue);
                 }
-                else if (columnName == HourlyRate)
+                else if (columnName == ContractHourlyRate)
                 {
-                    _result = TaskHandler.Instance.GetIDFromFieldValue(HourlyRateList, _fieldValue);
+                    _result = TaskHandler.Instance.GetIDFromFieldValue(ContractHourlyRateList, _fieldValue);
                 }
                 else if (columnName == ContractName)
                 {
@@ -471,15 +471,15 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllHourlyRateFromApi()
+        private void GetAllContractHourlyRatesFromApi()
         {
-            var _apiResponse = TaskHandler.Instance.GetAllHourlyRate(AuthenticationHandler.Instance.Token);
+            var _apiResponse = TaskHandler.Instance.GetAllContractHourlyRates(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _hourlyRate in _apiResponse)
+                foreach (var _contractHourlyRate in _apiResponse)
                 {
-                    HourlyRateList.Add(new KeyValuePair<int, string>(_hourlyRate.HourlyRateID, _hourlyRate.HourlyRateName));
+                    ContractHourlyRateList.Add(new KeyValuePair<int, string>(_contractHourlyRate.ContractHourlyRateID, _contractHourlyRate.Name));
                 }
             }
         }
@@ -609,7 +609,7 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_hourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
             TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_hourlyRate, HourlyRate, checkBox_defaultHourlyRate);
+                comboBox_hourlyRate, ContractHourlyRate, checkBox_defaultHourlyRate);
         }
 
         private void comboBox_taskNo_SelectedIndexChanged(object sender, EventArgs e)
@@ -703,7 +703,7 @@ namespace TimeLog.DataImporter.UserControls
         private void checkBox_defaultHourlyRate_CheckedChanged(object sender, EventArgs e)
         {
             TaskHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_task, _taskTable, comboBox_hourlyRate,
-                HourlyRate, checkBox_defaultHourlyRate, HourlyRateList, TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                ContractHourlyRate, checkBox_defaultHourlyRate, ContractHourlyRateList, TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         private void checkBox_defaultPaymentProductNo_CheckedChanged(object sender, EventArgs e)

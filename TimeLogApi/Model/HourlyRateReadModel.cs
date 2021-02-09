@@ -77,12 +77,12 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         public int ServiceID { get; set; }
 
         /// <summary>
-        /// Gets or sets the currency ID
+        /// Gets or sets the HourlyRate currency ID
         /// </summary>
         /// <value>
-        /// The currency ID
+        /// The HourlyRate currency ID
         /// </value>
-        public int CurrencyID { get; set; }
+        public int HourlyRateCurrencyID { get; set; }
 
         /// <summary>
         /// Gets or sets whether the hourly rate is default
@@ -91,5 +91,21 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <c>true</c> if the hourly rate is default; otherwise, <c>false</c>.
         /// </value>
         public bool IsDefault { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CurrencyISO
+        /// </summary>
+        /// <value>
+        /// The currency ISO
+        /// </value>
+        public string CurrencyISO { get; set; }
+
+        /// <summary>
+        /// Gets or sets the legal entity ID
+        /// </summary>
+        /// <value>
+        /// The legal entity ID
+        /// </value>
+        public int LegalEntityID { get; set; }
     }
 }

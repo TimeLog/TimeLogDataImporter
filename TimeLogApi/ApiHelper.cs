@@ -11,8 +11,9 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        public string LocalhostUrl = "http://localhost/tlptest";
-        
+        //public string LocalhostUrl = "https://app4.timelog.com/coldemo";
+        public string LocalhostUrl = "http://localhost/tlp";
+
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
         public string ProjectValidateEndpoint = "/api/v1/project/validate-create-from-template";
@@ -29,13 +30,14 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
         public string GetAllCustomerEndpoint = "/api/v1/customer?$page=1&$pagesize=300";
         public string GetAllDepartmentEndpoint = "/api/v1/Department?$page=1&$pagesize=300";
-        public string GetAllHourlyRateEndpoint = "/api/v1/hourly-rate?$page=1&$pagesize=300";
-        //public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";  //user-type endpoint
-        //public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";
-        //public string GetAllPublicHolidayCalendarEndpoint = "/api/v1/public-holiday-calendar?$page=1&$pagesize=300";
-        //public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page=1&$pagesize=300";
-        //public string GetAllNormalWorkingTimeEndpoint = "/api/v1/normal-working-time?$page=1&$pagesize=300";
-        //public string GetAllSalaryGroupEndpoint = "/api/v1/salary-group?$page=1&$pagesize=300";
+        public string GetDefaultHourlyRatesEndpoint = "/api/v1/hourly-rate/get-default-hourly-rates?$page=1&$pagesize=300";
+        public string GetAllContractHourlyRatesEndpoint = "/api/v1/contract-hourly-rate?$page=1&$pagesize=300";
+        public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";  //user-type endpoint
+        public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";
+        public string GetAllHolidayCalendarEndpoint = "/api/v1/holiday-calendar?$page=1&$pagesize=300";
+        public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page=1&$pagesize=300";
+        public string GetAllNormalWorkingTimeEndpoint = "/api/v1/normal-working-time?$page=1&$pagesize=300";
+        public string GetAllSalaryGroupEndpoint = "/api/v1/salary-group?$page=1&$pagesize=300";
         public string GetAllIndustryEndpoint = "/api/v1/industry/get-all?$page=1&$pagesize=50";
         public string GetAllCurrencyEndpoint = "/api/v1/currency/active?$page=1&$pagesize=300";
         public string GetAllCustomerStatusEndpoint = "/api/v1/customerstatus?$page=1&$pagesize=30";

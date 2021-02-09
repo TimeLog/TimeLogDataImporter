@@ -28,11 +28,13 @@ namespace TimeLog.DataImporter.UserControls
             {3, "Initials"},
             {4, "Email"},
             {5, "Manager Initials"},
-            {6, "Default Hourly Rate"},
-            {7, "Cost Price"},
-            {8, "Public Holiday Calendar"},
-            {9, "Normal Working Time"},
-            {10, "Salary Group"}
+            {6, "Legal Entity"},
+            {7, "Department"},
+            {8, "Default Hourly Rate"},
+            {9, "Cost Price"},
+            {10, "Public Holiday Calendar"},
+            {11, "Normal Working Time"},
+            {12, "Salary Group"}
         };
 
         //all column header variables
@@ -138,7 +140,7 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Functionalities implementations
 
-        private void button_select_project_file_Click(object sender, EventArgs e)
+        private void button_select_employee_file_Click(object sender, EventArgs e)
         {
             EmployeeHandler.Instance.FileColumnHeaders = new List<string>();
             _fileContent = new DataTable();
@@ -164,6 +166,12 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+
+                //this.checkBox_defaultLegalEntity.Checked = true;
+                //EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_legalEntity,
+                //    LegalEntity, checkBox_defaultLegalEntity, LegalEntityList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                //this.comboBox_legalEntity.SelectedIndex = 0;
             }
             else
             {
@@ -261,13 +269,13 @@ namespace TimeLog.DataImporter.UserControls
                                 LegalEntityID = (int) MapFieldValueToID(LegalEntity, _row, false),
                                 DepartmentID = (int) MapFieldValueToID(Department, _row, false),
                                 ApprovalManagerID = (int) MapFieldValueToID(ManagerInitials, _row, false),
-                                EmployeeTypeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, EmployeeType, _row),
-                                StandardHourlyRateID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, DefaultHourlyRate, _row),
-                                CostPriceID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, CostPrice, _row),
-                                PublicHolidayCalendarID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, PublicHolidayCalendar, _row),
-                                AllowanceLegislationID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, AllowanceLegislation, _row),
-                                NormalWorkingTimeID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, NormalWorkingTime, _row),
-                                SalaryGroupID = EmployeeHandler.Instance.CheckAndGetInteger(dataGridView_employee, SalaryGroup, _row),
+                                EmployeeTypeID = (int) MapFieldValueToID(EmployeeType, _row, false),
+                                StandardHourlyRateID = (int) MapFieldValueToID(DefaultHourlyRate, _row, false),
+                                CostPriceID = (int) MapFieldValueToID(CostPrice, _row, false),
+                                PublicHolidayCalendarID = (int) MapFieldValueToID(PublicHolidayCalendar, _row, false),
+                                AllowanceLegislationID = (int) MapFieldValueToID(AllowanceLegislation, _row, false),
+                                NormalWorkingTimeID = (int) MapFieldValueToID(NormalWorkingTime, _row, false),
+                                SalaryGroupID =(int) MapFieldValueToID(SalaryGroup, _row, false),
                                 UserRoleIDs = EmployeeHandler.Instance.CheckAndGetIntegerArray(dataGridView_employee, UserRoleNames, _row, _fileDelimiter, _userRoleDelimiter)
                             };
 
@@ -493,93 +501,93 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllEmployeeTypeFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllEmployeeTypes(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _employeeType in _apiResponse)
+                {
+                    EmployeeTypeList.Add(new KeyValuePair<int, string>(_employeeType.EmployeeTypeID, _employeeType.Name));
+                }
+            }
         }
 
         private void GetAllDefaultHourlyRateFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllDefaultHourlyRate(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _hourlyRate in _apiResponse)
+                {
+                    DefaultHourlyRateList.Add(new KeyValuePair<int, string>(_hourlyRate.HourlyRateID, _hourlyRate.HourlyRateName));
+                }
+            }
         }
 
         private void GetAllCostPriceFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllCostPrices(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _costPrice in _apiResponse)
+                {
+                    CostPriceList.Add(new KeyValuePair<int, string>(_costPrice.CostPriceID, _costPrice.Name));
+                }
+            }
         }
 
         private void GetAllPublicHolidayCalendarFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllHolidayCalendars(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _holidayCalendar in _apiResponse)
+                {
+                    PublicHolidayCalendarList.Add(new KeyValuePair<int, string>(_holidayCalendar.HolidayCalendarID, _holidayCalendar.Name));
+                }
+            }
         }
 
         private void GetAllAllowanceLegislationFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllAllowanceLegislations(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _allowanceLegislation in _apiResponse)
+                {
+                    AllowanceLegislationList.Add(new KeyValuePair<int, string>(_allowanceLegislation.AllowanceLegislationID, _allowanceLegislation.Description));
+                }
+            }
         }
 
         private void GetAllNormalWorkingTimeFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllNormalWorkingTimes(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _normalWorkingTime in _apiResponse)
+                {
+                    NormalWorkingTimeList.Add(new KeyValuePair<int, string>(_normalWorkingTime.NormalWorkingTimeID, _normalWorkingTime.Name));
+                }
+            }
         }
 
         private void GetAllSalaryGroupFromApi()
         {
-            //var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+            var _apiResponse = EmployeeHandler.Instance.GetAllSalaryGroups(AuthenticationHandler.Instance.Token);
 
-            //if (_apiResponse != null)
-            //{
-            //    foreach (var _department in _apiResponse)
-            //    {
-            //        DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-            //    }
-            //}
+            if (_apiResponse != null)
+            {
+                foreach (var _salaryGroup in _apiResponse)
+                {
+                    SalaryGroupList.Add(new KeyValuePair<int, string>(_salaryGroup.SalaryGroupID, _salaryGroup.Name));
+                }
+            }
         }
 
         private void GetAllManagerFromApi()
@@ -659,6 +667,28 @@ namespace TimeLog.DataImporter.UserControls
                 comboBox_salaryGroup, SalaryGroup, checkBox_defaultSalaryGroup);
         }
 
+        private void comboBox_legalEntity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+                comboBox_legalEntity, LegalEntity, checkBox_defaultLegalEntity);
+        }
+
+        private void comboBox_department_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+                comboBox_department, Department, checkBox_defaultDepartment);
+        }
+        private void comboBox_defaultHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+                comboBox_defaultHourlyRate, DefaultHourlyRate, checkBox_defaultHourlyRate);
+        }
+
+        private void comboBox_employeeType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
+                comboBox_employeeType, EmployeeType, checkBox_defaultEmployeeType);
+        }
         private void comboBox_jobTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
@@ -675,30 +705,6 @@ namespace TimeLog.DataImporter.UserControls
         {
             EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
                 comboBox_employmentDate, EmploymentDate);
-        }
-
-        private void comboBox_legalEntity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_legalEntity, LegalEntity, checkBox_defaultLegalEntity);
-        }
-
-        private void comboBox_defaultHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_defaultHourlyRate, DefaultHourlyRate, checkBox_defaultHourlyRate);
-        }
-
-        private void comboBox_department_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_department, Department, checkBox_defaultDepartment);
-        }
-
-        private void comboBox_employeeType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_employeeType, EmployeeType, checkBox_defaultEmployeeType);
         }
 
         private void comboBox_allowanceLegislation_SelectedIndexChanged(object sender, EventArgs e)
@@ -737,6 +743,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void checkBox_defaultHourlyRate_CheckedChanged(object sender, EventArgs e)
         {
+            var _selectedLegalEntityID = this.comboBox_legalEntity.SelectedItem;
             EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_defaultHourlyRate,
                 DefaultHourlyRate, checkBox_defaultHourlyRate, DefaultHourlyRateList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }

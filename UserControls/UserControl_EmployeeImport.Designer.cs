@@ -54,19 +54,13 @@
             this.label_userRoleNames = new System.Windows.Forms.Label();
             this.label_allowanceLegislation = new System.Windows.Forms.Label();
             this.label_employeeType = new System.Windows.Forms.Label();
-            this.checkBox_defaultDepartment = new System.Windows.Forms.CheckBox();
             this.label_jobTitle = new System.Windows.Forms.Label();
             this.comboBox_jobTitle = new System.Windows.Forms.ComboBox();
-            this.checkBox_defaultLegalEntity = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultEmployeeType = new System.Windows.Forms.CheckBox();
-            this.label_department = new System.Windows.Forms.Label();
             this.comboBox_employeeNo = new System.Windows.Forms.ComboBox();
-            this.comboBox_department = new System.Windows.Forms.ComboBox();
             this.label_employeeNo = new System.Windows.Forms.Label();
             this.comboBox_employmentDate = new System.Windows.Forms.ComboBox();
             this.label_employmentDate = new System.Windows.Forms.Label();
-            this.label_legalEntity = new System.Windows.Forms.Label();
-            this.comboBox_legalEntity = new System.Windows.Forms.ComboBox();
             this.label_delimiter = new System.Windows.Forms.Label();
             this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
             this.groupBox_employeeMandatoryFields = new System.Windows.Forms.GroupBox();
@@ -97,6 +91,12 @@
             this.comboBox_firstName = new System.Windows.Forms.ComboBox();
             this.label_userName = new System.Windows.Forms.Label();
             this.comboBox_userName = new System.Windows.Forms.ComboBox();
+            this.checkBox_defaultLegalEntity = new System.Windows.Forms.CheckBox();
+            this.label_legalEntity = new System.Windows.Forms.Label();
+            this.comboBox_legalEntity = new System.Windows.Forms.ComboBox();
+            this.label_department = new System.Windows.Forms.Label();
+            this.checkBox_defaultDepartment = new System.Windows.Forms.CheckBox();
+            this.comboBox_department = new System.Windows.Forms.ComboBox();
             this.label_employeeSetup = new System.Windows.Forms.Label();
             this.button_employeeSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
@@ -314,37 +314,25 @@
             this.panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_userRoleDelimiter);
             this.panel_NonMandatoryFields.Controls.Add(this.label_userRoleDelimiter);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultAllowanceLegislation);
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_userRoles);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_allowanceLegislation);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employeeType);
             this.panel_NonMandatoryFields.Controls.Add(this.label_userRoleNames);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_allowanceLegislation);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_employeeType);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultDepartment);
             this.panel_NonMandatoryFields.Controls.Add(this.label_jobTitle);
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_jobTitle);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultLegalEntity);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultEmployeeType);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_department);
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employeeNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_department);
             this.panel_NonMandatoryFields.Controls.Add(this.label_employeeNo);
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_employmentDate);
             this.panel_NonMandatoryFields.Controls.Add(this.label_employmentDate);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_legalEntity);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_legalEntity);
             this.panel_NonMandatoryFields.Location = new System.Drawing.Point(3, 41);
             this.panel_NonMandatoryFields.MaximumSize = new System.Drawing.Size(382, 289);
             this.panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(382, 0);
             this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
-            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(382, 289);
+            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(382, 180);
             this.panel_NonMandatoryFields.TabIndex = 1;
             // 
             // comboBox_userRoleDelimiter
             // 
             this.comboBox_userRoleDelimiter.FormattingEnabled = true;
-            this.comboBox_userRoleDelimiter.Location = new System.Drawing.Point(153, 224);
+            this.comboBox_userRoleDelimiter.Location = new System.Drawing.Point(153, 101);
             this.comboBox_userRoleDelimiter.Name = "comboBox_userRoleDelimiter";
             this.comboBox_userRoleDelimiter.Size = new System.Drawing.Size(150, 25);
             this.comboBox_userRoleDelimiter.TabIndex = 12;
@@ -352,7 +340,7 @@
             // label_userRoleDelimiter
             // 
             this.label_userRoleDelimiter.AutoSize = true;
-            this.label_userRoleDelimiter.Location = new System.Drawing.Point(10, 227);
+            this.label_userRoleDelimiter.Location = new System.Drawing.Point(10, 104);
             this.label_userRoleDelimiter.Name = "label_userRoleDelimiter";
             this.label_userRoleDelimiter.Size = new System.Drawing.Size(123, 17);
             this.label_userRoleDelimiter.TabIndex = 1;
@@ -361,7 +349,7 @@
             // checkBox_defaultAllowanceLegislation
             // 
             this.checkBox_defaultAllowanceLegislation.AutoSize = true;
-            this.checkBox_defaultAllowanceLegislation.Location = new System.Drawing.Point(309, 195);
+            this.checkBox_defaultAllowanceLegislation.Location = new System.Drawing.Point(323, 463);
             this.checkBox_defaultAllowanceLegislation.Name = "checkBox_defaultAllowanceLegislation";
             this.checkBox_defaultAllowanceLegislation.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultAllowanceLegislation.TabIndex = 11;
@@ -373,7 +361,7 @@
             // comboBox_userRoles
             // 
             this.comboBox_userRoles.FormattingEnabled = true;
-            this.comboBox_userRoles.Location = new System.Drawing.Point(153, 255);
+            this.comboBox_userRoles.Location = new System.Drawing.Point(153, 132);
             this.comboBox_userRoles.Name = "comboBox_userRoles";
             this.comboBox_userRoles.Size = new System.Drawing.Size(150, 25);
             this.comboBox_userRoles.TabIndex = 10;
@@ -382,25 +370,25 @@
             // comboBox_allowanceLegislation
             // 
             this.comboBox_allowanceLegislation.FormattingEnabled = true;
-            this.comboBox_allowanceLegislation.Location = new System.Drawing.Point(153, 193);
+            this.comboBox_allowanceLegislation.Location = new System.Drawing.Point(164, 461);
             this.comboBox_allowanceLegislation.Name = "comboBox_allowanceLegislation";
-            this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(153, 25);
             this.comboBox_allowanceLegislation.TabIndex = 10;
             this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
             // 
             // comboBox_employeeType
             // 
             this.comboBox_employeeType.FormattingEnabled = true;
-            this.comboBox_employeeType.Location = new System.Drawing.Point(153, 162);
+            this.comboBox_employeeType.Location = new System.Drawing.Point(164, 430);
             this.comboBox_employeeType.Name = "comboBox_employeeType";
-            this.comboBox_employeeType.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_employeeType.Size = new System.Drawing.Size(153, 25);
             this.comboBox_employeeType.TabIndex = 10;
             this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
             // 
             // label_userRoleNames
             // 
             this.label_userRoleNames.AutoSize = true;
-            this.label_userRoleNames.Location = new System.Drawing.Point(10, 258);
+            this.label_userRoleNames.Location = new System.Drawing.Point(10, 135);
             this.label_userRoleNames.Name = "label_userRoleNames";
             this.label_userRoleNames.Size = new System.Drawing.Size(111, 17);
             this.label_userRoleNames.TabIndex = 1;
@@ -409,7 +397,7 @@
             // label_allowanceLegislation
             // 
             this.label_allowanceLegislation.AutoSize = true;
-            this.label_allowanceLegislation.Location = new System.Drawing.Point(10, 196);
+            this.label_allowanceLegislation.Location = new System.Drawing.Point(6, 463);
             this.label_allowanceLegislation.Name = "label_allowanceLegislation";
             this.label_allowanceLegislation.Size = new System.Drawing.Size(137, 17);
             this.label_allowanceLegislation.TabIndex = 1;
@@ -418,23 +406,11 @@
             // label_employeeType
             // 
             this.label_employeeType.AutoSize = true;
-            this.label_employeeType.Location = new System.Drawing.Point(10, 165);
+            this.label_employeeType.Location = new System.Drawing.Point(6, 432);
             this.label_employeeType.Name = "label_employeeType";
             this.label_employeeType.Size = new System.Drawing.Size(99, 17);
             this.label_employeeType.TabIndex = 1;
             this.label_employeeType.Text = "Employee Type";
-            // 
-            // checkBox_defaultDepartment
-            // 
-            this.checkBox_defaultDepartment.AutoSize = true;
-            this.checkBox_defaultDepartment.Location = new System.Drawing.Point(309, 133);
-            this.checkBox_defaultDepartment.Name = "checkBox_defaultDepartment";
-            this.checkBox_defaultDepartment.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultDepartment.TabIndex = 5;
-            this.checkBox_defaultDepartment.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultDepartment, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultDepartment.UseVisualStyleBackColor = true;
-            this.checkBox_defaultDepartment.CheckedChanged += new System.EventHandler(this.checkBox_defaultDepartment_CheckedChanged);
             // 
             // label_jobTitle
             // 
@@ -454,22 +430,10 @@
             this.comboBox_jobTitle.TabIndex = 3;
             this.comboBox_jobTitle.SelectedIndexChanged += new System.EventHandler(this.comboBox_jobTitle_SelectedIndexChanged);
             // 
-            // checkBox_defaultLegalEntity
-            // 
-            this.checkBox_defaultLegalEntity.AutoSize = true;
-            this.checkBox_defaultLegalEntity.Location = new System.Drawing.Point(309, 102);
-            this.checkBox_defaultLegalEntity.Name = "checkBox_defaultLegalEntity";
-            this.checkBox_defaultLegalEntity.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultLegalEntity.TabIndex = 5;
-            this.checkBox_defaultLegalEntity.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultLegalEntity, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultLegalEntity.UseVisualStyleBackColor = true;
-            this.checkBox_defaultLegalEntity.CheckedChanged += new System.EventHandler(this.checkBox_defaultLegalEntity_CheckedChanged);
-            // 
             // checkBox_defaultEmployeeType
             // 
             this.checkBox_defaultEmployeeType.AutoSize = true;
-            this.checkBox_defaultEmployeeType.Location = new System.Drawing.Point(309, 164);
+            this.checkBox_defaultEmployeeType.Location = new System.Drawing.Point(323, 432);
             this.checkBox_defaultEmployeeType.Name = "checkBox_defaultEmployeeType";
             this.checkBox_defaultEmployeeType.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultEmployeeType.TabIndex = 4;
@@ -477,15 +441,6 @@
             this.defaultToolTip.SetToolTip(this.checkBox_defaultEmployeeType, "Set default values for all rows of a particular column field");
             this.checkBox_defaultEmployeeType.UseVisualStyleBackColor = true;
             this.checkBox_defaultEmployeeType.CheckedChanged += new System.EventHandler(this.checkBox_defaultEmployeeType_CheckedChanged);
-            // 
-            // label_department
-            // 
-            this.label_department.AutoSize = true;
-            this.label_department.Location = new System.Drawing.Point(10, 134);
-            this.label_department.Name = "label_department";
-            this.label_department.Size = new System.Drawing.Size(81, 17);
-            this.label_department.TabIndex = 1;
-            this.label_department.Text = "Department";
             // 
             // comboBox_employeeNo
             // 
@@ -495,15 +450,6 @@
             this.comboBox_employeeNo.Size = new System.Drawing.Size(150, 25);
             this.comboBox_employeeNo.TabIndex = 3;
             this.comboBox_employeeNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeNo_SelectedIndexChanged);
-            // 
-            // comboBox_department
-            // 
-            this.comboBox_department.FormattingEnabled = true;
-            this.comboBox_department.Location = new System.Drawing.Point(153, 131);
-            this.comboBox_department.Name = "comboBox_department";
-            this.comboBox_department.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_department.TabIndex = 3;
-            this.comboBox_department.SelectedIndexChanged += new System.EventHandler(this.comboBox_department_SelectedIndexChanged);
             // 
             // label_employeeNo
             // 
@@ -532,24 +478,6 @@
             this.label_employmentDate.TabIndex = 1;
             this.label_employmentDate.Text = "Employment Date";
             // 
-            // label_legalEntity
-            // 
-            this.label_legalEntity.AutoSize = true;
-            this.label_legalEntity.Location = new System.Drawing.Point(10, 103);
-            this.label_legalEntity.Name = "label_legalEntity";
-            this.label_legalEntity.Size = new System.Drawing.Size(78, 17);
-            this.label_legalEntity.TabIndex = 1;
-            this.label_legalEntity.Text = "Legal Entity";
-            // 
-            // comboBox_legalEntity
-            // 
-            this.comboBox_legalEntity.FormattingEnabled = true;
-            this.comboBox_legalEntity.Location = new System.Drawing.Point(153, 100);
-            this.comboBox_legalEntity.Name = "comboBox_legalEntity";
-            this.comboBox_legalEntity.Size = new System.Drawing.Size(150, 25);
-            this.comboBox_legalEntity.TabIndex = 3;
-            this.comboBox_legalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_legalEntity_SelectedIndexChanged);
-            // 
             // label_delimiter
             // 
             this.label_delimiter.AutoSize = true;
@@ -571,14 +499,20 @@
             // 
             this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultSalaryGroup);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultNormalWorkingTime);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultAllowanceLegislation);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultPublicHolidayCalendar);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_salaryGroup);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_allowanceLegislation);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_normalWorkingTime);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_employeeType);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_publicHolidayCalendar);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_costPrice);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.label_allowanceLegislation);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.label_salaryGroup);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.label_employeeType);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.label_normalWorkingTime);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.label2);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultEmployeeType);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.label_costPrice);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultCostPrice);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultHourlyRate);
@@ -596,9 +530,15 @@
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_firstName);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.label_userName);
             this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_userName);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultLegalEntity);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.label_legalEntity);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_legalEntity);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.label_department);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.checkBox_defaultDepartment);
+            this.groupBox_employeeMandatoryFields.Controls.Add(this.comboBox_department);
             this.groupBox_employeeMandatoryFields.Location = new System.Drawing.Point(160, 62);
             this.groupBox_employeeMandatoryFields.Name = "groupBox_employeeMandatoryFields";
-            this.groupBox_employeeMandatoryFields.Size = new System.Drawing.Size(394, 370);
+            this.groupBox_employeeMandatoryFields.Size = new System.Drawing.Size(397, 610);
             this.groupBox_employeeMandatoryFields.TabIndex = 5;
             this.groupBox_employeeMandatoryFields.TabStop = false;
             this.groupBox_employeeMandatoryFields.Text = "Mandatory";
@@ -606,7 +546,7 @@
             // checkBox_defaultSalaryGroup
             // 
             this.checkBox_defaultSalaryGroup.AutoSize = true;
-            this.checkBox_defaultSalaryGroup.Location = new System.Drawing.Point(323, 336);
+            this.checkBox_defaultSalaryGroup.Location = new System.Drawing.Point(323, 400);
             this.checkBox_defaultSalaryGroup.Name = "checkBox_defaultSalaryGroup";
             this.checkBox_defaultSalaryGroup.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultSalaryGroup.TabIndex = 13;
@@ -618,7 +558,7 @@
             // checkBox_defaultNormalWorkingTime
             // 
             this.checkBox_defaultNormalWorkingTime.AutoSize = true;
-            this.checkBox_defaultNormalWorkingTime.Location = new System.Drawing.Point(323, 305);
+            this.checkBox_defaultNormalWorkingTime.Location = new System.Drawing.Point(323, 369);
             this.checkBox_defaultNormalWorkingTime.Name = "checkBox_defaultNormalWorkingTime";
             this.checkBox_defaultNormalWorkingTime.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultNormalWorkingTime.TabIndex = 12;
@@ -630,7 +570,7 @@
             // checkBox_defaultPublicHolidayCalendar
             // 
             this.checkBox_defaultPublicHolidayCalendar.AutoSize = true;
-            this.checkBox_defaultPublicHolidayCalendar.Location = new System.Drawing.Point(323, 274);
+            this.checkBox_defaultPublicHolidayCalendar.Location = new System.Drawing.Point(323, 338);
             this.checkBox_defaultPublicHolidayCalendar.Name = "checkBox_defaultPublicHolidayCalendar";
             this.checkBox_defaultPublicHolidayCalendar.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPublicHolidayCalendar.TabIndex = 11;
@@ -642,7 +582,7 @@
             // comboBox_salaryGroup
             // 
             this.comboBox_salaryGroup.FormattingEnabled = true;
-            this.comboBox_salaryGroup.Location = new System.Drawing.Point(163, 334);
+            this.comboBox_salaryGroup.Location = new System.Drawing.Point(163, 398);
             this.comboBox_salaryGroup.Name = "comboBox_salaryGroup";
             this.comboBox_salaryGroup.Size = new System.Drawing.Size(154, 25);
             this.comboBox_salaryGroup.TabIndex = 10;
@@ -651,7 +591,7 @@
             // comboBox_normalWorkingTime
             // 
             this.comboBox_normalWorkingTime.FormattingEnabled = true;
-            this.comboBox_normalWorkingTime.Location = new System.Drawing.Point(163, 303);
+            this.comboBox_normalWorkingTime.Location = new System.Drawing.Point(163, 367);
             this.comboBox_normalWorkingTime.Name = "comboBox_normalWorkingTime";
             this.comboBox_normalWorkingTime.Size = new System.Drawing.Size(154, 25);
             this.comboBox_normalWorkingTime.TabIndex = 9;
@@ -660,7 +600,7 @@
             // comboBox_publicHolidayCalendar
             // 
             this.comboBox_publicHolidayCalendar.FormattingEnabled = true;
-            this.comboBox_publicHolidayCalendar.Location = new System.Drawing.Point(163, 272);
+            this.comboBox_publicHolidayCalendar.Location = new System.Drawing.Point(163, 336);
             this.comboBox_publicHolidayCalendar.Name = "comboBox_publicHolidayCalendar";
             this.comboBox_publicHolidayCalendar.Size = new System.Drawing.Size(154, 25);
             this.comboBox_publicHolidayCalendar.TabIndex = 8;
@@ -669,7 +609,7 @@
             // comboBox_costPrice
             // 
             this.comboBox_costPrice.FormattingEnabled = true;
-            this.comboBox_costPrice.Location = new System.Drawing.Point(163, 241);
+            this.comboBox_costPrice.Location = new System.Drawing.Point(163, 305);
             this.comboBox_costPrice.Name = "comboBox_costPrice";
             this.comboBox_costPrice.Size = new System.Drawing.Size(154, 25);
             this.comboBox_costPrice.TabIndex = 7;
@@ -678,7 +618,7 @@
             // label_salaryGroup
             // 
             this.label_salaryGroup.AutoSize = true;
-            this.label_salaryGroup.Location = new System.Drawing.Point(6, 337);
+            this.label_salaryGroup.Location = new System.Drawing.Point(6, 401);
             this.label_salaryGroup.Name = "label_salaryGroup";
             this.label_salaryGroup.Size = new System.Drawing.Size(87, 17);
             this.label_salaryGroup.TabIndex = 1;
@@ -687,7 +627,7 @@
             // label_normalWorkingTime
             // 
             this.label_normalWorkingTime.AutoSize = true;
-            this.label_normalWorkingTime.Location = new System.Drawing.Point(6, 306);
+            this.label_normalWorkingTime.Location = new System.Drawing.Point(6, 370);
             this.label_normalWorkingTime.Name = "label_normalWorkingTime";
             this.label_normalWorkingTime.Size = new System.Drawing.Size(142, 17);
             this.label_normalWorkingTime.TabIndex = 1;
@@ -696,7 +636,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 275);
+            this.label2.Location = new System.Drawing.Point(6, 339);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(151, 17);
             this.label2.TabIndex = 1;
@@ -705,7 +645,7 @@
             // label_costPrice
             // 
             this.label_costPrice.AutoSize = true;
-            this.label_costPrice.Location = new System.Drawing.Point(6, 244);
+            this.label_costPrice.Location = new System.Drawing.Point(6, 308);
             this.label_costPrice.Name = "label_costPrice";
             this.label_costPrice.Size = new System.Drawing.Size(68, 17);
             this.label_costPrice.TabIndex = 1;
@@ -714,7 +654,7 @@
             // checkBox_defaultCostPrice
             // 
             this.checkBox_defaultCostPrice.AutoSize = true;
-            this.checkBox_defaultCostPrice.Location = new System.Drawing.Point(323, 243);
+            this.checkBox_defaultCostPrice.Location = new System.Drawing.Point(323, 307);
             this.checkBox_defaultCostPrice.Name = "checkBox_defaultCostPrice";
             this.checkBox_defaultCostPrice.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultCostPrice.TabIndex = 6;
@@ -726,7 +666,7 @@
             // checkBox_defaultHourlyRate
             // 
             this.checkBox_defaultHourlyRate.AutoSize = true;
-            this.checkBox_defaultHourlyRate.Location = new System.Drawing.Point(323, 212);
+            this.checkBox_defaultHourlyRate.Location = new System.Drawing.Point(323, 276);
             this.checkBox_defaultHourlyRate.Name = "checkBox_defaultHourlyRate";
             this.checkBox_defaultHourlyRate.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultHourlyRate.TabIndex = 4;
@@ -765,7 +705,7 @@
             // label_defaultHourlyRate
             // 
             this.label_defaultHourlyRate.AutoSize = true;
-            this.label_defaultHourlyRate.Location = new System.Drawing.Point(6, 213);
+            this.label_defaultHourlyRate.Location = new System.Drawing.Point(6, 277);
             this.label_defaultHourlyRate.Name = "label_defaultHourlyRate";
             this.label_defaultHourlyRate.Size = new System.Drawing.Size(127, 17);
             this.label_defaultHourlyRate.TabIndex = 1;
@@ -810,7 +750,7 @@
             // comboBox_defaultHourlyRate
             // 
             this.comboBox_defaultHourlyRate.FormattingEnabled = true;
-            this.comboBox_defaultHourlyRate.Location = new System.Drawing.Point(163, 210);
+            this.comboBox_defaultHourlyRate.Location = new System.Drawing.Point(163, 274);
             this.comboBox_defaultHourlyRate.Name = "comboBox_defaultHourlyRate";
             this.comboBox_defaultHourlyRate.Size = new System.Drawing.Size(154, 25);
             this.comboBox_defaultHourlyRate.TabIndex = 3;
@@ -861,6 +801,66 @@
             this.comboBox_userName.TabIndex = 3;
             this.comboBox_userName.SelectedIndexChanged += new System.EventHandler(this.comboBox_userName_SelectedIndexChanged);
             // 
+            // checkBox_defaultLegalEntity
+            // 
+            this.checkBox_defaultLegalEntity.AutoSize = true;
+            this.checkBox_defaultLegalEntity.Location = new System.Drawing.Point(323, 213);
+            this.checkBox_defaultLegalEntity.Name = "checkBox_defaultLegalEntity";
+            this.checkBox_defaultLegalEntity.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultLegalEntity.TabIndex = 5;
+            this.checkBox_defaultLegalEntity.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultLegalEntity, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultLegalEntity.UseVisualStyleBackColor = true;
+            this.checkBox_defaultLegalEntity.CheckedChanged += new System.EventHandler(this.checkBox_defaultLegalEntity_CheckedChanged);
+            // 
+            // label_legalEntity
+            // 
+            this.label_legalEntity.AutoSize = true;
+            this.label_legalEntity.Location = new System.Drawing.Point(6, 214);
+            this.label_legalEntity.Name = "label_legalEntity";
+            this.label_legalEntity.Size = new System.Drawing.Size(78, 17);
+            this.label_legalEntity.TabIndex = 1;
+            this.label_legalEntity.Text = "Legal Entity";
+            // 
+            // comboBox_legalEntity
+            // 
+            this.comboBox_legalEntity.FormattingEnabled = true;
+            this.comboBox_legalEntity.Location = new System.Drawing.Point(163, 211);
+            this.comboBox_legalEntity.Name = "comboBox_legalEntity";
+            this.comboBox_legalEntity.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_legalEntity.TabIndex = 3;
+            this.comboBox_legalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_legalEntity_SelectedIndexChanged);
+            // 
+            // label_department
+            // 
+            this.label_department.AutoSize = true;
+            this.label_department.Location = new System.Drawing.Point(6, 243);
+            this.label_department.Name = "label_department";
+            this.label_department.Size = new System.Drawing.Size(81, 17);
+            this.label_department.TabIndex = 1;
+            this.label_department.Text = "Department";
+            // 
+            // checkBox_defaultDepartment
+            // 
+            this.checkBox_defaultDepartment.AutoSize = true;
+            this.checkBox_defaultDepartment.Location = new System.Drawing.Point(323, 244);
+            this.checkBox_defaultDepartment.Name = "checkBox_defaultDepartment";
+            this.checkBox_defaultDepartment.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultDepartment.TabIndex = 5;
+            this.checkBox_defaultDepartment.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultDepartment, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultDepartment.UseVisualStyleBackColor = true;
+            this.checkBox_defaultDepartment.CheckedChanged += new System.EventHandler(this.checkBox_defaultDepartment_CheckedChanged);
+            // 
+            // comboBox_department
+            // 
+            this.comboBox_department.FormattingEnabled = true;
+            this.comboBox_department.Location = new System.Drawing.Point(163, 242);
+            this.comboBox_department.Name = "comboBox_department";
+            this.comboBox_department.Size = new System.Drawing.Size(153, 25);
+            this.comboBox_department.TabIndex = 3;
+            this.comboBox_department.SelectedIndexChanged += new System.EventHandler(this.comboBox_department_SelectedIndexChanged);
+            // 
             // label_employeeSetup
             // 
             this.label_employeeSetup.AutoSize = true;
@@ -886,7 +886,7 @@
             this.button_employeeSelectFile.Text = "Select File";
             this.defaultToolTip.SetToolTip(this.button_employeeSelectFile, "Select input CSV file");
             this.button_employeeSelectFile.UseVisualStyleBackColor = false;
-            this.button_employeeSelectFile.Click += new System.EventHandler(this.button_select_project_file_Click);
+            this.button_employeeSelectFile.Click += new System.EventHandler(this.button_select_employee_file_Click);
             // 
             // tmrExpand
             // 
