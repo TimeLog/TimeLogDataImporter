@@ -84,7 +84,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<CountryReadModel> _apiResponse = new List<CountryReadModel>();
 
@@ -116,7 +116,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<CustomerStatusReadModel> _apiResponse = new List<CustomerStatusReadModel>();
 
@@ -148,7 +148,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<IndustryReadModel> _apiResponse = new List<IndustryReadModel>();
 
@@ -180,7 +180,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<PaymentTermReadModel> _apiResponse = new List<PaymentTermReadModel>();
 

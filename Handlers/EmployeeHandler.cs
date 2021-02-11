@@ -84,7 +84,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<DepartmentReadModel> _apiResponse = new List<DepartmentReadModel>();
 
@@ -116,7 +116,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<EmployeeTypeReadModel> _apiResponse = new List<EmployeeTypeReadModel>();
 
@@ -149,7 +149,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<HourlyRateReadModel> _apiResponse = new List<HourlyRateReadModel>();
 
@@ -181,7 +181,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<CostPriceReadModel> _apiResponse = new List<CostPriceReadModel>();
 
@@ -213,7 +213,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<HolidayCalendarReadModel> _apiResponse = new List<HolidayCalendarReadModel>();
 
@@ -245,7 +245,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<AllowanceLegislationReadModel> _apiResponse = new List<AllowanceLegislationReadModel>();
 
@@ -277,7 +277,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<NormalWorkingTimeReadModel> _apiResponse = new List<NormalWorkingTimeReadModel>();
 
@@ -309,7 +309,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<SalaryGroupReadModel> _apiResponse = new List<SalaryGroupReadModel>();
 
@@ -327,6 +327,38 @@ namespace TimeLog.DataImporter.Handlers
             catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain salary group time ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<UserRoleReadModel> GetAllUserRoles(string token)
+        {
+            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllUserRolesEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<UserRoleReadModel> _apiResponse = new List<UserRoleReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<UserRoleReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain user role ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;

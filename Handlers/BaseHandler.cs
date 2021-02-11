@@ -135,10 +135,24 @@ namespace TimeLog.DataImporter.Handlers
         {
             foreach (var _field in keyValuePairList)
             {
-                if (_field.Value == fieldValue)
+                if (_field.Value.ToLower().Trim().Equals(fieldValue.ToLower().Trim()))
                 {
                     var _fieldKey = _field.Key;
                     return _fieldKey;
+                }
+            }
+
+            return -1;
+        }
+
+        public int GetIDFromFieldValue(List<KeyValuePair<string, string>> keyValuePairList, string fieldValue)
+        {
+            foreach (var _field in keyValuePairList)
+            {
+                if (_field.Value.ToLower().Trim().Equals(fieldValue.ToLower().Trim()))
+                {
+                    var _fieldKey = _field.Key.Split("_")[0];
+                    return Convert.ToInt32(_fieldKey);
                 }
             }
 
@@ -432,7 +446,7 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public int[] CheckAndGetIntegerArray(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow, string selectFileDelimiter, string fieldDelimiter)
+        public int[] CheckAndGetIntegerArray(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow, string selectFileDelimiter, string fieldDelimiter, List<KeyValuePair<int,string>> dataSet)
         {
             if (selectFileDelimiter == fieldDelimiter)
             {
@@ -450,9 +464,9 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _value in dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString().Split(fieldDelimiter))
                         {
-                            if (int.TryParse(_value, out var _num))
+                            if (dataSet.Exists(x=>x.Value.ToLower().Trim().Equals(_value.ToLower().Trim())))
                             {
-                                _intList.Add(_num);
+                                _intList.Add(dataSet.First(x=>x.Value.ToLower().Trim().Equals(_value.ToLower().Trim())).Key);
                             }
                             else
                             {
@@ -719,6 +733,33 @@ namespace TimeLog.DataImporter.Handlers
             }
         }
 
+        public void MapValuesToComboBoxByCheckboxStatus(DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, 
+            CheckBox checkBox, List<KeyValuePair<string, string>> keyValuePairList, object[] fileColumnHeaderArray)
+        {
+            comboBox.ResetText();
+            comboBox.Items.Clear();
+
+            if (checkBox.Checked)
+            {
+                AddKeyValuePairListToDomainComboBox(comboBox, keyValuePairList);
+            }
+            else
+            {
+                comboBox.Items.AddRange(fileColumnHeaderArray);
+            }
+
+            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+
+            if (_tableColumnIndex != -1)
+            {
+                ClearColumn(dataGridView, _tableColumnIndex);
+
+                ClearRow(domainTable, _tableColumnIndex);
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+            }
+        }
+
         //for default non-key value pair list that is not from API
         public void MapNonKeyValuePairToComboBoxByCheckboxStatus(DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName,
             CheckBox checkBox, List<string> defaultValueList, object[] fileColumnHeaderArray)
@@ -772,6 +813,20 @@ namespace TimeLog.DataImporter.Handlers
         #region Helper - Checking and adding methods
 
         private void AddKeyValuePairListToDomainComboBox(ComboBox comboBox, List<KeyValuePair<int, string>> keyValuePairList)
+        {
+            comboBox.DisplayMember = "Value";
+            comboBox.ValueMember = "Key";
+
+            if (keyValuePairList != null)
+            {
+                foreach (var _domain in keyValuePairList)
+                {
+                    comboBox.Items.Add(new { _domain.Key, _domain.Value });
+                }
+            }
+        }
+
+        private void AddKeyValuePairListToDomainComboBox(ComboBox comboBox, List<KeyValuePair<string, string>> keyValuePairList)
         {
             comboBox.DisplayMember = "Value";
             comboBox.ValueMember = "Key";

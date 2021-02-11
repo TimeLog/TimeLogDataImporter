@@ -49,26 +49,27 @@ namespace TimeLog.DataImporter.UserControls
         private const string LegalEntity = "Legal Entity";  
         private const string Department = "Department";
         private const string ManagerInitials = "Manager Initials";
-        private const string EmployeeType = "Employee Type";    //no such api yet
-        private const string DefaultHourlyRate = "Default Hourly Rate";    //no such api yet
-        private const string CostPrice = "Cost Price";  //no such api yet
-        private const string PublicHolidayCalendar = "Public Holiday Calendar";  //no such api yet
-        private const string AllowanceLegislation = "Allowance Legislation";  //no such api yet
-        private const string NormalWorkingTime = "Normal Working Time";  //no such api yet
-        private const string SalaryGroup = "Salary Group"; //no such api yet
-        private const string UserRoleNames = "User Role Names";   //no such api yet
+        private const string EmployeeType = "Employee Type"; 
+        private const string DefaultHourlyRate = "Default Hourly Rate";
+        private const string CostPrice = "Cost Price";  
+        private const string PublicHolidayCalendar = "Public Holiday Calendar";
+        private const string AllowanceLegislation = "Allowance Legislation";  
+        private const string NormalWorkingTime = "Normal Working Time";  
+        private const string SalaryGroup = "Salary Group"; 
+        private const string UserRoleNames = "User Role Names";   
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> LegalEntityList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> DepartmentList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> EmployeeTypeList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> DefaultHourlyRateList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<string, string>> DefaultHourlyRateList = new List<KeyValuePair<string, string>>();
         private static readonly List<KeyValuePair<int, string>> CostPriceList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PublicHolidayCalendarList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> AllowanceLegislationList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> NormalWorkingTimeList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> SalaryGroupList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> ManagerInitialsList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> UserRolesList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -134,6 +135,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllNormalWorkingTimeFromApi();
             GetAllSalaryGroupFromApi();
             GetAllManagerFromApi();
+            GetAllUserRolesFromApi();
         }
 
         #endregion
@@ -276,7 +278,7 @@ namespace TimeLog.DataImporter.UserControls
                                 AllowanceLegislationID = (int) MapFieldValueToID(AllowanceLegislation, _row, false),
                                 NormalWorkingTimeID = (int) MapFieldValueToID(NormalWorkingTime, _row, false),
                                 SalaryGroupID =(int) MapFieldValueToID(SalaryGroup, _row, false),
-                                UserRoleIDs = EmployeeHandler.Instance.CheckAndGetIntegerArray(dataGridView_employee, UserRoleNames, _row, _fileDelimiter, _userRoleDelimiter)
+                                UserRoleIDs = EmployeeHandler.Instance.CheckAndGetIntegerArray(dataGridView_employee, UserRoleNames, _row, _fileDelimiter, _userRoleDelimiter,UserRolesList)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -393,6 +395,7 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = EmployeeHandler.Instance.GetIDFromFieldValue(ManagerInitialsList, _fieldValue);
                 }
+                
 
                 if (_result != -1)
                 {
@@ -520,7 +523,7 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _hourlyRate in _apiResponse)
                 {
-                    DefaultHourlyRateList.Add(new KeyValuePair<int, string>(_hourlyRate.HourlyRateID, _hourlyRate.HourlyRateName));
+                    DefaultHourlyRateList.Add(new KeyValuePair<string, string>(_hourlyRate.HourlyRateID + "_" + _hourlyRate.LegalEntityID, _hourlyRate.HourlyRateName));
                 }
             }
         }
@@ -599,6 +602,19 @@ namespace TimeLog.DataImporter.UserControls
                 foreach (var _manager in _apiResponse)
                 {
                     ManagerInitialsList.Add(new KeyValuePair<int, string>(_manager.UserID, _manager.Initials));
+                }
+            }
+        }
+
+        private void GetAllUserRolesFromApi()
+        {
+            var _apiResponse = EmployeeHandler.Instance.GetAllUserRoles(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _userRole in _apiResponse)
+                {
+                    UserRolesList.Add(new KeyValuePair<int, string>(_userRole.RoleID, _userRole.Name));
                 }
             }
         }

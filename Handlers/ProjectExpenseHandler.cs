@@ -85,7 +85,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
 
@@ -117,7 +117,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ExpenseTypeReadModel> _apiResponse = new List<ExpenseTypeReadModel>();
 

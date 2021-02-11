@@ -53,6 +53,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllTaskEndpoint = "/api/v1/task?$page=1&$pagesize=300";
         public string GetAllTaskTypeEndpoint = "/api/v1/TaskType?$page=1&$pagesize=300";
         public string GetAllProductEndpoint = "/api/v1/product?$page=1&$pagesize=300";
+        public string GetAllUserRolesEndpoint = "/api/v1/role?$page=1&$pagesize=300";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();

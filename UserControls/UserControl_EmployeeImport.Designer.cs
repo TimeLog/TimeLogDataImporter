@@ -47,16 +47,10 @@
             this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
             this.comboBox_userRoleDelimiter = new System.Windows.Forms.ComboBox();
             this.label_userRoleDelimiter = new System.Windows.Forms.Label();
-            this.checkBox_defaultAllowanceLegislation = new System.Windows.Forms.CheckBox();
             this.comboBox_userRoles = new System.Windows.Forms.ComboBox();
-            this.comboBox_allowanceLegislation = new System.Windows.Forms.ComboBox();
-            this.comboBox_employeeType = new System.Windows.Forms.ComboBox();
             this.label_userRoleNames = new System.Windows.Forms.Label();
-            this.label_allowanceLegislation = new System.Windows.Forms.Label();
-            this.label_employeeType = new System.Windows.Forms.Label();
             this.label_jobTitle = new System.Windows.Forms.Label();
             this.comboBox_jobTitle = new System.Windows.Forms.ComboBox();
-            this.checkBox_defaultEmployeeType = new System.Windows.Forms.CheckBox();
             this.comboBox_employeeNo = new System.Windows.Forms.ComboBox();
             this.label_employeeNo = new System.Windows.Forms.Label();
             this.comboBox_employmentDate = new System.Windows.Forms.ComboBox();
@@ -66,14 +60,20 @@
             this.groupBox_employeeMandatoryFields = new System.Windows.Forms.GroupBox();
             this.checkBox_defaultSalaryGroup = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultNormalWorkingTime = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultAllowanceLegislation = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultPublicHolidayCalendar = new System.Windows.Forms.CheckBox();
             this.comboBox_salaryGroup = new System.Windows.Forms.ComboBox();
+            this.comboBox_allowanceLegislation = new System.Windows.Forms.ComboBox();
             this.comboBox_normalWorkingTime = new System.Windows.Forms.ComboBox();
+            this.comboBox_employeeType = new System.Windows.Forms.ComboBox();
             this.comboBox_publicHolidayCalendar = new System.Windows.Forms.ComboBox();
             this.comboBox_costPrice = new System.Windows.Forms.ComboBox();
+            this.label_allowanceLegislation = new System.Windows.Forms.Label();
             this.label_salaryGroup = new System.Windows.Forms.Label();
+            this.label_employeeType = new System.Windows.Forms.Label();
             this.label_normalWorkingTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBox_defaultEmployeeType = new System.Windows.Forms.CheckBox();
             this.label_costPrice = new System.Windows.Forms.Label();
             this.checkBox_defaultCostPrice = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultHourlyRate = new System.Windows.Forms.CheckBox();
@@ -346,18 +346,6 @@
             this.label_userRoleDelimiter.TabIndex = 1;
             this.label_userRoleDelimiter.Text = "User Role Delimiter";
             // 
-            // checkBox_defaultAllowanceLegislation
-            // 
-            this.checkBox_defaultAllowanceLegislation.AutoSize = true;
-            this.checkBox_defaultAllowanceLegislation.Location = new System.Drawing.Point(323, 463);
-            this.checkBox_defaultAllowanceLegislation.Name = "checkBox_defaultAllowanceLegislation";
-            this.checkBox_defaultAllowanceLegislation.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultAllowanceLegislation.TabIndex = 11;
-            this.checkBox_defaultAllowanceLegislation.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultAllowanceLegislation, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultAllowanceLegislation.UseVisualStyleBackColor = true;
-            this.checkBox_defaultAllowanceLegislation.CheckedChanged += new System.EventHandler(this.checkBox_defaultAllowanceLegislation_CheckedChanged);
-            // 
             // comboBox_userRoles
             // 
             this.comboBox_userRoles.FormattingEnabled = true;
@@ -367,24 +355,6 @@
             this.comboBox_userRoles.TabIndex = 10;
             this.comboBox_userRoles.SelectedIndexChanged += new System.EventHandler(this.comboBox_userRoles_SelectedIndexChanged);
             // 
-            // comboBox_allowanceLegislation
-            // 
-            this.comboBox_allowanceLegislation.FormattingEnabled = true;
-            this.comboBox_allowanceLegislation.Location = new System.Drawing.Point(164, 461);
-            this.comboBox_allowanceLegislation.Name = "comboBox_allowanceLegislation";
-            this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(153, 25);
-            this.comboBox_allowanceLegislation.TabIndex = 10;
-            this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
-            // 
-            // comboBox_employeeType
-            // 
-            this.comboBox_employeeType.FormattingEnabled = true;
-            this.comboBox_employeeType.Location = new System.Drawing.Point(164, 430);
-            this.comboBox_employeeType.Name = "comboBox_employeeType";
-            this.comboBox_employeeType.Size = new System.Drawing.Size(153, 25);
-            this.comboBox_employeeType.TabIndex = 10;
-            this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
-            // 
             // label_userRoleNames
             // 
             this.label_userRoleNames.AutoSize = true;
@@ -393,24 +363,6 @@
             this.label_userRoleNames.Size = new System.Drawing.Size(111, 17);
             this.label_userRoleNames.TabIndex = 1;
             this.label_userRoleNames.Text = "User Role Names";
-            // 
-            // label_allowanceLegislation
-            // 
-            this.label_allowanceLegislation.AutoSize = true;
-            this.label_allowanceLegislation.Location = new System.Drawing.Point(6, 463);
-            this.label_allowanceLegislation.Name = "label_allowanceLegislation";
-            this.label_allowanceLegislation.Size = new System.Drawing.Size(137, 17);
-            this.label_allowanceLegislation.TabIndex = 1;
-            this.label_allowanceLegislation.Text = "Allowance Legislation";
-            // 
-            // label_employeeType
-            // 
-            this.label_employeeType.AutoSize = true;
-            this.label_employeeType.Location = new System.Drawing.Point(6, 432);
-            this.label_employeeType.Name = "label_employeeType";
-            this.label_employeeType.Size = new System.Drawing.Size(99, 17);
-            this.label_employeeType.TabIndex = 1;
-            this.label_employeeType.Text = "Employee Type";
             // 
             // label_jobTitle
             // 
@@ -429,18 +381,6 @@
             this.comboBox_jobTitle.Size = new System.Drawing.Size(150, 25);
             this.comboBox_jobTitle.TabIndex = 3;
             this.comboBox_jobTitle.SelectedIndexChanged += new System.EventHandler(this.comboBox_jobTitle_SelectedIndexChanged);
-            // 
-            // checkBox_defaultEmployeeType
-            // 
-            this.checkBox_defaultEmployeeType.AutoSize = true;
-            this.checkBox_defaultEmployeeType.Location = new System.Drawing.Point(323, 432);
-            this.checkBox_defaultEmployeeType.Name = "checkBox_defaultEmployeeType";
-            this.checkBox_defaultEmployeeType.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultEmployeeType.TabIndex = 4;
-            this.checkBox_defaultEmployeeType.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultEmployeeType, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultEmployeeType.UseVisualStyleBackColor = true;
-            this.checkBox_defaultEmployeeType.CheckedChanged += new System.EventHandler(this.checkBox_defaultEmployeeType_CheckedChanged);
             // 
             // comboBox_employeeNo
             // 
@@ -567,6 +507,18 @@
             this.checkBox_defaultNormalWorkingTime.UseVisualStyleBackColor = true;
             this.checkBox_defaultNormalWorkingTime.CheckedChanged += new System.EventHandler(this.checkBox_defaultNormalWorkingTime_CheckedChanged);
             // 
+            // checkBox_defaultAllowanceLegislation
+            // 
+            this.checkBox_defaultAllowanceLegislation.AutoSize = true;
+            this.checkBox_defaultAllowanceLegislation.Location = new System.Drawing.Point(323, 463);
+            this.checkBox_defaultAllowanceLegislation.Name = "checkBox_defaultAllowanceLegislation";
+            this.checkBox_defaultAllowanceLegislation.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultAllowanceLegislation.TabIndex = 11;
+            this.checkBox_defaultAllowanceLegislation.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultAllowanceLegislation, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultAllowanceLegislation.UseVisualStyleBackColor = true;
+            this.checkBox_defaultAllowanceLegislation.CheckedChanged += new System.EventHandler(this.checkBox_defaultAllowanceLegislation_CheckedChanged);
+            // 
             // checkBox_defaultPublicHolidayCalendar
             // 
             this.checkBox_defaultPublicHolidayCalendar.AutoSize = true;
@@ -588,6 +540,15 @@
             this.comboBox_salaryGroup.TabIndex = 10;
             this.comboBox_salaryGroup.SelectedIndexChanged += new System.EventHandler(this.comboBox_salaryGroup_SelectedIndexChanged);
             // 
+            // comboBox_allowanceLegislation
+            // 
+            this.comboBox_allowanceLegislation.FormattingEnabled = true;
+            this.comboBox_allowanceLegislation.Location = new System.Drawing.Point(164, 461);
+            this.comboBox_allowanceLegislation.Name = "comboBox_allowanceLegislation";
+            this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(153, 25);
+            this.comboBox_allowanceLegislation.TabIndex = 10;
+            this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
+            // 
             // comboBox_normalWorkingTime
             // 
             this.comboBox_normalWorkingTime.FormattingEnabled = true;
@@ -596,6 +557,15 @@
             this.comboBox_normalWorkingTime.Size = new System.Drawing.Size(154, 25);
             this.comboBox_normalWorkingTime.TabIndex = 9;
             this.comboBox_normalWorkingTime.SelectedIndexChanged += new System.EventHandler(this.comboBox_normalWorkingTime_SelectedIndexChanged);
+            // 
+            // comboBox_employeeType
+            // 
+            this.comboBox_employeeType.FormattingEnabled = true;
+            this.comboBox_employeeType.Location = new System.Drawing.Point(164, 430);
+            this.comboBox_employeeType.Name = "comboBox_employeeType";
+            this.comboBox_employeeType.Size = new System.Drawing.Size(153, 25);
+            this.comboBox_employeeType.TabIndex = 10;
+            this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
             // 
             // comboBox_publicHolidayCalendar
             // 
@@ -615,6 +585,15 @@
             this.comboBox_costPrice.TabIndex = 7;
             this.comboBox_costPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_costPrice_SelectedIndexChanged);
             // 
+            // label_allowanceLegislation
+            // 
+            this.label_allowanceLegislation.AutoSize = true;
+            this.label_allowanceLegislation.Location = new System.Drawing.Point(6, 463);
+            this.label_allowanceLegislation.Name = "label_allowanceLegislation";
+            this.label_allowanceLegislation.Size = new System.Drawing.Size(137, 17);
+            this.label_allowanceLegislation.TabIndex = 1;
+            this.label_allowanceLegislation.Text = "Allowance Legislation";
+            // 
             // label_salaryGroup
             // 
             this.label_salaryGroup.AutoSize = true;
@@ -623,6 +602,15 @@
             this.label_salaryGroup.Size = new System.Drawing.Size(87, 17);
             this.label_salaryGroup.TabIndex = 1;
             this.label_salaryGroup.Text = "Salary Group";
+            // 
+            // label_employeeType
+            // 
+            this.label_employeeType.AutoSize = true;
+            this.label_employeeType.Location = new System.Drawing.Point(6, 432);
+            this.label_employeeType.Name = "label_employeeType";
+            this.label_employeeType.Size = new System.Drawing.Size(99, 17);
+            this.label_employeeType.TabIndex = 1;
+            this.label_employeeType.Text = "Employee Type";
             // 
             // label_normalWorkingTime
             // 
@@ -641,6 +629,18 @@
             this.label2.Size = new System.Drawing.Size(151, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Public Holiday Calendar";
+            // 
+            // checkBox_defaultEmployeeType
+            // 
+            this.checkBox_defaultEmployeeType.AutoSize = true;
+            this.checkBox_defaultEmployeeType.Location = new System.Drawing.Point(323, 432);
+            this.checkBox_defaultEmployeeType.Name = "checkBox_defaultEmployeeType";
+            this.checkBox_defaultEmployeeType.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultEmployeeType.TabIndex = 4;
+            this.checkBox_defaultEmployeeType.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultEmployeeType, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultEmployeeType.UseVisualStyleBackColor = true;
+            this.checkBox_defaultEmployeeType.CheckedChanged += new System.EventHandler(this.checkBox_defaultEmployeeType_CheckedChanged);
             // 
             // label_costPrice
             // 
