@@ -90,6 +90,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoiceAddress = new System.Windows.Forms.Label();
             this.button_invoiceAddress = new System.Windows.Forms.Button();
             this.panel_invoiceAddress = new System.Windows.Forms.Panel();
+            this.checkBox_defaultInvoicingAddressCountryISO = new System.Windows.Forms.CheckBox();
             this.label_useInvoicingAddress = new System.Windows.Forms.Label();
             this.label_invoicingAddress = new System.Windows.Forms.Label();
             this.label_invoicingAddressCity = new System.Windows.Forms.Label();
@@ -105,7 +106,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressZipCode = new System.Windows.Forms.ComboBox();
             this.comboBox_invoicingAddressCity = new System.Windows.Forms.ComboBox();
             this.comboBox_invoicingAddressState = new System.Windows.Forms.ComboBox();
-            this.comboBox_invoicingAddressCountryID = new System.Windows.Forms.ComboBox();
+            this.comboBox_invoicingAddressCountryISO = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label_financeCompanyInfo = new System.Windows.Forms.Label();
             this.button_financeCompanyInfo = new System.Windows.Forms.Button();
@@ -122,9 +123,11 @@ namespace TimeLog.DataImporter.UserControls
             this.label_defaultInvoiceSettings = new System.Windows.Forms.Label();
             this.button_defaultInvoiceSettings = new System.Windows.Forms.Button();
             this.panel_defaultInvoiceSettings = new System.Windows.Forms.Panel();
+            this.checkBox_defaultInvoiceAddressToUse = new System.Windows.Forms.CheckBox();
+            this.checkBox_defaultInternalReference = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultVATPercentage = new System.Windows.Forms.CheckBox();
             this.label_contactID = new System.Windows.Forms.Label();
-            this.label_internalReferenceID = new System.Windows.Forms.Label();
+            this.label_internalReference = new System.Windows.Forms.Label();
             this.label_customerReferenceID = new System.Windows.Forms.Label();
             this.checkBox_defaultPaymentTerm = new System.Windows.Forms.CheckBox();
             this.label_paymentTerm = new System.Windows.Forms.Label();
@@ -139,7 +142,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_paymentTerm = new System.Windows.Forms.ComboBox();
             this.comboBox_invoiceAddressToUse = new System.Windows.Forms.ComboBox();
             this.comboBox_customerReferenceID = new System.Windows.Forms.ComboBox();
-            this.comboBox_internalReferenceID = new System.Windows.Forms.ComboBox();
+            this.comboBox_internalReference = new System.Windows.Forms.ComboBox();
             this.panel_invoiceExternalCosts = new System.Windows.Forms.Panel();
             this.label_invoiceExternalCosts = new System.Windows.Forms.Label();
             this.button_invoiceExternalCosts = new System.Windows.Forms.Button();
@@ -852,6 +855,7 @@ namespace TimeLog.DataImporter.UserControls
             // panel_invoiceAddress
             // 
             this.panel_invoiceAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel_invoiceAddress.Controls.Add(this.checkBox_defaultInvoicingAddressCountryISO);
             this.panel_invoiceAddress.Controls.Add(this.label_useInvoicingAddress);
             this.panel_invoiceAddress.Controls.Add(this.label_invoicingAddress);
             this.panel_invoiceAddress.Controls.Add(this.label_invoicingAddressCity);
@@ -867,13 +871,24 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_invoiceAddress.Controls.Add(this.comboBox_invoicingAddressZipCode);
             this.panel_invoiceAddress.Controls.Add(this.comboBox_invoicingAddressCity);
             this.panel_invoiceAddress.Controls.Add(this.comboBox_invoicingAddressState);
-            this.panel_invoiceAddress.Controls.Add(this.comboBox_invoicingAddressCountryID);
+            this.panel_invoiceAddress.Controls.Add(this.comboBox_invoicingAddressCountryISO);
             this.panel_invoiceAddress.Location = new System.Drawing.Point(3, 659);
             this.panel_invoiceAddress.MaximumSize = new System.Drawing.Size(426, 265);
             this.panel_invoiceAddress.MinimumSize = new System.Drawing.Size(426, 0);
             this.panel_invoiceAddress.Name = "panel_invoiceAddress";
             this.panel_invoiceAddress.Size = new System.Drawing.Size(426, 265);
             this.panel_invoiceAddress.TabIndex = 3;
+            // 
+            // checkBox_defaultInvoicingAddressCountryISO
+            // 
+            this.checkBox_defaultInvoicingAddressCountryISO.AutoSize = true;
+            this.checkBox_defaultInvoicingAddressCountryISO.Location = new System.Drawing.Point(341, 231);
+            this.checkBox_defaultInvoicingAddressCountryISO.Name = "checkBox_defaultInvoicingAddressCountryISO";
+            this.checkBox_defaultInvoicingAddressCountryISO.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultInvoicingAddressCountryISO.TabIndex = 6;
+            this.checkBox_defaultInvoicingAddressCountryISO.Text = "Default";
+            this.checkBox_defaultInvoicingAddressCountryISO.UseVisualStyleBackColor = true;
+            this.checkBox_defaultInvoicingAddressCountryISO.CheckedChanged += new System.EventHandler(this.checkBox_defaultInvoiceAddressCountryISO_CheckedChanged);
             // 
             // label_useInvoicingAddress
             // 
@@ -1010,14 +1025,14 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressState.TabIndex = 3;
             this.comboBox_invoicingAddressState.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressState_SelectedIndexChanged);
             // 
-            // comboBox_invoicingAddressCountryID
+            // comboBox_invoicingAddressCountryISO
             // 
-            this.comboBox_invoicingAddressCountryID.FormattingEnabled = true;
-            this.comboBox_invoicingAddressCountryID.Location = new System.Drawing.Point(202, 229);
-            this.comboBox_invoicingAddressCountryID.Name = "comboBox_invoicingAddressCountryID";
-            this.comboBox_invoicingAddressCountryID.Size = new System.Drawing.Size(133, 25);
-            this.comboBox_invoicingAddressCountryID.TabIndex = 3;
-            this.comboBox_invoicingAddressCountryID.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCountryID_SelectedIndexChanged);
+            this.comboBox_invoicingAddressCountryISO.FormattingEnabled = true;
+            this.comboBox_invoicingAddressCountryISO.Location = new System.Drawing.Point(202, 229);
+            this.comboBox_invoicingAddressCountryISO.Name = "comboBox_invoicingAddressCountryISO";
+            this.comboBox_invoicingAddressCountryISO.Size = new System.Drawing.Size(133, 25);
+            this.comboBox_invoicingAddressCountryISO.TabIndex = 3;
+            this.comboBox_invoicingAddressCountryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCountryID_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -1178,9 +1193,11 @@ namespace TimeLog.DataImporter.UserControls
             // panel_defaultInvoiceSettings
             // 
             this.panel_defaultInvoiceSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultInvoiceAddressToUse);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultInternalReference);
             this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultVATPercentage);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_contactID);
-            this.panel_defaultInvoiceSettings.Controls.Add(this.label_internalReferenceID);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.label_internalReference);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_customerReferenceID);
             this.panel_defaultInvoiceSettings.Controls.Add(this.checkBox_defaultPaymentTerm);
             this.panel_defaultInvoiceSettings.Controls.Add(this.label_paymentTerm);
@@ -1195,13 +1212,35 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_paymentTerm);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_invoiceAddressToUse);
             this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_customerReferenceID);
-            this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_internalReferenceID);
+            this.panel_defaultInvoiceSettings.Controls.Add(this.comboBox_internalReference);
             this.panel_defaultInvoiceSettings.Location = new System.Drawing.Point(3, 1153);
             this.panel_defaultInvoiceSettings.MaximumSize = new System.Drawing.Size(426, 265);
             this.panel_defaultInvoiceSettings.MinimumSize = new System.Drawing.Size(426, 0);
             this.panel_defaultInvoiceSettings.Name = "panel_defaultInvoiceSettings";
             this.panel_defaultInvoiceSettings.Size = new System.Drawing.Size(426, 265);
             this.panel_defaultInvoiceSettings.TabIndex = 7;
+            // 
+            // checkBox_defaultInvoiceAddressToUse
+            // 
+            this.checkBox_defaultInvoiceAddressToUse.AutoSize = true;
+            this.checkBox_defaultInvoiceAddressToUse.Location = new System.Drawing.Point(328, 46);
+            this.checkBox_defaultInvoiceAddressToUse.Name = "checkBox_defaultInvoiceAddressToUse";
+            this.checkBox_defaultInvoiceAddressToUse.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultInvoiceAddressToUse.TabIndex = 10;
+            this.checkBox_defaultInvoiceAddressToUse.Text = "Default";
+            this.checkBox_defaultInvoiceAddressToUse.UseVisualStyleBackColor = true;
+            this.checkBox_defaultInvoiceAddressToUse.CheckedChanged += new System.EventHandler(this.checkBox_defaultInvoiceAddressToUse_CheckedChanged);
+            // 
+            // checkBox_defaultInternalReference
+            // 
+            this.checkBox_defaultInternalReference.AutoSize = true;
+            this.checkBox_defaultInternalReference.Location = new System.Drawing.Point(328, 77);
+            this.checkBox_defaultInternalReference.Name = "checkBox_defaultInternalReference";
+            this.checkBox_defaultInternalReference.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultInternalReference.TabIndex = 9;
+            this.checkBox_defaultInternalReference.Text = "Default";
+            this.checkBox_defaultInternalReference.UseVisualStyleBackColor = true;
+            this.checkBox_defaultInternalReference.CheckedChanged += new System.EventHandler(this.checkBox_defaultInternalReference_CheckedChanged);
             // 
             // checkBox_defaultVATPercentage
             // 
@@ -1223,15 +1262,16 @@ namespace TimeLog.DataImporter.UserControls
             this.label_contactID.Size = new System.Drawing.Size(72, 17);
             this.label_contactID.TabIndex = 1;
             this.label_contactID.Text = "Contact ID";
+            this.label_contactID.Visible = false;
             // 
-            // label_internalReferenceID
+            // label_internalReference
             // 
-            this.label_internalReferenceID.AutoSize = true;
-            this.label_internalReferenceID.Location = new System.Drawing.Point(10, 77);
-            this.label_internalReferenceID.Name = "label_internalReferenceID";
-            this.label_internalReferenceID.Size = new System.Drawing.Size(135, 17);
-            this.label_internalReferenceID.TabIndex = 1;
-            this.label_internalReferenceID.Text = "Internal Reference ID";
+            this.label_internalReference.AutoSize = true;
+            this.label_internalReference.Location = new System.Drawing.Point(10, 77);
+            this.label_internalReference.Name = "label_internalReference";
+            this.label_internalReference.Size = new System.Drawing.Size(118, 17);
+            this.label_internalReference.TabIndex = 1;
+            this.label_internalReference.Text = "Internal Reference";
             // 
             // label_customerReferenceID
             // 
@@ -1241,6 +1281,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerReferenceID.Size = new System.Drawing.Size(147, 17);
             this.label_customerReferenceID.TabIndex = 1;
             this.label_customerReferenceID.Text = "Customer Reference ID";
+            this.label_customerReferenceID.Visible = false;
             // 
             // checkBox_defaultPaymentTerm
             // 
@@ -1333,6 +1374,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_contactID.Name = "comboBox_contactID";
             this.comboBox_contactID.Size = new System.Drawing.Size(152, 25);
             this.comboBox_contactID.TabIndex = 3;
+            this.comboBox_contactID.Visible = false;
             this.comboBox_contactID.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactID_SelectedIndexChanged);
             // 
             // comboBox_paymentTerm
@@ -1360,16 +1402,17 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerReferenceID.Name = "comboBox_customerReferenceID";
             this.comboBox_customerReferenceID.Size = new System.Drawing.Size(152, 25);
             this.comboBox_customerReferenceID.TabIndex = 3;
+            this.comboBox_customerReferenceID.Visible = false;
             this.comboBox_customerReferenceID.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerReferenceID_SelectedIndexChanged);
             // 
-            // comboBox_internalReferenceID
+            // comboBox_internalReference
             // 
-            this.comboBox_internalReferenceID.FormattingEnabled = true;
-            this.comboBox_internalReferenceID.Location = new System.Drawing.Point(169, 74);
-            this.comboBox_internalReferenceID.Name = "comboBox_internalReferenceID";
-            this.comboBox_internalReferenceID.Size = new System.Drawing.Size(152, 25);
-            this.comboBox_internalReferenceID.TabIndex = 3;
-            this.comboBox_internalReferenceID.SelectedIndexChanged += new System.EventHandler(this.comboBox_internalReferenceID_SelectedIndexChanged);
+            this.comboBox_internalReference.FormattingEnabled = true;
+            this.comboBox_internalReference.Location = new System.Drawing.Point(169, 74);
+            this.comboBox_internalReference.Name = "comboBox_internalReference";
+            this.comboBox_internalReference.Size = new System.Drawing.Size(152, 25);
+            this.comboBox_internalReference.TabIndex = 3;
+            this.comboBox_internalReference.SelectedIndexChanged += new System.EventHandler(this.comboBox_internalReference_SelectedIndexChanged);
             // 
             // panel_invoiceExternalCosts
             // 
@@ -1835,7 +1878,7 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.Label label_discountPercentage;
         private System.Windows.Forms.Label label_paymentTerm;
         private System.Windows.Forms.Label label_customerReferenceID;
-        private System.Windows.Forms.Label label_internalReferenceID;
+        private System.Windows.Forms.Label label_internalReference;
         private System.Windows.Forms.Label label_contactID;
         private System.Windows.Forms.Label label_defaultDistIsMaxBillable;
         private System.Windows.Forms.Label label_organizationNo;
@@ -1887,14 +1930,14 @@ namespace TimeLog.DataImporter.UserControls
         private System.Windows.Forms.ComboBox comboBox_calculateVAT;
         private System.Windows.Forms.ComboBox comboBox_discountPercentage;
         private System.Windows.Forms.ComboBox comboBox_customerReferenceID;
-        private System.Windows.Forms.ComboBox comboBox_internalReferenceID;
+        private System.Windows.Forms.ComboBox comboBox_internalReference;
         private System.Windows.Forms.ComboBox comboBox_invoiceAddressToUse;
         private System.Windows.Forms.ComboBox comboBox_contactID;
         private System.Windows.Forms.ComboBox comboBox_defaultDistIsMaxBillable;
         private System.Windows.Forms.ComboBox comboBox_mileageIsBillable;
         private System.Windows.Forms.ComboBox comboBox_expenseIsBillable;
         private System.Windows.Forms.ComboBox comboBox_defaultMileageDistance;
-        private System.Windows.Forms.ComboBox comboBox_invoicingAddressCountryID;
+        private System.Windows.Forms.ComboBox comboBox_invoicingAddressCountryISO;
         private System.Windows.Forms.ComboBox comboBox_invoicingAddressState;
         private System.Windows.Forms.ComboBox comboBox_invoicingAddressCity;
         private System.Windows.Forms.ComboBox comboBox_invoicingAddressZipCode;
@@ -1942,5 +1985,8 @@ namespace TimeLog.DataImporter.UserControls
         private CheckBox checkBox_defaultMileageIsBillable;
         private CheckBox checkBox_defaultExpenseIsBillable;
         private ComboBox comboBox_paymentTerm;
+        private CheckBox checkBox_defaultInvoicingAddressCountryISO;
+        private CheckBox checkBox_defaultInternalReference;
+        private CheckBox checkBox_defaultInvoiceAddressToUse;
     }
 }

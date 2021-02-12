@@ -251,7 +251,7 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
-                    return _apiResponse;
+                    return _apiResponse.Where(x=>x.IsActive && x.UserType == 0).ToList();
                 }
             }
             catch (WebException _webEx)

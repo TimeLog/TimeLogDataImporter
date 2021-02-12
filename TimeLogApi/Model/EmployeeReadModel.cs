@@ -43,5 +43,22 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// The initials.
         /// </value>
         public string Initials { get; set; }
+
+        /// <summary>
+        /// Gets or sets if the user is active.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this user is active; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user type.
+        /// </summary>
+        /// <value>
+        /// The user type
+        /// </value>
+        public int UserType { get; set; }
+
     }
 }
