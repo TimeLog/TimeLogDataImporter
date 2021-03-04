@@ -13,11 +13,24 @@ namespace TimeLog.DataImporter.Handlers
 
         private AuthenticationHandler()
         {
+            //var _options = new OidcClientOptions
+            //{
+            //    Authority = "http://192.168.1.100/login",
+            //    ClientId = "coldemo",
+            //    ClientSecret = "coldemo",
+            //    Scope = "openid profile tlp",
+            //    RedirectUri = "com.timelog:/oauthredirect",
+            //    ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect,
+            //    Flow = OidcClientOptions.AuthenticationFlow.AuthorizationCode,
+            //    Policy = new Policy { Discovery = new DiscoveryPolicy { RequireHttps = false } },
+            //    Browser = new WinFormsWebView()
+            //};
+
             var _options = new OidcClientOptions
             {
-                Authority = "http://10.50.6.61/tlplogin",
-                ClientId = "postman",
-                ClientSecret = "postman",
+                Authority = "https://newlogin.timelog.com",
+                ClientId = "tdi",
+                ClientSecret = "a2c06677-ad29-4213-9c84-983c301379af",
                 Scope = "openid profile tlp",
                 RedirectUri = "com.timelog:/oauthredirect",
                 ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect,
@@ -25,22 +38,6 @@ namespace TimeLog.DataImporter.Handlers
                 Policy = new Policy { Discovery = new DiscoveryPolicy { RequireHttps = false } },
                 Browser = new WinFormsWebView()
             };
-
-            //var options = new OidcClientOptions
-            //{
-            //    Authority = "https://newlogin.timelog.com",
-            //    ClientId = "mobile",
-            //    ClientSecret = "timelog4life",
-            //    Scope = "openid profile tlp",
-            //    RedirectUri = "com.timelog:/oauthredirect",
-
-            //    ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect,
-            //    Flow = OidcClientOptions.AuthenticationFlow.AuthorizationCode,
-
-
-            //    Policy = new Policy {Discovery = new DiscoveryPolicy {RequireHttps = false}},
-            //    Browser = new WinFormsWebView()
-            //};
 
 
             _oidcClient = new OidcClient(_options);

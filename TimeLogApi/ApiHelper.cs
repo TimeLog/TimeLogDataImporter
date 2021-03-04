@@ -11,8 +11,8 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        //public string LocalhostUrl = "https://app4.timelog.com/coldemo";
-        public string LocalhostUrl = "http://localhost/tlp";
+        public string LocalhostUrl = "https://app4.timelog.com/coldemo";
+        //public string LocalhostUrl = "http://localhost/tlp";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
@@ -78,7 +78,7 @@ namespace TimeLog.DataImporter.TimeLogApi
             var _client = new WebClient();
             _client.Encoding = Encoding.UTF8;
             _client.Headers.Add("Authorization", "Bearer " + token);
-            _client.Headers.Add("Accept", "application/json");
+            _client.Headers.Add("Accept", "*/*");
             _client.Headers.Add("Content-Type", "application/json");
             return _client;
         }
