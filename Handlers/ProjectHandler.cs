@@ -28,7 +28,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(project, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectValidateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectValidateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -55,7 +55,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(project, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectCreateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -80,7 +80,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectTemplateReadModel> GetAllProjectTemplate(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectTemplateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProjectTemplateEndpoint;
 
             try
             {
@@ -112,7 +112,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectTypeReadModel> GetAllProjectType(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectTypeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProjectTypeEndpoint;
 
             try
             {
@@ -144,7 +144,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectCategoryReadModel> GetAllProjectCategory(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectCategoryEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProjectCategoryEndpoint;
 
             try
             {

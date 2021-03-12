@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel_login = new System.Windows.Forms.Panel();
+            this.label_siteUrl = new System.Windows.Forms.Label();
+            this.textBox_siteUrl = new System.Windows.Forms.TextBox();
             this.label_loginText = new System.Windows.Forms.Label();
             this.label_login = new System.Windows.Forms.Label();
             this.button_login = new System.Windows.Forms.Button();
@@ -38,6 +40,8 @@
             // 
             // panel_login
             // 
+            this.panel_login.Controls.Add(this.label_siteUrl);
+            this.panel_login.Controls.Add(this.textBox_siteUrl);
             this.panel_login.Controls.Add(this.label_loginText);
             this.panel_login.Controls.Add(this.label_login);
             this.panel_login.Controls.Add(this.button_login);
@@ -47,6 +51,25 @@
             this.panel_login.Name = "panel_login";
             this.panel_login.Size = new System.Drawing.Size(990, 903);
             this.panel_login.TabIndex = 0;
+            // 
+            // label_siteUrl
+            // 
+            this.label_siteUrl.AutoSize = true;
+            this.label_siteUrl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label_siteUrl.Location = new System.Drawing.Point(270, 373);
+            this.label_siteUrl.Name = "label_siteUrl";
+            this.label_siteUrl.Size = new System.Drawing.Size(62, 21);
+            this.label_siteUrl.TabIndex = 4;
+            this.label_siteUrl.Text = "Site url:";
+            // 
+            // textBox_siteUrl
+            // 
+            this.textBox_siteUrl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox_siteUrl.Location = new System.Drawing.Point(338, 370);
+            this.textBox_siteUrl.Name = "textBox_siteUrl";
+            this.textBox_siteUrl.PlaceholderText = "E.g: https://app4.timelog.com/coldemo";
+            this.textBox_siteUrl.Size = new System.Drawing.Size(334, 29);
+            this.textBox_siteUrl.TabIndex = 3;
             // 
             // label_loginText
             // 
@@ -80,7 +103,7 @@
             this.button_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_login.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button_login.ForeColor = System.Drawing.Color.White;
-            this.button_login.Location = new System.Drawing.Point(412, 364);
+            this.button_login.Location = new System.Drawing.Point(412, 418);
             this.button_login.Margin = new System.Windows.Forms.Padding(10);
             this.button_login.Name = "button_login";
             this.button_login.Size = new System.Drawing.Size(174, 39);
@@ -110,5 +133,8 @@
         private System.Windows.Forms.Button button_login;
         private System.Windows.Forms.Label label_login;
         private System.Windows.Forms.Label label_loginText;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label_siteUrl;
+        private System.Windows.Forms.TextBox textBox_siteUrl;
     }
 }

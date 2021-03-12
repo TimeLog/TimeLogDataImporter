@@ -11,8 +11,8 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        public string LocalhostUrl = "https://app4.timelog.com/coldemo";
-        //public string LocalhostUrl = "http://localhost/tlp";
+        //public string SiteUrl = "https://app4.timelog.com/coldemo";
+        public string SiteUrl = "http://localhost/tlp";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
@@ -23,7 +23,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         //public string ProjectExpenseValidateEndpoint = "/api/v1/project-expense/validate-new-project-expense";
         public string ProjectExpenseCreateEndpoint = "/api/v1/project-expense";
         public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
-        public string TaskCreateEndpoint = "/api/v1/task/create";
+        public string TaskCreateEndpoint = "/api/v1/task/";
         public string SubTaskCreateEndpoint = "/api/v1/task/create-sub-task";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";

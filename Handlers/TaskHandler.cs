@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -25,7 +26,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(task, Newtonsoft.Json.Formatting.None, 
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.TaskValidateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.TaskValidateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -52,7 +53,17 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(task, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.TaskCreateEndpoint;
+
+            var _address = String.Empty;
+            if (task.ParentTaskID != null)
+            {
+                _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.SubTaskCreateEndpoint;
+            }
+            else
+            {
+                _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.TaskCreateEndpoint;
+            }
+
             businessRulesApiResponse = null;
 
             try
@@ -77,7 +88,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<TaskTypeReadModel> GetAllTaskType(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllTaskTypeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllTaskTypeEndpoint;
 
             try
             {
@@ -92,7 +103,11 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<TaskTypeReadModel>(_property.Value.ToString()));
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<TaskTypeReadModel>(_property.Value.ToString()));
+                            }
                         }
                     }
 
@@ -107,9 +122,9 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token)
+        public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token, int contractID)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllContractHourlyRatesEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllContractHourlyRatesEndpoint + "&contractID=" + contractID;
 
             try
             {
@@ -124,7 +139,12 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ContractHourlyRateReadModel>(_property.Value.ToString()));
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<ContractHourlyRateReadModel>(
+                                        _property.Value.ToString()));
+                            }
                         }
                     }
 
@@ -133,7 +153,7 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                MessageBox.Show("Failed to obtain contract hourly rate ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to obtain contract hourly rate ID list for contractID: "+contractID + ". " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
@@ -141,7 +161,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProductReadModel> GetAllProduct(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProductEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProductEndpoint;
 
             try
             {
@@ -156,7 +176,11 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ProductReadModel>(_property.Value.ToString()));
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<ProductReadModel>(_property.Value.ToString()));
+                            }
                         }
                     }
 
@@ -173,7 +197,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<TaskReadModel> GetAllTask(string token, int projectID)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID;
 
             try
             {
@@ -188,7 +212,11 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
+                            }
                         }
                     }
 

@@ -25,7 +25,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(customer, Newtonsoft.Json.Formatting.None, 
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.CustomerValidateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.CustomerValidateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -52,7 +52,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(customer, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.CustomerCreateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.CustomerCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -77,7 +77,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CountryReadModel> GetAllCountry(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCountryEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCountryEndpoint;
 
             try
             {
@@ -109,7 +109,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerStatusReadModel> GetAllCustomerStatus(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCustomerStatusEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCustomerStatusEndpoint;
 
             try
             {
@@ -141,7 +141,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<IndustryReadModel> GetAllIndustry(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllIndustryEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllIndustryEndpoint;
 
             try
             {
@@ -173,7 +173,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentTermReadModel> GetAllPaymentTerm(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllPaymentTermEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllPaymentTermEndpoint;
 
             try
             {

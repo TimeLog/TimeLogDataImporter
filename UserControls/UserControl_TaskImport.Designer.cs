@@ -45,8 +45,6 @@
             this.label_nonMandatoryFields = new System.Windows.Forms.Label();
             this.button_expandNonMandatory = new System.Windows.Forms.Button();
             this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
-            this.checkBox_defaultPaymentProductNo = new System.Windows.Forms.CheckBox();
-            this.checkBox_defaultHourlyRate = new System.Windows.Forms.CheckBox();
             this.label_paymentInvoiceDate = new System.Windows.Forms.Label();
             this.label_paymentName = new System.Windows.Forms.Label();
             this.checkBox_defaultAdditionalTextIsRequired = new System.Windows.Forms.CheckBox();
@@ -312,8 +310,6 @@
             // panel_NonMandatoryFields
             // 
             this.panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultPaymentProductNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultHourlyRate);
             this.panel_NonMandatoryFields.Controls.Add(this.label_paymentInvoiceDate);
             this.panel_NonMandatoryFields.Controls.Add(this.label_paymentName);
             this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultAdditionalTextIsRequired);
@@ -354,28 +350,6 @@
             this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
             this.panel_NonMandatoryFields.Size = new System.Drawing.Size(440, 477);
             this.panel_NonMandatoryFields.TabIndex = 1;
-            // 
-            // checkBox_defaultPaymentProductNo
-            // 
-            this.checkBox_defaultPaymentProductNo.AutoSize = true;
-            this.checkBox_defaultPaymentProductNo.Location = new System.Drawing.Point(362, 381);
-            this.checkBox_defaultPaymentProductNo.Name = "checkBox_defaultPaymentProductNo";
-            this.checkBox_defaultPaymentProductNo.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultPaymentProductNo.TabIndex = 20;
-            this.checkBox_defaultPaymentProductNo.Text = "Default";
-            this.checkBox_defaultPaymentProductNo.UseVisualStyleBackColor = true;
-            this.checkBox_defaultPaymentProductNo.CheckedChanged += new System.EventHandler(this.checkBox_defaultPaymentProductNo_CheckedChanged);
-            // 
-            // checkBox_defaultHourlyRate
-            // 
-            this.checkBox_defaultHourlyRate.AutoSize = true;
-            this.checkBox_defaultHourlyRate.Location = new System.Drawing.Point(362, 195);
-            this.checkBox_defaultHourlyRate.Name = "checkBox_defaultHourlyRate";
-            this.checkBox_defaultHourlyRate.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultHourlyRate.TabIndex = 19;
-            this.checkBox_defaultHourlyRate.Text = "Default";
-            this.checkBox_defaultHourlyRate.UseVisualStyleBackColor = true;
-            this.checkBox_defaultHourlyRate.CheckedChanged += new System.EventHandler(this.checkBox_defaultHourlyRate_CheckedChanged);
             // 
             // label_paymentInvoiceDate
             // 
@@ -1008,7 +982,5 @@
         private System.Windows.Forms.Label label_paymentName;
         private System.Windows.Forms.Label label_paymentProductNo;
         private System.Windows.Forms.CheckBox checkBox_defaultTaskType;
-        private System.Windows.Forms.CheckBox checkBox_defaultHourlyRate;
-        private System.Windows.Forms.CheckBox checkBox_defaultPaymentProductNo;
     }
 }

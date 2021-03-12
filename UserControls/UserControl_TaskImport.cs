@@ -120,10 +120,8 @@ namespace TimeLog.DataImporter.UserControls
 
         private void InitializeAllDefaultValues()
         {
-            GetAllContractHourlyRatesFromApi();
-            GetAllPaymentProductNoFromApi();
-            GetAllTaskTypeFromApi();
             GetAllProjectFromApi();
+            GetAllTaskTypeFromApi();
             GetAllPaymentRecognitionModel();
         }
 
@@ -239,6 +237,7 @@ namespace TimeLog.DataImporter.UserControls
                         {
                             TaskCreateModel _newTask = new TaskCreateModel
                             {
+                                ProjectID = (int)MapFieldValueToID(ProjectNo, _row, false),
                                 TaskNo = TaskHandler.Instance.CheckAndGetString(dataGridView_task, TaskNo, _row),
                                 TaskName = TaskHandler.Instance.CheckAndGetString(dataGridView_task, TaskName, _row),
                                 Description = TaskHandler.Instance.CheckAndGetString(dataGridView_task, Description, _row),
@@ -251,7 +250,6 @@ namespace TimeLog.DataImporter.UserControls
                                 IsReadyForInvoicing = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsReadyForInvoicing, _row),
                                 TaskTypeID = MapFieldValueToID(TaskType, _row, true),
                                 HourlyRateID = (int) MapFieldValueToID(ContractHourlyRate, _row, false),
-                                ProjectID = (int) MapFieldValueToID(ProjectNo, _row, false),
                                 ParentTaskID = MapFieldValueToID(ParentTaskNo, _row, true),
                                 IsBillable = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsBillable, _row),
                                 PaymentRecognitionModel = (PaymentRecognitionModelTypes)(int) MapFieldValueToID(PaymentRecognitionModel, _row, false),
@@ -370,11 +368,25 @@ namespace TimeLog.DataImporter.UserControls
                 }
                 else if (columnName == PaymentRecognitionModel)
                 {
-                    _result = TaskHandler.Instance.GetIDFromFieldValue(PaymentRecognitionModelList, _fieldValue);
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        _result = TaskHandler.Instance.GetIDFromFieldValue(PaymentRecognitionModelList, _fieldValue);
+                    }
+                    else
+                    {
+                        _result = 0;
+                    }
                 }
                 else if (columnName == ParentTaskNo)
                 {
-                    _result = TaskHandler.Instance.GetIDFromFieldValue(ParentTaskNoList, _fieldValue);
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        _result = TaskHandler.Instance.GetIDFromFieldValue(ParentTaskNoList, _fieldValue);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
 
                 if (_result != -1)
@@ -448,10 +460,8 @@ namespace TimeLog.DataImporter.UserControls
             checkBox_defaultTaskType.Checked = false;
             checkBox_defaultAdditionalTextIsRequired.Checked = false;
             checkBox_defaultIsReadyForInvoicing.Checked = false;
-            checkBox_defaultHourlyRate.Checked = false;
             checkBox_defaultPaymentRecognitionModel.Checked = false;
             checkBox_defaultIsBillable.Checked = false;
-            checkBox_defaultPaymentProductNo.Checked = false;
         }
 
         #endregion
@@ -471,31 +481,31 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllContractHourlyRatesFromApi()
-        {
-            var _apiResponse = TaskHandler.Instance.GetAllContractHourlyRates(AuthenticationHandler.Instance.Token);
+        //private void GetAllContractHourlyRatesFromApi()
+        //{
+        //    var _apiResponse = TaskHandler.Instance.GetAllContractHourlyRates(AuthenticationHandler.Instance.Token);
 
-            if (_apiResponse != null)
-            {
-                foreach (var _contractHourlyRate in _apiResponse)
-                {
-                    ContractHourlyRateList.Add(new KeyValuePair<int, string>(_contractHourlyRate.ContractHourlyRateID, _contractHourlyRate.Name));
-                }
-            }
-        }
+        //    if (_apiResponse != null)
+        //    {
+        //        foreach (var _contractHourlyRate in _apiResponse)
+        //        {
+        //            ContractHourlyRateList.Add(new KeyValuePair<int, string>(_contractHourlyRate.ContractHourlyRateID, _contractHourlyRate.Name));
+        //        }
+        //    }
+        //}
 
-        private void GetAllPaymentProductNoFromApi()
-        {
-            var _apiResponse = TaskHandler.Instance.GetAllProduct(AuthenticationHandler.Instance.Token);
+        //private void GetAllPaymentProductNoFromApi()
+        //{
+        //    var _apiResponse = TaskHandler.Instance.GetAllProduct(AuthenticationHandler.Instance.Token);
 
-            if (_apiResponse != null)
-            {
-                foreach (var _product in _apiResponse)
-                {
-                    PaymentProductNoList.Add(new KeyValuePair<int, string>(_product.ProductNumberID, _product.ProductNumber));
-                }
-            }
-        }
+        //    if (_apiResponse != null)
+        //    {
+        //        foreach (var _product in _apiResponse)
+        //        {
+        //            PaymentProductNoList.Add(new KeyValuePair<int, string>(_product.ProductNumberID, _product.ProductNumber));
+        //        }
+        //    }
+        //}
 
         private void GetAllProjectFromApi()
         {
@@ -609,7 +619,7 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_hourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
             TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_hourlyRate, ContractHourlyRate, checkBox_defaultHourlyRate);
+                comboBox_hourlyRate, ContractHourlyRate);
         }
 
         private void comboBox_taskNo_SelectedIndexChanged(object sender, EventArgs e)
@@ -651,7 +661,7 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_paymentProductNo_SelectedIndexChanged(object sender, EventArgs e)
         {
             TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentProductNo, PaymentProductNo, checkBox_defaultPaymentProductNo);
+                comboBox_paymentProductNo, PaymentProductNo);
         }
 
         private void comboBox_paymentName_SelectedIndexChanged(object sender, EventArgs e)
@@ -698,18 +708,6 @@ namespace TimeLog.DataImporter.UserControls
         {
             TaskHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_task, _taskTable, comboBox_taskType,
                 TaskType, checkBox_defaultTaskType, TaskTypeList, TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
-
-        private void checkBox_defaultHourlyRate_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_task, _taskTable, comboBox_hourlyRate,
-                ContractHourlyRate, checkBox_defaultHourlyRate, ContractHourlyRateList, TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
-
-        private void checkBox_defaultPaymentProductNo_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_task, _taskTable, comboBox_paymentProductNo,
-                PaymentProductNo, checkBox_defaultPaymentProductNo, PaymentProductNoList, TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
         #endregion

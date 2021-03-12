@@ -165,7 +165,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCurrencyEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCurrencyEndpoint;
 
             try
             {
@@ -197,7 +197,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<LegalEntityReadModel> GetAllLegalEntity(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllLegalEntityEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllLegalEntityEndpoint;
 
             try
             {
@@ -229,7 +229,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<EmployeeReadModel> GetAllEmployee(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllEmployeeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllEmployeeEndpoint;
 
             try
             {
@@ -251,7 +251,7 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
-                    return _apiResponse.Where(x=>x.IsActive && x.UserType == 0).ToList();
+                    return _apiResponse.Where(x=>x.IsActive && x.UserType.Equals("Employee")).ToList();
                 }
             }
             catch (WebException _webEx)
@@ -264,7 +264,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerReadModel> GetAllCustomer(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCustomerEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCustomerEndpoint;
 
             try
             {
@@ -299,14 +299,14 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectReadModel> GetAllProject(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllProjectEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProjectEndpoint;
 
             try
             {
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ProjectReadModel> _apiResponse = new List<ProjectReadModel>();
 
@@ -334,7 +334,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID;
 
             try
             {
@@ -349,7 +349,10 @@ namespace TimeLog.DataImporter.Handlers
                     {
                         foreach (var _property in _entity.Properties())
                         {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
+                            }
                         }
                     }
 

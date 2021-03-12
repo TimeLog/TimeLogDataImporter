@@ -26,7 +26,7 @@ namespace TimeLog.DataImporter.Handlers
             var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None, 
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
             //lack of validate endpoint
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -53,7 +53,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -78,7 +78,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllPaymentMethodEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllPaymentMethodEndpoint;
 
             try
             {
@@ -110,7 +110,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllExpenseTypeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllExpenseTypeEndpoint;
 
             try
             {

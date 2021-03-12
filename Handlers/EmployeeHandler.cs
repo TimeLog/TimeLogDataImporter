@@ -25,7 +25,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(employee, Newtonsoft.Json.Formatting.None, 
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.EmployeeValidateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.EmployeeValidateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -52,7 +52,7 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _data = JsonConvert.SerializeObject(employee, Newtonsoft.Json.Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.EmployeeCreateEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.EmployeeCreateEndpoint;
             businessRulesApiResponse = null;
 
             try
@@ -77,7 +77,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<DepartmentReadModel> GetAllDepartment(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllDepartmentEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllDepartmentEndpoint;
 
             try
             {
@@ -109,7 +109,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<EmployeeTypeReadModel> GetAllEmployeeTypes(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllEmployeeTypeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllEmployeeTypeEndpoint;
 
             try
             {
@@ -142,7 +142,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HourlyRateReadModel> GetAllDefaultHourlyRate(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetDefaultHourlyRatesEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetDefaultHourlyRatesEndpoint;
 
             try
             {
@@ -174,7 +174,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CostPriceReadModel> GetAllCostPrices(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllCostPriceEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCostPriceEndpoint;
 
             try
             {
@@ -206,7 +206,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HolidayCalendarReadModel> GetAllHolidayCalendars(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllHolidayCalendarEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllHolidayCalendarEndpoint;
 
             try
             {
@@ -238,7 +238,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<AllowanceLegislationReadModel> GetAllAllowanceLegislations(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllAllowanceLegislationEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllAllowanceLegislationEndpoint;
 
             try
             {
@@ -270,7 +270,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<NormalWorkingTimeReadModel> GetAllNormalWorkingTimes(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint;
 
             try
             {
@@ -302,7 +302,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<SalaryGroupReadModel> GetAllSalaryGroups(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllSalaryGroupEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllSalaryGroupEndpoint;
 
             try
             {
@@ -334,7 +334,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<UserRoleReadModel> GetAllUserRoles(string token)
         {
-            var _address = ApiHelper.Instance.LocalhostUrl + ApiHelper.Instance.GetAllUserRolesEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllUserRolesEndpoint;
 
             try
             {
