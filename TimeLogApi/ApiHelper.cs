@@ -11,8 +11,8 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        //public string SiteUrl = "https://app4.timelog.com/coldemo";
-        public string SiteUrl = "http://localhost/tlp";
+        public string SiteUrl = "https://app4.timelog.com/coldemo";
+        //public string SiteUrl = "http://localhost/tlp";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
@@ -25,6 +25,11 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
         public string TaskCreateEndpoint = "/api/v1/task/";
         public string SubTaskCreateEndpoint = "/api/v1/task/create-sub-task";
+        public string TimeMaterialBasicCreateEndpoint = "/api/v1/contract/create-time-material-basic-contract";
+        public string FixedPriceBasicCreateEndpoint = "/api/v1/contract/create-fixed-price-basic-contract";
+        public string TimeMaterialAccountEndBalancingCreateEndpoint = "/api/v1/contract/create-time-material-account-end-balancing-contract";
+        public string PrepaidServicesCreateEndpoint = "/api/v1/contract/create-prepaid-services-contract";
+        public string TaskDrivenRevenueCreateEndpoint = "/api/v1/contract/create-task-driven-revenue-contract";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
         public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
@@ -54,6 +59,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllTaskTypeEndpoint = "/api/v1/TaskType?$page=1&$pagesize=300";
         public string GetAllProductEndpoint = "/api/v1/product?$page=1&$pagesize=300";
         public string GetAllUserRolesEndpoint = "/api/v1/role?$page=1&$pagesize=300";
+        public string GetAllContractModelsEndpoint = "/api/v1/ContractModel";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();

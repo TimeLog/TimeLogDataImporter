@@ -77,7 +77,7 @@ namespace TimeLog.DataImporter.UserControls
         //default value lists
         private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
         private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
-        private static readonly List<string> VATPercentageList = new List<string>();
+        private static  List<string> VATPercentageList = new List<string>();
         private static readonly List<KeyValuePair<int, string>> InvoiceAddressToUse = new List<KeyValuePair<int, string>>()
         {
             new KeyValuePair<int, string>(1,"Customer's Address"),
@@ -181,7 +181,8 @@ namespace TimeLog.DataImporter.UserControls
             GetAllInternalReferencesFromApi();
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
-            GetAllVATPercentages();
+            VATPercentageList = CustomerHandler.Instance.GetPercentageList();
+            
         }
 
         #endregion
@@ -386,14 +387,7 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Helper methods
 
-        private void GetAllVATPercentages()
-        {
-            for (int i = 0; i <= 100; i++)
-            {
-                VATPercentageList.Add(i.ToString());
-            }
-        }
-
+       
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);

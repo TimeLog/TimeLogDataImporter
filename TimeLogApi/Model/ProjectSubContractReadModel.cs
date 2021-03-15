@@ -26,7 +26,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The contract model type
         /// </value>
-        public ContractModelType ContractModelType { get; set; }
+        public int ContractModelType { get; set; }
 
         /// <summary>
         /// Gets or sets the project ID
@@ -85,58 +85,58 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         Cancelled = 4
     }
 
-    public enum ContractModelType
-    {
-        /// <summary>
-        /// The Time and Material Standard Agreement contract type
-        /// </summary>
-        TimeMaterialBasic = 1,
+    //public enum ContractModelType
+    //{
+    //    /// <summary>
+    //    /// The Time and Material Standard Agreement contract type
+    //    /// </summary>
+    //    TimeMaterialBasic = 1,
 
-        /// <summary>
-        /// The fixed price standard agreement contract type
-        /// </summary>
-        FixedPriceBasic = 2,
+    //    /// <summary>
+    //    /// The fixed price standard agreement contract type
+    //    /// </summary>
+    //    FixedPriceBasic = 2,
 
-        /// <summary>
-        /// The On Account with end balancing - Time and Material contract type
-        /// </summary>
-        TimeMaterialAccountEndBalancing = 3,
+    //    /// <summary>
+    //    /// The On Account with end balancing - Time and Material contract type
+    //    /// </summary>
+    //    TimeMaterialAccountEndBalancing = 3,
 
-        /// <summary>
-        /// The On Account with periodic balancing - Time and Material contract type
-        /// Recurrence Contract
-        /// </summary>
-        TimeMaterialAccountPeriodicBalancing = 4,
+    //    /// <summary>
+    //    /// The On Account with periodic balancing - Time and Material contract type
+    //    /// Recurrence Contract
+    //    /// </summary>
+    //    TimeMaterialAccountPeriodicBalancing = 4,
 
-        /// <summary>
-        /// The prepaid hours - Time and Material contract type
-        /// </summary>
-        PrepaidServices = 5,
+    //    /// <summary>
+    //    /// The prepaid hours - Time and Material contract type
+    //    /// </summary>
+    //    PrepaidServices = 5,
 
-        /// <summary>
-        /// The revenue request per task - fixed price contract type (TDR = task driven revenue)
-        /// </summary>
-        TaskDrivenRevenue = 6,
+    //    /// <summary>
+    //    /// The revenue request per task - fixed price contract type (TDR = task driven revenue)
+    //    /// </summary>
+    //    TaskDrivenRevenue = 6,
 
-        /// <summary>
-        /// The revenue request per period - fixed price contract type (continuous service)
-        /// Recurrence Contract
-        /// </summary>
-        ContinuousService = 7,
+    //    /// <summary>
+    //    /// The revenue request per period - fixed price contract type (continuous service)
+    //    /// Recurrence Contract
+    //    /// </summary>
+    //    ContinuousService = 7,
 
-        /// <summary>
-        /// The volumn invoicing - fixed price contract type (FPVI)
-        /// Recurrence Contract
-        /// </summary>
-        ContinuousItemInvoicing = 8,
+    //    /// <summary>
+    //    /// The volumn invoicing - fixed price contract type (FPVI)
+    //    /// Recurrence Contract
+    //    /// </summary>
+    //    ContinuousItemInvoicing = 8,
 
-        #region System contracts
+    //    #region System contracts
 
-        /// <summary>
-        /// Recurring Product Contract for expenses generated from recurring product sales
-        /// </summary>
-        RecurringProductContract = 20
+    //    /// <summary>
+    //    /// Recurring Product Contract for expenses generated from recurring product sales
+    //    /// </summary>
+    //    RecurringProductContract = 20
 
-        #endregion
-    }
+    //    #endregion
+    //}
 }
