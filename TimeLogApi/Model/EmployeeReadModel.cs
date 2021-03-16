@@ -58,7 +58,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The user type
         /// </value>
-        public int UserType { get; set; }
+        public string UserType { get; set; }
 
     }
 }
