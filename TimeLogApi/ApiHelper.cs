@@ -35,7 +35,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
         public string GetAllCustomerEndpoint = "/api/v1/customer?$page=1&$pagesize=300";
         public string GetAllDepartmentEndpoint = "/api/v1/Department?$page=1&$pagesize=300";
-        public string GetDefaultHourlyRatesEndpoint = "/api/v1/hourly-rate/get-default-hourly-rates?$page=1&$pagesize=300";
+        public string GetDefaultHourlyRatesEndpoint = "/api/v1/hourly-rate/default?$page=1&$pagesize=300";
         public string GetAllContractHourlyRatesEndpoint = "/api/v1/contract-hourly-rate?$page=1&$pagesize=300";
         public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";  //user-type endpoint
         public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";

@@ -202,6 +202,8 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_clear_Click(object sender, EventArgs e)
         {
+            InitializeAllDefaultValues();
+
             EmployeeHandler.Instance.FileColumnHeaders = new List<string>();
             textBox_employeeImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
@@ -369,7 +371,10 @@ namespace TimeLog.DataImporter.UserControls
                 }
                 else if (columnName == DefaultHourlyRate)
                 {
-                    _result = EmployeeHandler.Instance.GetIDFromFieldValue(DefaultHourlyRateList, _fieldValue);
+                    var _legalEntity = EmployeeHandler.Instance.CheckAndGetString(dataGridView_employee, LegalEntity, row);
+                    var legalEntityID = EmployeeHandler.Instance.GetIDFromFieldValue(LegalEntityList, _legalEntity);
+
+                    _result = EmployeeHandler.Instance.GetLegalEntityIDFromFieldValue(DefaultHourlyRateList, _fieldValue, legalEntityID);
                 }
                 else if (columnName == CostPrice)
                 {
@@ -478,6 +483,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllLegalEntityFromApi()
         {
+            LegalEntityList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllLegalEntity(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -491,6 +497,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllDepartmentFromApi()
         {
+            DepartmentList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -504,6 +511,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllEmployeeTypeFromApi()
         {
+            EmployeeTypeList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllEmployeeTypes(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -517,6 +525,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllDefaultHourlyRateFromApi()
         {
+            DefaultHourlyRateList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllDefaultHourlyRate(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -530,6 +539,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCostPriceFromApi()
         {
+            CostPriceList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllCostPrices(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -543,6 +553,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllPublicHolidayCalendarFromApi()
         {
+            PublicHolidayCalendarList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllHolidayCalendars(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -556,6 +567,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllAllowanceLegislationFromApi()
         {
+            AllowanceLegislationList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllAllowanceLegislations(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -569,6 +581,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllNormalWorkingTimeFromApi()
         {
+            NormalWorkingTimeList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllNormalWorkingTimes(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -582,6 +595,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllSalaryGroupFromApi()
         {
+            SalaryGroupList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllSalaryGroups(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -595,6 +609,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllManagerFromApi()
         {
+            ManagerInitialsList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -608,6 +623,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllUserRolesFromApi()
         {
+            UserRolesList.Clear();
             var _apiResponse = EmployeeHandler.Instance.GetAllUserRoles(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

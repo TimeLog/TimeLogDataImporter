@@ -178,6 +178,20 @@ namespace TimeLog.DataImporter.Handlers
             return -1;
         }
 
+        public int GetLegalEntityIDFromFieldValue(List<KeyValuePair<string, string>> keyValuePairList, string fieldValue, int legalEntityID)
+        {
+            foreach (var _field in keyValuePairList)
+            {
+                if (_field.Value.ToLower().Trim().Equals(fieldValue.ToLower().Trim()) && Convert.ToInt32(_field.Key.Split("_")[1]) == legalEntityID)
+                {
+                    var _fieldKey = _field.Key.Split("_")[0];
+                    return Convert.ToInt32(_fieldKey);
+                }
+            }
+
+            return -1;
+        }
+
         #endregion
 
         #region Get methods for shared default values
