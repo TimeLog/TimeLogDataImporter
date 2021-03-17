@@ -82,4 +82,7 @@ public class ProjectSubContractCreateModelBase
     /// <c>true</c> if the expenses are default; otherwise, <c>false</c>
     /// </value>
     public bool IsDefaultExpenses { get; set; }
+
+
+    public ContractModelType ContractModelType { get; set; }
 }

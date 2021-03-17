@@ -50,10 +50,12 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _revenueTravelAmount = "Revenue Travel Amount";
         private readonly string _isExpensesLinked = "Is Expenses Linked";
         private readonly string _isTravelLinked = "Is Travel Linked";
+        private readonly string _hourlyRateService = "Hourly Rate Service";
 
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> ContractModels = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<string, string>> HourlyRateService = new List<KeyValuePair<string, string>>();
 
 
         private static readonly List<KeyValuePair<int, string>> ContractStatusList =
@@ -248,52 +250,99 @@ namespace TimeLog.DataImporter.UserControls
 
                         if (_row.DataBoundItem != null)
                         {
-                            //ContractCreateModel _newProject = new ProjectCreateModel
-                            //{
-                            //    Name = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, _projectName,
-                            //        _row),
-                            //    CustomerID = (int) MapFieldValueToID(_customerNo, _row, false),
-                            //    ProjectTemplateID = (int) MapFieldValueToID(_projectTemplate, _row, false),
-                            //    ProjectManagerID = (int) MapFieldValueToID(_projectManager, _row, false),
-                            //    CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
-                            //    LegalEntityID = (int) MapFieldValueToID(_legalEntity, _row, false),
-                            //    ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_contract, _projectNo,
-                            //        _row),
-                            //    Description =
-                            //        ProjectHandler.Instance.CheckAndGetString(dataGridView_contract, _description,
-                            //            _row),
-                            //    ProjectStartDate =
-                            //        ProjectHandler.Instance.CheckAndGetDate(dataGridView_contract, _projectStartDate,
-                            //            _row),
-                            //    ProjectEndDate =
-                            //        ProjectHandler.Instance.CheckAndGetDate(dataGridView_contract, _projectEndDate,
-                            //            _row),
-                            //    ProjectTypeID = (int) MapFieldValueToID(_projectType, _row, false),
-                            //    ProjectCategoryID = (int) MapFieldValueToID(_projectCategory, _row, false)
-                            //};
+                            ProjectSubContractCreateModelBase _newContract = new ProjectSubContractCreateModelBase
+                            {
+                                ProjectID = (int)MapFieldValueToID(_projectNo, _row, false),
+                                ContractName = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, _contractName, _row),
+                                IsMileageBillable = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isMileageBillable, _row),
+                                IsDefaultExpenses = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row),
+                                ContractOwnerUserID = (int)MapFieldValueToID(_contractOwnerInitials, _row, false),
+                                BudgetWorkHour = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row ),
+                                BudgetWorkAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkAmount, _row),
+                                
+                                ContractStatus = (ProjectSubContractStatus)MapFieldValueToID(_contractStatus, _row, false),
+                                ContractModelType = (ContractModelType)MapFieldValueToID(_contractModel, _row, false),
 
-                            //if (_isMappingFieldValueToIDCorrect)
-                            //{
-                            //    if (_senderButton.Name == button_validate.Name)
-                            //    {
-                            //        var _defaultApiResponse = ContractHandler.Instance.ValidateProject(_newProject,
-                            //            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                            };
 
-                            //        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row,
-                            //            _businessRulesApiResponse,
-                            //            textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
-                            //    }
-                            //    else
-                            //    {
+                            switch (_newContract.ContractModelType)
+                            {
+                                case ContractModelType.TimeMaterialBasic:
+                                    // Specifics for TimeMaterialBasic contract model
+                                    ((TimeMaterialBasicContractCreateModel) _newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
+                                    ((TimeMaterialBasicContractCreateModel) _newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    ((TimeMaterialBasicContractCreateModel) _newContract).HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
+                                    ((TimeMaterialBasicContractCreateModel) _newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    ((TimeMaterialBasicContractCreateModel) _newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    break;
 
-                            //        var _defaultApiResponse = ContractHandler.Instance.ImportContract(_newProject,
-                            //            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                case ContractModelType.FixedPriceBasic:
+                                    // Specifics for FixedPriceBasic contract model
+                                    ((FixedPriceBasicContractCreateModel)_newContract).IsExpensesLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).IsTravelLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isTravelLinked, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).PaymentPlanAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _paymentPlanAmount, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).RevenueExprAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueExprAmount, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).RevenueTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueTravelAmount, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
+                                    ((FixedPriceBasicContractCreateModel)_newContract).TargetHourlyRate = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
 
-                            //        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row,
-                            //            _businessRulesApiResponse,
-                            //            textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
-                            //    }
-                            //}
+
+                                    break;
+
+
+                                case ContractModelType.TimeMaterialAccountEndBalancing:
+                                    // Specifics for TimeMaterialAccountEndBalancing contract model
+                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
+                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
+                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    break;
+
+
+
+                                case ContractModelType.PrepaidServices:
+                                    // Specifics for PrepaidServices contract model
+                                    ((PrepaidServicesContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
+                                    ((PrepaidServicesContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    ((PrepaidServicesContractCreateModel)_newContract).IsFixedHourlyRate = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _targetHourlyRate, _row);
+                                    ((PrepaidServicesContractCreateModel)_newContract).HourlyRateServiceID = (int)MapFieldValueToID(, _row, false)
+                                    break;
+
+                            }
+
+
+
+                            _newContract as TimeMaterialBasicContractCreateModel
+
+
+
+
+                            if (_isMappingFieldValueToIDCorrect)
+                            {
+                                if (_senderButton.Name == button_validate.Name)
+                                {
+                                    var _defaultApiResponse = ContractHandler.Instance.ValidateProject(_newProject,
+                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+
+                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row,
+                                        _businessRulesApiResponse,
+                                        textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                }
+                                else
+                                {
+
+                                    var _defaultApiResponse = ContractHandler.Instance.ImportContract(_newProject,
+                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+
+                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row,
+                                        _businessRulesApiResponse,
+                                        textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                }
+                            }
                         }
                     }
 
@@ -431,6 +480,19 @@ namespace TimeLog.DataImporter.UserControls
                 foreach (var _contractModel in _apiResponse)
                 {
                     ContractModels.Add(new KeyValuePair<int, string>(_contractModel.ContractModelID, _contractModel.Name));
+                }
+            }
+        }
+
+        private void GetAllDefaultHourlyRateServicesFromApi()
+        {
+            var _apiResponse = EmployeeHandler.Instance.GetAllDefaultHourlyRate(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _hourlyRate in _apiResponse.GroupBy(x=> new{ x.ServiceID, x.LegalEntityID, x.HourlyRateName }))
+                {
+                    HourlyRateService.Add(new KeyValuePair<string, string>(_hourlyRate.HourlyRateID + "_" + _hourlyRate.LegalEntityID, _hourlyRate.HourlyRateName));
                 }
             }
         }
