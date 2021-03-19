@@ -25,10 +25,15 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
         public string TaskCreateEndpoint = "/api/v1/task/";
         public string SubTaskCreateEndpoint = "/api/v1/task/create-sub-task";
+        public string TimeMaterialBasicValidateEndpoint = "/api/v1/contract/create-time-material-basic-contract";
         public string TimeMaterialBasicCreateEndpoint = "/api/v1/contract/create-time-material-basic-contract";
+        public string FixedPriceBasicValidateEndpoint = "/api/v1/contract/create-fixed-price-basic-contract";
         public string FixedPriceBasicCreateEndpoint = "/api/v1/contract/create-fixed-price-basic-contract";
+        public string TimeMaterialAccountEndBalancingValidateEndpoint = "/api/v1/contract/create-time-material-account-end-balancing-contract";
         public string TimeMaterialAccountEndBalancingCreateEndpoint = "/api/v1/contract/create-time-material-account-end-balancing-contract";
+        public string PrepaidServicesValidateEndpoint = "/api/v1/contract/create-prepaid-services-contract";
         public string PrepaidServicesCreateEndpoint = "/api/v1/contract/create-prepaid-services-contract";
+        public string TaskDrivenRevenueValidateEndpoint = "/api/v1/contract/create-task-driven-revenue-contract";
         public string TaskDrivenRevenueCreateEndpoint = "/api/v1/contract/create-task-driven-revenue-contract";
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";

@@ -81,6 +81,9 @@
             this.button_projectSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBox_defaultProjectDepartment = new System.Windows.Forms.CheckBox();
+            this.label_projectDepartment = new System.Windows.Forms.Label();
+            this.comboBox_projectDepartment = new System.Windows.Forms.ComboBox();
             this.panel_projectDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_project)).BeginInit();
             this.panel_projectMessage.SuspendLayout();
@@ -431,6 +434,9 @@
             // 
             // groupBox_projectMandatoryFields
             // 
+            this.groupBox_projectMandatoryFields.Controls.Add(this.checkBox_defaultProjectDepartment);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.label_projectDepartment);
+            this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectDepartment);
             this.groupBox_projectMandatoryFields.Controls.Add(this.checkBox_defaultLegalEntity);
             this.groupBox_projectMandatoryFields.Controls.Add(this.checkBox_defaultProjectTemplate);
             this.groupBox_projectMandatoryFields.Controls.Add(this.checkBox_defaultProjectType);
@@ -451,7 +457,7 @@
             this.groupBox_projectMandatoryFields.Controls.Add(this.comboBox_projectName);
             this.groupBox_projectMandatoryFields.Location = new System.Drawing.Point(184, 62);
             this.groupBox_projectMandatoryFields.Name = "groupBox_projectMandatoryFields";
-            this.groupBox_projectMandatoryFields.Size = new System.Drawing.Size(358, 245);
+            this.groupBox_projectMandatoryFields.Size = new System.Drawing.Size(358, 277);
             this.groupBox_projectMandatoryFields.TabIndex = 5;
             this.groupBox_projectMandatoryFields.TabStop = false;
             this.groupBox_projectMandatoryFields.Text = "Mandatory";
@@ -666,6 +672,36 @@
             // 
             this.defaultToolTip.ShowAlways = true;
             // 
+            // checkBox_defaultProjectDepartment
+            // 
+            this.checkBox_defaultProjectDepartment.AutoSize = true;
+            this.checkBox_defaultProjectDepartment.Location = new System.Drawing.Point(283, 243);
+            this.checkBox_defaultProjectDepartment.Name = "checkBox_defaultProjectDepartment";
+            this.checkBox_defaultProjectDepartment.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultProjectDepartment.TabIndex = 9;
+            this.checkBox_defaultProjectDepartment.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultProjectDepartment, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultProjectDepartment.UseVisualStyleBackColor = true;
+            this.checkBox_defaultProjectDepartment.CheckedChanged += new System.EventHandler(this.checkBox_defaultProjectDepartment_CheckedChanged);
+            // 
+            // label_projectDepartment
+            // 
+            this.label_projectDepartment.AutoSize = true;
+            this.label_projectDepartment.Location = new System.Drawing.Point(6, 244);
+            this.label_projectDepartment.Name = "label_projectDepartment";
+            this.label_projectDepartment.Size = new System.Drawing.Size(81, 17);
+            this.label_projectDepartment.TabIndex = 7;
+            this.label_projectDepartment.Text = "Department";
+            // 
+            // comboBox_projectDepartment
+            // 
+            this.comboBox_projectDepartment.FormattingEnabled = true;
+            this.comboBox_projectDepartment.Location = new System.Drawing.Point(138, 241);
+            this.comboBox_projectDepartment.Name = "comboBox_projectDepartment";
+            this.comboBox_projectDepartment.Size = new System.Drawing.Size(139, 25);
+            this.comboBox_projectDepartment.TabIndex = 8;
+            this.comboBox_projectDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectDepartment_SelectedIndexChanged);
+            // 
             // UserControl_ProjectImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -764,5 +800,8 @@
         private System.Windows.Forms.Button button_expandNonMandatory;
         private System.Windows.Forms.Timer tmrExpand;
         private System.Windows.Forms.ToolTip defaultToolTip;
+        private System.Windows.Forms.CheckBox checkBox_defaultProjectDepartment;
+        private System.Windows.Forms.Label label_projectDepartment;
+        private System.Windows.Forms.ComboBox comboBox_projectDepartment;
     }
 }

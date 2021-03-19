@@ -45,6 +45,9 @@
             this.label_nonMandatoryFields = new System.Windows.Forms.Label();
             this.button_expandNonMandatory = new System.Windows.Forms.Button();
             this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
+            this.checkBox_defaultContractHourlyRateService = new System.Windows.Forms.CheckBox();
+            this.label_contractHourlyRateService = new System.Windows.Forms.Label();
+            this.comboBox_contractHourlyRateService = new System.Windows.Forms.ComboBox();
             this.checkBox_defaultContractIsTravelLinked = new System.Windows.Forms.CheckBox();
             this.checkBox_defaultContractIsExpensesLinked = new System.Windows.Forms.CheckBox();
             this.label_contractIsExpensesLinked = new System.Windows.Forms.Label();
@@ -85,6 +88,9 @@
             this.label_delimiter = new System.Windows.Forms.Label();
             this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
             this.groupBox_contractMandatoryFields = new System.Windows.Forms.GroupBox();
+            this.checkBox_defaultContractModel = new System.Windows.Forms.CheckBox();
+            this.label_contractModel = new System.Windows.Forms.Label();
+            this.comboBox_ContractModel = new System.Windows.Forms.ComboBox();
             this.label_projectNo = new System.Windows.Forms.Label();
             this.checkBox_defaultContractStatus = new System.Windows.Forms.CheckBox();
             this.comboBox_projectNo = new System.Windows.Forms.ComboBox();
@@ -100,9 +106,6 @@
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label_contractModel = new System.Windows.Forms.Label();
-            this.comboBox_ContractModel = new System.Windows.Forms.ComboBox();
-            this.checkBox_defaultContractModel = new System.Windows.Forms.CheckBox();
             this.panel_projectDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_contract)).BeginInit();
             this.panel_projectMessage.SuspendLayout();
@@ -314,6 +317,9 @@
             // panel_NonMandatoryFields
             // 
             this.panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultContractHourlyRateService);
+            this.panel_NonMandatoryFields.Controls.Add(this.label_contractHourlyRateService);
+            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_contractHourlyRateService);
             this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultContractIsTravelLinked);
             this.panel_NonMandatoryFields.Controls.Add(this.checkBox_defaultContractIsExpensesLinked);
             this.panel_NonMandatoryFields.Controls.Add(this.label_contractIsExpensesLinked);
@@ -356,6 +362,36 @@
             this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
             this.panel_NonMandatoryFields.Size = new System.Drawing.Size(416, 550);
             this.panel_NonMandatoryFields.TabIndex = 1;
+            // 
+            // checkBox_defaultContractHourlyRateService
+            // 
+            this.checkBox_defaultContractHourlyRateService.AutoSize = true;
+            this.checkBox_defaultContractHourlyRateService.Location = new System.Drawing.Point(339, 294);
+            this.checkBox_defaultContractHourlyRateService.Name = "checkBox_defaultContractHourlyRateService";
+            this.checkBox_defaultContractHourlyRateService.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultContractHourlyRateService.TabIndex = 46;
+            this.checkBox_defaultContractHourlyRateService.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultContractHourlyRateService, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultContractHourlyRateService.UseVisualStyleBackColor = true;
+            this.checkBox_defaultContractHourlyRateService.CheckedChanged += new System.EventHandler(this.checkBox_defaultContractHourlyRateService_CheckedChanged);
+            // 
+            // label_contractHourlyRateService
+            // 
+            this.label_contractHourlyRateService.AutoSize = true;
+            this.label_contractHourlyRateService.Location = new System.Drawing.Point(10, 295);
+            this.label_contractHourlyRateService.Name = "label_contractHourlyRateService";
+            this.label_contractHourlyRateService.Size = new System.Drawing.Size(127, 17);
+            this.label_contractHourlyRateService.TabIndex = 44;
+            this.label_contractHourlyRateService.Text = "Hourly Rate Service";
+            // 
+            // comboBox_contractHourlyRateService
+            // 
+            this.comboBox_contractHourlyRateService.FormattingEnabled = true;
+            this.comboBox_contractHourlyRateService.Location = new System.Drawing.Point(194, 292);
+            this.comboBox_contractHourlyRateService.Name = "comboBox_contractHourlyRateService";
+            this.comboBox_contractHourlyRateService.Size = new System.Drawing.Size(139, 25);
+            this.comboBox_contractHourlyRateService.TabIndex = 45;
+            this.comboBox_contractHourlyRateService.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHourlyRateService_SelectedIndexChanged);
             // 
             // checkBox_defaultContractIsTravelLinked
             // 
@@ -749,6 +785,36 @@
             this.groupBox_contractMandatoryFields.TabStop = false;
             this.groupBox_contractMandatoryFields.Text = "Mandatory";
             // 
+            // checkBox_defaultContractModel
+            // 
+            this.checkBox_defaultContractModel.AutoSize = true;
+            this.checkBox_defaultContractModel.Location = new System.Drawing.Point(302, 150);
+            this.checkBox_defaultContractModel.Name = "checkBox_defaultContractModel";
+            this.checkBox_defaultContractModel.Size = new System.Drawing.Size(70, 21);
+            this.checkBox_defaultContractModel.TabIndex = 8;
+            this.checkBox_defaultContractModel.Text = "Default";
+            this.defaultToolTip.SetToolTip(this.checkBox_defaultContractModel, "Set default values for all rows of a particular column field");
+            this.checkBox_defaultContractModel.UseVisualStyleBackColor = true;
+            this.checkBox_defaultContractModel.CheckedChanged += new System.EventHandler(this.checkBox_defaultContractModel_CheckedChanged);
+            // 
+            // label_contractModel
+            // 
+            this.label_contractModel.AutoSize = true;
+            this.label_contractModel.Location = new System.Drawing.Point(6, 151);
+            this.label_contractModel.Name = "label_contractModel";
+            this.label_contractModel.Size = new System.Drawing.Size(102, 17);
+            this.label_contractModel.TabIndex = 6;
+            this.label_contractModel.Text = "Contract Model";
+            // 
+            // comboBox_ContractModel
+            // 
+            this.comboBox_ContractModel.FormattingEnabled = true;
+            this.comboBox_ContractModel.Location = new System.Drawing.Point(157, 148);
+            this.comboBox_ContractModel.Name = "comboBox_ContractModel";
+            this.comboBox_ContractModel.Size = new System.Drawing.Size(139, 25);
+            this.comboBox_ContractModel.TabIndex = 7;
+            this.comboBox_ContractModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_ContractModel_SelectedIndexChanged);
+            // 
             // label_projectNo
             // 
             this.label_projectNo.AutoSize = true;
@@ -886,36 +952,6 @@
             this.label5.TabIndex = 26;
             this.label5.Text = "Is Default Expenses";
             // 
-            // label_contractModel
-            // 
-            this.label_contractModel.AutoSize = true;
-            this.label_contractModel.Location = new System.Drawing.Point(6, 151);
-            this.label_contractModel.Name = "label_contractModel";
-            this.label_contractModel.Size = new System.Drawing.Size(102, 17);
-            this.label_contractModel.TabIndex = 6;
-            this.label_contractModel.Text = "Contract Model";
-            // 
-            // comboBox_ContractModel
-            // 
-            this.comboBox_ContractModel.FormattingEnabled = true;
-            this.comboBox_ContractModel.Location = new System.Drawing.Point(157, 148);
-            this.comboBox_ContractModel.Name = "comboBox_ContractModel";
-            this.comboBox_ContractModel.Size = new System.Drawing.Size(139, 25);
-            this.comboBox_ContractModel.TabIndex = 7;
-            this.comboBox_ContractModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_ContractModel_SelectedIndexChanged);
-            // 
-            // checkBox_defaultContractModel
-            // 
-            this.checkBox_defaultContractModel.AutoSize = true;
-            this.checkBox_defaultContractModel.Location = new System.Drawing.Point(302, 150);
-            this.checkBox_defaultContractModel.Name = "checkBox_defaultContractModel";
-            this.checkBox_defaultContractModel.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultContractModel.TabIndex = 8;
-            this.checkBox_defaultContractModel.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultContractModel, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultContractModel.UseVisualStyleBackColor = true;
-            this.checkBox_defaultContractModel.CheckedChanged += new System.EventHandler(this.checkBox_defaultContractModel_CheckedChanged);
-            // 
             // UserControl_ContractImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1036,5 +1072,8 @@
         private System.Windows.Forms.Label label_contractModel;
         private System.Windows.Forms.ComboBox comboBox_ContractModel;
         private System.Windows.Forms.CheckBox checkBox_defaultContractModel;
+        private System.Windows.Forms.CheckBox checkBox_defaultContractHourlyRateService;
+        private System.Windows.Forms.Label label_contractHourlyRateService;
+        private System.Windows.Forms.ComboBox comboBox_contractHourlyRateService;
     }
 }

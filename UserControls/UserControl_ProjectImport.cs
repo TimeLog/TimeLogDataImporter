@@ -28,7 +28,9 @@ namespace TimeLog.DataImporter.UserControls
             {3, "Project Manager Initials"},
             {4, "Currency ISO"},
             {5, "Legal Entity"},
-            {6, "Project Type"}
+            {6, "Project Type"},
+            {7, "Department Name"}
+
         };
 
         //all column header variables
@@ -38,6 +40,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _projectManager = "Project Manager Initials";
         private readonly string _currencyISO = "Currency ISO";
         private readonly string _legalEntity = "Legal Entity";
+        private readonly string _departmentName = "Department Name";
         private readonly string _projectNo = "Project No";
         private readonly string _description = "Description";
         private readonly string _projectStartDate = "Project Start Date";
@@ -49,6 +52,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> _projectTemplateList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _currencyISOList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _legalEntityList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> _departmentList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _projectTypeList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _projectCategoryList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _customerNoList = new List<KeyValuePair<int, string>>();
@@ -110,6 +114,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllProjectTemplateFromApi();
             GetAllCurrencyFromApi();
             GetAllLegalEntityFromApi();
+            GetAllDepartmentsFromApi();
             GetAllProjectTypeFromApi();
             GetAllProjectCategoryFromApi();
             GetAllProjectManagerFromApi();
@@ -438,6 +443,19 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
+        private void GetAllDepartmentsFromApi()
+        {
+            var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _department in _apiResponse)
+                {
+                    _departmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
+                }
+            }
+        }
+
         private void GetAllProjectTypeFromApi()
         {
             var _apiResponse = ProjectHandler.Instance.GetAllProjectType(AuthenticationHandler.Instance.Token);
@@ -566,6 +584,11 @@ namespace TimeLog.DataImporter.UserControls
                 comboBox_projectCategory, _projectCategory, checkBox_defaultProjectCategory);
         }
 
+        private void comboBox_projectDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
+                comboBox_projectLegalEntity, _departmentName, checkBox_defaultProjectDepartment);
+        }
         #endregion
 
         #region Checkbox implementations
@@ -600,6 +623,14 @@ namespace TimeLog.DataImporter.UserControls
                 _projectCategory, checkBox_defaultProjectCategory, _projectCategoryList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
+        private void checkBox_defaultProjectDepartment_CheckedChanged(object sender, EventArgs e)
+        {
+            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectDepartment,
+                _departmentName, checkBox_defaultProjectDepartment, _departmentList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+        }
+
         #endregion
+
+
     }
 }
