@@ -101,5 +101,13 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// The legal entity ID
         /// </value>
         public int LegalEntityID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the department ID
+        /// </summary>
+        /// <value>
+        /// The department ID
+        /// </value>
+        public int DepartmentID { get; set; }
     }
 }

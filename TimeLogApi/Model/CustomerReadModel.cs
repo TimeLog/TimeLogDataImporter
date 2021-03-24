@@ -43,5 +43,13 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// Default mileage for customer.
         /// </value>
         public int DefaultMileageDistance { get; set; }
+
+        /// <summary>
+        /// Gets or sets the customer status ID.
+        /// </summary>
+        /// <value>
+        /// The customer status ID.
+        /// </value>
+        public int CustomerStatusID { get; set; }
     }
 }

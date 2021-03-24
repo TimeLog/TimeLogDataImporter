@@ -107,37 +107,7 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<CustomerStatusReadModel> GetAllCustomerStatus(string token)
-        {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCustomerStatusEndpoint;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<CustomerStatusReadModel> _apiResponse = new List<CustomerStatusReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<CustomerStatusReadModel>(_property.Value.ToString()));
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain default customer status ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            
-            return null;
-        }
+        
 
         public List<IndustryReadModel> GetAllIndustry(string token)
         {

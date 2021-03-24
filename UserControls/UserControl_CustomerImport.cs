@@ -65,10 +65,6 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _expenseIsBillable = "Expense Is Billable";
         private readonly string _mileageIsBillable = "Mileage Is Billable";
         private readonly string _defaultDistIsMaxBillable = "Default Dist Is Max Billable";
-        private readonly string _contactID = "Contact ID";
-        private readonly string _invoiceAddressToUse = "Invoice Address To Use";
-        private readonly string _internalReference = "Internal Reference Initials";
-        private readonly string _customerReferenceID = "Customer Reference ID";
         private readonly string _paymentTerm = "Payment Term";
         private readonly string _discountPercentage = "Discount Percentage";
         private readonly string _calculateVAT = "Calculate VAT";
@@ -78,16 +74,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
         private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
         private static  List<string> VATPercentageList = new List<string>();
-        private static readonly List<KeyValuePair<int, string>> InvoiceAddressToUse = new List<KeyValuePair<int, string>>()
-        {
-            new KeyValuePair<int, string>(1,"Customer's Address"),
-            new KeyValuePair<int, string>(2,"Contact's Address"),
-            new KeyValuePair<int, string>(4,"Customer's Invoicing Address")
-        };
-        private static readonly List<KeyValuePair<int, string>> ContactList = new List<KeyValuePair<int, string>>()
-        {
-            new KeyValuePair<int, string>(-1,"Project's contact")
-        };
+        
 
 
         //default value lists from API 
@@ -98,11 +85,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>(); 
-        private static readonly List<KeyValuePair<int, string>> InternalReference = new List<KeyValuePair<int, string>>()
-        {
-            new KeyValuePair<int, string>(-1,"Customer's owner"),
-            new KeyValuePair<int, string>(-2,"Project's project manager")
-        };
+       
 
 
         //expanding panels' current states, expand panels, expand buttons
@@ -178,7 +161,6 @@ namespace TimeLog.DataImporter.UserControls
             GetAllCustomerStatusFromApi();
             GetAllPrimaryKAMFromApi();
             GetAllSecondaryKAMFromApi();
-            GetAllInternalReferencesFromApi();
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
             VATPercentageList = CustomerHandler.Instance.GetPercentageList();
@@ -333,10 +315,6 @@ namespace TimeLog.DataImporter.UserControls
                                 ExpenseIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _expenseIsBillable, _row),
                                 MileageIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _mileageIsBillable, _row),
                                 DefaultDistIsMaxBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _defaultDistIsMaxBillable, _row),
-                                ContactID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _contactID, _row),
-                                InvoiceAddressToUse = (int) MapFieldValueToID(_invoiceAddressToUse, _row, false),
-                                InternalReferenceID = (int) MapFieldValueToID(_internalReference, _row, false),
-                                CustomerReferenceID = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _customerReferenceID, _row),
                                 PaymentTermID = (int) MapFieldValueToID(_paymentTerm, _row, false),
                                 DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
                                 CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
@@ -426,12 +404,10 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_expenseIsBillable.Items.AddRange(fileColumnHeaderArray);
             comboBox_mileageIsBillable.Items.AddRange(fileColumnHeaderArray);
             comboBox_defaultDistIsMaxBillable.Items.AddRange(fileColumnHeaderArray);
-            comboBox_internalReference.Items.AddRange(fileColumnHeaderArray);
             comboBox_paymentTerm.Items.AddRange(fileColumnHeaderArray);
             comboBox_discountPercentage.Items.AddRange(fileColumnHeaderArray);
             comboBox_calculateVAT.Items.AddRange(fileColumnHeaderArray);
             comboBox_VATPercentage.Items.AddRange(fileColumnHeaderArray);
-            comboBox_invoiceAddressToUse.Items.AddRange(fileColumnHeaderArray);
 
         }
 
@@ -466,19 +442,11 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(IndustryNameList, _fieldValue);
                 }
-                else if (columnName == _internalReference)
-                {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(InternalReference, _fieldValue);
-                }
                 else if (columnName == _paymentTerm)
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(PaymentTermList, _fieldValue);
                 }
-                else if (columnName == _invoiceAddressToUse)
-                {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(InvoiceAddressToUse, _fieldValue);
-                }
-
+                
 
                 if (_result != -1)
                 {
@@ -574,9 +542,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_mileageIsBillable.Items.Clear();
             comboBox_defaultDistIsMaxBillable.ResetText();
             comboBox_defaultDistIsMaxBillable.Items.Clear();
-            comboBox_internalReference.ResetText();
-            comboBox_internalReference.Items.Clear();
-            comboBox_internalReference.Items.Clear();
             comboBox_paymentTerm.ResetText();
             comboBox_paymentTerm.Items.Clear();
             comboBox_invoicingAddress.ResetText();
@@ -587,8 +552,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_calculateVAT.Items.Clear();
             comboBox_VATPercentage.ResetText();
             comboBox_VATPercentage.Items.Clear();
-            comboBox_invoiceAddressToUse.ResetText();
-            comboBox_invoiceAddressToUse.Items.Clear();
         }
 
         private void ClearAndResetAllCheckBoxes()
@@ -603,8 +566,6 @@ namespace TimeLog.DataImporter.UserControls
             checkBox_defaultMileageIsBillable.Checked = false;
             checkBox_defaultPaymentTerm.Checked = false;
             checkBox_defaultVATPercentage.Checked = false;
-            checkBox_defaultInternalReference.Checked = false;
-            checkBox_defaultInvoiceAddressToUse.Checked = false;
 
             
         }
@@ -678,18 +639,6 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllInternalReferencesFromApi() 
-        {
-            var _apiResponse = CustomerHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _internalReference in _apiResponse)
-                {
-                    InternalReference.Add(new KeyValuePair<int, string>(_internalReference.UserID, _internalReference.Initials));
-                }
-            }
-        }
 
         private void GetAllIndustryFromApi()
         {
@@ -938,30 +887,6 @@ namespace TimeLog.DataImporter.UserControls
                 comboBox_defaultDistIsMaxBillable, _defaultDistIsMaxBillable);
         }
 
-        private void comboBox_contactID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_contactID, _contactID);
-        }
-
-        private void comboBox_invoiceAddressToUse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoiceAddressToUse, _invoiceAddressToUse, checkBox_defaultInvoiceAddressToUse);
-        }
-
-        private void comboBox_internalReference_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_internalReference, _internalReference, checkBox_defaultPrimaryKAM);
-
-        }
-
-        private void comboBox_customerReferenceID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_customerReferenceID, _customerReferenceID);
-        }
 
         private void comboBox_paymentTerm_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1015,12 +940,6 @@ namespace TimeLog.DataImporter.UserControls
                 _invoicingAddressCountryISO, checkBox_defaultInvoicingAddressCountryISO, CountryISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
-        private void checkBox_defaultInternalReference_CheckedChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_internalReference,
-                _internalReference, checkBox_defaultInternalReference, InternalReference, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
-
         private void checkBox_defaultPrimaryKAM_CheckedChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_primaryKAM,
@@ -1063,11 +982,6 @@ namespace TimeLog.DataImporter.UserControls
                 _VATPercentage, checkBox_defaultVATPercentage, VATPercentageList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
-        private void checkBox_defaultInvoiceAddressToUse_CheckedChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_invoiceAddressToUse,
-                _invoiceAddressToUse, checkBox_defaultInvoiceAddressToUse, InvoiceAddressToUse, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
 
         #endregion
     }

@@ -3,7 +3,6 @@
 public class PrepaidServicesContractCreateModel : ProjectSubContractCreateModelBase
 {
     #region Variables
-
     /// <summary>
     /// Gets or sets whether the hourly rate is fixed
     /// </summary>
@@ -13,12 +12,20 @@ public class PrepaidServicesContractCreateModel : ProjectSubContractCreateModelB
     public bool IsFixedHourlyRate { get; set; }
 
     /// <summary>
-    /// Gets or sets the hourly rate ID
+    /// Gets or sets the hourly rate price
     /// </summary>
     /// <value>
-    /// The hourly rate ID
+    /// The hourly rate price
     /// </value>
-    public int HourlyRateServiceID { get; set; }
+    public double HourlyRatePrice { get; set; }
+
+    /// <summary>
+    /// Gets or sets the hourly rate name
+    /// </summary>
+    /// <value>
+    /// The hourly rate name
+    /// </value>
+    public string HourlyRateName { get; set; }
 
     #endregion
 }

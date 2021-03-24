@@ -244,7 +244,9 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
                                 ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
                                 ProjectTypeID = (int) MapFieldValueToID(_projectType, _row, false),
-                                ProjectCategoryID = (int) MapFieldValueToID(_projectCategory, _row, false)
+                                ProjectCategoryID = (int) MapFieldValueToID(_projectCategory, _row, false),
+                                DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false)
+
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -305,6 +307,7 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_projectEndDate.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectType.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectCategory.Items.AddRange(fileColumnHeaderArray);
+            comboBox_projectDepartment.Items.AddRange(fileColumnHeaderArray);
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -341,6 +344,10 @@ namespace TimeLog.DataImporter.UserControls
                 else if (columnName == _customerNo)
                 {
                     _result = ProjectHandler.Instance.GetIDFromFieldValue(_customerNoList, _fieldValue);
+                }
+                else if (columnName == _departmentName)
+                {
+                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_departmentList, _fieldValue);
                 }
 
                 if (_result != -1)
@@ -389,6 +396,8 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_projectType.Items.Clear();
             comboBox_projectCategory.ResetText();
             comboBox_projectCategory.Items.Clear();
+            comboBox_projectDepartment.ResetText();
+            comboBox_projectDepartment.Items.Clear();
         }
 
         private void ClearAndResetAllCheckBoxes()
@@ -398,6 +407,7 @@ namespace TimeLog.DataImporter.UserControls
             checkBox_defaultLegalEntity.Checked = false;
             checkBox_defaultProjectType.Checked = false;
             checkBox_defaultProjectCategory.Checked = false;
+            checkBox_defaultProjectDepartment.Checked = false;
         }
 
         #endregion
@@ -497,11 +507,13 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCustomerFromApi()
         {
+            var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
+
             var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _customer in _apiResponse)
+                foreach (var _customer in _apiResponse.Where(x=>x.CustomerStatusID == _customerStatus.First(y=>y.IsDefault).CustomerStatusID))
                 {
                     _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
                 }
@@ -587,7 +599,7 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_projectDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
             ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectLegalEntity, _departmentName, checkBox_defaultProjectDepartment);
+                comboBox_projectDepartment, _departmentName, checkBox_defaultProjectDepartment);
         }
         #endregion
 
