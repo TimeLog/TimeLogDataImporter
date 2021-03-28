@@ -73,8 +73,7 @@ namespace TimeLog.DataImporter.UserControls
         //default value lists
         private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
         private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
-        private static  List<string> VATPercentageList = new List<string>();
-        
+        private static List<string> VATPercentageList = new List<string>();
 
 
         //default value lists from API 
@@ -84,8 +83,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> PrimaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>(); 
-       
+        private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>();
 
 
         //expanding panels' current states, expand panels, expand buttons
@@ -112,7 +110,6 @@ namespace TimeLog.DataImporter.UserControls
 
         private void UserControl1_Load(object sender, EventArgs e)
         {
-
         }
 
         #region Initialization methods
@@ -164,7 +161,6 @@ namespace TimeLog.DataImporter.UserControls
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
             VATPercentageList = CustomerHandler.Instance.GetPercentageList();
-            
         }
 
         #endregion
@@ -197,6 +193,52 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_customerName, _customerName);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_currencyISO, _currencyISO);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_customerStatus, _customerStatus);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_countryISO, _countryISO);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_customerNo, _customerNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_nickName, _nickname);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_primaryKAM, _primaryKAM);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_secondaryKAM, _secondaryKAM);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_customerSince, _customerSince);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_industryName, _industryName);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_phoneNo, _phoneNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_faxNo, _faxNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_email, _email);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_website, _website);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address, _address);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address2, _address2);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address3, _address3);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_zipCode, _zipCode);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_city, _city);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_state, _state);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_useEanNo, _useEanNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_eanNo, _eanNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_organizationNo, _organizationNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATNo, _VATNo);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_useInvoicingAddress, _useInvoicingAddress);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddress, _invoicingAddress);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddress2, _invoicingAddress2);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddress3, _invoicingAddress3);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddressZipCode, _invoicingAddressZipCode);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddressCity, _invoicingAddressCity);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddressState, _invoicingAddressState);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_invoicingAddressCountryISO, _invoicingAddressCountryISO);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_defaultMileageDistance, _defaultMileageDistance);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_expenseIsBillable, _expenseIsBillable);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_mileageIsBillable, _mileageIsBillable);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_defaultDistIsMaxBillable, _defaultDistIsMaxBillable);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentTerm, _paymentTerm);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_discountPercentage, _discountPercentage);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_calculateVAT, _calculateVAT);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATPercentage, _VATPercentage);
+            
+
+
+
             }
             else
             {
@@ -258,10 +300,10 @@ namespace TimeLog.DataImporter.UserControls
                 _errorRowCount = 0;
 
                 //while validating, deactivate other buttons
-                Invoke((MethodInvoker)(() => button_validate.Enabled = false));
-                Invoke((MethodInvoker)(() => button_import.Enabled = false));
-                Invoke((MethodInvoker)(() => button_clear.Enabled = false));
-                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = false));
+                Invoke((MethodInvoker) (() => button_validate.Enabled = false));
+                Invoke((MethodInvoker) (() => button_import.Enabled = false));
+                Invoke((MethodInvoker) (() => button_clear.Enabled = false));
+                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = false));
 
                 try
                 {
@@ -328,7 +370,7 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = CustomerHandler.Instance.ValidateCustomer(_newCustomer,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, 
+                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                         textBox_customerImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                                 else
@@ -336,7 +378,7 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = CustomerHandler.Instance.ImportCustomer(_newCustomer,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, 
+                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                         textBox_customerImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                             }
@@ -355,9 +397,9 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //reactivate buttons after work is done
-                Invoke((MethodInvoker)(() => button_validate.Enabled = true));
-                Invoke((MethodInvoker)(() => button_clear.Enabled = true));
-                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = true));
+                Invoke((MethodInvoker) (() => button_validate.Enabled = true));
+                Invoke((MethodInvoker) (() => button_clear.Enabled = true));
+                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = true));
             }
         }
 
@@ -365,7 +407,6 @@ namespace TimeLog.DataImporter.UserControls
 
         #region Helper methods
 
-       
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);
@@ -408,7 +449,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_discountPercentage.Items.AddRange(fileColumnHeaderArray);
             comboBox_calculateVAT.Items.AddRange(fileColumnHeaderArray);
             comboBox_VATPercentage.Items.AddRange(fileColumnHeaderArray);
-
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -446,7 +486,7 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(PaymentTermList, _fieldValue);
                 }
-                
+
 
                 if (_result != -1)
                 {
@@ -566,8 +606,6 @@ namespace TimeLog.DataImporter.UserControls
             checkBox_defaultMileageIsBillable.Checked = false;
             checkBox_defaultPaymentTerm.Checked = false;
             checkBox_defaultVATPercentage.Checked = false;
-
-            
         }
 
         #endregion
@@ -673,243 +711,203 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_customerName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
-                comboBox_customerName, _customerName);
+            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_customerName, _customerName);
         }
 
         private void comboBox_currencyISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
-                comboBox_currencyISO, _currencyISO, checkBox_defaultCurrencyISO);
+            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_currencyISO, _currencyISO, checkBox_defaultCurrencyISO);
         }
 
         private void comboBox_customerStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
-                comboBox_customerStatus, _customerStatus, checkBox_defaultCustomerStatus);
+            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_customerStatus, _customerStatus, checkBox_defaultCustomerStatus);
         }
 
         private void comboBox_countryISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_countryISO, _countryISO, checkBox_defaultCountryISO);
+            CustomerHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_countryISO, _countryISO, checkBox_defaultCountryISO);
         }
 
         private void comboBox_customerNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
-                comboBox_customerNo, _customerNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_customerNo, _customerNo);
         }
 
         private void comboBox_nickName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_nickName, _nickname);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_nickName, _nickname);
         }
 
         private void comboBox_primaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, 
-                comboBox_primaryKAM, _primaryKAM, checkBox_defaultPrimaryKAM);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_primaryKAM, _primaryKAM, checkBox_defaultPrimaryKAM);
         }
 
         private void comboBox_secondaryKAM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_secondaryKAM, _secondaryKAM, checkBox_defaultSecondaryKAM);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_secondaryKAM, _secondaryKAM, checkBox_defaultSecondaryKAM);
         }
 
         private void comboBox_customerSince_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_customerSince, _customerSince);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_customerSince, _customerSince);
         }
 
         private void comboBox_industryName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_industryName, _industryName, checkBox_defaultIndustryName);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_industryName, _industryName, checkBox_defaultIndustryName);
         }
 
         private void comboBox_phoneNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_phoneNo, _phoneNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_phoneNo, _phoneNo);
         }
 
         private void comboBox_faxNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_faxNo, _faxNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_faxNo, _faxNo);
         }
 
         private void comboBox_email_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_email, _email);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_email, _email);
         }
 
         private void comboBox_website_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_website, _website);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_website, _website);
         }
 
         private void comboBox_address_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_address, _address);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_address, _address);
         }
 
         private void comboBox_address2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_address2, _address2);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_address2, _address2);
         }
 
         private void comboBox_address3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_address3, _address3);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_address3, _address3);
         }
 
         private void comboBox_zipCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_zipCode, _zipCode);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_zipCode, _zipCode);
         }
 
         private void comboBox_city_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_city, _city);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_city, _city);
         }
 
         private void comboBox_state_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_state, _state);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_state, _state);
         }
 
         private void comboBox_useEanNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_useEanNo, _useEanNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_useEanNo, _useEanNo);
         }
 
         private void comboBox_eanNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_eanNo, _eanNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_eanNo, _eanNo);
         }
 
         private void comboBox_organizationNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_organizationNo, _organizationNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_organizationNo, _organizationNo);
         }
 
         private void comboBox_VATNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_VATNo, _VATNo);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_VATNo, _VATNo);
         }
 
         private void comboBox_useInvoicingAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_useInvoicingAddress, _useInvoicingAddress);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_useInvoicingAddress, _useInvoicingAddress);
         }
 
         private void comboBox_invoicingAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddress, _invoicingAddress);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddress, _invoicingAddress);
         }
 
         private void comboBox_invoicingAddress2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddress2, _invoicingAddress2);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddress2, _invoicingAddress2);
         }
 
         private void comboBox_invoicingAddress3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddress3, _invoicingAddress3);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddress3, _invoicingAddress3);
         }
 
         private void comboBox_invoicingAddressZipCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddressZipCode, _invoicingAddressZipCode);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddressZipCode, _invoicingAddressZipCode);
         }
 
         private void comboBox_invoicingAddressCity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddressCity, _invoicingAddressCity);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddressCity, _invoicingAddressCity);
         }
 
         private void comboBox_invoicingAddressState_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddressState, _invoicingAddressState);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddressState, _invoicingAddressState);
         }
 
         private void comboBox_invoicingAddressCountryID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_invoicingAddressCountryISO, _invoicingAddressCountryISO);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_invoicingAddressCountryISO, _invoicingAddressCountryISO);
         }
 
         private void comboBox_defaultMileageDistance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_defaultMileageDistance, _defaultMileageDistance);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_defaultMileageDistance, _defaultMileageDistance);
         }
 
         private void comboBox_expenseIsBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_expenseIsBillable, _expenseIsBillable, checkBox_defaultExpenseIsBillable);
+            CustomerHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_expenseIsBillable, _expenseIsBillable, checkBox_defaultExpenseIsBillable);
         }
 
         private void comboBox_mileageIsBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_mileageIsBillable, _mileageIsBillable, checkBox_defaultMileageIsBillable);
+            CustomerHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_mileageIsBillable, _mileageIsBillable, checkBox_defaultMileageIsBillable);
         }
 
         private void comboBox_defaultDistIsMaxBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_defaultDistIsMaxBillable, _defaultDistIsMaxBillable);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_defaultDistIsMaxBillable, _defaultDistIsMaxBillable);
         }
 
 
         private void comboBox_paymentTerm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_paymentTerm, _paymentTerm, checkBox_defaultPaymentTerm);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_paymentTerm, _paymentTerm, checkBox_defaultPaymentTerm);
         }
 
         private void comboBox_discountPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_discountPercentage, _discountPercentage);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_discountPercentage, _discountPercentage);
         }
 
         private void comboBox_calculateVAT_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_calculateVAT, _calculateVAT);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_calculateVAT, _calculateVAT);
         }
 
         private void comboBox_VATPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable,
-                comboBox_VATPercentage, _VATPercentage, checkBox_defaultVATPercentage);
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_VATPercentage, _VATPercentage, checkBox_defaultVATPercentage);
         }
 
         #endregion
@@ -918,7 +916,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void checkBox_defaultCurrencyISO_CheckedChanged(object sender, EventArgs e)
         {
-            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_currencyISO, 
+            CustomerHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_currencyISO,
                 _currencyISO, checkBox_defaultCurrencyISO, CurrencyISOList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
@@ -981,7 +979,6 @@ namespace TimeLog.DataImporter.UserControls
             CustomerHandler.Instance.MapNonKeyValuePairToComboBoxByCheckboxStatus(dataGridView_customer, _customerTable, comboBox_VATPercentage,
                 _VATPercentage, checkBox_defaultVATPercentage, VATPercentageList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
-
 
         #endregion
     }

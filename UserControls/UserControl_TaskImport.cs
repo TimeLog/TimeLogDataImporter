@@ -155,6 +155,29 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_taskName, TaskName);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_startDate, StartDate);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_endDate, EndDate);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_isReadyForInvoicing, IsReadyForInvoicing );
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_taskType, TaskType );
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectNo, ProjectNo);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_parentTaskNo, ParentTaskNo);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_isBillable, IsBillable );
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentRecognitionModel, PaymentRecognitionModel);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractName, ContractName);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentAmount, PaymentAmount);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_hourlyRate, ContractHourlyRate);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_taskNo, TaskNo);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_description, Description);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_additionalTextIsRequired, AdditionalTextIsRequired);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_budgetHours, BudgetHours);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_budgetAmount, BudgetAmount);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_taskHourlyRate, TaskHourlyRate);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentProductNo, PaymentProductNo);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentName, PaymentName);
+                TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentInvoiceDate, PaymentInvoiceDate);
+
             }
             else
             {
@@ -481,32 +504,7 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        //private void GetAllContractHourlyRatesFromApi()
-        //{
-        //    var _apiResponse = TaskHandler.Instance.GetAllContractHourlyRates(AuthenticationHandler.Instance.Token);
-
-        //    if (_apiResponse != null)
-        //    {
-        //        foreach (var _contractHourlyRate in _apiResponse)
-        //        {
-        //            ContractHourlyRateList.Add(new KeyValuePair<int, string>(_contractHourlyRate.ContractHourlyRateID, _contractHourlyRate.Name));
-        //        }
-        //    }
-        //}
-
-        //private void GetAllPaymentProductNoFromApi()
-        //{
-        //    var _apiResponse = TaskHandler.Instance.GetAllProduct(AuthenticationHandler.Instance.Token);
-
-        //    if (_apiResponse != null)
-        //    {
-        //        foreach (var _product in _apiResponse)
-        //        {
-        //            PaymentProductNoList.Add(new KeyValuePair<int, string>(_product.ProductNumberID, _product.ProductNumber));
-        //        }
-        //    }
-        //}
-
+       
         private void GetAllProjectFromApi()
         {
             var _apiResponse = TaskHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
@@ -552,128 +550,107 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_taskName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_taskName, TaskName);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_taskName, TaskName);
         }
 
         private void comboBox_startDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_startDate, StartDate);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_startDate, StartDate);
         }
 
         private void comboBox_endDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_endDate, EndDate);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_endDate, EndDate);
         }
 
         private void comboBox_isReadyForInvoicing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_isReadyForInvoicing, IsReadyForInvoicing, checkBox_defaultIsReadyForInvoicing);
+            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_isReadyForInvoicing, IsReadyForInvoicing, checkBox_defaultIsReadyForInvoicing);
         }
 
         private void comboBox_taskType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_taskType, TaskType, checkBox_defaultTaskType);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_taskType, TaskType, checkBox_defaultTaskType);
         }
 
         private void comboBox_projectNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_projectNo, ProjectNo);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_projectNo, ProjectNo);
         }
 
         private void comboBox_parentTaskNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_parentTaskNo, ParentTaskNo);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_parentTaskNo, ParentTaskNo);
         }
 
         private void comboBox_isBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_isBillable, IsBillable, checkBox_defaultIsBillable);
+            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_isBillable, IsBillable, checkBox_defaultIsBillable);
         }
 
         private void comboBox_paymentRecognitionModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentRecognitionModel, PaymentRecognitionModel, checkBox_defaultPaymentRecognitionModel);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_paymentRecognitionModel, PaymentRecognitionModel, checkBox_defaultPaymentRecognitionModel);
         }
 
         private void comboBox_contractName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_contractName, ContractName);
+            TaskHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_contractName, ContractName);
         }
 
         private void comboBox_paymentAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentAmount, PaymentAmount);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_paymentAmount, PaymentAmount);
         }
 
         private void comboBox_hourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_hourlyRate, ContractHourlyRate);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_hourlyRate, ContractHourlyRate);
         }
 
         private void comboBox_taskNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_taskNo, TaskNo);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_taskNo, TaskNo);
         }
 
         private void comboBox_description_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_description, Description);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_description, Description);
         }
 
         private void comboBox_additionalTextIsRequired_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_additionalTextIsRequired, AdditionalTextIsRequired, checkBox_defaultAdditionalTextIsRequired);
+            TaskHandler.Instance.MapNonMandatoryNonKeyValuePairSelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_additionalTextIsRequired, AdditionalTextIsRequired, checkBox_defaultAdditionalTextIsRequired);
         }
 
         private void comboBox_budgetHours_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_budgetHours, BudgetHours);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_budgetHours, BudgetHours);
         }
 
         private void comboBox_budgetAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_budgetAmount, BudgetAmount);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_budgetAmount, BudgetAmount);
         }
 
         private void comboBox_taskHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_taskHourlyRate, TaskHourlyRate);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_taskHourlyRate, TaskHourlyRate);
         }
 
         private void comboBox_paymentProductNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentProductNo, PaymentProductNo);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_paymentProductNo, PaymentProductNo);
         }
 
         private void comboBox_paymentName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentName, PaymentName);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_paymentName, PaymentName);
         }
 
         private void comboBox_paymentInvoiceDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable,
-                comboBox_paymentInvoiceDate, PaymentInvoiceDate);
+            TaskHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_task, _taskTable, comboBox_paymentInvoiceDate, PaymentInvoiceDate);
         }
 
         #endregion

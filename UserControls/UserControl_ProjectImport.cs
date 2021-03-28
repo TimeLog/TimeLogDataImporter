@@ -151,6 +151,21 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectName, _projectName);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCustomerNo, _customerNo);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectTemplate, _projectTemplate);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectManager, _projectManager);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCurrencyISO, _currencyISO);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectLegalEntity, _legalEntity);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectNo, _projectNo);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_description, _description);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectStartDate, _projectStartDate);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectEndDate, _projectEndDate);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectType, _projectType);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCategory, _projectCategory);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectDepartment, _departmentName);
+            
             }
             else
             {
@@ -526,80 +541,67 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectName, _projectName);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectName, _projectName);
         }
 
         private void comboBox_projectCustomerNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCustomerNo, _customerNo);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectCustomerNo, _customerNo);
         }
 
         private void comboBox_projectTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectTemplate, _projectTemplate,  checkBox_defaultProjectTemplate);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectTemplate, _projectTemplate,  checkBox_defaultProjectTemplate);
         }
 
         private void comboBox_projectManager_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectManager, _projectManager);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectManager, _projectManager);
         }
 
         private void comboBox_projectCurrencyISO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCurrencyISO, _currencyISO, checkBox_defaultCurrencyISO);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectCurrencyISO, _currencyISO, checkBox_defaultCurrencyISO);
         }
 
         private void comboBox_projectLegalEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectLegalEntity, _legalEntity, checkBox_defaultLegalEntity);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectLegalEntity, _legalEntity, checkBox_defaultLegalEntity);
         }
 
         private void comboBox_projectNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectNo, _projectNo);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectNo, _projectNo);
         }
 
         private void comboBox_description_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_description, _description);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_description, _description);
         }
 
         private void comboBox_projectStartDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectStartDate, _projectStartDate);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectStartDate, _projectStartDate);
         }
 
         private void comboBox_projectEndDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectEndDate, _projectEndDate);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectEndDate, _projectEndDate);
         }
 
         private void comboBox_projectType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectType, _projectType, checkBox_defaultProjectType);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectType, _projectType, checkBox_defaultProjectType);
         }
 
         private void comboBox_projectCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCategory, _projectCategory, checkBox_defaultProjectCategory);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectCategory, _projectCategory, checkBox_defaultProjectCategory);
         }
 
         private void comboBox_projectDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectDepartment, _departmentName, checkBox_defaultProjectDepartment);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectDepartment, _departmentName, checkBox_defaultProjectDepartment);
         }
         #endregion
 

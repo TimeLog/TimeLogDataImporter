@@ -170,10 +170,29 @@ namespace TimeLog.DataImporter.UserControls
                 AddFileColumnHeaderToComboBox(EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
 
-                //this.checkBox_defaultLegalEntity.Checked = true;
-                //EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_legalEntity,
-                //    LegalEntity, checkBox_defaultLegalEntity, LegalEntityList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-                //this.comboBox_legalEntity.SelectedIndex = 0;
+
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_userName, UserName);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_firstName, FirstName);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_lastName, LastName);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_initials, Initials);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_email, Email);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_managerInitials, ManagerInitials);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_costPrice, CostPrice);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_publicHolidayCalendar, PublicHolidayCalendar);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_normalWorkingTime, NormalWorkingTime);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_salaryGroup, SalaryGroup);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_legalEntity, LegalEntity);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_department, Department);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_defaultHourlyRate, DefaultHourlyRate);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_employeeType, EmployeeType);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_jobTitle, JobTitle);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_employeeNo, EmployeeNo);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_employmentDate, EmploymentDate);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_allowanceLegislation, AllowanceLegislation);
+                EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_userRoles, UserRoleNames);
+            
+
+
             }
             else
             {
@@ -641,114 +660,95 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_userName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_userName, UserName);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_userName, UserName);
         }
 
         private void comboBox_firstName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_firstName, FirstName);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_firstName, FirstName);
         }
 
         private void comboBox_lastName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_lastName, LastName);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_lastName, LastName);
         }
 
         private void comboBox_initials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_initials, Initials);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_initials, Initials);
         }
 
         private void comboBox_email_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_email, Email);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_email, Email);
         }
 
         private void comboBox_managerInitials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_managerInitials, ManagerInitials);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_managerInitials, ManagerInitials);
         }
 
         private void comboBox_costPrice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_costPrice, CostPrice, checkBox_defaultCostPrice);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_costPrice, CostPrice, checkBox_defaultCostPrice);
         }
 
         private void comboBox_publicHolidayCalendar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_publicHolidayCalendar, PublicHolidayCalendar, checkBox_defaultPublicHolidayCalendar);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_publicHolidayCalendar, PublicHolidayCalendar, checkBox_defaultPublicHolidayCalendar);
         }
 
         private void comboBox_normalWorkingTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_normalWorkingTime, NormalWorkingTime, checkBox_defaultNormalWorkingTime);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_normalWorkingTime, NormalWorkingTime, checkBox_defaultNormalWorkingTime);
         }
 
         private void comboBox_salaryGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_salaryGroup, SalaryGroup, checkBox_defaultSalaryGroup);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_salaryGroup, SalaryGroup, checkBox_defaultSalaryGroup);
         }
 
         private void comboBox_legalEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_legalEntity, LegalEntity, checkBox_defaultLegalEntity);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_legalEntity, LegalEntity, checkBox_defaultLegalEntity);
         }
 
         private void comboBox_department_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_department, Department, checkBox_defaultDepartment);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_department, Department, checkBox_defaultDepartment);
         }
         private void comboBox_defaultHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_defaultHourlyRate, DefaultHourlyRate, checkBox_defaultHourlyRate);
+            EmployeeHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_defaultHourlyRate, DefaultHourlyRate, checkBox_defaultHourlyRate);
         }
 
         private void comboBox_employeeType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_employeeType, EmployeeType, checkBox_defaultEmployeeType);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_employeeType, EmployeeType, checkBox_defaultEmployeeType);
         }
         private void comboBox_jobTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_jobTitle, JobTitle);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_jobTitle, JobTitle);
         }
 
         private void comboBox_employeeNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_employeeNo, EmployeeNo);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_employeeNo, EmployeeNo);
         }
 
         private void comboBox_employmentDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_employmentDate, EmploymentDate);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_employmentDate, EmploymentDate);
         }
 
         private void comboBox_allowanceLegislation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_allowanceLegislation, AllowanceLegislation, checkBox_defaultAllowanceLegislation);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_allowanceLegislation, AllowanceLegislation, checkBox_defaultAllowanceLegislation);
         }
 
         private void comboBox_userRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable,
-                comboBox_userRoles, UserRoleNames);
+            EmployeeHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_employee, _employeeTable, comboBox_userRoles, UserRoleNames);
         }
 
         #endregion
