@@ -2,6 +2,10 @@
 
 public class PrepaidServicesContractCreateModel : ProjectSubContractCreateModelBase
 {
+    public PrepaidServicesContractCreateModel(ProjectSubContractCreateModelBase contractModelBase) : base(contractModelBase)
+    {
+
+    }
     #region Variables
     /// <summary>
     /// Gets or sets whether the hourly rate is fixed

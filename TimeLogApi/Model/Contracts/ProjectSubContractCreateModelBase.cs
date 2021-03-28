@@ -3,6 +3,22 @@ using TimeLog.DataImporter.TimeLogApi.Model;
 
 public class ProjectSubContractCreateModelBase
 {
+    public ProjectSubContractCreateModelBase() { }
+
+    public ProjectSubContractCreateModelBase(ProjectSubContractCreateModelBase contractModelBase)
+    {
+        this.ProjectID = contractModelBase.ProjectID;
+        this.ContractName = contractModelBase.ContractName;
+        this.ContractStatus = contractModelBase.ContractStatus;
+        this.ContractOwnerUserID = contractModelBase.ContractOwnerUserID;
+        this.BudgetWorkAmount = contractModelBase.BudgetWorkAmount;
+        this.BudgetWorkHour = contractModelBase.BudgetWorkHour;
+        this.HasCompletionNotification = contractModelBase.HasCompletionNotification;
+        this.CompletionNotificationPercentage = contractModelBase.CompletionNotificationPercentage;
+        this.IsMileageBillable = contractModelBase.IsMileageBillable;
+        this.IsDefaultExpenses = contractModelBase.IsDefaultExpenses;
+        this.ContractModelType = contractModelBase.ContractModelType;
+    }
     /// <summary>
     /// Gets or sets the project ID
     /// </summary>

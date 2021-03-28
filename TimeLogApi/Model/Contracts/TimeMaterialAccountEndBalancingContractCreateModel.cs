@@ -2,6 +2,10 @@
 
 public class TimeMaterialAccountEndBalancingContractCreateModel : ProjectSubContractCreateModelBase
 {
+    public TimeMaterialAccountEndBalancingContractCreateModel(ProjectSubContractCreateModelBase contractModelBase) : base(contractModelBase)
+    {
+
+    }
     #region Variables
 
     /// <summary>

@@ -2,6 +2,10 @@
 
 public class TimeMaterialBasicContractCreateModel : ProjectSubContractCreateModelBase
 {
+    public TimeMaterialBasicContractCreateModel(ProjectSubContractCreateModelBase contractModelBase) : base(contractModelBase)
+    {
+
+    }
     #region Variables
 
     /// <summary>

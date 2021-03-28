@@ -749,17 +749,26 @@ namespace TimeLog.DataImporter.Handlers
 
         #region Helper - Mapping methods
 
+        public void AutoMapFileColumns(DataTable fileContent, ComboBox comboBox, string columnName)
+        {
+            int _columnIndex = fileContent.Columns.IndexOf(columnName);
+            comboBox.SelectedIndex = _columnIndex;
+        }
+
         public void MapMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
         {
             var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
-
+            
             var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
 
-            ClearColumn(dataGridView, _tableColumnIndex);
+            if (_tableColumnIndex >= 0 && _columnIndex >= 0)
+            {
+                ClearColumn(dataGridView, _tableColumnIndex);
 
-            MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
 
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+            }
         }
 
         //for fields with default value checkbox
@@ -767,22 +776,25 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
 
-            ClearColumn(dataGridView, _tableColumnIndex);
-
-            if (!checkBox.Checked)
+            if (_tableColumnIndex >= 0)
             {
-                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+                ClearColumn(dataGridView, _tableColumnIndex);
 
-                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                if (!checkBox.Checked)
+                {
+                    var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                    MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                }
+                else
+                {
+                    var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
+
+                    MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+                }
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
             }
-            else
-            {
-                var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
         }
 
         //for fields with non key value pair default value checkbox
@@ -790,37 +802,44 @@ namespace TimeLog.DataImporter.Handlers
         {
             var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
 
-            ClearColumn(dataGridView, _tableColumnIndex);
-
-            if (!checkBox.Checked)
+            if (_tableColumnIndex >= 0)
             {
-                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+                ClearColumn(dataGridView, _tableColumnIndex);
 
-                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                if (!checkBox.Checked)
+                {
+                    var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                    MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                }
+                else
+                {
+                    var _defaultValue = comboBox.SelectedItem.ToString();
+
+                    MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+                }
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
             }
-            else
-            {
-                var _defaultValue = comboBox.SelectedItem.ToString();
-
-                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
         }
 
         public void MapNonMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
         {
             var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+            if (_columnIndex >= 0)
+            {
+                CheckAndAddColumn(domainTable, columnName);
+                
+                var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
+                if (_tableColumnIndex >= 0)
+                {
+                    ClearColumn(dataGridView, _tableColumnIndex);
 
-            CheckAndAddColumn(domainTable, columnName);
+                    MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
 
-            var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
-
-            ClearColumn(dataGridView, _tableColumnIndex);
-
-            MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
-
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+                    CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
+                }
+            }
         }
 
         //for fields with default value checkbox
@@ -830,22 +849,25 @@ namespace TimeLog.DataImporter.Handlers
 
             var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
 
-            ClearColumn(dataGridView, _tableColumnIndex);
-
-            if (!checkBox.Checked)
+            if (_tableColumnIndex >= 0)
             {
-                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+                ClearColumn(dataGridView, _tableColumnIndex);
 
-                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                if (!checkBox.Checked)
+                {
+                    var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                    MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                }
+                else
+                {
+                    var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
+
+                    MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+                }
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
             }
-            else
-            {
-                var _defaultValue = (comboBox.SelectedItem as dynamic).Value.ToString();
-
-                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
         }
 
         //for fields with non key value pair default value checkbox
@@ -855,22 +877,25 @@ namespace TimeLog.DataImporter.Handlers
 
             var _tableColumnIndex = domainTable.Columns.IndexOf(columnName);
 
-            ClearColumn(dataGridView, _tableColumnIndex);
-
-            if (!checkBox.Checked)
+            if (_tableColumnIndex >= 0)
             {
-                var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+                ClearColumn(dataGridView, _tableColumnIndex);
 
-                MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                if (!checkBox.Checked)
+                {
+                    var _columnIndex = fileContent.Columns.IndexOf(comboBox.SelectedItem.ToString());
+
+                    MapFileContentToTable(fileContent, dataGridView, domainTable, _tableColumnIndex, _columnIndex);
+                }
+                else
+                {
+                    var _defaultValue = comboBox.SelectedItem.ToString();
+
+                    MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
+                }
+
+                CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
             }
-            else
-            {
-                var _defaultValue = comboBox.SelectedItem.ToString();
-
-                MapDefaultValueToTable(dataGridView, domainTable, _tableColumnIndex, _defaultValue);
-            }
-
-            CheckCellsForNullOrEmpty(dataGridView, _tableColumnIndex);
         }
 
         public void MapValuesToComboBoxByCheckboxStatus(DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName, 

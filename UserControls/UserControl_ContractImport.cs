@@ -22,9 +22,9 @@ namespace TimeLog.DataImporter.UserControls
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
-            {0, "Project Name"},
+            {0, "Contract Name"},
             {1, "Project No"},
-            {2, "Contract Status"},
+            {2, "Contract Status Name"},
             {3, "Contract Owner Initials"},
             {4, "Contract Model"},
         };
@@ -32,7 +32,7 @@ namespace TimeLog.DataImporter.UserControls
         //all column header variables
         private readonly string _contractName = "Contract Name";
         private readonly string _projectNo = "Project No";
-        private readonly string _contractStatus = "Contract Status";
+        private readonly string _contractStatus = "Contract Status Name";
         private readonly string _contractOwnerInitials = "Contract Owner Initials";
         private readonly string _contractModel = "Contract Model";
         private readonly string _budgetExpensesAmount = "Budget Expenses Amount";
@@ -44,22 +44,21 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _isMileageBillable = "Is Mileage Billable";
         private readonly string _isDefaultExpenses = "Is Default Expenses";
         private readonly string _budgetOverrunNotification = "Budget Overrun Notification";
+        private readonly string _isFixedHourlyRate = "Is Fixed Hourly Rate";
+        private readonly string _hourlyRateName = "Hourly Rate Name";
         private readonly string _targetHourlyRate = "Target Hourly Rate";
         private readonly string _paymentPlanAmount = "Payment Plan Amount";
-        private readonly string _revenueExprAmount = "Revenue Expr Amount";
+        private readonly string _revenueExpensesAmount = "Revenue Expenses Amount";
         private readonly string _revenueTravelAmount = "Revenue Travel Amount";
         private readonly string _isExpensesLinked = "Is Expenses Linked";
         private readonly string _isTravelLinked = "Is Travel Linked";
-        private readonly string _hourlyRateName = "Hourly Rate Name";
-        private readonly string _hourlyRatePrice = "Hourly Rate Price";
-        private readonly string _isFixedHourlyRate = "Is Fixed Hourly Rate";
 
 
 
         //default value lists from API 
-        private static readonly List<KeyValuePair<int, string>> ContractModels = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<string, string>> HourlyRateService = new List<KeyValuePair<string, string>>();
-
+        private static readonly List<KeyValuePair<int, string>> ContractModelList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ProjectList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ContractOwnerList = new List<KeyValuePair<int, string>>();
 
         private static readonly List<KeyValuePair<int, string>> ContractStatusList =
             new List<KeyValuePair<int, string>>()
@@ -140,7 +139,11 @@ namespace TimeLog.DataImporter.UserControls
             }
 
             GetAllContractModelsFromApi();
-            GetAllDefaultHourlyRateServicesFromApi();
+            GetAllProjectsFromApi();
+            GetAllContractOwnersFromApi();
+
+
+            
         }
 
         #endregion
@@ -173,6 +176,31 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(ContractHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractName, _contractName);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectNo, _projectNo);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractStatus, _contractStatus);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractOwnerInitials, _contractOwnerInitials);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_ContractModel, _contractModel);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractBudgetExpensesAmount, _budgetExpensesAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractBudgetTravelAmount, _budgetTravelAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractBudgetWorkAmount, _budgetWorkAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractBudgetWorkHour, _budgetWorkHour);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractHasCompletionNotification, _completionNotification);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractCompletionNotificationPercentage, _completionNotificationPercentage);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsMileageBillable, _isMileageBillable);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsDefaultExpenses, _isDefaultExpenses);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractHasBudgetOverrunNotification, _budgetOverrunNotification);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractTargetHourlyRate, _targetHourlyRate);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractPaymentPlanAmount, _paymentPlanAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractRevenueExpensesAmount, _revenueExpensesAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractRevenueTravelAmount, _revenueTravelAmount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsExpensesLinked, _isExpensesLinked);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsTravelLinked, _isTravelLinked);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractHourlyRateName, _hourlyRateName);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsFixedHourlyRate, _isFixedHourlyRate);
+                
             }
             else
             {
@@ -217,8 +245,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void textBox_projectImportMessages_MouseClick(object sender, MouseEventArgs e)
         {
-            ContractHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_contract,
-                textBox_contractImportMessages);
+            ContractHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_contract, textBox_contractImportMessages);
         }
 
         private void button_expand_Click(object sender, EventArgs e)
@@ -228,8 +255,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void tmrExpand_Tick(object sender, EventArgs e)
         {
-            ContractHandler.Instance.ProcessExpandCollapseFieldForPanel(_expandPanels, _expandStates, ExpansionPerTick,
-                tmrExpand);
+            ContractHandler.Instance.ProcessExpandCollapseFieldForPanel(_expandPanels, _expandStates, ExpansionPerTick, tmrExpand);
         }
 
         private void WorkerFetcherDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -258,7 +284,7 @@ namespace TimeLog.DataImporter.UserControls
 
                         if (_row.DataBoundItem != null)
                         {
-                            ProjectSubContractCreateModelBase _newContract = new ProjectSubContractCreateModelBase
+                            ProjectSubContractCreateModelBase _newBaseContract = new ProjectSubContractCreateModelBase
                             {
                                 ProjectID = (int)MapFieldValueToID(_projectNo, _row, false),
                                 ContractName = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, _contractName, _row),
@@ -271,26 +297,28 @@ namespace TimeLog.DataImporter.UserControls
                                 ContractModelType = (ContractModelType)MapFieldValueToID(_contractModel, _row, false),
                             };
 
-                            switch (_newContract.ContractModelType)
+                            switch (_newBaseContract.ContractModelType)
                             {
                                 case ContractModelType.TimeMaterialBasic:
+                                    TimeMaterialBasicContractCreateModel _timeMaterialBasicContractCreateModel= new TimeMaterialBasicContractCreateModel(_newBaseContract);
+                                    
                                     // Specifics for TimeMaterialBasic contract model
-                                    ((TimeMaterialBasicContractCreateModel) _newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
-                                    ((TimeMaterialBasicContractCreateModel) _newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
-                                    ((TimeMaterialBasicContractCreateModel) _newContract).HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
-                                    ((TimeMaterialBasicContractCreateModel) _newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
-                                    ((TimeMaterialBasicContractCreateModel) _newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    _timeMaterialBasicContractCreateModel.HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _completionNotification, _row);
+                                    _timeMaterialBasicContractCreateModel.CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    _timeMaterialBasicContractCreateModel.HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _budgetOverrunNotification, _row);
+                                    _timeMaterialBasicContractCreateModel.BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
+                                    _timeMaterialBasicContractCreateModel.BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
 
                                     if (_isMappingFieldValueToIDCorrect)
                                     {
                                         if (_senderButton.Name == button_validate.Name)
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialBasicContract(_newContract as TimeMaterialBasicContractCreateModel , AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialBasicContract(_timeMaterialBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                         else
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ImportTimeMaterialBasicContract(_newContract as TimeMaterialBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ImportTimeMaterialBasicContract(_timeMaterialBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                     }
@@ -298,28 +326,30 @@ namespace TimeLog.DataImporter.UserControls
                                     break;
 
                                 case ContractModelType.FixedPriceBasic:
+                                    FixedPriceBasicContractCreateModel _fixedPriceBasicContractCreateModel = new FixedPriceBasicContractCreateModel(_newBaseContract);
+
                                     // Specifics for FixedPriceBasic contract model
-                                    ((FixedPriceBasicContractCreateModel)_newContract).IsExpensesLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).IsTravelLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isTravelLinked, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).PaymentPlanAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _paymentPlanAmount, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).RevenueExprAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueExprAmount, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).RevenueTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueTravelAmount, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
-                                    ((FixedPriceBasicContractCreateModel)_newContract).TargetHourlyRate = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
+                                    _fixedPriceBasicContractCreateModel.IsExpensesLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
+                                    _fixedPriceBasicContractCreateModel.IsTravelLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isTravelLinked, _row);
+                                    _fixedPriceBasicContractCreateModel.PaymentPlanAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _paymentPlanAmount, _row);
+                                    _fixedPriceBasicContractCreateModel.RevenueExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueExpensesAmount, _row);
+                                    _fixedPriceBasicContractCreateModel.RevenueTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueTravelAmount, _row);
+                                    _fixedPriceBasicContractCreateModel.HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _completionNotification, _row);
+                                    _fixedPriceBasicContractCreateModel.CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    _fixedPriceBasicContractCreateModel.BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
+                                    _fixedPriceBasicContractCreateModel.BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
+                                    _fixedPriceBasicContractCreateModel.TargetHourlyRate = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
 
                                     if (_isMappingFieldValueToIDCorrect)
                                     {
                                         if (_senderButton.Name == button_validate.Name)
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateFixedPriceBasicContract(_newContract as FixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ValidateFixedPriceBasicContract(_fixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                         else
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateFixedPriceBasicContract(_newContract as FixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ImportFixedPriceBasicContract(_fixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                     }
@@ -328,47 +358,51 @@ namespace TimeLog.DataImporter.UserControls
 
 
                                 case ContractModelType.TimeMaterialAccountEndBalancing:
+                                    TimeMaterialAccountEndBalancingContractCreateModel _timeMaterialAccountEndBalancingContractCreateModel = new TimeMaterialAccountEndBalancingContractCreateModel(_newBaseContract);
+
                                     // Specifics for TimeMaterialAccountEndBalancing contract model
-                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
-                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
-                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isDefaultExpenses, _row);
-                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
-                                    ((TimeMaterialAccountEndBalancingContractCreateModel)_newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetWorkHour, _row);
+                                    _timeMaterialAccountEndBalancingContractCreateModel.HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _completionNotification, _row);
+                                    _timeMaterialAccountEndBalancingContractCreateModel.CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    _timeMaterialAccountEndBalancingContractCreateModel.HasBudgetOverrunNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _budgetOverrunNotification, _row);
+                                    _timeMaterialAccountEndBalancingContractCreateModel.BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
+                                    _timeMaterialAccountEndBalancingContractCreateModel.BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
 
                                     if (_isMappingFieldValueToIDCorrect)
                                     {
                                         if (_senderButton.Name == button_validate.Name)
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialAccountEndBalancingContract(_newContract as TimeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialAccountEndBalancingContract(_timeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                         else
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialAccountEndBalancingContract(_newContract as TimeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ImportTimeMaterialAccountEndBalancingContract(_timeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                     }
                                     break;
 
                                 case ContractModelType.PrepaidServices:
+                                    PrepaidServicesContractCreateModel _prepaidServicesContractCreateModel = new PrepaidServicesContractCreateModel(_newBaseContract);
+
                                     // Specifics for PrepaidServices contract model
-                                    ((PrepaidServicesContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
-                                    ((PrepaidServicesContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
-                                    ((PrepaidServicesContractCreateModel)_newContract).IsFixedHourlyRate = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isFixedHourlyRate, _row);
-                                    ((PrepaidServicesContractCreateModel)_newContract).HourlyRatePrice = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
-                                    ((PrepaidServicesContractCreateModel) _newContract).HourlyRateName = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, _hourlyRateName, _row);
+                                    _prepaidServicesContractCreateModel.HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _completionNotification, _row);
+                                    _prepaidServicesContractCreateModel.CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    _prepaidServicesContractCreateModel.IsFixedHourlyRate = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isFixedHourlyRate, _row);
+                                    _prepaidServicesContractCreateModel.HourlyRatePrice = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
+                                    _prepaidServicesContractCreateModel.HourlyRateName = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, _hourlyRateName, _row);
 
 
                                     if (_isMappingFieldValueToIDCorrect)
                                     {
                                         if (_senderButton.Name == button_validate.Name)
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidatePrepaidServicesContract(_newContract as PrepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ValidatePrepaidServicesContract(_prepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                         else
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidatePrepaidServicesContract(_newContract as PrepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ImportPrepaidServicesContract(_prepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                     }
@@ -376,28 +410,30 @@ namespace TimeLog.DataImporter.UserControls
 
 
                                 case ContractModelType.TaskDrivenRevenue:
+                                    TaskDrivenRevenueContractCreateModel _taskDrivenRevenueContractCreateModel = new TaskDrivenRevenueContractCreateModel(_newBaseContract);
+
                                     // Specifics for TaskDrivenRevenue contract model
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).IsExpensesLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).IsTravelLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isTravelLinked, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).PaymentPlanAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _paymentPlanAmount, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).RevenueExprAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueExprAmount, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).RevenueTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueTravelAmount, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
-                                    ((TaskDrivenRevenueContractCreateModel)_newContract).TargetHourlyRate = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
+                                    _taskDrivenRevenueContractCreateModel.IsExpensesLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isExpensesLinked, _row);
+                                    _taskDrivenRevenueContractCreateModel.IsTravelLinked = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _isTravelLinked, _row);
+                                    _taskDrivenRevenueContractCreateModel.PaymentPlanAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _paymentPlanAmount, _row);
+                                    _taskDrivenRevenueContractCreateModel.RevenueExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueExpensesAmount, _row);
+                                    _taskDrivenRevenueContractCreateModel.RevenueTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _revenueTravelAmount, _row);
+                                    _taskDrivenRevenueContractCreateModel.HasCompletionNotification = ContractHandler.Instance.CheckAndGetBoolean(dataGridView_contract, _completionNotification, _row);
+                                    _taskDrivenRevenueContractCreateModel.CompletionNotificationPercentage = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _completionNotificationPercentage, _row);
+                                    _taskDrivenRevenueContractCreateModel.BudgetTravelAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetTravelAmount, _row);
+                                    _taskDrivenRevenueContractCreateModel.BudgetExpensesAmount = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _budgetExpensesAmount, _row);
+                                    _taskDrivenRevenueContractCreateModel.TargetHourlyRate = ContractHandler.Instance.CheckAndGetDouble(dataGridView_contract, _targetHourlyRate, _row);
 
                                     if (_isMappingFieldValueToIDCorrect)
                                     {
                                         if (_senderButton.Name == button_validate.Name)
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTaskDrivenRevenueContract(_newContract as TaskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTaskDrivenRevenueContract(_taskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                         else
                                         {
-                                            var _defaultApiResponse = ContractHandler.Instance.ValidateTaskDrivenRevenueContract(_newContract as TaskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                            var _defaultApiResponse = ContractHandler.Instance.ImportTaskDrivenRevenueContract(_taskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
                                             _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
                                         }
                                     } 
@@ -431,14 +467,29 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
+            
             comboBox_contractName.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractOwnerInitials.Items.AddRange(fileColumnHeaderArray);
+            comboBox_ContractModel.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractStatus.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectNo.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractBudgetExpensesAmount.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractBudgetTravelAmount.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractBudgetWorkAmount.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractBudgetWorkHour.Items.AddRange(fileColumnHeaderArray);
             comboBox_contractHasCompletionNotification.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractCompletionNotificationPercentage.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractIsMileageBillable.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractIsDefaultExpenses.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractHasBudgetOverrunNotification.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractIsFixedHourlyRate.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractHourlyRateName.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractTargetHourlyRate.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractPaymentPlanAmount.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractRevenueExpensesAmount.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractRevenueTravelAmount.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractIsExpensesLinked.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contractIsTravelLinked.Items.AddRange(fileColumnHeaderArray);
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -448,11 +499,25 @@ namespace TimeLog.DataImporter.UserControls
                 var _fieldValue = ContractHandler.Instance.CheckAndGetString(dataGridView_contract, columnName, row);
                 int _result = -1;
 
-                if (columnName == _contractStatus)
+                if (columnName == _projectNo)
+                {
+                    _result = ContractHandler.Instance.GetIDFromFieldValue(ProjectList, _fieldValue);
+                }
+                else if (columnName == _contractStatus)
                 {
                     _result = ContractHandler.Instance.GetIDFromFieldValue(ContractStatusList, _fieldValue);
                 }
+                else if (columnName == _contractOwnerInitials)
+                {
+                    _result = ContractHandler.Instance.GetIDFromFieldValue(ContractOwnerList, _fieldValue);
+                }
+                else if (columnName == _contractModel)
+                {
+                    _result = ContractHandler.Instance.GetIDFromFieldValue(ContractModelList, _fieldValue);
+                }
+               
                 
+
 
                 if (_result != -1)
                 {
@@ -485,7 +550,9 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_contractStatus.Items.Clear();
             comboBox_contractOwnerInitials.ResetText();
             comboBox_contractOwnerInitials.Items.Clear();
-            
+            comboBox_ContractModel.ResetText();
+            comboBox_ContractModel.Items.Clear();
+
             comboBox_contractBudgetExpensesAmount.ResetText();
             comboBox_contractBudgetExpensesAmount.Items.Clear();
             comboBox_contractBudgetTravelAmount.ResetText();
@@ -503,15 +570,18 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_contractIsMileageBillable.Items.Clear();
             comboBox_contractIsDefaultExpenses.ResetText();
             comboBox_contractIsDefaultExpenses.Items.Clear();
-
             comboBox_contractHasBudgetOverrunNotification.ResetText();
             comboBox_contractHasBudgetOverrunNotification.Items.Clear();
+            comboBox_contractIsFixedHourlyRate.ResetText();
+            comboBox_contractIsFixedHourlyRate.Items.Clear();
+            comboBox_contractHourlyRateName.ResetText();
+            comboBox_contractHourlyRateName.Items.Clear();
             comboBox_contractTargetHourlyRate.ResetText();
             comboBox_contractTargetHourlyRate.Items.Clear();
             comboBox_contractPaymentPlanAmount.ResetText();
             comboBox_contractPaymentPlanAmount.Items.Clear();
-            comboBox_contractRevenueExprAmount.ResetText();
-            comboBox_contractRevenueExprAmount.Items.Clear();
+            comboBox_contractRevenueExpensesAmount.ResetText();
+            comboBox_contractRevenueExpensesAmount.Items.Clear();
             comboBox_contractRevenueTravelAmount.ResetText();
             comboBox_contractRevenueTravelAmount.Items.Clear();
             comboBox_contractIsExpensesLinked.ResetText();
@@ -523,7 +593,14 @@ namespace TimeLog.DataImporter.UserControls
         private void ClearAndResetAllCheckBoxes()
         {
             checkBox_defaultContractStatus.Checked = false;
+            checkBox_defaultContractModel.Checked = false;
             checkBox_defaultContractHasCompletionNotification.Checked = false;
+            checkBox_defaultContractCompletionNotificationPercentage.Checked = false;
+            checkBox_defaultContractIsMileageBillable.Checked = false;
+            checkBox_defaultContractIsDefaultExpenses.Checked = false;
+            checkBox_defaultContractIsFixedHourlyRate.Checked = false;
+            checkBox_defaultContractIsExpensesLinked.Checked = false;
+            checkBox_defaultContractIsTravelLinked.Checked = false;
         }
 
         #endregion
@@ -539,20 +616,33 @@ namespace TimeLog.DataImporter.UserControls
             {
                 foreach (var _contractModel in _apiResponse)
                 {
-                    ContractModels.Add(new KeyValuePair<int, string>(_contractModel.ContractModelID, _contractModel.Name));
+                    ContractModelList.Add(new KeyValuePair<int, string>(_contractModel.ContractModelID, _contractModel.Name));
                 }
             }
         }
 
-        private void GetAllDefaultHourlyRateServicesFromApi()
+        private void GetAllProjectsFromApi()
         {
-            var _apiResponse = EmployeeHandler.Instance.GetAllDefaultHourlyRate(AuthenticationHandler.Instance.Token);
+            var _apiResponse = ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _hourlyRate in _apiResponse.GroupBy(x=> new{ x.LegalEntityID, x.HourlyRateName }))
+                foreach (var _project in _apiResponse)
                 {
-                    HourlyRateService.Add(new KeyValuePair<string, string>(_hourlyRate.Key.HourlyRateName + "_" +_hourlyRate.Key.LegalEntityID, _hourlyRate.Key.HourlyRateName));
+                    ProjectList.Add(new KeyValuePair<int, string>(_project.ProjectID, _project.No));
+                }
+            }
+        }
+
+        private void GetAllContractOwnersFromApi()
+        {
+            var _apiResponse = ContractHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _employee in _apiResponse)
+                {
+                    ContractOwnerList.Add(new KeyValuePair<int, string>(_employee.UserID, _employee.Initials));
                 }
             }
         }
@@ -564,144 +654,114 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_contractName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractName, _contractName);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractName, _contractName);
         }
 
         private void comboBox_projectNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_projectNo, _projectNo);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_projectNo, _projectNo);
         }
 
         private void comboBox_contractStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractStatus, _contractStatus, checkBox_defaultContractStatus);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractStatus, _contractStatus, checkBox_defaultContractStatus);
         }
 
         private void comboBox_contractOwnerInitials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractOwnerInitials, _contractOwnerInitials);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractOwnerInitials, _contractOwnerInitials);
         }
 
         private void comboBox_ContractModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_ContractModel, _contractModel,
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_ContractModel, _contractModel,
                 checkBox_defaultContractModel);
         }
 
         private void comboBox_contractBudgetExpensesAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractBudgetExpensesAmount, _budgetExpensesAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractBudgetExpensesAmount, _budgetExpensesAmount);
         }
 
         private void comboBox_contractBudgetTravelAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractBudgetTravelAmount, _budgetTravelAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractBudgetTravelAmount, _budgetTravelAmount);
         }
 
         private void comboBox_contractBudgetWorkAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractBudgetWorkAmount, _budgetWorkAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractBudgetWorkAmount, _budgetWorkAmount);
         }
 
         private void comboBox_contractBudgetWorkHour_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractBudgetWorkHour, _budgetWorkHour);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractBudgetWorkHour, _budgetWorkHour);
         }
 
         private void comboBox_contractHasCompletionNotification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractHasCompletionNotification, _completionNotification,
-                checkBox_defaultContractHasCompletionNotification);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractHasCompletionNotification, _completionNotification, checkBox_defaultContractHasCompletionNotification);
         }
 
 
         private void comboBox_contractCompletionNotificationPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractCompletionNotificationPercentage, _completionNotificationPercentage,
-                checkBox_defaultContractCompletionNotificationPercentage);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractCompletionNotificationPercentage, _completionNotificationPercentage, checkBox_defaultContractCompletionNotificationPercentage);
         }
 
         private void comboBox_contractIsMileageBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractIsMileageBillable, _isMileageBillable,
-                checkBox_defaultContractIsMileageBillable);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractIsMileageBillable, _isMileageBillable, checkBox_defaultContractIsMileageBillable);
         }
 
         private void comboBox_contractIsDefaultExpenses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractIsDefaultExpenses, _isDefaultExpenses,
-                checkBox_defaultContractIsDefaultExpenses);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractIsDefaultExpenses, _isDefaultExpenses, checkBox_defaultContractIsDefaultExpenses);
         }
 
         private void comboBox_contractHasBudgetOverrunNotification_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractHasBudgetOverrunNotification, _budgetOverrunNotification,
-                checkBox_defaultContractHasBudgetOverrunNotification);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractHasBudgetOverrunNotification, _budgetOverrunNotification, checkBox_defaultContractHasBudgetOverrunNotification);
         }
 
         private void comboBox_contractTargetHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractTargetHourlyRate, _targetHourlyRate);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractTargetHourlyRate, _targetHourlyRate);
         }
 
         private void comboBox_contractPaymentPlanAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractPaymentPlanAmount, _paymentPlanAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractPaymentPlanAmount, _paymentPlanAmount);
         }
 
-        private void comboBox_contractRevenueExprAmount_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_contractRevenueExpensesAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractRevenueExprAmount, _revenueExprAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractRevenueExpensesAmount, _revenueExpensesAmount);
         }
 
         private void comboBox_contractRevenueTravelAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractRevenueTravelAmount, _revenueTravelAmount);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractRevenueTravelAmount, _revenueTravelAmount);
         }
 
         private void comboBox_contractIsExpensesLinked_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractIsExpensesLinked, _isExpensesLinked,
-                checkBox_defaultContractIsExpensesLinked);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractIsExpensesLinked, _isExpensesLinked, checkBox_defaultContractIsExpensesLinked);
         }
 
         private void comboBox_contractIsTravelLinked_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractIsTravelLinked, _isTravelLinked,
-                checkBox_defaultContractIsTravelLinked);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractIsTravelLinked, _isTravelLinked, checkBox_defaultContractIsTravelLinked);
         }
 
         private void comboBox_contractHourlyRateName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractHourlyRateName, _hourlyRateName);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractHourlyRateName, _hourlyRateName);
         }
 
         private void comboBox_contractIsFixedHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract,
-                _contractTable, comboBox_contractIsFixedHourlyRate, _isFixedHourlyRate,
-                checkBox_defaultContractIsFixedHourlyRate);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contract, _contractTable, comboBox_contractIsFixedHourlyRate, _isFixedHourlyRate, checkBox_defaultContractIsFixedHourlyRate);
         }
 
         #endregion
@@ -721,7 +781,7 @@ namespace TimeLog.DataImporter.UserControls
         {
             ContractHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_contract, _contractTable,
                 comboBox_ContractModel,
-                _contractModel, checkBox_defaultContractModel, ContractModels,
+                _contractModel, checkBox_defaultContractModel, ContractModelList,
                 ContractHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
@@ -790,8 +850,9 @@ namespace TimeLog.DataImporter.UserControls
                 ContractHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
+
         #endregion
 
-
+       
     }
 }

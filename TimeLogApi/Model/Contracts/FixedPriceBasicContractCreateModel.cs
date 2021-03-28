@@ -3,6 +3,10 @@
 
 public class FixedPriceBasicContractCreateModel : ProjectSubContractCreateModelBase
 {
+    public FixedPriceBasicContractCreateModel(ProjectSubContractCreateModelBase contractModelBase) : base(contractModelBase)
+    {
+
+    }
     #region Variables
 
     /// <summary>
@@ -44,7 +48,7 @@ public class FixedPriceBasicContractCreateModel : ProjectSubContractCreateModelB
     /// <value>
     /// The revenue expr amount
     /// </value>
-    public double RevenueExprAmount { get; set; }
+    public double RevenueExpensesAmount { get; set; }
 
     /// <summary>
     /// Gets or sets the revenue travel amount
