@@ -132,6 +132,8 @@ namespace TimeLog.DataImporter.Handlers
                     return new DefaultApiResponse(200, "OK", new string[] { });
                 }
 
+                //return new DefaultApiResponse(200, "OK", new string[] { });
+
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Project", new string[] { });
             }
             catch (WebException _webEx)

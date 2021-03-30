@@ -106,15 +106,29 @@ namespace TimeLog.DataImporter.Handlers
                         {
                             string[] _fieldData = _csvReader.ReadFields();
 
+                            int _count = 0;
+
                             for (int i = 0; i < _fieldData.Length; i++)
                             {
                                 if (_fieldData[i] == "")
                                 {
                                     _fieldData[i] = null;
                                 }
+                                
+                                if (_fieldData[i] != null && _fieldData[i] != "")
+                                {
+                                    _count++;
+                                }
                             }
 
-                            _csvData.Rows.Add(_fieldData);
+                            if (_count != 0)
+                            {
+                                _csvData.Rows.Add(_fieldData);
+                            }
+                            else
+                            {
+                                // All lines are empty if you end up here.
+                            }
                         }
                     }
                 }
@@ -397,6 +411,41 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<TaskReadModel> GetAllTask(string token, int projectID)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain project task list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
         {
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID;
@@ -431,6 +480,8 @@ namespace TimeLog.DataImporter.Handlers
 
             return null;
         }
+
+
 
         public List<ContractModelReadModel> GetAllContractModels(string token)
         {
@@ -526,6 +577,38 @@ namespace TimeLog.DataImporter.Handlers
             catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain default department ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<UnitTypeReadModel> GetAllUnitType(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllUnitTypeEndpoint;
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<UnitTypeReadModel> _apiResponse = new List<UnitTypeReadModel>();
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<UnitTypeReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default Unit Type list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;

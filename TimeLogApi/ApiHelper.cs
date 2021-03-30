@@ -35,6 +35,8 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string PrepaidServicesCreateEndpoint = "/api/v1/contract/create-prepaid-services-contract";
         public string TaskDrivenRevenueValidateEndpoint = "/api/v1/contract/validate-task-driven-revenue-contract";
         public string TaskDrivenRevenueCreateEndpoint = "/api/v1/contract/create-task-driven-revenue-contract";
+        public string PaymentValidateEndpoint = "/api/v1/payment/validate-new-payment";
+        public string PaymentCreateEndpoint = "/api/v1/payment";
 
 
 
@@ -67,6 +69,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllProductEndpoint = "/api/v1/product?$page=1&$pagesize=300";
         public string GetAllUserRolesEndpoint = "/api/v1/role?$page=1&$pagesize=300";
         public string GetAllContractModelsEndpoint = "/api/v1/ContractModel";
+        public string GetAllUnitTypeEndpoint = "/api/v1/unit-type";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();

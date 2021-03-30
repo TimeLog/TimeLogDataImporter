@@ -442,8 +442,7 @@ namespace TimeLog.DataImporter.UserControls
                         }
                     }
 
-                    ContractHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import,
-                        button_validate, _senderButton, textBox_contractImportMessages, this);
+                    ContractHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_contractImportMessages, this);
                 }
                 catch (FormatException _ex)
                 {

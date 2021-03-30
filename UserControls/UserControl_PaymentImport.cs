@@ -9,11 +9,11 @@ using TimeLog.DataImporter.TimeLogApi.Model;
 
 namespace TimeLog.DataImporter.UserControls
 {
-    public partial class UserControl_PrImport : UserControl
+    public partial class UserControl_PaymentImport : UserControl
     {
         #region Variable declarations
 
-        private DataTable _projectTable;
+        private DataTable _paymentTable;
         private DataTable _fileContent;
         private Button _senderButton;
         private int _errorRowCount;
@@ -22,41 +22,35 @@ namespace TimeLog.DataImporter.UserControls
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
-            {0, "Project Name"},
-            {1, "Customer No"},
-            {2, "Project Template"},
-            {3, "Project Manager Initials"},
-            {4, "Currency ISO"},
-            {5, "Legal Entity"},
-            {6, "Project Type"},
-            {7, "Department Name"}
+            {0, "Payment Name"},
+            {1, "Project No"},
+            {2, "Contract Name"},
+            {3, "Invoice Date"},
+            {4, "Amount"},
+            {5, "Quantity"},
+            {6, "Unit Type"},
 
         };
 
         //all column header variables
-        private readonly string _projectName = "Project Name";
-        private readonly string _customerNo = "Customer No";
-        private readonly string _projectTemplate = "Project Template";
-        private readonly string _projectManager = "Project Manager Initials";
-        private readonly string _currencyISO = "Currency ISO";
-        private readonly string _legalEntity = "Legal Entity";
-        private readonly string _departmentName = "Department Name";
+        private readonly string _paymentName = "Payment Name";
         private readonly string _projectNo = "Project No";
-        private readonly string _description = "Description";
-        private readonly string _projectStartDate = "Project Start Date";
-        private readonly string _projectEndDate = "Project End Date";
-        private readonly string _projectType = "Project Type";
-        private readonly string _projectCategory = "Project Category";
+        private readonly string _contractName = "Contract Name";
+        private readonly string _invoiceDate = "Invoice Date";
+        private readonly string _amount = "Amount";
+        private readonly string _quantity = "Quantity";
+        private readonly string _unitType = "Unit type";
+        private readonly string _taskNo = "Task No";
+        private readonly string _productNo = "Product No";
+        private readonly string _discountPercentage = "Discount Percentage";
+        private readonly string _comment = "Comment";
+        private readonly string _isReadyForInvoicing = "Is Ready For Invoicing";
+        private readonly string _isFixedPricePayment = "Is Fixed Price Payment";
+       
 
         //default value lists from API 
-        private static readonly List<KeyValuePair<int, string>> _projectTemplateList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _currencyISOList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _legalEntityList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _departmentList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _projectTypeList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _projectCategoryList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _customerNoList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _projectManagerList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> _projectList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> _unitTypeList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -68,23 +62,19 @@ namespace TimeLog.DataImporter.UserControls
 
         #endregion
 
-        public UserControl_ProjectImport()
+        public UserControl_PaymentImport()
         {
             InitializeComponent();
-            ProjectHandler.Instance.InitializeDelimiterComboBox(comboBox_delimiter);
+            PaymentHandler.Instance.InitializeDelimiterComboBox(comboBox_delimiter);
             InitializeExpandCollapsePanels();
             AddRowNumberToDataTable();
             InitializeAllDefaultValues();
-            _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-            dataGridView_project.DataSource = _projectTable;
+            _paymentTable = PaymentHandler.Instance.InitializeDomainDataTable(MandatoryFields);
+            dataGridView_payment.DataSource = _paymentTable;
             button_import.Enabled = false;
         }
 
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-          
-        }
-
+        
         #region Initialization methods
 
         private void InitializeExpandCollapsePanels()
@@ -111,46 +101,55 @@ namespace TimeLog.DataImporter.UserControls
 
         private void InitializeAllDefaultValues()
         {
-            GetAllProjectTemplateFromApi();
-            GetAllCurrencyFromApi();
-            GetAllLegalEntityFromApi();
-            GetAllDepartmentsFromApi();
-            GetAllProjectTypeFromApi();
-            GetAllProjectCategoryFromApi();
-            GetAllProjectManagerFromApi();
-            GetAllCustomerFromApi();
+            GetAllUnitTypeFromApi();
+            GetAllProjectFromApi();
         }
 
         #endregion
 
         #region Functionalities implementations
 
-        private void button_select_project_file_Click(object sender, EventArgs e)
+        private void button_select_payment_file_Click(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.FileColumnHeaders = new List<string>();
+            PaymentHandler.Instance.FileColumnHeaders = new List<string>();
             _fileContent = new DataTable();
-            _fileContent = ProjectHandler.Instance.GetFileContent(comboBox_delimiter.SelectedItem.ToString());
+            _fileContent = PaymentHandler.Instance.GetFileContent(comboBox_delimiter.SelectedItem.ToString());
 
             if (_fileContent != null)
             {
-                textBox_projectImportMessages.Text = string.Empty;
+                textBox_paymentImportMessages.Text = string.Empty;
                 ClearAndResetAllCheckBoxes();
                 ClearAndResetAllComboBoxes();
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
-                if (dataGridView_project.RowCount > 1)
+                if (dataGridView_payment.RowCount > 1)
                 {
-                    dataGridView_project.DataSource = null;
-                    _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_project.DataSource = _projectTable;
+                    dataGridView_payment.DataSource = null;
+                    _paymentTable = PaymentHandler.Instance.InitializeDomainDataTable(MandatoryFields);
+                    dataGridView_payment.DataSource = _paymentTable;
                 }
 
                 foreach (DataRow _fileContentRow in _fileContent.Rows)
                 {
-                    _projectTable.Rows.Add();
+                    _paymentTable.Rows.Add();
                 }
 
-                AddFileColumnHeaderToComboBox(ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+                AddFileColumnHeaderToComboBox(PaymentHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentName,_paymentName );
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentProjectNo,_projectNo);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentContractName,_contractName);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentInvoiceDate,_invoiceDate);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentAmount,_amount);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentQuantity,_quantity);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentUnitType,_unitType);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentTaskNo,_taskNo);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentProductNo,_productNo);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentDiscountPercentage,_discountPercentage);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentComment,_comment);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentIsReadyForInvoicing,_isReadyForInvoicing);
+                ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentIsFixedPricePayment,_isFixedPricePayment);
+
             }
             else
             {
@@ -160,7 +159,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_validate_Click(object sender, EventArgs e)
         {
-            textBox_projectImportMessages.Text = string.Empty;
+            textBox_paymentImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -172,42 +171,42 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_import_Click(object sender, EventArgs e)
         {
-            textBox_projectImportMessages.Text = string.Empty;
+            textBox_paymentImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
         private void button_clear_Click(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.FileColumnHeaders = new List<string>();
-            textBox_projectImportMessages.Text = string.Empty;
+            PaymentHandler.Instance.FileColumnHeaders = new List<string>();
+            textBox_paymentImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
-            dataGridView_project.DataSource = null;
-            _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-            dataGridView_project.DataSource = _projectTable;
+            dataGridView_payment.DataSource = null;
+            _paymentTable = PaymentHandler.Instance.InitializeDomainDataTable(MandatoryFields);
+            dataGridView_payment.DataSource = _paymentTable;
         }
 
-        private void textBox_projectImportMessages_MouseClick(object sender, MouseEventArgs e)
+        private void textBox_paymentImportMessages_MouseClick(object sender, MouseEventArgs e)
         {
-            ProjectHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_project, textBox_projectImportMessages);
+            PaymentHandler.Instance.HighlightDataTableRowByTextBoxClick(e, dataGridView_payment, textBox_paymentImportMessages);
         }
 
         private void button_expand_Click(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.ExpandCollapseFieldByButtonClick(sender, _expandStates, _expandButtons, tmrExpand);
+            PaymentHandler.Instance.ExpandCollapseFieldByButtonClick(sender, _expandStates, _expandButtons, tmrExpand);
         }
 
         private void tmrExpand_Tick(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.ProcessExpandCollapseFieldForPanel(_expandPanels, _expandStates, ExpansionPerTick, tmrExpand);
+            PaymentHandler.Instance.ProcessExpandCollapseFieldForPanel(_expandPanels, _expandStates, ExpansionPerTick, tmrExpand);
         }
 
         private void WorkerFetcherDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            if (dataGridView_project != null && dataGridView_project.RowCount > 1)
+            if (dataGridView_payment != null && dataGridView_payment.RowCount > 1)
             {
                 _errorRowCount = 0;
 
@@ -215,11 +214,11 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
-                Invoke((MethodInvoker)(() => button_projectSelectFile.Enabled = false));
+                Invoke((MethodInvoker)(() => button_paymentSelectFile.Enabled = false));
 
                 try
                 {
-                    foreach (DataGridViewRow _row in dataGridView_project.Rows)
+                    foreach (DataGridViewRow _row in dataGridView_payment.Rows)
                     {
                         if (WorkerFetcher.CancellationPending)
                         {
@@ -231,21 +230,21 @@ namespace TimeLog.DataImporter.UserControls
 
                         if (_row.DataBoundItem != null)
                         {
-                            ProjectCreateModel _newProject = new ProjectCreateModel
+                            PaymentCreateModel _newPayment = new PaymentCreateModel
                             {
-                                Name = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectName, _row),
-                                CustomerID = (int) MapFieldValueToID(_customerNo, _row, false),
-                                ProjectTemplateID = (int) MapFieldValueToID(_projectTemplate, _row, false),
-                                ProjectManagerID = (int) MapFieldValueToID(_projectManager, _row, false),
-                                CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
-                                LegalEntityID = (int) MapFieldValueToID(_legalEntity, _row, false),
-                                ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectNo, _row),
-                                Description = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _description, _row),
-                                ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
-                                ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
-                                ProjectTypeID = (int) MapFieldValueToID(_projectType, _row, false),
-                                ProjectCategoryID = (int) MapFieldValueToID(_projectCategory, _row, false),
-                                DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false)
+                                Name = PaymentHandler.Instance.CheckAndGetString(dataGridView_payment, _paymentName, _row),
+                                ProjectID = (int) MapFieldValueToID(_projectNo, _row, false),
+                                ProjectSubContractID = (int) MapFieldValueToID(_contractName, _row, false),
+                                TaskID = (int) MapFieldValueToID(_taskNo, _row, false),
+                                InvoiceDate = PaymentHandler.Instance.CheckAndGetDate(dataGridView_payment,_invoiceDate,_row),
+                                Amount = PaymentHandler.Instance.CheckAndGetDouble(dataGridView_payment,_amount,_row),
+                                Quantity = PaymentHandler.Instance.CheckAndGetDouble(dataGridView_payment, _quantity, _row),
+                                UnitTypeID = (int)MapFieldValueToID(_unitType,_row,false),
+                                ProductNumber = PaymentHandler.Instance.CheckAndGetString(dataGridView_payment,_productNo,_row),
+                                DiscountPercentage = PaymentHandler.Instance.CheckAndGetDouble(dataGridView_payment, _discountPercentage, _row),
+                                Comment = PaymentHandler.Instance.CheckAndGetString(dataGridView_payment,_comment,_row),
+                                IsReadyForInvoicing = PaymentHandler.Instance.CheckAndGetBoolean(dataGridView_payment,_isReadyForInvoicing,_row),
+                                IsFixedPricePayment = PaymentHandler.Instance.CheckAndGetBoolean(dataGridView_payment,_isFixedPricePayment,_row)
 
                             };
 
@@ -253,25 +252,25 @@ namespace TimeLog.DataImporter.UserControls
                             {
                                 if (_senderButton.Name == button_validate.Name)
                                 {
-                                    var _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
+                                    var _defaultApiResponse = PaymentHandler.Instance.ValidatePayment(_newPayment,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        textBox_paymentImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                                 else
                                 {
-                                    var _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
+                                    var _defaultApiResponse = PaymentHandler.Instance.ImportPayment(_newPayment,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        textBox_paymentImportMessages, _errorRowCount, WorkerFetcher, this);
                                 }
                             }
                         }
                     }
 
-                    ProjectHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_projectImportMessages, this);
+                    PaymentHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_paymentImportMessages, this);
                 }
                 catch (FormatException _ex)
                 {
@@ -285,7 +284,7 @@ namespace TimeLog.DataImporter.UserControls
                 //reactivate buttons after work is done
                 Invoke((MethodInvoker)(() => button_validate.Enabled = true));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = true));
-                Invoke((MethodInvoker)(() => button_projectSelectFile.Enabled = true));
+                Invoke((MethodInvoker)(() => button_paymentSelectFile.Enabled = true));
             }
         }
 
@@ -295,60 +294,73 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
-            comboBox_projectName.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectCustomerNo.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectManager.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectTemplate.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectCurrencyISO.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectLegalEntity.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectNo.Items.AddRange(fileColumnHeaderArray);
-            comboBox_description.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectStartDate.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectEndDate.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectType.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectCategory.Items.AddRange(fileColumnHeaderArray);
-            comboBox_projectDepartment.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentName.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentProjectNo.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentContractName.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentInvoiceDate.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentAmount.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentQuantity.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentUnitType.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentTaskNo.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentProductNo.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentDiscountPercentage.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentComment.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentIsReadyForInvoicing.Items.AddRange(fileColumnHeaderArray);
+            comboBox_paymentIsFixedPricePayment.Items.AddRange(fileColumnHeaderArray);
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
         {
-            if (dataGridView_project.Columns[columnName] != null)
+            if (dataGridView_payment.Columns[columnName] != null)
             {
-                var _fieldValue = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, columnName, row);
+                var _fieldValue = PaymentHandler.Instance.CheckAndGetString(dataGridView_payment, columnName, row);
                 int _result = -1;
 
-                if (columnName == _projectTemplate)
+                if (columnName == _projectNo)
                 {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectTemplateList, _fieldValue);
+                    _result = PaymentHandler.Instance.GetIDFromFieldValue(_projectList, _fieldValue);
                 }
-                else if (columnName == _currencyISO)
+                else if (columnName == _contractName)
                 {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_currencyISOList, _fieldValue);
+                    var _projectID = PaymentHandler.Instance.GetIDFromFieldValue(_projectList, PaymentHandler.Instance.CheckAndGetString(dataGridView_payment, _projectNo, row));
+                    var _projectContracts = PaymentHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, _projectID);
+
+                    try
+                    {
+                        _result = _projectContracts.FirstOrDefault(x => x.ContractName.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).ContractID;
+                    }
+                    catch (Exception _)
+                    {
+                        _result = -1;
+                    }
                 }
-                else if (columnName == _legalEntity)
+                else if (columnName == _taskNo)
                 {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_legalEntityList, _fieldValue);
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        var _projectID = PaymentHandler.Instance.GetIDFromFieldValue(_projectList, PaymentHandler.Instance.CheckAndGetString(dataGridView_payment, _projectNo, row));
+                        var _tasks = PaymentHandler.Instance.GetAllTask(AuthenticationHandler.Instance.Token, _projectID);
+
+                        try
+                        {
+                            _result = _tasks.FirstOrDefault(x => x.No.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).TaskID;
+                        }
+                        catch (Exception _)
+                        {
+                            _result = -1;
+                        }
+                    }
+                    else
+                    {
+                        _result = 0;
+                    }
+
                 }
-                else if (columnName == _projectType)
+                else if (columnName == _unitType)
                 {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectTypeList, _fieldValue);
+                    _result = PaymentHandler.Instance.GetIDFromFieldValue(_unitTypeList, _fieldValue);
                 }
-                else if (columnName == _projectCategory)
-                {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectCategoryList, _fieldValue);
-                }
-                else if (columnName == _projectManager)
-                {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_projectManagerList, _fieldValue);
-                }
-                else if (columnName == _customerNo)
-                {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_customerNoList, _fieldValue);
-                }
-                else if (columnName == _departmentName)
-                {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_departmentList, _fieldValue);
-                }
+                
 
                 if (_result != -1)
                 {
@@ -356,7 +368,7 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //if can't match, display error message
-                _errorRowCount = ProjectHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_projectImportMessages,
+                _errorRowCount = PaymentHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_paymentImportMessages,
                     WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
                 _isMappingFieldValueToIDCorrect = false;
                 _isFirstTimeInvalidMapping = false;
@@ -372,277 +384,172 @@ namespace TimeLog.DataImporter.UserControls
 
         private void ClearAndResetAllComboBoxes()
         {
-            comboBox_projectName.ResetText();
-            comboBox_projectName.Items.Clear();
-            comboBox_projectCustomerNo.ResetText();
-            comboBox_projectCustomerNo.Items.Clear();
-            comboBox_projectTemplate.ResetText();
-            comboBox_projectTemplate.Items.Clear();
-            comboBox_projectManager.ResetText();
-            comboBox_projectManager.Items.Clear();
-            comboBox_projectCurrencyISO.ResetText();
-            comboBox_projectCurrencyISO.Items.Clear();
-            comboBox_projectLegalEntity.ResetText();
-            comboBox_projectLegalEntity.Items.Clear();
-            comboBox_projectNo.ResetText();
-            comboBox_projectNo.Items.Clear();
-            comboBox_description.ResetText();
-            comboBox_description.Items.Clear();
-            comboBox_projectStartDate.ResetText();
-            comboBox_projectStartDate.Items.Clear();
-            comboBox_projectEndDate.ResetText();
-            comboBox_projectEndDate.Items.Clear();
-            comboBox_projectType.ResetText();
-            comboBox_projectType.Items.Clear();
-            comboBox_projectCategory.ResetText();
-            comboBox_projectCategory.Items.Clear();
-            comboBox_projectDepartment.ResetText();
-            comboBox_projectDepartment.Items.Clear();
+            comboBox_paymentName.ResetText();
+            comboBox_paymentName.Items.Clear();
+            comboBox_paymentProjectNo.ResetText();
+            comboBox_paymentProjectNo.Items.Clear();
+            comboBox_paymentContractName.ResetText();
+            comboBox_paymentContractName.Items.Clear();
+            comboBox_paymentInvoiceDate.ResetText();
+            comboBox_paymentInvoiceDate.Items.Clear();
+            comboBox_paymentAmount.ResetText();
+            comboBox_paymentAmount.Items.Clear();
+            comboBox_paymentQuantity.ResetText();
+            comboBox_paymentQuantity.Items.Clear();
+            comboBox_paymentUnitType.ResetText();
+            comboBox_paymentUnitType.Items.Clear();
+            comboBox_paymentTaskNo.ResetText();
+            comboBox_paymentTaskNo.Items.Clear();
+            comboBox_paymentProductNo.ResetText();
+            comboBox_paymentProductNo.Items.Clear();
+            comboBox_paymentDiscountPercentage.ResetText();
+            comboBox_paymentDiscountPercentage.Items.Clear();
+            comboBox_paymentComment.ResetText();
+            comboBox_paymentComment.Items.Clear();
+            comboBox_paymentIsReadyForInvoicing.ResetText();
+            comboBox_paymentIsReadyForInvoicing.Items.Clear();
+            comboBox_paymentIsFixedPricePayment.ResetText();
+            comboBox_paymentIsFixedPricePayment.Items.Clear();
         }
 
         private void ClearAndResetAllCheckBoxes()
         {
-            checkBox_defaultProjectTemplate.Checked = false;
-            checkBox_defaultCurrencyISO.Checked = false;
-            checkBox_defaultLegalEntity.Checked = false;
-            checkBox_defaultProjectType.Checked = false;
-            checkBox_defaultProjectCategory.Checked = false;
-            checkBox_defaultProjectDepartment.Checked = false;
+
+            checkBox_defaultPaymentUnitType.Checked = false;
         }
 
         #endregion
 
         #region Get default values from API
 
-        private void GetAllProjectTemplateFromApi()
+        private void GetAllUnitTypeFromApi()
         {
-            var _apiResponse = ProjectHandler.Instance.GetAllProjectTemplate(AuthenticationHandler.Instance.Token);
+            var _apiResponse = PaymentHandler.Instance.GetAllUnitType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _projectTemplate in _apiResponse)
+                foreach (var _unitType in _apiResponse)
                 {
-                    _projectTemplateList.Add(new KeyValuePair<int, string>(_projectTemplate.ProjectTemplateID, _projectTemplate.ProjectTemplateName));
+                    _unitTypeList.Add(new KeyValuePair<int, string>(_unitType.UnitTypeID, _unitType.Name));
                 }
             }
         }
 
-        private void GetAllCurrencyFromApi()
+        private void GetAllProjectFromApi()
         {
-            var _apiResponse = ProjectHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
+            var _apiResponse = PaymentHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _currency in _apiResponse)
+                foreach (var _project in _apiResponse)
                 {
-                    _currencyISOList.Add(new KeyValuePair<int, string>(_currency.CurrencyID, _currency.CurrencyABB));
+                    _projectList.Add(new KeyValuePair<int, string>(_project.ProjectID, _project.No));
                 }
             }
         }
 
-        private void GetAllLegalEntityFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllLegalEntity(AuthenticationHandler.Instance.Token);
+        
 
-            if (_apiResponse != null)
-            {
-                foreach (var _legalEntity in _apiResponse)
-                {
-                    _legalEntityList.Add(new KeyValuePair<int, string>(_legalEntity.LegalEntityID, _legalEntity.Name));
-                }
-            }
-        }
 
-        private void GetAllDepartmentsFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _department in _apiResponse)
-                {
-                    _departmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-                }
-            }
-        }
-
-        private void GetAllProjectTypeFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllProjectType(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _projectType in _apiResponse)
-                {
-                    _projectTypeList.Add(new KeyValuePair<int, string>(_projectType.ProjectTypeID, _projectType.Name));
-                }
-            }
-        }
-
-        private void GetAllProjectCategoryFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllProjectCategory(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _projectCategory in _apiResponse)
-                {
-                    _projectCategoryList.Add(new KeyValuePair<int, string>(_projectCategory.ProjectCategoryID, _projectCategory.Name));
-                }
-            }
-        }
-
-        private void GetAllProjectManagerFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _projectManager in _apiResponse)
-                {
-                    _projectManagerList.Add(new KeyValuePair<int, string>(_projectManager.UserID, _projectManager.Initials));
-                }
-            }
-        }
-
-        private void GetAllCustomerFromApi()
-        {
-            var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
-
-            var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _customer in _apiResponse.Where(x=>x.CustomerStatusID == _customerStatus.First(y=>y.IsDefault).CustomerStatusID))
-                {
-                    _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
-                }
-            }
-        }
 
         #endregion
 
         #region Combobox implementations
-
-        private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectName, _projectName);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentName, _paymentName);
+
         }
 
-        private void comboBox_projectCustomerNo_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentProjectNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCustomerNo, _customerNo);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentProjectNo, _projectNo);
+
         }
 
-        private void comboBox_projectTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentContractName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectTemplate, _projectTemplate,  checkBox_defaultProjectTemplate);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentContractName, _contractName);
+
         }
 
-        private void comboBox_projectManager_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentInvoiceDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectManager, _projectManager);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentInvoiceDate, _invoiceDate);
+
         }
 
-        private void comboBox_projectCurrencyISO_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentAmount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCurrencyISO, _currencyISO, checkBox_defaultCurrencyISO);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentAmount, _amount);
+
         }
 
-        private void comboBox_projectLegalEntity_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentQuantity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectLegalEntity, _legalEntity, checkBox_defaultLegalEntity);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentQuantity, _quantity);
+
         }
 
-        private void comboBox_projectNo_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentUnitType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectNo, _projectNo);
+            ContractHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentUnitType, _unitType);
+
         }
 
-        private void comboBox_description_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentTaskNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_description, _description);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentTaskNo,_taskNo);
+
         }
 
-        private void comboBox_projectStartDate_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentProductNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectStartDate, _projectStartDate);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentProductNo,_productNo);
+
         }
 
-        private void comboBox_projectEndDate_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentDiscountPercentage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectEndDate, _projectEndDate);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentDiscountPercentage,_discountPercentage);
+
         }
 
-        private void comboBox_projectType_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentComment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectType, _projectType, checkBox_defaultProjectType);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentComment,_comment);
+
         }
 
-        private void comboBox_projectCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentIsReadyForInvoicing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectCategory, _projectCategory, checkBox_defaultProjectCategory);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentIsReadyForInvoicing,_isReadyForInvoicing);
+
         }
 
-        private void comboBox_projectDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_paymentIsFixedPricePayment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable,
-                comboBox_projectDepartment, _departmentName, checkBox_defaultProjectDepartment);
+            ContractHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_payment, _paymentTable, comboBox_paymentIsFixedPricePayment,_isFixedPricePayment);
+
         }
+
         #endregion
 
         #region Checkbox implementations
 
-        private void checkBox_defaultCurrencyISO_CheckedChanged(object sender, EventArgs e)
+
+
+        private void checkBox_defaultPaymentUnitType_CheckedChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectCurrencyISO,
-                _currencyISO, checkBox_defaultCurrencyISO, _currencyISOList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+            PaymentHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_payment, _paymentTable, comboBox_paymentUnitType,
+                _unitType, checkBox_defaultPaymentUnitType, _unitTypeList, PaymentHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
-        private void checkBox_defaultProjectTemplate_CheckedChanged(object sender, EventArgs e)
-        {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectTemplate,
-                _projectTemplate, checkBox_defaultProjectTemplate, _projectTemplateList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
 
-        private void checkBox_defaultLegalEntity_CheckedChanged(object sender, EventArgs e)
-        {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectLegalEntity,
-                _legalEntity, checkBox_defaultLegalEntity, _legalEntityList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
 
-        private void checkBox_defaultProjectType_CheckedChanged(object sender, EventArgs e)
-        {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectType,
-                _projectType, checkBox_defaultProjectType, _projectTypeList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
-
-        private void checkBox_defaultProjectCategory_CheckedChanged(object sender, EventArgs e)
-        {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectCategory,
-                _projectCategory, checkBox_defaultProjectCategory, _projectCategoryList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
-
-        private void checkBox_defaultProjectDepartment_CheckedChanged(object sender, EventArgs e)
-        {
-            ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_projectDepartment,
-                _departmentName, checkBox_defaultProjectDepartment, _departmentList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
-        }
 
         #endregion
 
-
+      
     }
 }
