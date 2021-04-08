@@ -156,6 +156,26 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 AddFileColumnHeaderToComboBox(ProjectExpenseHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+
+
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectNo, ProjectNo);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_purchaseDate, PurchaseDate);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentMethod, PaymentMethod);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_expenseType, ExpenseType);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_amountIncludingVAT, AmountIncludingVAT);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_salesPriceAmount, SalesPriceAmount);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_expenseNo, ExpenseNo);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATAmount, VATAmount);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_expenseCurrencyISO, ExpenseCurrencyISO);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractName, ContractName);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_exchangeRate, ExchangeRate);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_isBillable, IsBillable);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_externalID, ExternalID);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_comment, Comment);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_supplierNo, SupplierNo);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_supplierInvoiceNo, SupplierInvoiceNo);
+                ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_profitRatio, ProfitRatio);
+                
             }
             else
             {

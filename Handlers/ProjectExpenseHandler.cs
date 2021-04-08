@@ -23,10 +23,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public DefaultApiResponse ValidateProjectExpense(ProjectExpenseCreateModel projectExpense, string token, out BusinessRulesApiResponse businessRulesApiResponse)
         {
-            var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None, 
-                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
-            //lack of validate endpoint
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectExpenseCreateEndpoint;
+            var _data = JsonConvert.SerializeObject(projectExpense, Newtonsoft.Json.Formatting.None, new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.ProjectExpenseValidateEndpoint;
             businessRulesApiResponse = null;
 
             try

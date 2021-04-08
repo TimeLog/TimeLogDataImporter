@@ -20,7 +20,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string ProjectCreateEndpoint = "/api/v1/project/create-from-template";
         public string EmployeeValidateEndpoint = "/api/v1/user/validate-new-user";
         public string EmployeeCreateEndpoint = "/api/v1/user/create";
-        //public string ProjectExpenseValidateEndpoint = "/api/v1/project-expense/validate-new-project-expense";
+        public string ProjectExpenseValidateEndpoint = "/api/v1/project-expense/validate-project-expense";
         public string ProjectExpenseCreateEndpoint = "/api/v1/project-expense";
         public string TaskValidateEndpoint = "/api/v1/task/validate-new-task";
         public string TaskCreateEndpoint = "/api/v1/task/";
