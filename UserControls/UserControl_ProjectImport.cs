@@ -27,7 +27,7 @@ namespace TimeLog.DataImporter.UserControls
             {2, "Project Template"},
             {3, "Project Manager Initials"},
             {4, "Currency ISO"},
-            {5, "Legal Entity"},
+            {5, "Legal Entity Name"},
             {6, "Project Type"},
             {7, "Department Name"}
 
@@ -39,7 +39,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _projectTemplate = "Project Template";
         private readonly string _projectManager = "Project Manager Initials";
         private readonly string _currencyISO = "Currency ISO";
-        private readonly string _legalEntity = "Legal Entity";
+        private readonly string _legalEntity = "Legal Entity Name";
         private readonly string _departmentName = "Department Name";
         private readonly string _projectNo = "Project No";
         private readonly string _description = "Description";
@@ -258,8 +258,8 @@ namespace TimeLog.DataImporter.UserControls
                                 Description = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _description, _row),
                                 ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
                                 ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
-                                ProjectTypeID = (int) MapFieldValueToID(_projectType, _row, false),
-                                ProjectCategoryID = (int) MapFieldValueToID(_projectCategory, _row, false),
+                                ProjectTypeID =  MapFieldValueToID(_projectType, _row, true),
+                                ProjectCategoryID =  MapFieldValueToID(_projectCategory, _row, true),
                                 DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false)
 
                             };
@@ -370,6 +370,11 @@ namespace TimeLog.DataImporter.UserControls
                     return _result;
                 }
 
+                if (isNullableField)
+                {
+                    return null;
+                }
+
                 //if can't match, display error message
                 _errorRowCount = ProjectHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_projectImportMessages,
                     WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
@@ -377,10 +382,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            if (isNullableField)
-            {
-                return null;
-            }
+           
 
             return 0;
         }

@@ -466,6 +466,18 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
                 }
+                else if (columnName == _invoicingAddressCountryISO)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
+
+                    if (_result == -1)
+                    {
+                        // if no invoice address country is added fall back to customer main country
+                        _fieldValue = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _countryISO, row);
+                        _result = CustomerHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
+                    }
+
+                }
                 else if (columnName == _customerStatus)
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(CustomerStatusList, _fieldValue);
@@ -485,12 +497,21 @@ namespace TimeLog.DataImporter.UserControls
                 else if (columnName == _paymentTerm)
                 {
                     _result = CustomerHandler.Instance.GetIDFromFieldValue(PaymentTermList, _fieldValue);
+                    if (_result == -1)
+                    {
+                        _result = 0;
+                    }
                 }
 
 
                 if (_result != -1)
                 {
                     return _result;
+                }
+
+                if (isNullableField)
+                {
+                    return null;
                 }
 
                 //if can't match, display error message
@@ -500,10 +521,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            if (isNullableField)
-            {
-                return null;
-            }
+            
 
             return 0;
         }

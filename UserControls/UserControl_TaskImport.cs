@@ -34,24 +34,24 @@ namespace TimeLog.DataImporter.UserControls
         private const string TaskNo = "Task No";
         private const string TaskName = "Task Name";
         private const string Description = "Description";
-        private const string StartDate = "Start Date";//def calendar
-        private const string EndDate = "End Date";//def calendar
-        private const string AdditionalTextIsRequired = "Add. Text Is Required";
+        private const string StartDate = "Start Date";
+        private const string EndDate = "End Date";
+        private const string AdditionalTextIsRequired = "Additional Text Is Required";
         private const string BudgetHours = "Budget Hours";
         private const string BudgetAmount = "Budget Amount";
-        private const string ContractName = "Contract Name";  //lookup projectsubcontractid
+        private const string ContractName = "Contract Name";  
         private const string IsReadyForInvoicing = "Is Ready For Invoicing";
-        private const string TaskType = "Task Type";//lookup tasktypeid
-        private const string ContractHourlyRate = "Hourly Rate";  //use name to lookup hourlyrateid
-        private const string ProjectNo = "Project No"; //lookup projectid
-        private const string ParentTaskNo = "Parent Task No";  //lookup parenttaskid  //if fillup,call create sub task api///////
+        private const string TaskType = "Task Type";
+        private const string ContractHourlyRate = "Hourly Rate Name";  
+        private const string ProjectNo = "Project No"; 
+        private const string ParentTaskNo = "Parent Task No";
         private const string IsBillable = "Is Billable";
-        private const string PaymentRecognitionModel = "Payment Recognition Model";  //pass in name to lookup enum value
+        private const string PaymentRecognitionModel = "Payment Recognition Model";  
         private const string PaymentAmount = "Payment Amount";
         private const string TaskHourlyRate = "Task Hourly Rate";
         private const string PaymentProductNo = "Payment Product No";
         private const string PaymentName = "Payment Name";
-        private const string PaymentInvoiceDate = "Payment Invoice Date";  //def calendar
+        private const string PaymentInvoiceDate = "Payment Invoice Date";  
 
         //default value lists
         private static readonly List<string> IsBillableList = new List<string> { "true", "false" };
@@ -62,10 +62,9 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> TaskTypeList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> ContractHourlyRateList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentRecognitionModelList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> PaymentProductNoList = new List<KeyValuePair<int, string>>(); //get all product number/project product number?
         private static readonly List<KeyValuePair<int, string>> ContractNameList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> ProjectNoList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> ParentTaskNoList = new List<KeyValuePair<int, string>>();  //get all normal tasks or parent task id of normal tasks?
+        private static readonly List<KeyValuePair<int, string>> ParentTaskNoList = new List<KeyValuePair<int, string>>(); 
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -272,7 +271,7 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectSubContractID = (int) MapFieldValueToID(ContractName, _row, false),
                                 IsReadyForInvoicing = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsReadyForInvoicing, _row),
                                 TaskTypeID = MapFieldValueToID(TaskType, _row, true),
-                                HourlyRateID = (int) MapFieldValueToID(ContractHourlyRate, _row, false),
+                                HourlyRateID = MapFieldValueToID(ContractHourlyRate, _row, true),
                                 ParentTaskID = MapFieldValueToID(ParentTaskNo, _row, true),
                                 IsBillable = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsBillable, _row),
                                 PaymentRecognitionModel = (PaymentRecognitionModelTypes)(int) MapFieldValueToID(PaymentRecognitionModel, _row, false),
@@ -384,6 +383,10 @@ namespace TimeLog.DataImporter.UserControls
                 else if (columnName == ContractHourlyRate)
                 {
                     _result = TaskHandler.Instance.GetIDFromFieldValue(ContractHourlyRateList, _fieldValue);
+                    if (_result == -1)
+                    {
+                        _result = 0;
+                    }
                 }
                 else if (columnName == ContractName)
                 {
@@ -417,6 +420,11 @@ namespace TimeLog.DataImporter.UserControls
                     return _result;
                 }
 
+                if (isNullableField)
+                {
+                    return null;
+                }
+
                 //if can't match, display error message
                 _errorRowCount = TaskHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_taskImportMessages, 
                     WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
@@ -424,11 +432,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            if (isNullableField)
-            {
-                return null;
-            }
-
+           
             return 0;
         }
 

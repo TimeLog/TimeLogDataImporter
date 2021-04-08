@@ -31,7 +31,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.TimeMaterialBasicValidateEndpoint;
 
-            return Import(_address, _data, token, out businessRulesApiResponse);
+            return Validate(_address, _data, token, out businessRulesApiResponse);
         }
 
         public DefaultApiResponse ValidateFixedPriceBasicContract(FixedPriceBasicContractCreateModel contract, string token, out BusinessRulesApiResponse businessRulesApiResponse)
@@ -40,7 +40,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.FixedPriceBasicValidateEndpoint;
 
-            return Import(_address, _data, token, out businessRulesApiResponse);
+            return Validate(_address, _data, token, out businessRulesApiResponse);
         }
 
         public DefaultApiResponse ValidateTimeMaterialAccountEndBalancingContract(TimeMaterialAccountEndBalancingContractCreateModel contract, string token, out BusinessRulesApiResponse businessRulesApiResponse)
@@ -49,7 +49,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.TimeMaterialAccountEndBalancingValidateEndpoint;
 
-            return Import(_address, _data, token, out businessRulesApiResponse);
+            return Validate(_address, _data, token, out businessRulesApiResponse);
         }
 
         public DefaultApiResponse ValidatePrepaidServicesContract(PrepaidServicesContractCreateModel contract, string token, out BusinessRulesApiResponse businessRulesApiResponse)
@@ -58,7 +58,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.PrepaidServicesValidateEndpoint;
 
-            return Import(_address, _data, token, out businessRulesApiResponse);
+            return Validate(_address, _data, token, out businessRulesApiResponse);
         }
 
         public DefaultApiResponse ValidateTaskDrivenRevenueContract(TaskDrivenRevenueContractCreateModel contract, string token, out BusinessRulesApiResponse businessRulesApiResponse)
@@ -67,7 +67,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.TaskDrivenRevenueValidateEndpoint;
 
-            return Import(_address, _data, token, out businessRulesApiResponse);
+            return Validate(_address, _data, token, out businessRulesApiResponse);
         }
 
 
@@ -132,9 +132,7 @@ namespace TimeLog.DataImporter.Handlers
                     return new DefaultApiResponse(200, "OK", new string[] { });
                 }
 
-                //return new DefaultApiResponse(200, "OK", new string[] { });
-
-                return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Project", new string[] { });
+                return new DefaultApiResponse(500, "Internal Application Error: Fail to validate or import Contract", new string[] { });
             }
             catch (WebException _webEx)
             {
@@ -146,5 +144,28 @@ namespace TimeLog.DataImporter.Handlers
         }
 
 
+        public DefaultApiResponse Validate(string address, string data, string token, out BusinessRulesApiResponse businessRulesApiResponse)
+        {
+            businessRulesApiResponse = null;
+
+            try
+            {
+                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(address, "POST", data);
+
+                if (_jsonResult == "null")
+                {
+                    return new DefaultApiResponse(200, "OK", new string[] { });
+                }
+
+                return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Customer", new string[] { });
+            }
+            catch (WebException _webEx)
+            {
+                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
+                string _responseContent = _r.ReadToEnd();
+
+                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+            }
+        }
     }
 }

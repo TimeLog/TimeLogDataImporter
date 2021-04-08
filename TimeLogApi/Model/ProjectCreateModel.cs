@@ -76,7 +76,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The project type ID
         /// </value>
-        public int ProjectTypeID { get; set; }
+        public int? ProjectTypeID { get; set; }
 
         /// <summary>
         /// Gets or sets the project category ID
@@ -84,7 +84,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The project category ID
         /// </value>
-        public int ProjectCategoryID { get; set; }
+        public int? ProjectCategoryID { get; set; }
 
         /// <summary>
         /// Gets or sets the currency ID

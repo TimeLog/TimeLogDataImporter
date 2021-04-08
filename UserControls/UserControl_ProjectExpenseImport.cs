@@ -359,6 +359,11 @@ namespace TimeLog.DataImporter.UserControls
                     return _result;
                 }
 
+                if (isNullableField)
+                {
+                    return null;
+                }
+
                 //if can't match, display error message
                 _errorRowCount = ProjectExpenseHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row, _fieldValue, textBox_projectExpenseImportMessages, 
                     WorkerFetcher, this, _isFirstTimeInvalidMapping, _errorRowCount);
@@ -366,11 +371,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            if (isNullableField)
-            {
-                return null;
-            }
-
+            
             return 0;
         }
 

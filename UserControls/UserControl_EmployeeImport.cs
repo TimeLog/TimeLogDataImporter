@@ -28,13 +28,13 @@ namespace TimeLog.DataImporter.UserControls
             {3, "Initials"},
             {4, "Email"},
             {5, "Manager Initials"},
-            {6, "Legal Entity"},
-            {7, "Department"},
-            {8, "Default Hourly Rate"},
-            {9, "Cost Price"},
-            {10, "Public Holiday Calendar"},
-            {11, "Normal Working Time"},
-            {12, "Salary Group"}
+            {6, "Legal Entity Name"},
+            {7, "Department Name"},
+            {8, "Default Hourly Rate Name"},
+            {9, "Cost Price Name"},
+            {10, "Public Holiday Calendar Name"},
+            {11, "Normal Working Time Name"},
+            {12, "Salary Group Name"}
         };
 
         //all column header variables
@@ -45,17 +45,17 @@ namespace TimeLog.DataImporter.UserControls
         private const string Email = "Email";
         private const string JobTitle = "Job Title";
         private const string EmployeeNo = "Employee No";
-        private const string EmploymentDate = "Employment Date";   //see if got date time picker
-        private const string LegalEntity = "Legal Entity";  
-        private const string Department = "Department";
+        private const string EmploymentDate = "Employment Date";  
+        private const string LegalEntity = "Legal Entity Name";  
+        private const string Department = "Department Name";    
         private const string ManagerInitials = "Manager Initials";
         private const string EmployeeType = "Employee Type"; 
-        private const string DefaultHourlyRate = "Default Hourly Rate";
-        private const string CostPrice = "Cost Price";  
-        private const string PublicHolidayCalendar = "Public Holiday Calendar";
-        private const string AllowanceLegislation = "Allowance Legislation";  
-        private const string NormalWorkingTime = "Normal Working Time";  
-        private const string SalaryGroup = "Salary Group"; 
+        private const string DefaultHourlyRate = "Default Hourly Rate Name";
+        private const string CostPrice = "Cost Price Name";  
+        private const string PublicHolidayCalendar = "Public Holiday Calendar Name";
+        private const string AllowanceLegislation = "Allowance Legislation Name";  
+        private const string NormalWorkingTime = "Normal Working Time Name";  
+        private const string SalaryGroup = "Salary Group Name"; 
         private const string UserRoleNames = "User Role Names";   
 
         //default value lists from API 

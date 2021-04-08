@@ -98,7 +98,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The hourly rate ID
         /// </value>
-        public int HourlyRateID { get; set; }
+        public int? HourlyRateID { get; set; }
 
         /// <summary>
         /// Gets or sets the project ID

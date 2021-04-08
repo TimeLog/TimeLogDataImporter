@@ -38,12 +38,12 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _budgetExpensesAmount = "Budget Expenses Amount";
         private readonly string _budgetTravelAmount = "Budget Travel Amount";
         private readonly string _budgetWorkAmount = "Budget Work Amount";
-        private readonly string _budgetWorkHour = "Budget Work Hour";
-        private readonly string _completionNotification = "Completion Notification";
+        private readonly string _budgetWorkHour = "Budget Work Hours";
+        private readonly string _completionNotification = "Has Completion Notification";
         private readonly string _completionNotificationPercentage = "Completion Notification %";
         private readonly string _isMileageBillable = "Is Mileage Billable";
         private readonly string _isDefaultExpenses = "Is Default Expenses";
-        private readonly string _budgetOverrunNotification = "Budget Overrun Notification";
+        private readonly string _budgetOverrunNotification = "Has Budget Overrun Notification";
         private readonly string _isFixedHourlyRate = "Is Fixed Hourly Rate";
         private readonly string _hourlyRateName = "Hourly Rate Name";
         private readonly string _targetHourlyRate = "Target Hourly Rate";
@@ -523,6 +523,11 @@ namespace TimeLog.DataImporter.UserControls
                     return _result;
                 }
 
+                if (isNullableField)
+                {
+                    return null;
+                }
+
                 //if can't match, display error message
                 _errorRowCount = ContractHandler.Instance.HandleInvalidFieldValueToIDMapping(columnName, row,
                     _fieldValue, textBox_contractImportMessages,
@@ -531,10 +536,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            if (isNullableField)
-            {
-                return null;
-            }
+            
 
             return 0;
         }
