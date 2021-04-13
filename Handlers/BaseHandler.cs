@@ -834,8 +834,11 @@ namespace TimeLog.DataImporter.Handlers
 
         public void AutoMapFileColumns(DataTable fileContent, ComboBox comboBox, string columnName)
         {
+
             int _columnIndex = fileContent.Columns.IndexOf(columnName);
             comboBox.SelectedIndex = _columnIndex;
+
+
         }
 
         public void MapMandatorySelectedColumnToTable(DataTable fileContent, DataGridView dataGridView, DataTable domainTable, ComboBox comboBox, string columnName)
@@ -1223,6 +1226,11 @@ namespace TimeLog.DataImporter.Handlers
                 control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Validation completed successfully with " + errorRowCount + " error(s). You may modify the invalid input data and then press Validate button again.")));
                 control.Invoke((MethodInvoker)(() => importButton.Enabled = false));
             }
+
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+            control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("End time: " + DateTime.Now)));
+
+
         }
 
         public void HighlightDataTableRowByTextBoxClick(MouseEventArgs e, DataGridView dataGridView, TextBox domainTextBox)
