@@ -353,7 +353,6 @@
             this.comboBox_userRoles.Name = "comboBox_userRoles";
             this.comboBox_userRoles.Size = new System.Drawing.Size(150, 25);
             this.comboBox_userRoles.TabIndex = 10;
-            this.comboBox_userRoles.SelectedIndexChanged += new System.EventHandler(this.comboBox_userRoles_SelectedIndexChanged);
             // 
             // label_userRoleNames
             // 
@@ -380,7 +379,6 @@
             this.comboBox_jobTitle.Name = "comboBox_jobTitle";
             this.comboBox_jobTitle.Size = new System.Drawing.Size(150, 25);
             this.comboBox_jobTitle.TabIndex = 3;
-            this.comboBox_jobTitle.SelectedIndexChanged += new System.EventHandler(this.comboBox_jobTitle_SelectedIndexChanged);
             // 
             // comboBox_employeeNo
             // 
@@ -389,7 +387,6 @@
             this.comboBox_employeeNo.Name = "comboBox_employeeNo";
             this.comboBox_employeeNo.Size = new System.Drawing.Size(150, 25);
             this.comboBox_employeeNo.TabIndex = 3;
-            this.comboBox_employeeNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeNo_SelectedIndexChanged);
             // 
             // label_employeeNo
             // 
@@ -407,7 +404,6 @@
             this.comboBox_employmentDate.Name = "comboBox_employmentDate";
             this.comboBox_employmentDate.Size = new System.Drawing.Size(150, 25);
             this.comboBox_employmentDate.TabIndex = 3;
-            this.comboBox_employmentDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_employmentDate_SelectedIndexChanged);
             // 
             // label_employmentDate
             // 
@@ -538,7 +534,6 @@
             this.comboBox_salaryGroup.Name = "comboBox_salaryGroup";
             this.comboBox_salaryGroup.Size = new System.Drawing.Size(154, 25);
             this.comboBox_salaryGroup.TabIndex = 10;
-            this.comboBox_salaryGroup.SelectedIndexChanged += new System.EventHandler(this.comboBox_salaryGroup_SelectedIndexChanged);
             // 
             // comboBox_allowanceLegislation
             // 
@@ -547,7 +542,6 @@
             this.comboBox_allowanceLegislation.Name = "comboBox_allowanceLegislation";
             this.comboBox_allowanceLegislation.Size = new System.Drawing.Size(153, 25);
             this.comboBox_allowanceLegislation.TabIndex = 10;
-            this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
             // 
             // comboBox_normalWorkingTime
             // 
@@ -556,7 +550,6 @@
             this.comboBox_normalWorkingTime.Name = "comboBox_normalWorkingTime";
             this.comboBox_normalWorkingTime.Size = new System.Drawing.Size(154, 25);
             this.comboBox_normalWorkingTime.TabIndex = 9;
-            this.comboBox_normalWorkingTime.SelectedIndexChanged += new System.EventHandler(this.comboBox_normalWorkingTime_SelectedIndexChanged);
             // 
             // comboBox_employeeType
             // 
@@ -565,7 +558,6 @@
             this.comboBox_employeeType.Name = "comboBox_employeeType";
             this.comboBox_employeeType.Size = new System.Drawing.Size(153, 25);
             this.comboBox_employeeType.TabIndex = 10;
-            this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
             // 
             // comboBox_publicHolidayCalendar
             // 
@@ -574,7 +566,6 @@
             this.comboBox_publicHolidayCalendar.Name = "comboBox_publicHolidayCalendar";
             this.comboBox_publicHolidayCalendar.Size = new System.Drawing.Size(154, 25);
             this.comboBox_publicHolidayCalendar.TabIndex = 8;
-            this.comboBox_publicHolidayCalendar.SelectedIndexChanged += new System.EventHandler(this.comboBox_publicHolidayCalendar_SelectedIndexChanged);
             // 
             // comboBox_costPrice
             // 
@@ -583,7 +574,6 @@
             this.comboBox_costPrice.Name = "comboBox_costPrice";
             this.comboBox_costPrice.Size = new System.Drawing.Size(154, 25);
             this.comboBox_costPrice.TabIndex = 7;
-            this.comboBox_costPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_costPrice_SelectedIndexChanged);
             // 
             // label_allowanceLegislation
             // 
@@ -691,7 +681,6 @@
             this.comboBox_managerInitials.Name = "comboBox_managerInitials";
             this.comboBox_managerInitials.Size = new System.Drawing.Size(154, 25);
             this.comboBox_managerInitials.TabIndex = 3;
-            this.comboBox_managerInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_managerInitials_SelectedIndexChanged);
             // 
             // label_email
             // 
@@ -718,7 +707,6 @@
             this.comboBox_email.Name = "comboBox_email";
             this.comboBox_email.Size = new System.Drawing.Size(154, 25);
             this.comboBox_email.TabIndex = 3;
-            this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
             // 
             // label_initials
             // 
@@ -736,7 +724,6 @@
             this.comboBox_initials.Name = "comboBox_initials";
             this.comboBox_initials.Size = new System.Drawing.Size(154, 25);
             this.comboBox_initials.TabIndex = 3;
-            this.comboBox_initials.SelectedIndexChanged += new System.EventHandler(this.comboBox_initials_SelectedIndexChanged);
             // 
             // label_lastName
             // 
@@ -754,7 +741,6 @@
             this.comboBox_defaultHourlyRate.Name = "comboBox_defaultHourlyRate";
             this.comboBox_defaultHourlyRate.Size = new System.Drawing.Size(154, 25);
             this.comboBox_defaultHourlyRate.TabIndex = 3;
-            this.comboBox_defaultHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultHourlyRate_SelectedIndexChanged);
             // 
             // comboBox_lastName
             // 
@@ -763,7 +749,6 @@
             this.comboBox_lastName.Name = "comboBox_lastName";
             this.comboBox_lastName.Size = new System.Drawing.Size(154, 25);
             this.comboBox_lastName.TabIndex = 3;
-            this.comboBox_lastName.SelectedIndexChanged += new System.EventHandler(this.comboBox_lastName_SelectedIndexChanged);
             // 
             // label_firstName
             // 
@@ -781,7 +766,6 @@
             this.comboBox_firstName.Name = "comboBox_firstName";
             this.comboBox_firstName.Size = new System.Drawing.Size(154, 25);
             this.comboBox_firstName.TabIndex = 3;
-            this.comboBox_firstName.SelectedIndexChanged += new System.EventHandler(this.comboBox_firstName_SelectedIndexChanged);
             // 
             // label_userName
             // 
@@ -799,7 +783,6 @@
             this.comboBox_userName.Name = "comboBox_userName";
             this.comboBox_userName.Size = new System.Drawing.Size(154, 25);
             this.comboBox_userName.TabIndex = 3;
-            this.comboBox_userName.SelectedIndexChanged += new System.EventHandler(this.comboBox_userName_SelectedIndexChanged);
             // 
             // checkBox_defaultLegalEntity
             // 
@@ -829,7 +812,6 @@
             this.comboBox_legalEntity.Name = "comboBox_legalEntity";
             this.comboBox_legalEntity.Size = new System.Drawing.Size(154, 25);
             this.comboBox_legalEntity.TabIndex = 3;
-            this.comboBox_legalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_legalEntity_SelectedIndexChanged);
             // 
             // label_department
             // 
@@ -859,7 +841,6 @@
             this.comboBox_department.Name = "comboBox_department";
             this.comboBox_department.Size = new System.Drawing.Size(153, 25);
             this.comboBox_department.TabIndex = 3;
-            this.comboBox_department.SelectedIndexChanged += new System.EventHandler(this.comboBox_department_SelectedIndexChanged);
             // 
             // label_employeeSetup
             // 

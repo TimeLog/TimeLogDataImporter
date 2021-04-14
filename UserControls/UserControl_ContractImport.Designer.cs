@@ -518,7 +518,6 @@
             this.comboBox_contractIsFixedHourlyRate.Name = "comboBox_contractIsFixedHourlyRate";
             this.comboBox_contractIsFixedHourlyRate.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractIsFixedHourlyRate.TabIndex = 47;
-            this.comboBox_contractIsFixedHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsFixedHourlyRate_SelectedIndexChanged);
             // 
             // label_contractHourlyRateName
             // 
@@ -538,7 +537,6 @@
             this.comboBox_contractHourlyRateName.Name = "comboBox_contractHourlyRateName";
             this.comboBox_contractHourlyRateName.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractHourlyRateName.TabIndex = 45;
-            this.comboBox_contractHourlyRateName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHourlyRateName_SelectedIndexChanged);
             // 
             // checkBox_defaultContractIsTravelLinked
             // 
@@ -594,7 +592,6 @@
             this.comboBox_contractIsTravelLinked.Name = "comboBox_contractIsTravelLinked";
             this.comboBox_contractIsTravelLinked.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractIsTravelLinked.TabIndex = 42;
-            this.comboBox_contractIsTravelLinked.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsTravelLinked_SelectedIndexChanged);
             // 
             // comboBox_contractIsExpensesLinked
             // 
@@ -604,7 +601,6 @@
             this.comboBox_contractIsExpensesLinked.Name = "comboBox_contractIsExpensesLinked";
             this.comboBox_contractIsExpensesLinked.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractIsExpensesLinked.TabIndex = 39;
-            this.comboBox_contractIsExpensesLinked.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsExpensesLinked_SelectedIndexChanged);
             // 
             // label_contractRevenueTravelAmount
             // 
@@ -624,7 +620,6 @@
             this.comboBox_contractRevenueTravelAmount.Name = "comboBox_contractRevenueTravelAmount";
             this.comboBox_contractRevenueTravelAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractRevenueTravelAmount.TabIndex = 36;
-            this.comboBox_contractRevenueTravelAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractRevenueTravelAmount_SelectedIndexChanged);
             // 
             // label_contractRevenueExpensesAmount
             // 
@@ -644,7 +639,6 @@
             this.comboBox_contractRevenueExpensesAmount.Name = "comboBox_contractRevenueExpensesAmount";
             this.comboBox_contractRevenueExpensesAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractRevenueExpensesAmount.TabIndex = 33;
-            this.comboBox_contractRevenueExpensesAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractRevenueExpensesAmount_SelectedIndexChanged);
             // 
             // label_contractPaymentPlanAmount
             // 
@@ -664,7 +658,6 @@
             this.comboBox_contractPaymentPlanAmount.Name = "comboBox_contractPaymentPlanAmount";
             this.comboBox_contractPaymentPlanAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractPaymentPlanAmount.TabIndex = 30;
-            this.comboBox_contractPaymentPlanAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractPaymentPlanAmount_SelectedIndexChanged);
             // 
             // label_contractTargetHourlyRate
             // 
@@ -684,7 +677,6 @@
             this.comboBox_contractTargetHourlyRate.Name = "comboBox_contractTargetHourlyRate";
             this.comboBox_contractTargetHourlyRate.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractTargetHourlyRate.TabIndex = 27;
-            this.comboBox_contractTargetHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractTargetHourlyRate_SelectedIndexChanged);
             // 
             // checkBox_defaultContractHasBudgetOverrunNotification
             // 
@@ -717,7 +709,6 @@
             this.comboBox_contractHasBudgetOverrunNotification.Name = "comboBox_contractHasBudgetOverrunNotification";
             this.comboBox_contractHasBudgetOverrunNotification.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractHasBudgetOverrunNotification.TabIndex = 18;
-            this.comboBox_contractHasBudgetOverrunNotification.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHasBudgetOverrunNotification_SelectedIndexChanged);
             // 
             // checkBox_defaultContractIsDefaultExpenses
             // 
@@ -750,7 +741,6 @@
             this.comboBox_contractIsDefaultExpenses.Name = "comboBox_contractIsDefaultExpenses";
             this.comboBox_contractIsDefaultExpenses.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractIsDefaultExpenses.TabIndex = 15;
-            this.comboBox_contractIsDefaultExpenses.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsDefaultExpenses_SelectedIndexChanged);
             // 
             // checkBox_defaultContractIsMileageBillable
             // 
@@ -783,7 +773,6 @@
             this.comboBox_contractIsMileageBillable.Name = "comboBox_contractIsMileageBillable";
             this.comboBox_contractIsMileageBillable.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractIsMileageBillable.TabIndex = 12;
-            this.comboBox_contractIsMileageBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsMileageBillable_SelectedIndexChanged);
             // 
             // checkBox_defaultContractCompletionNotificationPercentage
             // 
@@ -816,7 +805,6 @@
             this.comboBox_contractCompletionNotificationPercentage.Name = "comboBox_contractCompletionNotificationPercentage";
             this.comboBox_contractCompletionNotificationPercentage.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractCompletionNotificationPercentage.TabIndex = 9;
-            this.comboBox_contractCompletionNotificationPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractCompletionNotificationPercentage_SelectedIndexChanged);
             // 
             // comboBox_contractBudgetExpensesAmount
             // 
@@ -826,7 +814,6 @@
             this.comboBox_contractBudgetExpensesAmount.Name = "comboBox_contractBudgetExpensesAmount";
             this.comboBox_contractBudgetExpensesAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractBudgetExpensesAmount.TabIndex = 7;
-            this.comboBox_contractBudgetExpensesAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetExpensesAmount_SelectedIndexChanged);
             // 
             // label_contractBudgetExpensesAmount
             // 
@@ -869,7 +856,6 @@
             this.comboBox_contractBudgetTravelAmount.Name = "comboBox_contractBudgetTravelAmount";
             this.comboBox_contractBudgetTravelAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractBudgetTravelAmount.TabIndex = 3;
-            this.comboBox_contractBudgetTravelAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetTravelAmount_SelectedIndexChanged);
             // 
             // comboBox_contractHasCompletionNotification
             // 
@@ -879,7 +865,6 @@
             this.comboBox_contractHasCompletionNotification.Name = "comboBox_contractHasCompletionNotification";
             this.comboBox_contractHasCompletionNotification.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractHasCompletionNotification.TabIndex = 3;
-            this.comboBox_contractHasCompletionNotification.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHasCompletionNotification_SelectedIndexChanged);
             // 
             // label_contractBudgetTravelAmount
             // 
@@ -899,7 +884,6 @@
             this.comboBox_contractBudgetWorkAmount.Name = "comboBox_contractBudgetWorkAmount";
             this.comboBox_contractBudgetWorkAmount.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractBudgetWorkAmount.TabIndex = 3;
-            this.comboBox_contractBudgetWorkAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetWorkAmount_SelectedIndexChanged);
             // 
             // label_contractBudgetWorkAmount
             // 
@@ -929,7 +913,6 @@
             this.comboBox_contractBudgetWorkHour.Name = "comboBox_contractBudgetWorkHour";
             this.comboBox_contractBudgetWorkHour.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractBudgetWorkHour.TabIndex = 3;
-            this.comboBox_contractBudgetWorkHour.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetWorkHour_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -1004,7 +987,6 @@
             this.comboBox_ContractModel.Name = "comboBox_ContractModel";
             this.comboBox_ContractModel.Size = new System.Drawing.Size(197, 36);
             this.comboBox_ContractModel.TabIndex = 7;
-            this.comboBox_ContractModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_ContractModel_SelectedIndexChanged);
             // 
             // label_projectNo
             // 
@@ -1037,7 +1019,6 @@
             this.comboBox_projectNo.Name = "comboBox_projectNo";
             this.comboBox_projectNo.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectNo.TabIndex = 3;
-            this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
             // 
             // label_contractOwnerInitials
             // 
@@ -1057,7 +1038,6 @@
             this.comboBox_contractOwnerInitials.Name = "comboBox_contractOwnerInitials";
             this.comboBox_contractOwnerInitials.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractOwnerInitials.TabIndex = 3;
-            this.comboBox_contractOwnerInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractOwnerInitials_SelectedIndexChanged);
             // 
             // label_contractStatus
             // 
@@ -1077,7 +1057,6 @@
             this.comboBox_contractStatus.Name = "comboBox_contractStatus";
             this.comboBox_contractStatus.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractStatus.TabIndex = 3;
-            this.comboBox_contractStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractStatus_SelectedIndexChanged);
             // 
             // label_projectName
             // 
@@ -1097,7 +1076,6 @@
             this.comboBox_contractName.Name = "comboBox_contractName";
             this.comboBox_contractName.Size = new System.Drawing.Size(197, 36);
             this.comboBox_contractName.TabIndex = 3;
-            this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
             // 
             // label_contractSetup
             // 

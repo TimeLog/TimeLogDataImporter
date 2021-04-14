@@ -159,13 +159,11 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_employee.DataSource = null;
                     _employeeTable = EmployeeHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_employee.DataSource = _employeeTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _employeeTable.Rows.Add();
-                }
+                _employeeTable = _fileContent.Copy();
+                dataGridView_employee.DataSource = _employeeTable;
+
 
                 AddFileColumnHeaderToComboBox(EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -190,7 +188,26 @@ namespace TimeLog.DataImporter.UserControls
                 EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_employmentDate, EmploymentDate);
                 EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_allowanceLegislation, AllowanceLegislation);
                 EmployeeHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_userRoles, UserRoleNames);
-            
+
+                this.comboBox_userRoles.SelectedIndexChanged += new System.EventHandler(this.comboBox_userRoles_SelectedIndexChanged);
+                this.comboBox_jobTitle.SelectedIndexChanged += new System.EventHandler(this.comboBox_jobTitle_SelectedIndexChanged);
+                this.comboBox_employeeNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeNo_SelectedIndexChanged);
+                this.comboBox_employmentDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_employmentDate_SelectedIndexChanged);
+                this.comboBox_salaryGroup.SelectedIndexChanged += new System.EventHandler(this.comboBox_salaryGroup_SelectedIndexChanged);
+                this.comboBox_allowanceLegislation.SelectedIndexChanged += new System.EventHandler(this.comboBox_allowanceLegislation_SelectedIndexChanged);
+                this.comboBox_normalWorkingTime.SelectedIndexChanged += new System.EventHandler(this.comboBox_normalWorkingTime_SelectedIndexChanged);
+                this.comboBox_employeeType.SelectedIndexChanged += new System.EventHandler(this.comboBox_employeeType_SelectedIndexChanged);
+                this.comboBox_publicHolidayCalendar.SelectedIndexChanged += new System.EventHandler(this.comboBox_publicHolidayCalendar_SelectedIndexChanged);
+                this.comboBox_costPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_costPrice_SelectedIndexChanged);
+                this.comboBox_managerInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_managerInitials_SelectedIndexChanged);
+                this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
+                this.comboBox_initials.SelectedIndexChanged += new System.EventHandler(this.comboBox_initials_SelectedIndexChanged);
+                this.comboBox_defaultHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultHourlyRate_SelectedIndexChanged);
+                this.comboBox_lastName.SelectedIndexChanged += new System.EventHandler(this.comboBox_lastName_SelectedIndexChanged);
+                this.comboBox_firstName.SelectedIndexChanged += new System.EventHandler(this.comboBox_firstName_SelectedIndexChanged);
+                this.comboBox_userName.SelectedIndexChanged += new System.EventHandler(this.comboBox_userName_SelectedIndexChanged);
+                this.comboBox_legalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_legalEntity_SelectedIndexChanged);
+                this.comboBox_department.SelectedIndexChanged += new System.EventHandler(this.comboBox_department_SelectedIndexChanged);
 
 
             }
@@ -260,6 +277,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_employeeSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_employeeImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 //get strings of delimiters chosen
                 var _fileDelimiter = (string) comboBox_delimiter.Invoke(new Func<string>(() => comboBox_delimiter.SelectedItem.ToString()));

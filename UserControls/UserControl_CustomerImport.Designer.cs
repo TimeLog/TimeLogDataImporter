@@ -512,7 +512,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_industryName.Name = "comboBox_industryName";
             this.comboBox_industryName.Size = new System.Drawing.Size(195, 36);
             this.comboBox_industryName.TabIndex = 3;
-            this.comboBox_industryName.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryName_SelectedIndexChanged);
             // 
             // label_secondaryKAM
             // 
@@ -532,7 +531,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerSince.Name = "comboBox_customerSince";
             this.comboBox_customerSince.Size = new System.Drawing.Size(195, 36);
             this.comboBox_customerSince.TabIndex = 3;
-            this.comboBox_customerSince.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerSince_SelectedIndexChanged);
             // 
             // label_industryName
             // 
@@ -552,7 +550,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_primaryKAM.Name = "comboBox_primaryKAM";
             this.comboBox_primaryKAM.Size = new System.Drawing.Size(195, 36);
             this.comboBox_primaryKAM.TabIndex = 3;
-            this.comboBox_primaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAM_SelectedIndexChanged);
             // 
             // comboBox_secondaryKAM
             // 
@@ -562,7 +559,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_secondaryKAM.Name = "comboBox_secondaryKAM";
             this.comboBox_secondaryKAM.Size = new System.Drawing.Size(195, 36);
             this.comboBox_secondaryKAM.TabIndex = 3;
-            this.comboBox_secondaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_secondaryKAM_SelectedIndexChanged);
             // 
             // comboBox_nickName
             // 
@@ -572,7 +568,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_nickName.Name = "comboBox_nickName";
             this.comboBox_nickName.Size = new System.Drawing.Size(195, 36);
             this.comboBox_nickName.TabIndex = 3;
-            this.comboBox_nickName.SelectedIndexChanged += new System.EventHandler(this.comboBox_nickName_SelectedIndexChanged);
             // 
             // comboBox_customerNo
             // 
@@ -582,7 +577,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerNo.Name = "comboBox_customerNo";
             this.comboBox_customerNo.Size = new System.Drawing.Size(195, 36);
             this.comboBox_customerNo.TabIndex = 3;
-            this.comboBox_customerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerNo_SelectedIndexChanged);
             // 
             // checkBox_defaultPrimaryKAM
             // 
@@ -772,7 +766,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_phoneNo.Name = "comboBox_phoneNo";
             this.comboBox_phoneNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_phoneNo.TabIndex = 3;
-            this.comboBox_phoneNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_phoneNo_SelectedIndexChanged);
             // 
             // comboBox_faxNo
             // 
@@ -782,7 +775,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_faxNo.Name = "comboBox_faxNo";
             this.comboBox_faxNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_faxNo.TabIndex = 3;
-            this.comboBox_faxNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_faxNo_SelectedIndexChanged);
             // 
             // comboBox_email
             // 
@@ -792,7 +784,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_email.Name = "comboBox_email";
             this.comboBox_email.Size = new System.Drawing.Size(188, 36);
             this.comboBox_email.TabIndex = 3;
-            this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
             // 
             // comboBox_website
             // 
@@ -802,7 +793,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_website.Name = "comboBox_website";
             this.comboBox_website.Size = new System.Drawing.Size(188, 36);
             this.comboBox_website.TabIndex = 3;
-            this.comboBox_website.SelectedIndexChanged += new System.EventHandler(this.comboBox_website_SelectedIndexChanged);
             // 
             // comboBox_address
             // 
@@ -812,7 +802,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address.Name = "comboBox_address";
             this.comboBox_address.Size = new System.Drawing.Size(188, 36);
             this.comboBox_address.TabIndex = 3;
-            this.comboBox_address.SelectedIndexChanged += new System.EventHandler(this.comboBox_address_SelectedIndexChanged);
             // 
             // comboBox_address2
             // 
@@ -822,7 +811,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address2.Name = "comboBox_address2";
             this.comboBox_address2.Size = new System.Drawing.Size(188, 36);
             this.comboBox_address2.TabIndex = 3;
-            this.comboBox_address2.SelectedIndexChanged += new System.EventHandler(this.comboBox_address2_SelectedIndexChanged);
             // 
             // comboBox_address3
             // 
@@ -832,7 +820,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address3.Name = "comboBox_address3";
             this.comboBox_address3.Size = new System.Drawing.Size(188, 36);
             this.comboBox_address3.TabIndex = 3;
-            this.comboBox_address3.SelectedIndexChanged += new System.EventHandler(this.comboBox_address3_SelectedIndexChanged);
             // 
             // comboBox_zipCode
             // 
@@ -842,7 +829,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_zipCode.Name = "comboBox_zipCode";
             this.comboBox_zipCode.Size = new System.Drawing.Size(188, 36);
             this.comboBox_zipCode.TabIndex = 3;
-            this.comboBox_zipCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_zipCode_SelectedIndexChanged);
             // 
             // comboBox_city
             // 
@@ -852,7 +838,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_city.Name = "comboBox_city";
             this.comboBox_city.Size = new System.Drawing.Size(188, 36);
             this.comboBox_city.TabIndex = 3;
-            this.comboBox_city.SelectedIndexChanged += new System.EventHandler(this.comboBox_city_SelectedIndexChanged);
             // 
             // comboBox_state
             // 
@@ -862,7 +847,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_state.Name = "comboBox_state";
             this.comboBox_state.Size = new System.Drawing.Size(188, 36);
             this.comboBox_state.TabIndex = 3;
-            this.comboBox_state.SelectedIndexChanged += new System.EventHandler(this.comboBox_state_SelectedIndexChanged);
             // 
             // panel_invoiceAddressButton
             // 
@@ -1028,7 +1012,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_useInvoicingAddress.Name = "comboBox_useInvoicingAddress";
             this.comboBox_useInvoicingAddress.Size = new System.Drawing.Size(188, 36);
             this.comboBox_useInvoicingAddress.TabIndex = 3;
-            this.comboBox_useInvoicingAddress.SelectedIndexChanged += new System.EventHandler(this.comboBox_useInvoicingAddress_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddress
             // 
@@ -1038,7 +1021,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress.Name = "comboBox_invoicingAddress";
             this.comboBox_invoicingAddress.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddress.TabIndex = 3;
-            this.comboBox_invoicingAddress.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddress2
             // 
@@ -1048,7 +1030,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress2.Name = "comboBox_invoicingAddress2";
             this.comboBox_invoicingAddress2.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddress2.TabIndex = 3;
-            this.comboBox_invoicingAddress2.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress2_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddress3
             // 
@@ -1058,7 +1039,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress3.Name = "comboBox_invoicingAddress3";
             this.comboBox_invoicingAddress3.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddress3.TabIndex = 3;
-            this.comboBox_invoicingAddress3.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress3_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddressZipCode
             // 
@@ -1068,7 +1048,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressZipCode.Name = "comboBox_invoicingAddressZipCode";
             this.comboBox_invoicingAddressZipCode.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddressZipCode.TabIndex = 3;
-            this.comboBox_invoicingAddressZipCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressZipCode_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddressCity
             // 
@@ -1078,7 +1057,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressCity.Name = "comboBox_invoicingAddressCity";
             this.comboBox_invoicingAddressCity.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddressCity.TabIndex = 3;
-            this.comboBox_invoicingAddressCity.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCity_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddressState
             // 
@@ -1088,7 +1066,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressState.Name = "comboBox_invoicingAddressState";
             this.comboBox_invoicingAddressState.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddressState.TabIndex = 3;
-            this.comboBox_invoicingAddressState.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressState_SelectedIndexChanged);
             // 
             // comboBox_invoicingAddressCountryISO
             // 
@@ -1098,7 +1075,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressCountryISO.Name = "comboBox_invoicingAddressCountryISO";
             this.comboBox_invoicingAddressCountryISO.Size = new System.Drawing.Size(188, 36);
             this.comboBox_invoicingAddressCountryISO.TabIndex = 3;
-            this.comboBox_invoicingAddressCountryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCountryID_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -1183,7 +1159,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_organizationNo.Name = "comboBox_organizationNo";
             this.comboBox_organizationNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_organizationNo.TabIndex = 3;
-            this.comboBox_organizationNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_organizationNo_SelectedIndexChanged);
             // 
             // comboBox_VATNo
             // 
@@ -1193,7 +1168,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_VATNo.Name = "comboBox_VATNo";
             this.comboBox_VATNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_VATNo.TabIndex = 3;
-            this.comboBox_VATNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATNo_SelectedIndexChanged);
             // 
             // comboBox_eanNo
             // 
@@ -1203,7 +1177,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_eanNo.Name = "comboBox_eanNo";
             this.comboBox_eanNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_eanNo.TabIndex = 3;
-            this.comboBox_eanNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_eanNo_SelectedIndexChanged);
             // 
             // comboBox_useEanNo
             // 
@@ -1213,7 +1186,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_useEanNo.Name = "comboBox_useEanNo";
             this.comboBox_useEanNo.Size = new System.Drawing.Size(188, 36);
             this.comboBox_useEanNo.TabIndex = 3;
-            this.comboBox_useEanNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_useEanNo_SelectedIndexChanged);
             // 
             // label_eanNo
             // 
@@ -1356,7 +1328,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_VATPercentage.Name = "comboBox_VATPercentage";
             this.comboBox_VATPercentage.Size = new System.Drawing.Size(215, 36);
             this.comboBox_VATPercentage.TabIndex = 3;
-            this.comboBox_VATPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATPercentage_SelectedIndexChanged);
             // 
             // label_vatPercentage
             // 
@@ -1376,7 +1347,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_calculateVAT.Name = "comboBox_calculateVAT";
             this.comboBox_calculateVAT.Size = new System.Drawing.Size(215, 36);
             this.comboBox_calculateVAT.TabIndex = 3;
-            this.comboBox_calculateVAT.SelectedIndexChanged += new System.EventHandler(this.comboBox_calculateVAT_SelectedIndexChanged);
             // 
             // comboBox_discountPercentage
             // 
@@ -1386,7 +1356,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_discountPercentage.Name = "comboBox_discountPercentage";
             this.comboBox_discountPercentage.Size = new System.Drawing.Size(215, 36);
             this.comboBox_discountPercentage.TabIndex = 3;
-            this.comboBox_discountPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_discountPercentage_SelectedIndexChanged);
             // 
             // comboBox_paymentTerm
             // 
@@ -1396,7 +1365,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_paymentTerm.Name = "comboBox_paymentTerm";
             this.comboBox_paymentTerm.Size = new System.Drawing.Size(215, 36);
             this.comboBox_paymentTerm.TabIndex = 3;
-            this.comboBox_paymentTerm.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTerm_SelectedIndexChanged);
             // 
             // panel_invoiceExternalCosts
             // 
@@ -1529,7 +1497,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_defaultDistIsMaxBillable.Name = "comboBox_defaultDistIsMaxBillable";
             this.comboBox_defaultDistIsMaxBillable.Size = new System.Drawing.Size(257, 36);
             this.comboBox_defaultDistIsMaxBillable.TabIndex = 3;
-            this.comboBox_defaultDistIsMaxBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultDistIsMaxBillable_SelectedIndexChanged);
             // 
             // comboBox_defaultMileageDistance
             // 
@@ -1539,7 +1506,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_defaultMileageDistance.Name = "comboBox_defaultMileageDistance";
             this.comboBox_defaultMileageDistance.Size = new System.Drawing.Size(257, 36);
             this.comboBox_defaultMileageDistance.TabIndex = 3;
-            this.comboBox_defaultMileageDistance.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultMileageDistance_SelectedIndexChanged);
             // 
             // comboBox_expenseIsBillable
             // 
@@ -1549,7 +1515,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_expenseIsBillable.Name = "comboBox_expenseIsBillable";
             this.comboBox_expenseIsBillable.Size = new System.Drawing.Size(211, 36);
             this.comboBox_expenseIsBillable.TabIndex = 3;
-            this.comboBox_expenseIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseIsBillable_SelectedIndexChanged);
             // 
             // comboBox_mileageIsBillable
             // 
@@ -1559,7 +1524,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_mileageIsBillable.Name = "comboBox_mileageIsBillable";
             this.comboBox_mileageIsBillable.Size = new System.Drawing.Size(211, 36);
             this.comboBox_mileageIsBillable.TabIndex = 3;
-            this.comboBox_mileageIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_mileageIsBillable_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -1669,7 +1633,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_countryISO.Name = "comboBox_countryISO";
             this.comboBox_countryISO.Size = new System.Drawing.Size(188, 36);
             this.comboBox_countryISO.TabIndex = 7;
-            this.comboBox_countryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_countryISO_SelectedIndexChanged);
             // 
             // comboBox_customerStatus
             // 
@@ -1679,7 +1642,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerStatus.Name = "comboBox_customerStatus";
             this.comboBox_customerStatus.Size = new System.Drawing.Size(188, 36);
             this.comboBox_customerStatus.TabIndex = 6;
-            this.comboBox_customerStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerStatus_SelectedIndexChanged);
             // 
             // label_currencyISO
             // 
@@ -1699,7 +1661,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_currencyISO.Name = "comboBox_currencyISO";
             this.comboBox_currencyISO.Size = new System.Drawing.Size(188, 36);
             this.comboBox_currencyISO.TabIndex = 4;
-            this.comboBox_currencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_currencyISO_SelectedIndexChanged);
             // 
             // label_customerName
             // 
@@ -1719,7 +1680,6 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerName.Name = "comboBox_customerName";
             this.comboBox_customerName.Size = new System.Drawing.Size(188, 36);
             this.comboBox_customerName.TabIndex = 3;
-            this.comboBox_customerName.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerName_SelectedIndexChanged);
             // 
             // label_customerSetup
             // 

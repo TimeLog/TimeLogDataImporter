@@ -142,13 +142,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_project.DataSource = null;
                     _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_project.DataSource = _projectTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _projectTable.Rows.Add();
-                }
+                _projectTable = _fileContent.Copy();
+                dataGridView_project.DataSource = _projectTable;
 
                 AddFileColumnHeaderToComboBox(ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -165,7 +162,21 @@ namespace TimeLog.DataImporter.UserControls
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectType, _projectType);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCategory, _projectCategory);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectDepartment, _departmentName);
-            
+
+                this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
+                this.comboBox_description.SelectedIndexChanged += new System.EventHandler(this.comboBox_description_SelectedIndexChanged);
+                this.comboBox_projectCategory.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCategory_SelectedIndexChanged);
+                this.comboBox_projectStartDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectStartDate_SelectedIndexChanged);
+                this.comboBox_projectEndDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectEndDate_SelectedIndexChanged);
+                this.comboBox_projectDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectDepartment_SelectedIndexChanged);
+                this.comboBox_projectLegalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectLegalEntity_SelectedIndexChanged);
+                this.comboBox_projectCurrencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCurrencyISO_SelectedIndexChanged);
+                this.comboBox_projectManager.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectManager_SelectedIndexChanged);
+                this.comboBox_projectType.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectType_SelectedIndexChanged);
+                this.comboBox_projectTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectTemplate_SelectedIndexChanged);
+                this.comboBox_projectCustomerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomerNo_SelectedIndexChanged);
+                this.comboBox_projectName.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectName_SelectedIndexChanged);
+
             }
             else
             {
@@ -231,6 +242,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_projectSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_projectImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {

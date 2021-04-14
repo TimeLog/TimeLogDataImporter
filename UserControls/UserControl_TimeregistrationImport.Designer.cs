@@ -344,7 +344,6 @@
             this.comboBox_timeregistrationComment.Name = "comboBox_timeregistrationComment";
             this.comboBox_timeregistrationComment.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationComment.TabIndex = 3;
-            this.comboBox_timeregistrationComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationComment_SelectedIndexChanged);
             // 
             // comboBox_timeregistrationAdditionalComment
             // 
@@ -354,7 +353,6 @@
             this.comboBox_timeregistrationAdditionalComment.Name = "comboBox_timeregistrationAdditionalComment";
             this.comboBox_timeregistrationAdditionalComment.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationAdditionalComment.TabIndex = 3;
-            this.comboBox_timeregistrationAdditionalComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationAdditionalComment_SelectedIndexChanged);
             // 
             // label__timeregistrationAdditionalComment
             // 
@@ -374,7 +372,6 @@
             this.comboBox_timeregistrationMonthlyPeriod.Name = "comboBox_timeregistrationMonthlyPeriod";
             this.comboBox_timeregistrationMonthlyPeriod.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationMonthlyPeriod.TabIndex = 3;
-            this.comboBox_timeregistrationMonthlyPeriod.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationMonthlyPeriod_SelectedIndexChanged);
             // 
             // label_timeregistrationMonthlyPeriod
             // 
@@ -462,7 +459,6 @@
             this.comboBox_timeregistrationCostPriceName.Name = "comboBox_timeregistrationCostPriceName";
             this.comboBox_timeregistrationCostPriceName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationCostPriceName.TabIndex = 20;
-            this.comboBox_timeregistrationCostPriceName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationCostPriceName_SelectedIndexChanged);
             // 
             // label_timeregistrationCostPrice
             // 
@@ -482,7 +478,6 @@
             this.comboBox_timeregistrationCostPrice.Name = "comboBox_timeregistrationCostPrice";
             this.comboBox_timeregistrationCostPrice.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationCostPrice.TabIndex = 18;
-            this.comboBox_timeregistrationCostPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationCostPrice_SelectedIndexChanged);
             // 
             // label_timeregistrationHourlyRateName
             // 
@@ -502,7 +497,6 @@
             this.comboBox_timeregistrationHourlyRateName.Name = "comboBox_timeregistrationHourlyRateName";
             this.comboBox_timeregistrationHourlyRateName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationHourlyRateName.TabIndex = 16;
-            this.comboBox_timeregistrationHourlyRateName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHourlyRateName_SelectedIndexChanged);
             // 
             // label_timeregistrationHourlyRate
             // 
@@ -522,7 +516,6 @@
             this.comboBox_timeregistrationHourlyRate.Name = "comboBox_timeregistrationHourlyRate";
             this.comboBox_timeregistrationHourlyRate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationHourlyRate.TabIndex = 14;
-            this.comboBox_timeregistrationHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHourlyRate_SelectedIndexChanged);
             // 
             // label_timeregistrationBillableHours
             // 
@@ -542,7 +535,6 @@
             this.comboBox_timeregistrationBillableHours.Name = "comboBox_timeregistrationBillableHours";
             this.comboBox_timeregistrationBillableHours.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationBillableHours.TabIndex = 12;
-            this.comboBox_timeregistrationBillableHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationBillableHours_SelectedIndexChanged);
             // 
             // label_timeregistrationIsBillable
             // 
@@ -562,7 +554,6 @@
             this.comboBox_timeregistrationIsBillable.Name = "comboBox_timeregistrationIsBillable";
             this.comboBox_timeregistrationIsBillable.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationIsBillable.TabIndex = 8;
-            this.comboBox_timeregistrationIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationIsBillable_SelectedIndexChanged);
             // 
             // label_timeregistrationHours
             // 
@@ -582,7 +573,6 @@
             this.comboBox_timeregistrationHours.Name = "comboBox_timeregistrationHours";
             this.comboBox_timeregistrationHours.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationHours.TabIndex = 3;
-            this.comboBox_timeregistrationHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHours_SelectedIndexChanged);
             // 
             // label_timeregistrationDate
             // 
@@ -612,7 +602,6 @@
             this.comboBox_timeregistrationDate.Name = "comboBox_timeregistrationDate";
             this.comboBox_timeregistrationDate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationDate.TabIndex = 3;
-            this.comboBox_timeregistrationDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationDate_SelectedIndexChanged);
             // 
             // label_timeregistrationUserInitials
             // 
@@ -632,7 +621,6 @@
             this.comboBox_timeregistrationUserInitials.Name = "comboBox_timeregistrationUserInitials";
             this.comboBox_timeregistrationUserInitials.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationUserInitials.TabIndex = 3;
-            this.comboBox_timeregistrationUserInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationUserInitials_SelectedIndexChanged);
             // 
             // label_timeregistrationContractName
             // 
@@ -652,7 +640,6 @@
             this.comboBox_timeregistrationGroupType.Name = "comboBox_timeregistrationGroupType";
             this.comboBox_timeregistrationGroupType.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationGroupType.TabIndex = 3;
-            this.comboBox_timeregistrationGroupType.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationGroupType_SelectedIndexChanged);
             // 
             // comboBox_timeregistrationContractName
             // 
@@ -662,7 +649,6 @@
             this.comboBox_timeregistrationContractName.Name = "comboBox_timeregistrationContractName";
             this.comboBox_timeregistrationContractName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationContractName.TabIndex = 3;
-            this.comboBox_timeregistrationContractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationContractName_SelectedIndexChanged);
             // 
             // label_timeregistrationProjectNo
             // 
@@ -682,7 +668,6 @@
             this.comboBox_timeregistrationProjectNo.Name = "comboBox_timeregistrationProjectNo";
             this.comboBox_timeregistrationProjectNo.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationProjectNo.TabIndex = 3;
-            this.comboBox_timeregistrationProjectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationProjectNo_SelectedIndexChanged);
             // 
             // label_timeregistrationTaskNo
             // 
@@ -702,7 +687,6 @@
             this.comboBox_timeregistrationTaskNo.Name = "comboBox_timeregistrationTaskNo";
             this.comboBox_timeregistrationTaskNo.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationTaskNo.TabIndex = 3;
-            this.comboBox_timeregistrationTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationTaskName_SelectedIndexChanged);
             // 
             // label_timeregistrationSetup
             // 
@@ -760,7 +744,6 @@
             this.comboBox_timeregistrationAbcenseCode.Name = "comboBox_timeregistrationAbcenseCode";
             this.comboBox_timeregistrationAbcenseCode.Size = new System.Drawing.Size(197, 25);
             this.comboBox_timeregistrationAbcenseCode.TabIndex = 22;
-            this.comboBox_timeregistrationAbcenseCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationAbcenseCode_SelectedIndexChanged);
             // 
             // UserControl_TimeregistrationImport
             // 

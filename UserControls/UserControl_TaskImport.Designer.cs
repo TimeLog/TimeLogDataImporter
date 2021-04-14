@@ -422,7 +422,6 @@
             this.comboBox_paymentInvoiceDate.Name = "comboBox_paymentInvoiceDate";
             this.comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(227, 36);
             this.comboBox_paymentInvoiceDate.TabIndex = 18;
-            this.comboBox_paymentInvoiceDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentInvoiceDate_SelectedIndexChanged);
             // 
             // comboBox_paymentName
             // 
@@ -432,7 +431,6 @@
             this.comboBox_paymentName.Name = "comboBox_paymentName";
             this.comboBox_paymentName.Size = new System.Drawing.Size(227, 36);
             this.comboBox_paymentName.TabIndex = 17;
-            this.comboBox_paymentName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentName_SelectedIndexChanged);
             // 
             // comboBox_paymentProductNo
             // 
@@ -442,7 +440,6 @@
             this.comboBox_paymentProductNo.Name = "comboBox_paymentProductNo";
             this.comboBox_paymentProductNo.Size = new System.Drawing.Size(227, 36);
             this.comboBox_paymentProductNo.TabIndex = 16;
-            this.comboBox_paymentProductNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProductNo_SelectedIndexChanged);
             // 
             // comboBox_taskHourlyRate
             // 
@@ -452,7 +449,6 @@
             this.comboBox_taskHourlyRate.Name = "comboBox_taskHourlyRate";
             this.comboBox_taskHourlyRate.Size = new System.Drawing.Size(227, 36);
             this.comboBox_taskHourlyRate.TabIndex = 15;
-            this.comboBox_taskHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskHourlyRate_SelectedIndexChanged);
             // 
             // label_taskHourlyRate
             // 
@@ -508,7 +504,6 @@
             this.comboBox_budgetAmount.Name = "comboBox_budgetAmount";
             this.comboBox_budgetAmount.Size = new System.Drawing.Size(227, 36);
             this.comboBox_budgetAmount.TabIndex = 10;
-            this.comboBox_budgetAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_budgetAmount_SelectedIndexChanged);
             // 
             // comboBox_paymentRecognitionModel
             // 
@@ -518,7 +513,6 @@
             this.comboBox_paymentRecognitionModel.Name = "comboBox_paymentRecognitionModel";
             this.comboBox_paymentRecognitionModel.Size = new System.Drawing.Size(227, 36);
             this.comboBox_paymentRecognitionModel.TabIndex = 9;
-            this.comboBox_paymentRecognitionModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentRecognitionModel_SelectedIndexChanged);
             // 
             // comboBox_paymentAmount
             // 
@@ -528,7 +522,6 @@
             this.comboBox_paymentAmount.Name = "comboBox_paymentAmount";
             this.comboBox_paymentAmount.Size = new System.Drawing.Size(227, 36);
             this.comboBox_paymentAmount.TabIndex = 3;
-            this.comboBox_paymentAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentAmount_SelectedIndexChanged);
             // 
             // label_isBillable
             // 
@@ -568,7 +561,6 @@
             this.comboBox_isBillable.Name = "comboBox_isBillable";
             this.comboBox_isBillable.Size = new System.Drawing.Size(227, 36);
             this.comboBox_isBillable.TabIndex = 8;
-            this.comboBox_isBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_isBillable_SelectedIndexChanged);
             // 
             // label_taskNo
             // 
@@ -599,7 +591,6 @@
             this.comboBox_parentTaskNo.Name = "comboBox_parentTaskNo";
             this.comboBox_parentTaskNo.Size = new System.Drawing.Size(227, 36);
             this.comboBox_parentTaskNo.TabIndex = 7;
-            this.comboBox_parentTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_parentTaskNo_SelectedIndexChanged);
             // 
             // label_parentTaskNo
             // 
@@ -619,7 +610,6 @@
             this.comboBox_taskNo.Name = "comboBox_taskNo";
             this.comboBox_taskNo.Size = new System.Drawing.Size(227, 36);
             this.comboBox_taskNo.TabIndex = 3;
-            this.comboBox_taskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskNo_SelectedIndexChanged);
             // 
             // label_budgetHours
             // 
@@ -639,7 +629,6 @@
             this.comboBox_budgetHours.Name = "comboBox_budgetHours";
             this.comboBox_budgetHours.Size = new System.Drawing.Size(227, 36);
             this.comboBox_budgetHours.TabIndex = 3;
-            this.comboBox_budgetHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_budgetHours_SelectedIndexChanged);
             // 
             // checkBox_defaultIsReadyForInvoicing
             // 
@@ -672,7 +661,6 @@
             this.comboBox_description.Name = "comboBox_description";
             this.comboBox_description.Size = new System.Drawing.Size(227, 36);
             this.comboBox_description.TabIndex = 3;
-            this.comboBox_description.SelectedIndexChanged += new System.EventHandler(this.comboBox_description_SelectedIndexChanged);
             // 
             // comboBox_isReadyForInvoicing
             // 
@@ -682,7 +670,6 @@
             this.comboBox_isReadyForInvoicing.Name = "comboBox_isReadyForInvoicing";
             this.comboBox_isReadyForInvoicing.Size = new System.Drawing.Size(227, 36);
             this.comboBox_isReadyForInvoicing.TabIndex = 3;
-            this.comboBox_isReadyForInvoicing.SelectedIndexChanged += new System.EventHandler(this.comboBox_isReadyForInvoicing_SelectedIndexChanged);
             // 
             // label_description
             // 
@@ -712,7 +699,6 @@
             this.comboBox_additionalTextIsRequired.Name = "comboBox_additionalTextIsRequired";
             this.comboBox_additionalTextIsRequired.Size = new System.Drawing.Size(227, 36);
             this.comboBox_additionalTextIsRequired.TabIndex = 3;
-            this.comboBox_additionalTextIsRequired.SelectedIndexChanged += new System.EventHandler(this.comboBox_additionalTextIsRequired_SelectedIndexChanged);
             // 
             // comboBox_hourlyRate
             // 
@@ -722,7 +708,6 @@
             this.comboBox_hourlyRate.Name = "comboBox_hourlyRate";
             this.comboBox_hourlyRate.Size = new System.Drawing.Size(227, 36);
             this.comboBox_hourlyRate.TabIndex = 3;
-            this.comboBox_hourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_hourlyRate_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -787,7 +772,6 @@
             this.comboBox_contractName.Name = "comboBox_contractName";
             this.comboBox_contractName.Size = new System.Drawing.Size(218, 36);
             this.comboBox_contractName.TabIndex = 10;
-            this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
             // 
             // label_contractName
             // 
@@ -818,7 +802,6 @@
             this.comboBox_projectNo.Name = "comboBox_projectNo";
             this.comboBox_projectNo.Size = new System.Drawing.Size(218, 36);
             this.comboBox_projectNo.TabIndex = 3;
-            this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
             // 
             // label_taskType
             // 
@@ -839,7 +822,6 @@
             this.comboBox_taskType.Name = "comboBox_taskType";
             this.comboBox_taskType.Size = new System.Drawing.Size(218, 36);
             this.comboBox_taskType.TabIndex = 3;
-            this.comboBox_taskType.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskType_SelectedIndexChanged);
             // 
             // label_endDate
             // 
@@ -859,7 +841,6 @@
             this.comboBox_endDate.Name = "comboBox_endDate";
             this.comboBox_endDate.Size = new System.Drawing.Size(218, 36);
             this.comboBox_endDate.TabIndex = 3;
-            this.comboBox_endDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_endDate_SelectedIndexChanged);
             // 
             // label_startDate
             // 
@@ -879,7 +860,6 @@
             this.comboBox_startDate.Name = "comboBox_startDate";
             this.comboBox_startDate.Size = new System.Drawing.Size(218, 36);
             this.comboBox_startDate.TabIndex = 3;
-            this.comboBox_startDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_startDate_SelectedIndexChanged);
             // 
             // label_taskName
             // 
@@ -899,7 +879,6 @@
             this.comboBox_taskName.Name = "comboBox_taskName";
             this.comboBox_taskName.Size = new System.Drawing.Size(218, 36);
             this.comboBox_taskName.TabIndex = 3;
-            this.comboBox_taskName.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskName_SelectedIndexChanged);
             // 
             // label_taskSetup
             // 

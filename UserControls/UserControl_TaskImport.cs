@@ -145,13 +145,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_task.DataSource = null;
                     _taskTable = TaskHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_task.DataSource = _taskTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _taskTable.Rows.Add();
-                }
+                _taskTable = _fileContent.Copy();
+                dataGridView_task.DataSource = _taskTable;
 
                 AddFileColumnHeaderToComboBox(TaskHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -176,6 +173,28 @@ namespace TimeLog.DataImporter.UserControls
                 TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentProductNo, PaymentProductNo);
                 TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentName, PaymentName);
                 TaskHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentInvoiceDate, PaymentInvoiceDate);
+
+                this.comboBox_paymentInvoiceDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentInvoiceDate_SelectedIndexChanged);
+                this.comboBox_paymentName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentName_SelectedIndexChanged);
+                this.comboBox_paymentProductNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProductNo_SelectedIndexChanged);
+                this.comboBox_taskHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskHourlyRate_SelectedIndexChanged);
+                this.comboBox_budgetAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_budgetAmount_SelectedIndexChanged);
+                this.comboBox_paymentRecognitionModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentRecognitionModel_SelectedIndexChanged);
+                this.comboBox_paymentAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentAmount_SelectedIndexChanged);
+                this.comboBox_isBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_isBillable_SelectedIndexChanged);
+                this.comboBox_parentTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_parentTaskNo_SelectedIndexChanged);
+                this.comboBox_taskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskNo_SelectedIndexChanged);
+                this.comboBox_budgetHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_budgetHours_SelectedIndexChanged);
+                this.comboBox_description.SelectedIndexChanged += new System.EventHandler(this.comboBox_description_SelectedIndexChanged);
+                this.comboBox_isReadyForInvoicing.SelectedIndexChanged += new System.EventHandler(this.comboBox_isReadyForInvoicing_SelectedIndexChanged);
+                this.comboBox_additionalTextIsRequired.SelectedIndexChanged += new System.EventHandler(this.comboBox_additionalTextIsRequired_SelectedIndexChanged);
+                this.comboBox_hourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_hourlyRate_SelectedIndexChanged);
+                this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
+                this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
+                this.comboBox_taskType.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskType_SelectedIndexChanged);
+                this.comboBox_endDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_endDate_SelectedIndexChanged);
+                this.comboBox_startDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_startDate_SelectedIndexChanged);
+                this.comboBox_taskName.SelectedIndexChanged += new System.EventHandler(this.comboBox_taskName_SelectedIndexChanged);
 
             }
             else
@@ -242,6 +261,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_taskSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_taskImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {

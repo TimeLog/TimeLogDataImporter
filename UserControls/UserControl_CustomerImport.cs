@@ -20,6 +20,7 @@ namespace TimeLog.DataImporter.UserControls
         private bool _isMappingFieldValueToIDCorrect;
         private bool _isFirstTimeInvalidMapping;
 
+
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
             {0, "Customer Name"},
@@ -184,13 +185,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_customer.DataSource = null;
                     _customerTable = CustomerHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_customer.DataSource = _customerTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _customerTable.Rows.Add();
-                }
+                _customerTable = _fileContent.Copy();
+                dataGridView_customer.DataSource = _customerTable;
 
                 AddFileColumnHeaderToComboBox(CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -235,8 +233,49 @@ namespace TimeLog.DataImporter.UserControls
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_discountPercentage, _discountPercentage);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_calculateVAT, _calculateVAT);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATPercentage, _VATPercentage);
-            
 
+
+
+                this.comboBox_industryName.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryName_SelectedIndexChanged);
+                this.comboBox_customerSince.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerSince_SelectedIndexChanged);
+                this.comboBox_primaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAM_SelectedIndexChanged);
+                this.comboBox_secondaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_secondaryKAM_SelectedIndexChanged);
+                this.comboBox_nickName.SelectedIndexChanged += new System.EventHandler(this.comboBox_nickName_SelectedIndexChanged);
+                this.comboBox_customerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerNo_SelectedIndexChanged);
+                this.comboBox_phoneNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_phoneNo_SelectedIndexChanged);
+                this.comboBox_faxNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_faxNo_SelectedIndexChanged);
+                this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
+                this.comboBox_website.SelectedIndexChanged += new System.EventHandler(this.comboBox_website_SelectedIndexChanged);
+                this.comboBox_address.SelectedIndexChanged += new System.EventHandler(this.comboBox_address_SelectedIndexChanged);
+                this.comboBox_address2.SelectedIndexChanged += new System.EventHandler(this.comboBox_address2_SelectedIndexChanged);
+                this.comboBox_address3.SelectedIndexChanged += new System.EventHandler(this.comboBox_address3_SelectedIndexChanged);
+                this.comboBox_zipCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_zipCode_SelectedIndexChanged);
+                this.comboBox_city.SelectedIndexChanged += new System.EventHandler(this.comboBox_city_SelectedIndexChanged);
+                this.comboBox_state.SelectedIndexChanged += new System.EventHandler(this.comboBox_state_SelectedIndexChanged);
+                this.comboBox_useInvoicingAddress.SelectedIndexChanged += new System.EventHandler(this.comboBox_useInvoicingAddress_SelectedIndexChanged);
+                this.comboBox_invoicingAddress.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress_SelectedIndexChanged);
+                this.comboBox_invoicingAddress2.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress2_SelectedIndexChanged);
+                this.comboBox_invoicingAddress3.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddress3_SelectedIndexChanged);
+                this.comboBox_invoicingAddressZipCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressZipCode_SelectedIndexChanged);
+                this.comboBox_invoicingAddressCity.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCity_SelectedIndexChanged);
+                this.comboBox_invoicingAddressState.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressState_SelectedIndexChanged);
+                this.comboBox_invoicingAddressCountryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_invoicingAddressCountryID_SelectedIndexChanged);
+                this.comboBox_organizationNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_organizationNo_SelectedIndexChanged);
+                this.comboBox_VATNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATNo_SelectedIndexChanged);
+                this.comboBox_eanNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_eanNo_SelectedIndexChanged);
+                this.comboBox_useEanNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_useEanNo_SelectedIndexChanged);
+                this.comboBox_VATPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATPercentage_SelectedIndexChanged);
+                this.comboBox_calculateVAT.SelectedIndexChanged += new System.EventHandler(this.comboBox_calculateVAT_SelectedIndexChanged);
+                this.comboBox_discountPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_discountPercentage_SelectedIndexChanged);
+                this.comboBox_paymentTerm.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTerm_SelectedIndexChanged);
+                this.comboBox_defaultDistIsMaxBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultDistIsMaxBillable_SelectedIndexChanged);
+                this.comboBox_defaultMileageDistance.SelectedIndexChanged += new System.EventHandler(this.comboBox_defaultMileageDistance_SelectedIndexChanged);
+                this.comboBox_expenseIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseIsBillable_SelectedIndexChanged);
+                this.comboBox_mileageIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_mileageIsBillable_SelectedIndexChanged);
+                this.comboBox_countryISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_countryISO_SelectedIndexChanged);
+                this.comboBox_customerStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerStatus_SelectedIndexChanged);
+                this.comboBox_currencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_currencyISO_SelectedIndexChanged);
+                this.comboBox_customerName.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerName_SelectedIndexChanged);
 
 
             }
@@ -304,6 +343,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker) (() => button_import.Enabled = false));
                 Invoke((MethodInvoker) (() => button_clear.Enabled = false));
                 Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {
@@ -386,6 +427,7 @@ namespace TimeLog.DataImporter.UserControls
                     }
 
                     CustomerHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_customerImportMessages, this);
+
                 }
                 catch (FormatException _ex)
                 {

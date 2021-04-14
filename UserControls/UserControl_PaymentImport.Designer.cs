@@ -325,7 +325,6 @@
             this.comboBox_paymentIsFixedPricePayment.Name = "comboBox_paymentIsFixedPricePayment";
             this.comboBox_paymentIsFixedPricePayment.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentIsFixedPricePayment.TabIndex = 6;
-            this.comboBox_paymentIsFixedPricePayment.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentIsFixedPricePayment_SelectedIndexChanged);
             // 
             // label_paymentIsReadyForInvoicing
             // 
@@ -343,7 +342,6 @@
             this.comboBox_paymentIsReadyForInvoicing.Name = "comboBox_paymentIsReadyForInvoicing";
             this.comboBox_paymentIsReadyForInvoicing.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentIsReadyForInvoicing.TabIndex = 7;
-            this.comboBox_paymentIsReadyForInvoicing.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentIsReadyForInvoicing_SelectedIndexChanged);
             // 
             // label_paymentComment
             // 
@@ -361,7 +359,6 @@
             this.comboBox_paymentProductNo.Name = "comboBox_paymentProductNo";
             this.comboBox_paymentProductNo.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentProductNo.TabIndex = 3;
-            this.comboBox_paymentProductNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProductNo_SelectedIndexChanged);
             // 
             // comboBox_paymentComment
             // 
@@ -370,7 +367,6 @@
             this.comboBox_paymentComment.Name = "comboBox_paymentComment";
             this.comboBox_paymentComment.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentComment.TabIndex = 3;
-            this.comboBox_paymentComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentComment_SelectedIndexChanged);
             // 
             // label_paymentProductNo
             // 
@@ -397,7 +393,6 @@
             this.comboBox_paymentDiscountPercentage.Name = "comboBox_paymentDiscountPercentage";
             this.comboBox_paymentDiscountPercentage.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentDiscountPercentage.TabIndex = 3;
-            this.comboBox_paymentDiscountPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentDiscountPercentage_SelectedIndexChanged);
             // 
             // label_paymentTaskNo
             // 
@@ -415,7 +410,6 @@
             this.comboBox_paymentTaskNo.Name = "comboBox_paymentTaskNo";
             this.comboBox_paymentTaskNo.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentTaskNo.TabIndex = 3;
-            this.comboBox_paymentTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTaskNo_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -495,7 +489,6 @@
             this.comboBox_paymentProjectNo.Name = "comboBox_paymentProjectNo";
             this.comboBox_paymentProjectNo.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentProjectNo.TabIndex = 3;
-            this.comboBox_paymentProjectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProjectNo_SelectedIndexChanged);
             // 
             // comboBox_paymentUnitType
             // 
@@ -504,7 +497,6 @@
             this.comboBox_paymentUnitType.Name = "comboBox_paymentUnitType";
             this.comboBox_paymentUnitType.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentUnitType.TabIndex = 8;
-            this.comboBox_paymentUnitType.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentUnitType_SelectedIndexChanged);
             // 
             // comboBox_paymentInvoiceDate
             // 
@@ -513,7 +505,6 @@
             this.comboBox_paymentInvoiceDate.Name = "comboBox_paymentInvoiceDate";
             this.comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentInvoiceDate.TabIndex = 3;
-            this.comboBox_paymentInvoiceDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentInvoiceDate_SelectedIndexChanged);
             // 
             // label_paymentInvoiceDate
             // 
@@ -540,7 +531,6 @@
             this.comboBox_paymentAmount.Name = "comboBox_paymentAmount";
             this.comboBox_paymentAmount.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentAmount.TabIndex = 3;
-            this.comboBox_paymentAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentAmount_SelectedIndexChanged);
             // 
             // label_paymentQuantity
             // 
@@ -567,7 +557,6 @@
             this.comboBox_paymentQuantity.Name = "comboBox_paymentQuantity";
             this.comboBox_paymentQuantity.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentQuantity.TabIndex = 3;
-            this.comboBox_paymentQuantity.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentQuantity_SelectedIndexChanged);
             // 
             // comboBox_paymentContractName
             // 
@@ -576,7 +565,6 @@
             this.comboBox_paymentContractName.Name = "comboBox_paymentContractName";
             this.comboBox_paymentContractName.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentContractName.TabIndex = 3;
-            this.comboBox_paymentContractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentContractName_SelectedIndexChanged);
             // 
             // label_paymentName
             // 
@@ -594,7 +582,6 @@
             this.comboBox_paymentName.Name = "comboBox_paymentName";
             this.comboBox_paymentName.Size = new System.Drawing.Size(139, 25);
             this.comboBox_paymentName.TabIndex = 3;
-            this.comboBox_paymentName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentName_SelectedIndexChanged);
             // 
             // label_paymentSetup
             // 

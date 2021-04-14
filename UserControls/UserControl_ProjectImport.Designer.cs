@@ -360,7 +360,6 @@
             this.comboBox_projectNo.Name = "comboBox_projectNo";
             this.comboBox_projectNo.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectNo.TabIndex = 3;
-            this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
             // 
             // label_projectCategory
             // 
@@ -380,7 +379,6 @@
             this.comboBox_description.Name = "comboBox_description";
             this.comboBox_description.Size = new System.Drawing.Size(197, 36);
             this.comboBox_description.TabIndex = 3;
-            this.comboBox_description.SelectedIndexChanged += new System.EventHandler(this.comboBox_description_SelectedIndexChanged);
             // 
             // comboBox_projectCategory
             // 
@@ -390,7 +388,6 @@
             this.comboBox_projectCategory.Name = "comboBox_projectCategory";
             this.comboBox_projectCategory.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectCategory.TabIndex = 3;
-            this.comboBox_projectCategory.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCategory_SelectedIndexChanged);
             // 
             // label_description
             // 
@@ -410,7 +407,6 @@
             this.comboBox_projectStartDate.Name = "comboBox_projectStartDate";
             this.comboBox_projectStartDate.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectStartDate.TabIndex = 3;
-            this.comboBox_projectStartDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectStartDate_SelectedIndexChanged);
             // 
             // label_projectStartDate
             // 
@@ -440,7 +436,6 @@
             this.comboBox_projectEndDate.Name = "comboBox_projectEndDate";
             this.comboBox_projectEndDate.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectEndDate.TabIndex = 3;
-            this.comboBox_projectEndDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectEndDate_SelectedIndexChanged);
             // 
             // label_delimiter
             // 
@@ -524,7 +519,6 @@
             this.comboBox_projectDepartment.Name = "comboBox_projectDepartment";
             this.comboBox_projectDepartment.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectDepartment.TabIndex = 8;
-            this.comboBox_projectDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectDepartment_SelectedIndexChanged);
             // 
             // checkBox_defaultLegalEntity
             // 
@@ -596,7 +590,6 @@
             this.comboBox_projectLegalEntity.Name = "comboBox_projectLegalEntity";
             this.comboBox_projectLegalEntity.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectLegalEntity.TabIndex = 3;
-            this.comboBox_projectLegalEntity.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectLegalEntity_SelectedIndexChanged);
             // 
             // label_projectCurrencyISO
             // 
@@ -626,7 +619,6 @@
             this.comboBox_projectCurrencyISO.Name = "comboBox_projectCurrencyISO";
             this.comboBox_projectCurrencyISO.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectCurrencyISO.TabIndex = 3;
-            this.comboBox_projectCurrencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCurrencyISO_SelectedIndexChanged);
             // 
             // label_projectManager
             // 
@@ -646,7 +638,6 @@
             this.comboBox_projectManager.Name = "comboBox_projectManager";
             this.comboBox_projectManager.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectManager.TabIndex = 3;
-            this.comboBox_projectManager.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectManager_SelectedIndexChanged);
             // 
             // label_projectTemplate
             // 
@@ -666,7 +657,6 @@
             this.comboBox_projectType.Name = "comboBox_projectType";
             this.comboBox_projectType.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectType.TabIndex = 3;
-            this.comboBox_projectType.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectType_SelectedIndexChanged);
             // 
             // comboBox_projectTemplate
             // 
@@ -676,7 +666,6 @@
             this.comboBox_projectTemplate.Name = "comboBox_projectTemplate";
             this.comboBox_projectTemplate.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectTemplate.TabIndex = 3;
-            this.comboBox_projectTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectTemplate_SelectedIndexChanged);
             // 
             // label_projectCustomerNo
             // 
@@ -696,7 +685,6 @@
             this.comboBox_projectCustomerNo.Name = "comboBox_projectCustomerNo";
             this.comboBox_projectCustomerNo.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectCustomerNo.TabIndex = 3;
-            this.comboBox_projectCustomerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomerNo_SelectedIndexChanged);
             // 
             // label_projectName
             // 
@@ -716,7 +704,6 @@
             this.comboBox_projectName.Name = "comboBox_projectName";
             this.comboBox_projectName.Size = new System.Drawing.Size(197, 36);
             this.comboBox_projectName.TabIndex = 3;
-            this.comboBox_projectName.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectName_SelectedIndexChanged);
             // 
             // label_projectSetup
             // 

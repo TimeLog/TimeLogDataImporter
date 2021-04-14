@@ -147,13 +147,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_projectExpense.DataSource = null;
                     _projectExpenseTable = ProjectExpenseHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_projectExpense.DataSource = _projectExpenseTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _projectExpenseTable.Rows.Add();
-                }
+                _projectExpenseTable = _fileContent.Copy();
+                dataGridView_projectExpense.DataSource = _projectExpenseTable;
 
                 AddFileColumnHeaderToComboBox(ProjectExpenseHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -175,7 +172,25 @@ namespace TimeLog.DataImporter.UserControls
                 ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_supplierNo, SupplierNo);
                 ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_supplierInvoiceNo, SupplierInvoiceNo);
                 ProjectExpenseHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_profitRatio, ProfitRatio);
-                
+
+                this.comboBox_profitRatio.SelectedIndexChanged += new System.EventHandler(this.comboBox_profitRatio_SelectedIndexChanged);
+                this.comboBox_externalID.SelectedIndexChanged += new System.EventHandler(this.comboBox_externalID_SelectedIndexChanged);
+                this.comboBox_supplierInvoiceNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_supplierInvoiceNo_SelectedIndexChanged);
+                this.comboBox_comment.SelectedIndexChanged += new System.EventHandler(this.comboBox_comment_SelectedIndexChanged);
+                this.comboBox_supplierNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_supplierNo_SelectedIndexChanged);
+                this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
+                this.comboBox_expenseCurrencyISO.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseCurrencyISO_SelectedIndexChanged);
+                this.comboBox_VATAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_VATAmount_SelectedIndexChanged);
+                this.comboBox_expenseNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseNo_SelectedIndexChanged);
+                this.comboBox_salesPriceAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_salesPriceAmount_SelectedIndexChanged);
+                this.comboBox_exchangeRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_exchangeRate_SelectedIndexChanged);
+                this.comboBox_amountIncludingVAT.SelectedIndexChanged += new System.EventHandler(this.comboBox_amountIncludingVAT_SelectedIndexChanged);
+                this.comboBox_expenseType.SelectedIndexChanged += new System.EventHandler(this.comboBox_expenseType_SelectedIndexChanged);
+                this.comboBox_isBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_isBillable_SelectedIndexChanged);
+                this.comboBox_paymentMethod.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentMethod_SelectedIndexChanged);
+                this.comboBox_purchaseDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_purchaseDate_SelectedIndexChanged);
+                this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
+
             }
             else
             {
@@ -241,6 +256,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_projectExpenseSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_projectExpenseImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {

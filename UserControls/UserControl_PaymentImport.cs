@@ -126,13 +126,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_payment.DataSource = null;
                     _paymentTable = PaymentHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_payment.DataSource = _paymentTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _paymentTable.Rows.Add();
-                }
+                _paymentTable = _fileContent.Copy();
+                dataGridView_payment.DataSource = _paymentTable;
 
                 AddFileColumnHeaderToComboBox(PaymentHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -149,6 +146,20 @@ namespace TimeLog.DataImporter.UserControls
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentComment,_comment);
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentIsReadyForInvoicing,_isReadyForInvoicing);
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_paymentIsFixedPricePayment,_isFixedPricePayment);
+
+                this.comboBox_paymentIsFixedPricePayment.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentIsFixedPricePayment_SelectedIndexChanged);
+                this.comboBox_paymentIsReadyForInvoicing.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentIsReadyForInvoicing_SelectedIndexChanged);
+                this.comboBox_paymentProductNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProductNo_SelectedIndexChanged);
+                this.comboBox_paymentComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentComment_SelectedIndexChanged);
+                this.comboBox_paymentDiscountPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentDiscountPercentage_SelectedIndexChanged);
+                this.comboBox_paymentTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentTaskNo_SelectedIndexChanged);
+                this.comboBox_paymentProjectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentProjectNo_SelectedIndexChanged);
+                this.comboBox_paymentUnitType.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentUnitType_SelectedIndexChanged);
+                this.comboBox_paymentInvoiceDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentInvoiceDate_SelectedIndexChanged);
+                this.comboBox_paymentAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentAmount_SelectedIndexChanged);
+                this.comboBox_paymentQuantity.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentQuantity_SelectedIndexChanged);
+                this.comboBox_paymentContractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentContractName_SelectedIndexChanged);
+                this.comboBox_paymentName.SelectedIndexChanged += new System.EventHandler(this.comboBox_paymentName_SelectedIndexChanged);
 
             }
             else
@@ -215,6 +226,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_paymentSelectFile.Enabled = false));
+                
+                Invoke((MethodInvoker)(() => textBox_paymentImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {

@@ -167,13 +167,11 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_contract.DataSource = null;
                     _contractTable = ContractHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_contract.DataSource = _contractTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _contractTable.Rows.Add();
-                }
+                _contractTable = _fileContent.Copy();
+                dataGridView_contract.DataSource = _contractTable;
+
 
                 AddFileColumnHeaderToComboBox(ContractHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -200,7 +198,30 @@ namespace TimeLog.DataImporter.UserControls
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsTravelLinked, _isTravelLinked);
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractHourlyRateName, _hourlyRateName);
                 ContractHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contractIsFixedHourlyRate, _isFixedHourlyRate);
-                
+
+                this.comboBox_contractIsFixedHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsFixedHourlyRate_SelectedIndexChanged);
+                this.comboBox_contractHourlyRateName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHourlyRateName_SelectedIndexChanged);
+                this.comboBox_contractIsTravelLinked.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsTravelLinked_SelectedIndexChanged);
+                this.comboBox_contractIsExpensesLinked.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsExpensesLinked_SelectedIndexChanged);
+                this.comboBox_contractRevenueTravelAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractRevenueTravelAmount_SelectedIndexChanged);
+                this.comboBox_contractRevenueExpensesAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractRevenueExpensesAmount_SelectedIndexChanged);
+                this.comboBox_contractPaymentPlanAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractPaymentPlanAmount_SelectedIndexChanged);
+                this.comboBox_contractTargetHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractTargetHourlyRate_SelectedIndexChanged);
+                this.comboBox_contractHasBudgetOverrunNotification.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHasBudgetOverrunNotification_SelectedIndexChanged);
+                this.comboBox_contractIsDefaultExpenses.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsDefaultExpenses_SelectedIndexChanged);
+                this.comboBox_contractIsMileageBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractIsMileageBillable_SelectedIndexChanged);
+                this.comboBox_contractCompletionNotificationPercentage.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractCompletionNotificationPercentage_SelectedIndexChanged);
+                this.comboBox_contractBudgetExpensesAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetExpensesAmount_SelectedIndexChanged);
+                this.comboBox_contractBudgetTravelAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetTravelAmount_SelectedIndexChanged);
+                this.comboBox_contractHasCompletionNotification.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractHasCompletionNotification_SelectedIndexChanged);
+                this.comboBox_contractBudgetWorkAmount.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetWorkAmount_SelectedIndexChanged);
+                this.comboBox_contractBudgetWorkHour.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractBudgetWorkHour_SelectedIndexChanged);
+                this.comboBox_ContractModel.SelectedIndexChanged += new System.EventHandler(this.comboBox_ContractModel_SelectedIndexChanged);
+                this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
+                this.comboBox_contractOwnerInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractOwnerInitials_SelectedIndexChanged);
+                this.comboBox_contractStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractStatus_SelectedIndexChanged);
+                this.comboBox_contractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_contractName_SelectedIndexChanged);
+
             }
             else
             {
@@ -269,6 +290,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker) (() => button_import.Enabled = false));
                 Invoke((MethodInvoker) (() => button_clear.Enabled = false));
                 Invoke((MethodInvoker) (() => button_contractSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_contractImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {

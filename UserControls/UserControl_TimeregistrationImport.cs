@@ -154,13 +154,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     dataGridView_timeregistration.DataSource = null;
                     _timeregistrationTable = TimeregistrationHandler.Instance.InitializeDomainDataTable(MandatoryFields);
-                    dataGridView_timeregistration.DataSource = _timeregistrationTable;
                 }
 
-                foreach (DataRow _fileContentRow in _fileContent.Rows)
-                {
-                    _timeregistrationTable.Rows.Add();
-                }
+                _timeregistrationTable = _fileContent.Copy();
+                dataGridView_timeregistration.DataSource = _timeregistrationTable;
 
                 AddFileColumnHeaderToComboBox(TimeregistrationHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
@@ -182,8 +179,24 @@ namespace TimeLog.DataImporter.UserControls
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationAdditionalComment, _additionalComment);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationMonthlyPeriod, _monthlyPeriod);
                 
-                
-            
+                this.comboBox_timeregistrationComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationComment_SelectedIndexChanged);
+                this.comboBox_timeregistrationAdditionalComment.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationAdditionalComment_SelectedIndexChanged);
+                this.comboBox_timeregistrationMonthlyPeriod.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationMonthlyPeriod_SelectedIndexChanged);
+                this.comboBox_timeregistrationCostPriceName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationCostPriceName_SelectedIndexChanged);
+                this.comboBox_timeregistrationCostPrice.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationCostPrice_SelectedIndexChanged);
+                this.comboBox_timeregistrationHourlyRateName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHourlyRateName_SelectedIndexChanged);
+                this.comboBox_timeregistrationHourlyRate.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHourlyRate_SelectedIndexChanged);
+                this.comboBox_timeregistrationBillableHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationBillableHours_SelectedIndexChanged);
+                this.comboBox_timeregistrationIsBillable.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationIsBillable_SelectedIndexChanged);
+                this.comboBox_timeregistrationHours.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationHours_SelectedIndexChanged);
+                this.comboBox_timeregistrationDate.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationDate_SelectedIndexChanged);
+                this.comboBox_timeregistrationUserInitials.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationUserInitials_SelectedIndexChanged);
+                this.comboBox_timeregistrationGroupType.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationGroupType_SelectedIndexChanged);
+                this.comboBox_timeregistrationContractName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationContractName_SelectedIndexChanged);
+                this.comboBox_timeregistrationProjectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationProjectNo_SelectedIndexChanged);
+                this.comboBox_timeregistrationTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationTaskName_SelectedIndexChanged);
+                this.comboBox_timeregistrationAbcenseCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationAbcenseCode_SelectedIndexChanged);
+
             }
             else
             {
@@ -248,6 +261,8 @@ namespace TimeLog.DataImporter.UserControls
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
                 Invoke((MethodInvoker)(() => button_clear.Enabled = false));
                 Invoke((MethodInvoker)(() => button_timeregistrationSelectFile.Enabled = false));
+
+                Invoke((MethodInvoker)(() => textBox_timeregistrationImportMessages.AppendText("Start time: " + DateTime.Now)));
 
                 try
                 {
