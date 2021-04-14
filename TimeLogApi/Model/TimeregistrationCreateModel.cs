@@ -63,8 +63,15 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The type of the group.
         /// </value>
-        public string GroupType { get; set; }
+        public int GroupType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the type of the group.
+        /// </summary>
+        /// <value>
+        /// The type of the group.
+        /// </value>
+        public int AbsenceCodeID { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether this timeregistration is billable.
         /// </summary>

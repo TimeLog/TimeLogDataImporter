@@ -78,12 +78,14 @@
             this.comboBox_timeregistrationContractName = new System.Windows.Forms.ComboBox();
             this.label_timeregistrationProjectNo = new System.Windows.Forms.Label();
             this.comboBox_timeregistrationProjectNo = new System.Windows.Forms.ComboBox();
-            this.label_timeregistrationTaskName = new System.Windows.Forms.Label();
-            this.comboBox_timeregistrationTaskName = new System.Windows.Forms.ComboBox();
+            this.label_timeregistrationTaskNo = new System.Windows.Forms.Label();
+            this.comboBox_timeregistrationTaskNo = new System.Windows.Forms.ComboBox();
             this.label_timeregistrationSetup = new System.Windows.Forms.Label();
             this.button_timeregistrationSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label_timeregistrationAbsenceCode = new System.Windows.Forms.Label();
+            this.comboBox_timeregistrationAbcenseCode = new System.Windows.Forms.ComboBox();
             this.panel_timeregistrationDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_timeregistration)).BeginInit();
             this.panel_timeregistrationMessage.SuspendLayout();
@@ -405,6 +407,8 @@
             // 
             // groupBox_timeregistrationMandatoryFields
             // 
+            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationAbsenceCode);
+            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationAbcenseCode);
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationCostPriceName);
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationCostPriceName);
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationCostPrice);
@@ -429,8 +433,8 @@
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationContractName);
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationProjectNo);
             this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationProjectNo);
-            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationTaskName);
-            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationTaskName);
+            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.label_timeregistrationTaskNo);
+            this.groupBox_timeregistrationMandatoryFields.Controls.Add(this.comboBox_timeregistrationTaskNo);
             this.groupBox_timeregistrationMandatoryFields.Location = new System.Drawing.Point(263, 103);
             this.groupBox_timeregistrationMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox_timeregistrationMandatoryFields.Name = "groupBox_timeregistrationMandatoryFields";
@@ -543,7 +547,7 @@
             // label_timeregistrationIsBillable
             // 
             this.label_timeregistrationIsBillable.AutoSize = true;
-            this.label_timeregistrationIsBillable.Location = new System.Drawing.Point(9, 407);
+            this.label_timeregistrationIsBillable.Location = new System.Drawing.Point(9, 422);
             this.label_timeregistrationIsBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_timeregistrationIsBillable.Name = "label_timeregistrationIsBillable";
             this.label_timeregistrationIsBillable.Size = new System.Drawing.Size(64, 17);
@@ -553,7 +557,7 @@
             // comboBox_timeregistrationIsBillable
             // 
             this.comboBox_timeregistrationIsBillable.FormattingEnabled = true;
-            this.comboBox_timeregistrationIsBillable.Location = new System.Drawing.Point(197, 402);
+            this.comboBox_timeregistrationIsBillable.Location = new System.Drawing.Point(197, 417);
             this.comboBox_timeregistrationIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_timeregistrationIsBillable.Name = "comboBox_timeregistrationIsBillable";
             this.comboBox_timeregistrationIsBillable.Size = new System.Drawing.Size(197, 25);
@@ -680,25 +684,25 @@
             this.comboBox_timeregistrationProjectNo.TabIndex = 3;
             this.comboBox_timeregistrationProjectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationProjectNo_SelectedIndexChanged);
             // 
-            // label_timeregistrationTaskName
+            // label_timeregistrationTaskNo
             // 
-            this.label_timeregistrationTaskName.AutoSize = true;
-            this.label_timeregistrationTaskName.Location = new System.Drawing.Point(9, 45);
-            this.label_timeregistrationTaskName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_timeregistrationTaskName.Name = "label_timeregistrationTaskName";
-            this.label_timeregistrationTaskName.Size = new System.Drawing.Size(74, 17);
-            this.label_timeregistrationTaskName.TabIndex = 1;
-            this.label_timeregistrationTaskName.Text = "Task Name";
+            this.label_timeregistrationTaskNo.AutoSize = true;
+            this.label_timeregistrationTaskNo.Location = new System.Drawing.Point(9, 45);
+            this.label_timeregistrationTaskNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_timeregistrationTaskNo.Name = "label_timeregistrationTaskNo";
+            this.label_timeregistrationTaskNo.Size = new System.Drawing.Size(56, 17);
+            this.label_timeregistrationTaskNo.TabIndex = 1;
+            this.label_timeregistrationTaskNo.Text = "Task No";
             // 
-            // comboBox_timeregistrationTaskName
+            // comboBox_timeregistrationTaskNo
             // 
-            this.comboBox_timeregistrationTaskName.FormattingEnabled = true;
-            this.comboBox_timeregistrationTaskName.Location = new System.Drawing.Point(197, 40);
-            this.comboBox_timeregistrationTaskName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_timeregistrationTaskName.Name = "comboBox_timeregistrationTaskName";
-            this.comboBox_timeregistrationTaskName.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_timeregistrationTaskName.TabIndex = 3;
-            this.comboBox_timeregistrationTaskName.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationTaskName_SelectedIndexChanged);
+            this.comboBox_timeregistrationTaskNo.FormattingEnabled = true;
+            this.comboBox_timeregistrationTaskNo.Location = new System.Drawing.Point(197, 40);
+            this.comboBox_timeregistrationTaskNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox_timeregistrationTaskNo.Name = "comboBox_timeregistrationTaskNo";
+            this.comboBox_timeregistrationTaskNo.Size = new System.Drawing.Size(197, 25);
+            this.comboBox_timeregistrationTaskNo.TabIndex = 3;
+            this.comboBox_timeregistrationTaskNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationTaskName_SelectedIndexChanged);
             // 
             // label_timeregistrationSetup
             // 
@@ -737,6 +741,26 @@
             // defaultToolTip
             // 
             this.defaultToolTip.ShowAlways = true;
+            // 
+            // label_timeregistrationAbsenceCode
+            // 
+            this.label_timeregistrationAbsenceCode.AutoSize = true;
+            this.label_timeregistrationAbsenceCode.Location = new System.Drawing.Point(9, 390);
+            this.label_timeregistrationAbsenceCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_timeregistrationAbsenceCode.Name = "label_timeregistrationAbsenceCode";
+            this.label_timeregistrationAbsenceCode.Size = new System.Drawing.Size(94, 17);
+            this.label_timeregistrationAbsenceCode.TabIndex = 21;
+            this.label_timeregistrationAbsenceCode.Text = "Absence Code";
+            // 
+            // comboBox_timeregistrationAbcenseCode
+            // 
+            this.comboBox_timeregistrationAbcenseCode.FormattingEnabled = true;
+            this.comboBox_timeregistrationAbcenseCode.Location = new System.Drawing.Point(197, 385);
+            this.comboBox_timeregistrationAbcenseCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox_timeregistrationAbcenseCode.Name = "comboBox_timeregistrationAbcenseCode";
+            this.comboBox_timeregistrationAbcenseCode.Size = new System.Drawing.Size(197, 25);
+            this.comboBox_timeregistrationAbcenseCode.TabIndex = 22;
+            this.comboBox_timeregistrationAbcenseCode.SelectedIndexChanged += new System.EventHandler(this.comboBox_timeregistrationAbcenseCode_SelectedIndexChanged);
             // 
             // UserControl_TimeregistrationImport
             // 
@@ -796,8 +820,8 @@
         private System.Windows.Forms.Button button_stop;
         private System.Windows.Forms.Panel panel_timeregistrationFieldMapping;
         private System.Windows.Forms.GroupBox groupBox_timeregistrationMandatoryFields;
-        private System.Windows.Forms.ComboBox comboBox_timeregistrationTaskName;
-        private System.Windows.Forms.Label label_timeregistrationTaskName;
+        private System.Windows.Forms.ComboBox comboBox_timeregistrationTaskNo;
+        private System.Windows.Forms.Label label_timeregistrationTaskNo;
         private System.Windows.Forms.Label label_timeregistrationSetup;
         private System.Windows.Forms.Button button_timeregistrationSelectFile;
         private System.Windows.Forms.TextBox textBox_timeregistrationImportMessages;
@@ -840,5 +864,7 @@
         private System.Windows.Forms.ComboBox comboBox_timeregistrationHourlyRate;
         private System.Windows.Forms.Label label_timeregistrationBillableHours;
         private System.Windows.Forms.ComboBox comboBox_timeregistrationBillableHours;
+        private System.Windows.Forms.Label label_timeregistrationAbsenceCode;
+        private System.Windows.Forms.ComboBox comboBox_timeregistrationAbcenseCode;
     }
 }

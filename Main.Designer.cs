@@ -47,6 +47,8 @@ namespace TimeLog.DataImporter
             this.userControl_ProjectExpenseImport = new UserControl_ProjectExpenseImport();
             this.tabPage_task = new System.Windows.Forms.TabPage();
             this.userControl_TaskImport = new UserControl_TaskImport();
+            this.tabPage_timeregistration = new System.Windows.Forms.TabPage();
+            this.userControl_TimeregistrationImport = new UserControl_TimeregistrationImport();
             this.tabPage_help = new System.Windows.Forms.TabPage();
             this.userControl_Help = new UserControl_Help();
             this.tabPage_logout = new System.Windows.Forms.TabPage();
@@ -59,6 +61,7 @@ namespace TimeLog.DataImporter
             this.tabPage_employee.SuspendLayout();
             this.tabPage_projectExpense.SuspendLayout();
             this.tabPage_task.SuspendLayout();
+            this.tabPage_timeregistration.SuspendLayout();
             this.tabPage_help.SuspendLayout();
             this.tabPage_logout.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +75,7 @@ namespace TimeLog.DataImporter
             this.tabControl1.Controls.Add(this.tabPage_contract);
             this.tabControl1.Controls.Add(this.tabPage_payment);
             this.tabControl1.Controls.Add(this.tabPage_projectExpense);
+            this.tabControl1.Controls.Add(this.tabPage_timeregistration);
             this.tabControl1.Controls.Add(this.tabPage_help);
             this.tabControl1.Controls.Add(this.tabPage_logout);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -81,7 +85,6 @@ namespace TimeLog.DataImporter
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1006, 942);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage_customer
             // 
@@ -215,6 +218,18 @@ namespace TimeLog.DataImporter
             this.tabPage_task.Text = "Task";
             this.tabPage_task.UseVisualStyleBackColor = true;
             // 
+            // tabPage_timeregistration
+            // 
+            this.tabPage_timeregistration.AutoScroll = true;
+            this.tabPage_timeregistration.Controls.Add(this.userControl_TimeregistrationImport);
+            this.tabPage_timeregistration.Location = new System.Drawing.Point(4, 24);
+            this.tabPage_timeregistration.Name = "tabPage_timeregistration";
+            this.tabPage_timeregistration.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_timeregistration.Size = new System.Drawing.Size(998, 914);
+            this.tabPage_timeregistration.TabIndex = 4;
+            this.tabPage_timeregistration.Text = "Timeregistration";
+            this.tabPage_timeregistration.UseVisualStyleBackColor = true;
+            // 
             // userControl_TaskImport
             // 
             this.userControl_TaskImport.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -222,6 +237,14 @@ namespace TimeLog.DataImporter
             this.userControl_TaskImport.Name = "userControl_TaskImport";
             this.userControl_TaskImport.Size = new System.Drawing.Size(992, 908);
             this.userControl_TaskImport.TabIndex = 0;
+            // 
+            // userControl_TimeregistrationImport
+            // 
+            this.userControl_TimeregistrationImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl_TimeregistrationImport.Location = new System.Drawing.Point(3, 3);
+            this.userControl_TimeregistrationImport.Name = "userControl_TimeregistrationImport";
+            this.userControl_TimeregistrationImport.Size = new System.Drawing.Size(992, 908);
+            this.userControl_TimeregistrationImport.TabIndex = 0;
             // 
             // tabPage_help
             // 
@@ -282,6 +305,7 @@ namespace TimeLog.DataImporter
             this.tabPage_employee.ResumeLayout(false);
             this.tabPage_projectExpense.ResumeLayout(false);
             this.tabPage_task.ResumeLayout(false);
+            this.tabPage_timeregistration.ResumeLayout(false);
             this.tabPage_help.ResumeLayout(false);
             this.tabPage_logout.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -298,6 +322,7 @@ namespace TimeLog.DataImporter
         public TabPage tabPage_employee;
         public TabPage tabPage_projectExpense;
         public TabPage tabPage_task;
+        public TabPage tabPage_timeregistration;
         public TabPage tabPage_help;
         public TabPage tabPage_logout;
         public UserControl_CustomerImport userControl_CustomerImport;
@@ -306,6 +331,7 @@ namespace TimeLog.DataImporter
         public UserControl_EmployeeImport userControl_EmployeeImport;
         public UserControl_ProjectExpenseImport userControl_ProjectExpenseImport;
         public UserControl_TaskImport userControl_TaskImport;
+        public UserControl_TimeregistrationImport userControl_TimeregistrationImport;
         public UserControl_PaymentImport userControl_PaymentImport;
         public UserControl_Help userControl_Help;
         public UserControl_Logout userControl_Logout;

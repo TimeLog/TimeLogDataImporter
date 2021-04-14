@@ -22,30 +22,32 @@ namespace TimeLog.DataImporter.UserControls
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
-            {0, "Task Name"},
+            {0, "Task No"},
             {1, "Project No"},
             {2, "Contract Name"},
             {3, "User Initials"},
             {4, "Date"},
             {5, "Hours"},
             {6, "Group Type"},
-            {7, "Is Billable"},
-            {8, "Billable Hours"},
-            {9, "Hourly Rate"},
-            {10, "Hourly Rate Name"},
-            {11, "Cost Price"},
-            {12, "Cost Price Name"},
+            {7, "Absence Code"},
+            {8, "Is Billable"},
+            {9, "Billable Hours"},
+            {10, "Hourly Rate"},
+            {11, "Hourly Rate Name"},
+            {12, "Cost Price"},
+            {13, "Cost Price Name"},
 
         };
 
         //all column header variables
-        private readonly string _taskName = "Task Name";
+        private readonly string _taskNo = "Task No";
         private readonly string _projectNo = "Project No";
         private readonly string _contractName = "Contract Name";
         private readonly string _userInitials = "User Initials";
         private readonly string _date = "Date";
         private readonly string _hours = "Hours";
         private readonly string _groupType = "Group Type";
+        private readonly string _absenceCode = "Absence Code";
         private readonly string _isBillable = "Is Billable";
         private readonly string _billableHours = "Billable Hours";
         private readonly string _hourlyRate = "Hourly Rate";
@@ -59,11 +61,19 @@ namespace TimeLog.DataImporter.UserControls
         
 
         //default value lists from API 
-        private static readonly List<KeyValuePair<int, string>> _taskList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _projectList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _contractList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _userList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> _groupTypeList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ProjectList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> UserList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> AbsenceCodeList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> GroupTypeList =
+            new List<KeyValuePair<int, string>>()
+            {
+                new KeyValuePair<int, string>(1, "Project"),
+                //new KeyValuePair<int, string>(2, "SupportTicket"),
+                new KeyValuePair<int, string>(3, "Absence"),
+                //new KeyValuePair<int, string>(4, "ProjectTimeTracker"),
+                //new KeyValuePair<int, string>(5, "AbsenceTimeTracker"),
+                //new KeyValuePair<int, string>(6, "TravelTime")  // Only used wiht mileage for maps. 
+            };
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -118,6 +128,9 @@ namespace TimeLog.DataImporter.UserControls
 
         private void InitializeAllDefaultValues()
         {
+            GetAllProjectFromApi();
+            GetAllUsersFromApi();
+            GetAllAbsenceCodesFromApi();
 
         }
 
@@ -151,13 +164,14 @@ namespace TimeLog.DataImporter.UserControls
 
                 AddFileColumnHeaderToComboBox(TimeregistrationHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
-                TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationTaskName, _taskName);
+                TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationTaskNo, _taskNo);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationProjectNo, _projectNo);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationContractName, _contractName);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationUserInitials, _userInitials);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationDate, _date);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationHours, _hours);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationGroupType, _groupType);
+                TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationAbcenseCode, _absenceCode);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationIsBillable, _isBillable);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationBillableHours, _billableHours);
                 TimeregistrationHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_timeregistrationHourlyRate, _hourlyRate);
@@ -251,13 +265,14 @@ namespace TimeLog.DataImporter.UserControls
                         {
                             TimeregistrationCreateModel _newTimeregistration = new TimeregistrationCreateModel
                             {
-                                TaskID = (int)MapFieldValueToID(_taskName, _row, false),
+                                TaskID = (int)MapFieldValueToID(_taskNo, _row, false),
                                 ProjectID = (int)MapFieldValueToID(_projectNo, _row, false),
                                 ContractID = (int)MapFieldValueToID(_contractName, _row, false),
                                 UserID = (int)MapFieldValueToID(_userInitials, _row, false),
                                 Date = TimeregistrationHandler.Instance.CheckAndGetDate(dataGridView_timeregistration,_date, _row),
                                 Hours = TimeregistrationHandler.Instance.CheckAndGetDouble(dataGridView_timeregistration, _hours, _row),
-                                GroupType = TimeregistrationHandler.Instance.CheckAndGetString(dataGridView_timeregistration, _groupType, _row),
+                                GroupType = (int)MapFieldValueToID(_groupType, _row, false),
+                                AbsenceCodeID = (int)MapFieldValueToID(_absenceCode,_row,false),
                                 Billable = TimeregistrationHandler.Instance.CheckAndGetBoolean(dataGridView_timeregistration, _isBillable, _row),
                                 BillableHours = TimeregistrationHandler.Instance.CheckAndGetDouble(dataGridView_timeregistration, _billableHours, _row),
                                 HourlyRate = TimeregistrationHandler.Instance.CheckAndGetDouble(dataGridView_timeregistration, _hourlyRate, _row),
@@ -316,13 +331,14 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
-            comboBox_timeregistrationTaskName.Items.AddRange(fileColumnHeaderArray);
+            comboBox_timeregistrationTaskNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationProjectNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationContractName.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationUserInitials.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationDate.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationHours.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationGroupType.Items.AddRange(fileColumnHeaderArray);
+            comboBox_timeregistrationAbcenseCode.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationIsBillable.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationBillableHours.Items.AddRange(fileColumnHeaderArray);
             comboBox_timeregistrationHourlyRate.Items.AddRange(fileColumnHeaderArray);
@@ -342,16 +358,48 @@ namespace TimeLog.DataImporter.UserControls
                 var _fieldValue = TimeregistrationHandler.Instance.CheckAndGetString(dataGridView_timeregistration, columnName, row);
                 int _result = -1;
 
-                if (columnName == _taskName)
+                if (columnName == _taskNo)
                 {
                     if (!string.IsNullOrWhiteSpace(_fieldValue))
                     {
-                        var _projectID = PaymentHandler.Instance.GetIDFromFieldValue(_projectList, PaymentHandler.Instance.CheckAndGetString(dataGridView_timeregistration, _projectNo, row));
-                        var _tasks = PaymentHandler.Instance.GetAllTask(AuthenticationHandler.Instance.Token, _projectID);
+                        var _projectID = TimeregistrationHandler.Instance.GetIDFromFieldValue(ProjectList, TimeregistrationHandler.Instance.CheckAndGetString(dataGridView_timeregistration, _projectNo, row));
+                        var _tasks = TimeregistrationHandler.Instance.GetAllTask(AuthenticationHandler.Instance.Token, _projectID);
 
                         try
                         {
-                            _result = _tasks.FirstOrDefault(x => x.Name.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).TaskID;
+                            _result = _tasks.FirstOrDefault(x => x.No.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).TaskID;
+                        }
+                        catch (Exception _)
+                        {
+                            _result = -1;
+                        }
+                    }
+                    else
+                    {
+                        _result = 0;
+                    }
+                }
+                else if (columnName == _projectNo)
+                {
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(ProjectList, _fieldValue);
+                    }
+                    else
+                    {
+                        _result = 0;
+                    }
+                }
+                else if (columnName == _contractName)
+                {
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        var _projectID = TimeregistrationHandler.Instance.GetIDFromFieldValue(ProjectList, TimeregistrationHandler.Instance.CheckAndGetString(dataGridView_timeregistration, _projectNo, row));
+                        var _projectContracts = TimeregistrationHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, _projectID);
+
+                        try
+                        {
+                            _result = _projectContracts.FirstOrDefault(x => x.ContractName.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).ContractID;
                         }
                         catch (Exception _)
                         {
@@ -364,33 +412,26 @@ namespace TimeLog.DataImporter.UserControls
                     }
 
                 }
-                else if (columnName == _projectNo)
-                {
-                    _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(_projectList, _fieldValue);
-                }
-                else if (columnName == _contractName)
-                {
-                    var _projectID = PaymentHandler.Instance.GetIDFromFieldValue(_projectList, PaymentHandler.Instance.CheckAndGetString(dataGridView_timeregistration, _projectNo, row));
-                    var _projectContracts = PaymentHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, _projectID);
-
-                    try
-                    {
-                        _result = _projectContracts.FirstOrDefault(x => x.ContractName.ToLower().Trim().Equals(_fieldValue.ToLower().Trim())).ContractID;
-                    }
-                    catch (Exception _)
-                    {
-                        _result = -1;
-                    }
-                }
                 else if (columnName == _userInitials)
                 {
-                    _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(_userList, _fieldValue);
+                    _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(UserList, _fieldValue);
                 }
                 else if (columnName == _groupType)
                 {
-                    _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(_groupTypeList, _fieldValue);
+                    _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(GroupTypeList, _fieldValue);
                 }
-                
+                else if (columnName == _absenceCode)
+                {
+                    if (!string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(AbsenceCodeList, _fieldValue);
+                    }
+                    else
+                    {
+                        _result = 0;
+                    }
+                }
+
 
                 if (_result != -1)
                 {
@@ -416,8 +457,8 @@ namespace TimeLog.DataImporter.UserControls
 
         private void ClearAndResetAllComboBoxes()
         {
-            comboBox_timeregistrationTaskName.ResetText();
-            comboBox_timeregistrationTaskName.Items.Clear();
+            comboBox_timeregistrationTaskNo.ResetText();
+            comboBox_timeregistrationTaskNo.Items.Clear();
             comboBox_timeregistrationProjectNo.ResetText();
             comboBox_timeregistrationProjectNo.Items.Clear();
             comboBox_timeregistrationContractName.ResetText();
@@ -430,6 +471,8 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_timeregistrationHours.Items.Clear();
             comboBox_timeregistrationGroupType.ResetText();
             comboBox_timeregistrationGroupType.Items.Clear();
+            comboBox_timeregistrationAbcenseCode.ResetText();
+            comboBox_timeregistrationAbcenseCode.Items.Clear();
             comboBox_timeregistrationIsBillable.ResetText();
             comboBox_timeregistrationIsBillable.Items.Clear();
             comboBox_timeregistrationBillableHours.ResetText();
@@ -457,7 +500,44 @@ namespace TimeLog.DataImporter.UserControls
         #endregion
 
         #region Get default values from API
+        private void GetAllProjectFromApi()
+        {
+            var _apiResponse = TimeregistrationHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
+            if (_apiResponse != null)
+            {
+                foreach (var _project in _apiResponse)
+                {
+                    ProjectList.Add(new KeyValuePair<int, string>(_project.ProjectID, _project.No));
+                }
+            }
+        }
+
+        private void GetAllUsersFromApi()
+        {
+            var _apiResponse = TimeregistrationHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _user in _apiResponse)
+                {
+                    UserList.Add(new KeyValuePair<int, string>(_user.UserID, _user.Initials));
+                }
+            }
+        }
+
+        private void GetAllAbsenceCodesFromApi()
+        {
+            var _apiResponse = TimeregistrationHandler.Instance.GetAllAbsenceCode(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _absenceCode in _apiResponse)
+                {
+                    AbsenceCodeList.Add(new KeyValuePair<int, string>(_absenceCode.AbsenceCodeID, _absenceCode.Name));
+                }
+            }
+        }
 
 
         #endregion
@@ -466,105 +546,112 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_timeregistrationTaskName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationTaskName, _taskName);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationTaskNo, _taskNo);
 
         }
 
         private void comboBox_timeregistrationProjectNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationProjectNo, _projectNo);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationProjectNo, _projectNo);
 
         }
 
         private void comboBox_timeregistrationContractName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationContractName, _contractName);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationContractName, _contractName);
 
         }
 
         private void comboBox_timeregistrationUserInitials_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationUserInitials, _userInitials);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationUserInitials, _userInitials);
 
         }
 
         private void comboBox_timeregistrationDate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationDate, _date);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationDate, _date);
 
         }
 
         private void comboBox_timeregistrationHours_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHours, _hours);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHours, _hours);
 
         }
 
         private void comboBox_timeregistrationGroupType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationGroupType, _groupType);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationGroupType, _groupType);
+
+        }
+
+        private void comboBox_timeregistrationAbcenseCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationAbcenseCode, _absenceCode);
 
         }
 
         private void comboBox_timeregistrationIsBillable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationIsBillable, _isBillable);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationIsBillable, _isBillable);
 
         }
 
         private void comboBox_timeregistrationBillableHours_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationBillableHours, _billableHours);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationBillableHours, _billableHours);
 
         }
 
         private void comboBox_timeregistrationHourlyRate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHourlyRate, _hourlyRate);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHourlyRate, _hourlyRate);
 
         }
 
         private void comboBox_timeregistrationHourlyRateName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHourlyRateName, _hourlyRateName);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationHourlyRateName, _hourlyRateName);
 
         }
 
         private void comboBox_timeregistrationCostPrice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationCostPrice, _costPrice);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationCostPrice, _costPrice);
 
         }
 
         private void comboBox_timeregistrationCostPriceName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationCostPriceName, _costPriceName);
+            TimeregistrationHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationCostPriceName, _costPriceName);
 
         }
 
         private void comboBox_timeregistrationComment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationComment, _comment);
+            TimeregistrationHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationComment, _comment);
 
         }
 
         private void comboBox_timeregistrationAdditionalComment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationAdditionalComment, _additionalComment);
+            TimeregistrationHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationAdditionalComment, _additionalComment);
 
         }
 
         private void comboBox_timeregistrationMonthlyPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationMonthlyPeriod, _monthlyPeriod);
+            TimeregistrationHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_timeregistration, _timeregistrationTable, comboBox_timeregistrationMonthlyPeriod, _monthlyPeriod);
 
         }
 
 
 
+
+
         #endregion
 
-
-
+        
     }
 }

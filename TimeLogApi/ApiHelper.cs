@@ -71,6 +71,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllUserRolesEndpoint = "/api/v1/role?$page=1&$pagesize=300";
         public string GetAllContractModelsEndpoint = "/api/v1/ContractModel";
         public string GetAllUnitTypeEndpoint = "/api/v1/unit-type";
+        public string GetAllAbsenceCodeEndpoint = "/api/v1/absence-code";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();
