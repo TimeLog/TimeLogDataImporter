@@ -74,68 +74,6 @@ namespace TimeLog.DataImporter.Handlers
             }
         }
 
-        public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
-        {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllPaymentMethodEndpoint;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentMethodReadModel>(_property.Value.ToString()));
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            return null;
-        }
-
-        public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
-        {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllExpenseTypeEndpoint;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<ExpenseTypeReadModel> _apiResponse = new List<ExpenseTypeReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<ExpenseTypeReadModel>(_property.Value.ToString()));
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain default expense type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            return null;
-        }
+        
     }
 }

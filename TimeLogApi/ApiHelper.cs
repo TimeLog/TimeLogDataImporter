@@ -41,37 +41,37 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string TimeregistrationCreateEndpoint = "/api/v1/time-registration/import-timeregistration";
 
 
-        public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page=1&$pagesize=300";
-        public string GetAllContractEndpoint = "/api/v1/contract?$page=1&$pagesize=300";
-        public string GetAllCustomerEndpoint = "/api/v1/customer?$page=1&$pagesize=300";
-        public string GetAllDepartmentEndpoint = "/api/v1/department?$page=1&$pagesize=300";
-        public string GetDefaultHourlyRatesEndpoint = "/api/v1/hourly-rate/default?$page=1&$pagesize=300";
-        public string GetAllContractHourlyRatesEndpoint = "/api/v1/contract-hourly-rate?$page=1&$pagesize=300";
-        public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page=1&$pagesize=300";  //user-type endpoint
-        public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page=1&$pagesize=300";
-        public string GetAllHolidayCalendarEndpoint = "/api/v1/holiday-calendar?$page=1&$pagesize=300";
-        public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page=1&$pagesize=300";
-        public string GetAllNormalWorkingTimeEndpoint = "/api/v1/normal-working-time?$page=1&$pagesize=300";
-        public string GetAllSalaryGroupEndpoint = "/api/v1/salary-group?$page=1&$pagesize=300";
-        public string GetAllIndustryEndpoint = "/api/v1/industry/get-all?$page=1&$pagesize=50";
-        public string GetAllCurrencyEndpoint = "/api/v1/currency/active?$page=1&$pagesize=300";
-        public string GetAllCustomerStatusEndpoint = "/api/v1/customerstatus?$page=1&$pagesize=30";
-        public string GetAllEmployeeEndpoint = "/api/v1/user?$page=1&$pagesize=500";
-        public string GetAllExpenseTypeEndpoint = "/api/v1/expense-type?$page=1&$pagesize=300";
-        public string GetAllPaymentTermEndpoint = "/api/v1/payment-term?$page=1&$pagesize=300";
-        public string GetAllPaymentMethodEndpoint = "/api/v1/payment-method?$page=1&$pagesize=30";
-        public string GetAllProjectEndpoint = "/api/v1/project/get-all?$page=1&$pagesize=500";
-        public string GetAllProjectTemplateEndpoint = "/api/v1/project-template/get-all?$page=1&$pagesize=500";
-        public string GetAllLegalEntityEndpoint = "/api/v1/legalentity?$page=1&$pagesize=500";
-        public string GetAllProjectTypeEndpoint = "/api/v1/ProjectType?$page=1&$pagesize=500";
-        public string GetAllProjectCategoryEndpoint = "/api/v1/ProjectCategory?$page=1&$pagesize=500";
-        public string GetAllTaskEndpoint = "/api/v1/task?$page=1&$pagesize=300";
-        public string GetAllTaskTypeEndpoint = "/api/v1/TaskType?$page=1&$pagesize=300";
-        public string GetAllProductEndpoint = "/api/v1/product?$page=1&$pagesize=300";
-        public string GetAllUserRolesEndpoint = "/api/v1/role?$page=1&$pagesize=300";
-        public string GetAllContractModelsEndpoint = "/api/v1/ContractModel";
-        public string GetAllUnitTypeEndpoint = "/api/v1/unit-type";
-        public string GetAllAbsenceCodeEndpoint = "/api/v1/absence-code";
+        public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page={0}&$pagesize=500";
+        public string GetAllContractEndpoint = "/api/v1/contract?$page={0}&$pagesize=500";
+        public string GetAllCustomerEndpoint = "/api/v1/customer?$page={0}&$pagesize=500";
+        public string GetAllDepartmentEndpoint = "/api/v1/department?$page={0}&$pagesize=500";
+        public string GetDefaultHourlyRatesEndpoint = "/api/v1/hourly-rate/default?$page={0}&$pagesize=500";
+        public string GetAllContractHourlyRatesEndpoint = "/api/v1/contract-hourly-rate?$page={0}&$pagesize=500";
+        public string GetAllEmployeeTypeEndpoint = "/api/v1/employee-type?$page={0}&$pagesize=500";  //user-type endpoint
+        public string GetAllCostPriceEndpoint = "/api/v1/cost-price?$page={0}&$pagesize=500";
+        public string GetAllHolidayCalendarEndpoint = "/api/v1/holiday-calendar?$page={0}&$pagesize=500";
+        public string GetAllAllowanceLegislationEndpoint = "/api/v1/allowance-legislation?$page={0}&$pagesize=500";
+        public string GetAllNormalWorkingTimeEndpoint = "/api/v1/normal-working-time?$page={0}&$pagesize=500";
+        public string GetAllSalaryGroupEndpoint = "/api/v1/salary-group?$page={0}&$pagesize=500";
+        public string GetAllIndustryEndpoint = "/api/v1/industry/get-all?$page={0}&$pagesize=500";
+        public string GetAllCurrencyEndpoint = "/api/v1/currency/active?$page={0}&$pagesize=500";
+        public string GetAllCustomerStatusEndpoint = "/api/v1/customerstatus?$page={0}&$pagesize=500";
+        public string GetAllEmployeeEndpoint = "/api/v1/user?$page={0}&$pagesize=500";
+        public string GetAllExpenseTypeEndpoint = "/api/v1/expense-type?$page={0}&$pagesize=500";
+        public string GetAllPaymentTermEndpoint = "/api/v1/payment-term?$page={0}&$pagesize=500";
+        public string GetAllPaymentMethodEndpoint = "/api/v1/payment-method?$page={0}&$pagesize=500";
+        public string GetAllProjectEndpoint = "/api/v1/project/get-all?$page={0}&$pagesize=500";
+        public string GetAllProjectTemplateEndpoint = "/api/v1/project-template/get-all?$page={0}&$pagesize=500";
+        public string GetAllLegalEntityEndpoint = "/api/v1/legalentity?$page={0}&$pagesize=500";
+        public string GetAllProjectTypeEndpoint = "/api/v1/ProjectType?$page={0}&$pagesize=500";
+        public string GetAllProjectCategoryEndpoint = "/api/v1/ProjectCategory?$page={0}&$pagesize=500";
+        public string GetAllTaskEndpoint = "/api/v1/task?$page={0}&$pagesize=500";
+        public string GetAllTaskTypeEndpoint = "/api/v1/TaskType?$page={0}&$pagesize=500";
+        public string GetAllProductEndpoint = "/api/v1/product?$page={0}&$pagesize=500";
+        public string GetAllUserRolesEndpoint = "/api/v1/role?$page={0}&$pagesize=500";
+        public string GetAllContractModelsEndpoint = "/api/v1/ContractModel?$page={0}&$pagesize=500";
+        public string GetAllUnitTypeEndpoint = "/api/v1/unit-type?$page={0}&$pagesize=500";
+        public string GetAllAbsenceCodeEndpoint = "/api/v1/absence-code?$page={0}&$pagesize=500";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();

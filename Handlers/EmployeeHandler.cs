@@ -77,37 +77,7 @@ namespace TimeLog.DataImporter.Handlers
 
         
 
-        public List<EmployeeTypeReadModel> GetAllEmployeeTypes(string token)
-        {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllEmployeeTypeEndpoint;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<EmployeeTypeReadModel> _apiResponse = new List<EmployeeTypeReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            _apiResponse.Add(JsonConvert.DeserializeObject<EmployeeTypeReadModel>(_property.Value.ToString()));
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain default EmployyType ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            return null;
-        }
+        
 
 
        

@@ -178,19 +178,7 @@ namespace TimeLog.DataImporter.Handlers
             return -1;
         }
 
-        public int GetIDFromFieldValue(List<KeyValuePair<string, string>> keyValuePairList, string fieldValue)
-        {
-            foreach (var _field in keyValuePairList)
-            {
-                if (_field.Value.ToLower().Trim().Equals(fieldValue.ToLower().Trim()))
-                {
-                    var _fieldKey = _field.Key.Split("_")[0];
-                    return Convert.ToInt32(_fieldKey);
-                }
-            }
-
-            return -1;
-        }
+       
 
         public int GetLegalEntityIDFromFieldValue(List<KeyValuePair<string, string>> keyValuePairList, string fieldValue, int legalEntityID)
         {
@@ -212,7 +200,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCurrencyEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCurrencyEndpoint, 1);
 
             try
             {
@@ -222,6 +210,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<CurrencyReadModel> _apiResponse = new List<CurrencyReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -231,6 +221,28 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCurrencyEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -244,7 +256,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<LegalEntityReadModel> GetAllLegalEntity(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllLegalEntityEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllLegalEntityEndpoint, 1);
 
             try
             {
@@ -254,6 +266,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<LegalEntityReadModel> _apiResponse = new List<LegalEntityReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -263,6 +277,28 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllLegalEntityEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -276,7 +312,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<EmployeeReadModel> GetAllEmployee(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllEmployeeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeEndpoint, 1);
 
             try
             {
@@ -286,6 +322,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<EmployeeReadModel> _apiResponse = new List<EmployeeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -297,7 +335,30 @@ namespace TimeLog.DataImporter.Handlers
                             }
                         }
                     }
+                    
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     return _apiResponse.Where(x=>x.IsActive && x.UserType.Equals("Employee")).ToList();
                 }
             }
@@ -311,7 +372,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerReadModel> GetAllCustomer(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCustomerEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerEndpoint, 1);
 
             try
             {
@@ -322,6 +383,9 @@ namespace TimeLog.DataImporter.Handlers
                 {
                     List<CustomerReadModel> _apiResponse = new List<CustomerReadModel>();
 
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
@@ -329,6 +393,29 @@ namespace TimeLog.DataImporter.Handlers
                             if (_property.Name == "Properties")
                             {
                                 _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                                    }
+                                }
                             }
                         }
                     }
@@ -346,7 +433,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerStatusReadModel> GetAllCustomerStatus(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCustomerStatusEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerStatusEndpoint, 1);
 
             try
             {
@@ -357,11 +444,34 @@ namespace TimeLog.DataImporter.Handlers
                 {
                     List<CustomerStatusReadModel> _apiResponse = new List<CustomerStatusReadModel>();
 
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
                             _apiResponse.Add(JsonConvert.DeserializeObject<CustomerStatusReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerStatusEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<CustomerStatusReadModel>(_property.Value.ToString()));
+                                }
+                            }
+
                         }
                     }
 
@@ -378,7 +488,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectReadModel> GetAllProject(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllProjectEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectEndpoint, 1);
 
             try
             {
@@ -388,6 +498,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ProjectReadModel> _apiResponse = new List<ProjectReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -399,7 +511,30 @@ namespace TimeLog.DataImporter.Handlers
                             }
                         }
                     }
+                    
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<ProjectReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -411,44 +546,11 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-        public List<TaskReadModel> GetAllTask(string token, int projectID)
-        {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID;
-
-            try
-            {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
-                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
-                {
-                    List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
-
-                    foreach (var _entity in _jsonDeserializedObject.Entities)
-                    {
-                        foreach (var _property in _entity.Properties())
-                        {
-                            if (_property.Name == "Properties")
-                            {
-                                _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
-                            }
-                        }
-                    }
-
-                    return _apiResponse;
-                }
-            }
-            catch (WebException _webEx)
-            {
-                MessageBox.Show("Failed to obtain project task list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            return null;
-        }
+       
 
         public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID, 1);
 
             try
             {
@@ -458,6 +560,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ProjectSubContractReadModel> _apiResponse = new List<ProjectSubContractReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -467,6 +571,30 @@ namespace TimeLog.DataImporter.Handlers
                             {
                                 _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
                             }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<ProjectSubContractReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+
                         }
                     }
 
@@ -485,7 +613,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ContractModelReadModel> GetAllContractModels(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllContractModelsEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractModelsEndpoint, 1);
 
             try
             {
@@ -495,6 +623,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ContractModelReadModel> _apiResponse = new List<ContractModelReadModel>();
+                    //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    //var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -507,6 +637,28 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    //while (_totalPages > _currentPage)
+                    //{
+                    //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractModelsEndpoint, _currentPage + 1);
+                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                    //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                    //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                    //    {
+                    //        _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+                    //        foreach (var _entity in _jsonDeserializedObject.Entities)
+                    //        {
+                    //            foreach (var _property in _entity.Properties())
+                    //            {
+                    //                if (_property.Name == "Properties")
+                    //                {
+                    //                    _apiResponse.Add(JsonConvert.DeserializeObject<ContractModelReadModel>(_property.Value.ToString()));
+                    //                }
+                    //            }
+                    //        }
+
+                    //    }
+                    //}
                     return _apiResponse;
                 }
             }
@@ -520,7 +672,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HourlyRateReadModel> GetAllDefaultHourlyRate(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetDefaultHourlyRatesEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetDefaultHourlyRatesEndpoint, 1);
 
             try
             {
@@ -530,6 +682,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<HourlyRateReadModel> _apiResponse = new List<HourlyRateReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -539,6 +693,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetDefaultHourlyRatesEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<HourlyRateReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -552,7 +725,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<DepartmentReadModel> GetAllDepartment(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllDepartmentEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllDepartmentEndpoint, 1);
 
             try
             {
@@ -562,12 +735,34 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<DepartmentReadModel> _apiResponse = new List<DepartmentReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
                             _apiResponse.Add(JsonConvert.DeserializeObject<DepartmentReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllDepartmentEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<DepartmentReadModel>(_property.Value.ToString()));
+                                }
+                            }
                         }
                     }
 
@@ -584,7 +779,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<UnitTypeReadModel> GetAllUnitType(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllUnitTypeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUnitTypeEndpoint, 1);
 
             try
             {
@@ -594,6 +789,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<UnitTypeReadModel> _apiResponse = new List<UnitTypeReadModel>();
+                    //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    //var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -603,6 +800,26 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    //while (_totalPages > _currentPage)
+                    //{
+                    //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUnitTypeEndpoint, _currentPage + 1);
+                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                    //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                    //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                    //    {
+                    //        _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    //        foreach (var _entity in _jsonDeserializedObject.Entities)
+                    //        {
+                    //            foreach (var _property in _entity.Properties())
+                    //            {
+                    //                _apiResponse.Add(JsonConvert.DeserializeObject<UnitTypeReadModel>(_property.Value.ToString()));
+                    //            }
+                    //        }
+
+                    //    }
+                    //}
                     return _apiResponse;
                 }
             }
@@ -616,7 +833,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<AbsenceCodeReadModel> GetAllAbsenceCode(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllAbsenceCodeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAbsenceCodeEndpoint, 1);
 
             try
             {
@@ -626,6 +843,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<AbsenceCodeReadModel> _apiResponse = new List<AbsenceCodeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -638,12 +857,760 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAbsenceCodeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<AbsenceCodeReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
             catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain absence code list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<CountryReadModel> GetAllCountry(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCountryEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<CountryReadModel> _apiResponse = new List<CountryReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<CountryReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCountryEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<CountryReadModel>(_property.Value.ToString()));
+                                }
+                            }
+
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default country ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+
+
+        public List<IndustryReadModel> GetAllIndustry(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllIndustryEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<IndustryReadModel> _apiResponse = new List<IndustryReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<IndustryReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllIndustryEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<IndustryReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default industry ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<PaymentTermReadModel> GetAllPaymentTerm(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentTermEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<PaymentTermReadModel> _apiResponse = new List<PaymentTermReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentTermReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentTermEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<PaymentTermReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default payment term ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<EmployeeTypeReadModel> GetAllEmployeeTypes(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeTypeEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<EmployeeTypeReadModel> _apiResponse = new List<EmployeeTypeReadModel>();
+                    //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    //var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<EmployeeTypeReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    //while (_totalPages > _currentPage)
+                    //{
+                    //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeTypeEndpoint, _currentPage + 1);
+                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                    //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                    //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                    //    {
+                    //        _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    //        foreach (var _entity in _jsonDeserializedObject.Entities)
+                    //        {
+                    //            foreach (var _property in _entity.Properties())
+                    //            {
+                    //                _apiResponse.Add(JsonConvert.DeserializeObject<EmployeeTypeReadModel>(_property.Value.ToString()));
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default EmployyType ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<PaymentMethodReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<PaymentMethodReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllExpenseTypeEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ExpenseTypeReadModel> _apiResponse = new List<ExpenseTypeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ExpenseTypeReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllExpenseTypeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<ExpenseTypeReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default expense type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ProjectTemplateReadModel> GetAllProjectTemplate(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTemplateEndpoint, 1);
+
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProjectTemplateReadModel> _apiResponse = new List<ProjectTemplateReadModel>();
+                    //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    //var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectTemplateReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    //while (_totalPages > _currentPage)
+                    //{
+                    //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTemplateEndpoint, _currentPage + 1);
+                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                    //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                    //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                    //    {
+                    //        _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    //        foreach (var _entity in _jsonDeserializedObject.Entities)
+                    //        {
+                    //            foreach (var _property in _entity.Properties())
+                    //            {
+                    //                _apiResponse.Add(JsonConvert.DeserializeObject<ProjectTemplateReadModel>(_property.Value.ToString()));
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default project template ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ProjectTypeReadModel> GetAllProjectType(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTypeEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProjectTypeReadModel> _apiResponse = new List<ProjectTypeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectTypeReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTypeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<ProjectTypeReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default project type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ProjectCategoryReadModel> GetAllProjectCategory(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectCategoryEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProjectCategoryReadModel> _apiResponse = new List<ProjectCategoryReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ProjectCategoryReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectCategoryEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<ProjectCategoryReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default project category ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<TaskTypeReadModel> GetAllTaskType(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskTypeEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<TaskTypeReadModel> _apiResponse = new List<TaskTypeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<TaskTypeReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskTypeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(
+                                            JsonConvert.DeserializeObject<TaskTypeReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default task type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token, int contractID)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractHourlyRatesEndpoint + "&contractID=" + contractID, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ContractHourlyRateReadModel> _apiResponse = new List<ContractHourlyRateReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<ContractHourlyRateReadModel>(
+                                        _property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractHourlyRatesEndpoint + "&contractID=" + contractID, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach(var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(
+                                            JsonConvert.DeserializeObject<ContractHourlyRateReadModel>(
+                                                _property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain contract hourly rate ID list for contractID: " + contractID + ". " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+        public List<ProductReadModel> GetAllProduct(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProductEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ProductReadModel> _apiResponse = new List<ProductReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(
+                                    JsonConvert.DeserializeObject<ProductReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProductEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(
+                                            JsonConvert.DeserializeObject<ProductReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default product ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
+
+        public List<TaskReadModel> GetAllTask(string token, int projectID)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID,  1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            if (_property.Name == "Properties")
+                            {
+                                _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
+                            }
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    if (_property.Name == "Properties")
+                                    {
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<TaskReadModel>(_property.Value.ToString()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain project task list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return null;
