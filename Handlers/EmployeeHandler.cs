@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -84,7 +85,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CostPriceReadModel> GetAllCostPrices(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllCostPriceEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCostPriceEndpoint, 1);
+
 
             try
             {
@@ -94,6 +96,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<CostPriceReadModel> _apiResponse = new List<CostPriceReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -103,6 +107,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCostPriceEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<CostPriceReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -116,7 +139,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HolidayCalendarReadModel> GetAllHolidayCalendars(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllHolidayCalendarEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllHolidayCalendarEndpoint, 1);
+
 
             try
             {
@@ -126,12 +150,34 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<HolidayCalendarReadModel> _apiResponse = new List<HolidayCalendarReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
                         foreach (var _property in _entity.Properties())
                         {
                             _apiResponse.Add(JsonConvert.DeserializeObject<HolidayCalendarReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllHolidayCalendarEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<HolidayCalendarReadModel>(_property.Value.ToString()));
+                                }
+                            }
                         }
                     }
 
@@ -148,7 +194,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<AllowanceLegislationReadModel> GetAllAllowanceLegislations(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllAllowanceLegislationEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAllowanceLegislationEndpoint, 1);
+
 
             try
             {
@@ -158,6 +205,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<AllowanceLegislationReadModel> _apiResponse = new List<AllowanceLegislationReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -167,6 +216,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAllowanceLegislationEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<AllowanceLegislationReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -180,7 +248,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<NormalWorkingTimeReadModel> GetAllNormalWorkingTimes(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint, 1);
+
 
             try
             {
@@ -190,6 +259,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<NormalWorkingTimeReadModel> _apiResponse = new List<NormalWorkingTimeReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -199,6 +270,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<NormalWorkingTimeReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -212,7 +302,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<SalaryGroupReadModel> GetAllSalaryGroups(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllSalaryGroupEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllSalaryGroupEndpoint, 1);
+
 
             try
             {
@@ -222,6 +313,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<SalaryGroupReadModel> _apiResponse = new List<SalaryGroupReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -231,6 +324,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllSalaryGroupEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<SalaryGroupReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
@@ -244,7 +356,8 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<UserRoleReadModel> GetAllUserRoles(string token)
         {
-            var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.GetAllUserRolesEndpoint;
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUserRolesEndpoint, 1);
+
 
             try
             {
@@ -254,6 +367,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<UserRoleReadModel> _apiResponse = new List<UserRoleReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -263,6 +378,25 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUserRolesEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<UserRoleReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
                     return _apiResponse;
                 }
             }
