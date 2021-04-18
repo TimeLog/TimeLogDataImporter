@@ -45,6 +45,8 @@
             this.label_nonMandatoryFields = new System.Windows.Forms.Label();
             this.button_expandNonMandatory = new System.Windows.Forms.Button();
             this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label_taskTDRProperties = new System.Windows.Forms.Label();
             this.label_paymentInvoiceDate = new System.Windows.Forms.Label();
             this.label_paymentName = new System.Windows.Forms.Label();
             this.checkBox_defaultAdditionalTextIsRequired = new System.Windows.Forms.CheckBox();
@@ -99,8 +101,6 @@
             this.button_taskSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label_taskTDRProperties = new System.Windows.Forms.Label();
             this.panel_taskDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_task)).BeginInit();
             this.panel_projectMessage.SuspendLayout();
@@ -109,8 +109,8 @@
             this.flowLayoutPanel_nonMandatoryFields.SuspendLayout();
             this.panel_NonMandatoryButton.SuspendLayout();
             this.panel_NonMandatoryFields.SuspendLayout();
-            this.groupBox_taskMandatoryFields.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox_taskMandatoryFields.SuspendLayout();
             this.SuspendLayout();
             // 
             // WorkerFetcher
@@ -124,10 +124,10 @@
             this.panel_taskDataTable.Controls.Add(this.dataGridView_task);
             this.panel_taskDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_taskDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_taskDataTable.Location = new System.Drawing.Point(0, 968);
+            this.panel_taskDataTable.Location = new System.Drawing.Point(0, 770);
             this.panel_taskDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_taskDataTable.Name = "panel_taskDataTable";
-            this.panel_taskDataTable.Size = new System.Drawing.Size(1437, 602);
+            this.panel_taskDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_taskDataTable.TabIndex = 6;
             // 
             // dataGridView_task
@@ -137,18 +137,18 @@
             this.dataGridView_task.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_task.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_task.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_task.Location = new System.Drawing.Point(0, 17);
+            this.dataGridView_task.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_task.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_task.Name = "dataGridView_task";
             this.dataGridView_task.RowHeadersWidth = 62;
-            this.dataGridView_task.Size = new System.Drawing.Size(1437, 585);
+            this.dataGridView_task.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_task.TabIndex = 0;
             // 
             // panel_projectMessage
             // 
             this.panel_projectMessage.Controls.Add(this.textBox_taskImportMessages);
             this.panel_projectMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_projectMessage.Location = new System.Drawing.Point(0, 661);
+            this.panel_projectMessage.Location = new System.Drawing.Point(0, 463);
             this.panel_projectMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectMessage.Name = "panel_projectMessage";
             this.panel_projectMessage.Size = new System.Drawing.Size(1437, 307);
@@ -159,7 +159,7 @@
             this.textBox_taskImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox_taskImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_taskImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_taskImportMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_taskImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox_taskImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox_taskImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox_taskImportMessages.Location = new System.Drawing.Point(0, 0);
@@ -182,7 +182,7 @@
             this.panel_taskButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_taskButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_taskButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_taskButtons.Location = new System.Drawing.Point(0, 574);
+            this.panel_taskButtons.Location = new System.Drawing.Point(0, 376);
             this.panel_taskButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_taskButtons.Name = "panel_taskButtons";
             this.panel_taskButtons.Size = new System.Drawing.Size(1437, 87);
@@ -275,7 +275,7 @@
             this.panel_taskFieldMapping.Location = new System.Drawing.Point(0, 0);
             this.panel_taskFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_taskFieldMapping.Name = "panel_taskFieldMapping";
-            this.panel_taskFieldMapping.Size = new System.Drawing.Size(1437, 574);
+            this.panel_taskFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_taskFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_nonMandatoryFields
@@ -305,7 +305,7 @@
             this.label_nonMandatoryFields.Location = new System.Drawing.Point(66, 13);
             this.label_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_nonMandatoryFields.Name = "label_nonMandatoryFields";
-            this.label_nonMandatoryFields.Size = new System.Drawing.Size(158, 28);
+            this.label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
             this.label_nonMandatoryFields.TabIndex = 1;
             this.label_nonMandatoryFields.Text = "Non-Mandatory";
             // 
@@ -371,13 +371,30 @@
             this.panel_NonMandatoryFields.Size = new System.Drawing.Size(629, 883);
             this.panel_NonMandatoryFields.TabIndex = 1;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label_taskTDRProperties);
+            this.panel1.Location = new System.Drawing.Point(0, 517);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(629, 47);
+            this.panel1.TabIndex = 19;
+            // 
+            // label_taskTDRProperties
+            // 
+            this.label_taskTDRProperties.AutoSize = true;
+            this.label_taskTDRProperties.Location = new System.Drawing.Point(14, 9);
+            this.label_taskTDRProperties.Name = "label_taskTDRProperties";
+            this.label_taskTDRProperties.Size = new System.Drawing.Size(154, 17);
+            this.label_taskTDRProperties.TabIndex = 0;
+            this.label_taskTDRProperties.Text = "Properties for TDR tasks";
+            // 
             // label_paymentInvoiceDate
             // 
             this.label_paymentInvoiceDate.AutoSize = true;
             this.label_paymentInvoiceDate.Location = new System.Drawing.Point(14, 827);
             this.label_paymentInvoiceDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentInvoiceDate.Name = "label_paymentInvoiceDate";
-            this.label_paymentInvoiceDate.Size = new System.Drawing.Size(210, 28);
+            this.label_paymentInvoiceDate.Size = new System.Drawing.Size(141, 17);
             this.label_paymentInvoiceDate.TabIndex = 1;
             this.label_paymentInvoiceDate.Text = "Payment Invoice Date";
             // 
@@ -387,7 +404,7 @@
             this.label_paymentName.Location = new System.Drawing.Point(14, 775);
             this.label_paymentName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentName.Name = "label_paymentName";
-            this.label_paymentName.Size = new System.Drawing.Size(151, 28);
+            this.label_paymentName.Size = new System.Drawing.Size(102, 17);
             this.label_paymentName.TabIndex = 1;
             this.label_paymentName.Text = "Payment Name";
             // 
@@ -397,7 +414,7 @@
             this.checkBox_defaultAdditionalTextIsRequired.Location = new System.Drawing.Point(517, 118);
             this.checkBox_defaultAdditionalTextIsRequired.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultAdditionalTextIsRequired.Name = "checkBox_defaultAdditionalTextIsRequired";
-            this.checkBox_defaultAdditionalTextIsRequired.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultAdditionalTextIsRequired.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultAdditionalTextIsRequired.TabIndex = 4;
             this.checkBox_defaultAdditionalTextIsRequired.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultAdditionalTextIsRequired, "Set default values for all rows of a particular column field");
@@ -410,7 +427,7 @@
             this.label_paymentProductNo.Location = new System.Drawing.Point(14, 724);
             this.label_paymentProductNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentProductNo.Name = "label_paymentProductNo";
-            this.label_paymentProductNo.Size = new System.Drawing.Size(201, 28);
+            this.label_paymentProductNo.Size = new System.Drawing.Size(136, 17);
             this.label_paymentProductNo.TabIndex = 1;
             this.label_paymentProductNo.Text = "Payment Product No";
             // 
@@ -420,7 +437,7 @@
             this.comboBox_paymentInvoiceDate.Location = new System.Drawing.Point(280, 822);
             this.comboBox_paymentInvoiceDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentInvoiceDate.Name = "comboBox_paymentInvoiceDate";
-            this.comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(227, 25);
             this.comboBox_paymentInvoiceDate.TabIndex = 18;
             // 
             // comboBox_paymentName
@@ -429,7 +446,7 @@
             this.comboBox_paymentName.Location = new System.Drawing.Point(280, 770);
             this.comboBox_paymentName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentName.Name = "comboBox_paymentName";
-            this.comboBox_paymentName.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_paymentName.Size = new System.Drawing.Size(227, 25);
             this.comboBox_paymentName.TabIndex = 17;
             // 
             // comboBox_paymentProductNo
@@ -438,7 +455,7 @@
             this.comboBox_paymentProductNo.Location = new System.Drawing.Point(280, 719);
             this.comboBox_paymentProductNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentProductNo.Name = "comboBox_paymentProductNo";
-            this.comboBox_paymentProductNo.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_paymentProductNo.Size = new System.Drawing.Size(227, 25);
             this.comboBox_paymentProductNo.TabIndex = 16;
             // 
             // comboBox_taskHourlyRate
@@ -447,7 +464,7 @@
             this.comboBox_taskHourlyRate.Location = new System.Drawing.Point(280, 667);
             this.comboBox_taskHourlyRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_taskHourlyRate.Name = "comboBox_taskHourlyRate";
-            this.comboBox_taskHourlyRate.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_taskHourlyRate.Size = new System.Drawing.Size(227, 25);
             this.comboBox_taskHourlyRate.TabIndex = 15;
             // 
             // label_taskHourlyRate
@@ -456,7 +473,7 @@
             this.label_taskHourlyRate.Location = new System.Drawing.Point(14, 672);
             this.label_taskHourlyRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_taskHourlyRate.Name = "label_taskHourlyRate";
-            this.label_taskHourlyRate.Size = new System.Drawing.Size(164, 28);
+            this.label_taskHourlyRate.Size = new System.Drawing.Size(110, 17);
             this.label_taskHourlyRate.TabIndex = 1;
             this.label_taskHourlyRate.Text = "Task Hourly Rate";
             // 
@@ -466,7 +483,7 @@
             this.checkBox_defaultPaymentRecognitionModel.Location = new System.Drawing.Point(517, 567);
             this.checkBox_defaultPaymentRecognitionModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultPaymentRecognitionModel.Name = "checkBox_defaultPaymentRecognitionModel";
-            this.checkBox_defaultPaymentRecognitionModel.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultPaymentRecognitionModel.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPaymentRecognitionModel.TabIndex = 12;
             this.checkBox_defaultPaymentRecognitionModel.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentRecognitionModel, "Set default values for all rows of a particular column field");
@@ -479,7 +496,7 @@
             this.checkBox_defaultIsBillable.Location = new System.Drawing.Point(517, 428);
             this.checkBox_defaultIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultIsBillable.Name = "checkBox_defaultIsBillable";
-            this.checkBox_defaultIsBillable.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultIsBillable.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultIsBillable.TabIndex = 14;
             this.checkBox_defaultIsBillable.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultIsBillable, "Set default values for all rows of a particular column field");
@@ -492,7 +509,7 @@
             this.label_paymentRecognitionModel.Location = new System.Drawing.Point(14, 569);
             this.label_paymentRecognitionModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentRecognitionModel.Name = "label_paymentRecognitionModel";
-            this.label_paymentRecognitionModel.Size = new System.Drawing.Size(269, 28);
+            this.label_paymentRecognitionModel.Size = new System.Drawing.Size(180, 17);
             this.label_paymentRecognitionModel.TabIndex = 1;
             this.label_paymentRecognitionModel.Text = "Payment Recognition Model";
             // 
@@ -502,7 +519,7 @@
             this.comboBox_budgetAmount.Location = new System.Drawing.Point(280, 218);
             this.comboBox_budgetAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_budgetAmount.Name = "comboBox_budgetAmount";
-            this.comboBox_budgetAmount.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_budgetAmount.Size = new System.Drawing.Size(227, 25);
             this.comboBox_budgetAmount.TabIndex = 10;
             // 
             // comboBox_paymentRecognitionModel
@@ -511,7 +528,7 @@
             this.comboBox_paymentRecognitionModel.Location = new System.Drawing.Point(280, 564);
             this.comboBox_paymentRecognitionModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentRecognitionModel.Name = "comboBox_paymentRecognitionModel";
-            this.comboBox_paymentRecognitionModel.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_paymentRecognitionModel.Size = new System.Drawing.Size(227, 25);
             this.comboBox_paymentRecognitionModel.TabIndex = 9;
             // 
             // comboBox_paymentAmount
@@ -520,7 +537,7 @@
             this.comboBox_paymentAmount.Location = new System.Drawing.Point(280, 615);
             this.comboBox_paymentAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentAmount.Name = "comboBox_paymentAmount";
-            this.comboBox_paymentAmount.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_paymentAmount.Size = new System.Drawing.Size(227, 25);
             this.comboBox_paymentAmount.TabIndex = 3;
             // 
             // label_isBillable
@@ -529,7 +546,7 @@
             this.label_isBillable.Location = new System.Drawing.Point(14, 430);
             this.label_isBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_isBillable.Name = "label_isBillable";
-            this.label_isBillable.Size = new System.Drawing.Size(98, 28);
+            this.label_isBillable.Size = new System.Drawing.Size(64, 17);
             this.label_isBillable.TabIndex = 1;
             this.label_isBillable.Text = "Is Billable";
             // 
@@ -539,7 +556,7 @@
             this.label_paymentAmount.Location = new System.Drawing.Point(14, 620);
             this.label_paymentAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentAmount.Name = "label_paymentAmount";
-            this.label_paymentAmount.Size = new System.Drawing.Size(171, 28);
+            this.label_paymentAmount.Size = new System.Drawing.Size(116, 17);
             this.label_paymentAmount.TabIndex = 1;
             this.label_paymentAmount.Text = "Payment Amount";
             // 
@@ -549,7 +566,7 @@
             this.label_budgetAmount.Location = new System.Drawing.Point(14, 223);
             this.label_budgetAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_budgetAmount.Name = "label_budgetAmount";
-            this.label_budgetAmount.Size = new System.Drawing.Size(158, 28);
+            this.label_budgetAmount.Size = new System.Drawing.Size(106, 17);
             this.label_budgetAmount.TabIndex = 1;
             this.label_budgetAmount.Text = "Budget Amount";
             // 
@@ -559,7 +576,7 @@
             this.comboBox_isBillable.Location = new System.Drawing.Point(280, 425);
             this.comboBox_isBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_isBillable.Name = "comboBox_isBillable";
-            this.comboBox_isBillable.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_isBillable.Size = new System.Drawing.Size(227, 25);
             this.comboBox_isBillable.TabIndex = 8;
             // 
             // label_taskNo
@@ -568,7 +585,7 @@
             this.label_taskNo.Location = new System.Drawing.Point(14, 17);
             this.label_taskNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_taskNo.Name = "label_taskNo";
-            this.label_taskNo.Size = new System.Drawing.Size(84, 28);
+            this.label_taskNo.Size = new System.Drawing.Size(56, 17);
             this.label_taskNo.TabIndex = 1;
             this.label_taskNo.Text = "Task No";
             // 
@@ -578,7 +595,7 @@
             this.label_hourlyRate.Location = new System.Drawing.Point(14, 327);
             this.label_hourlyRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_hourlyRate.Name = "label_hourlyRate";
-            this.label_hourlyRate.Size = new System.Drawing.Size(119, 28);
+            this.label_hourlyRate.Size = new System.Drawing.Size(80, 17);
             this.label_hourlyRate.TabIndex = 1;
             this.label_hourlyRate.Text = "Hourly Rate";
             this.defaultToolTip.SetToolTip(this.label_hourlyRate, "In expense currency");
@@ -589,7 +606,7 @@
             this.comboBox_parentTaskNo.Location = new System.Drawing.Point(280, 373);
             this.comboBox_parentTaskNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_parentTaskNo.Name = "comboBox_parentTaskNo";
-            this.comboBox_parentTaskNo.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_parentTaskNo.Size = new System.Drawing.Size(227, 25);
             this.comboBox_parentTaskNo.TabIndex = 7;
             // 
             // label_parentTaskNo
@@ -598,7 +615,7 @@
             this.label_parentTaskNo.Location = new System.Drawing.Point(14, 378);
             this.label_parentTaskNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_parentTaskNo.Name = "label_parentTaskNo";
-            this.label_parentTaskNo.Size = new System.Drawing.Size(148, 28);
+            this.label_parentTaskNo.Size = new System.Drawing.Size(100, 17);
             this.label_parentTaskNo.TabIndex = 1;
             this.label_parentTaskNo.Text = "Parent Task No";
             // 
@@ -608,7 +625,7 @@
             this.comboBox_taskNo.Location = new System.Drawing.Point(280, 12);
             this.comboBox_taskNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_taskNo.Name = "comboBox_taskNo";
-            this.comboBox_taskNo.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_taskNo.Size = new System.Drawing.Size(227, 25);
             this.comboBox_taskNo.TabIndex = 3;
             // 
             // label_budgetHours
@@ -617,7 +634,7 @@
             this.label_budgetHours.Location = new System.Drawing.Point(14, 172);
             this.label_budgetHours.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_budgetHours.Name = "label_budgetHours";
-            this.label_budgetHours.Size = new System.Drawing.Size(139, 28);
+            this.label_budgetHours.Size = new System.Drawing.Size(93, 17);
             this.label_budgetHours.TabIndex = 1;
             this.label_budgetHours.Text = "Budget Hours";
             // 
@@ -627,7 +644,7 @@
             this.comboBox_budgetHours.Location = new System.Drawing.Point(280, 167);
             this.comboBox_budgetHours.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_budgetHours.Name = "comboBox_budgetHours";
-            this.comboBox_budgetHours.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_budgetHours.Size = new System.Drawing.Size(227, 25);
             this.comboBox_budgetHours.TabIndex = 3;
             // 
             // checkBox_defaultIsReadyForInvoicing
@@ -636,7 +653,7 @@
             this.checkBox_defaultIsReadyForInvoicing.Location = new System.Drawing.Point(517, 273);
             this.checkBox_defaultIsReadyForInvoicing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultIsReadyForInvoicing.Name = "checkBox_defaultIsReadyForInvoicing";
-            this.checkBox_defaultIsReadyForInvoicing.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultIsReadyForInvoicing.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultIsReadyForInvoicing.TabIndex = 6;
             this.checkBox_defaultIsReadyForInvoicing.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultIsReadyForInvoicing, "Set default values for all rows of a particular column field");
@@ -649,7 +666,7 @@
             this.label_isReadyForInvoicing.Location = new System.Drawing.Point(14, 275);
             this.label_isReadyForInvoicing.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_isReadyForInvoicing.Name = "label_isReadyForInvoicing";
-            this.label_isReadyForInvoicing.Size = new System.Drawing.Size(211, 28);
+            this.label_isReadyForInvoicing.Size = new System.Drawing.Size(142, 17);
             this.label_isReadyForInvoicing.TabIndex = 1;
             this.label_isReadyForInvoicing.Text = "Is Ready For Invoicing";
             // 
@@ -659,7 +676,7 @@
             this.comboBox_description.Location = new System.Drawing.Point(280, 63);
             this.comboBox_description.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_description.Name = "comboBox_description";
-            this.comboBox_description.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_description.Size = new System.Drawing.Size(227, 25);
             this.comboBox_description.TabIndex = 3;
             // 
             // comboBox_isReadyForInvoicing
@@ -668,7 +685,7 @@
             this.comboBox_isReadyForInvoicing.Location = new System.Drawing.Point(280, 270);
             this.comboBox_isReadyForInvoicing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_isReadyForInvoicing.Name = "comboBox_isReadyForInvoicing";
-            this.comboBox_isReadyForInvoicing.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_isReadyForInvoicing.Size = new System.Drawing.Size(227, 25);
             this.comboBox_isReadyForInvoicing.TabIndex = 3;
             // 
             // label_description
@@ -677,7 +694,7 @@
             this.label_description.Location = new System.Drawing.Point(14, 68);
             this.label_description.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_description.Name = "label_description";
-            this.label_description.Size = new System.Drawing.Size(115, 28);
+            this.label_description.Size = new System.Drawing.Size(76, 17);
             this.label_description.TabIndex = 1;
             this.label_description.Text = "Description";
             // 
@@ -687,7 +704,7 @@
             this.label_additionalTextIsRequired.Location = new System.Drawing.Point(14, 120);
             this.label_additionalTextIsRequired.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_additionalTextIsRequired.Name = "label_additionalTextIsRequired";
-            this.label_additionalTextIsRequired.Size = new System.Drawing.Size(205, 28);
+            this.label_additionalTextIsRequired.Size = new System.Drawing.Size(137, 17);
             this.label_additionalTextIsRequired.TabIndex = 1;
             this.label_additionalTextIsRequired.Text = "Add. Text Is Required";
             // 
@@ -697,7 +714,7 @@
             this.comboBox_additionalTextIsRequired.Location = new System.Drawing.Point(280, 115);
             this.comboBox_additionalTextIsRequired.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_additionalTextIsRequired.Name = "comboBox_additionalTextIsRequired";
-            this.comboBox_additionalTextIsRequired.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_additionalTextIsRequired.Size = new System.Drawing.Size(227, 25);
             this.comboBox_additionalTextIsRequired.TabIndex = 3;
             // 
             // comboBox_hourlyRate
@@ -706,7 +723,7 @@
             this.comboBox_hourlyRate.Location = new System.Drawing.Point(280, 322);
             this.comboBox_hourlyRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_hourlyRate.Name = "comboBox_hourlyRate";
-            this.comboBox_hourlyRate.Size = new System.Drawing.Size(227, 36);
+            this.comboBox_hourlyRate.Size = new System.Drawing.Size(227, 25);
             this.comboBox_hourlyRate.TabIndex = 3;
             // 
             // label_delimiter
@@ -715,7 +732,7 @@
             this.label_delimiter.Location = new System.Drawing.Point(14, 125);
             this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_delimiter.Name = "label_delimiter";
-            this.label_delimiter.Size = new System.Drawing.Size(95, 28);
+            this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
             this.label_delimiter.Text = "Delimiter";
             // 
@@ -725,7 +742,7 @@
             this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
             this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 36);
+            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
             this.comboBox_delimiter.TabIndex = 6;
             // 
             // groupBox_taskMandatoryFields
@@ -758,7 +775,7 @@
             this.checkBox_defaultTaskType.Location = new System.Drawing.Point(421, 250);
             this.checkBox_defaultTaskType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultTaskType.Name = "checkBox_defaultTaskType";
-            this.checkBox_defaultTaskType.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultTaskType.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultTaskType.TabIndex = 11;
             this.checkBox_defaultTaskType.Text = "Default";
             this.checkBox_defaultTaskType.UseVisualStyleBackColor = true;
@@ -770,7 +787,7 @@
             this.comboBox_contractName.Location = new System.Drawing.Point(193, 195);
             this.comboBox_contractName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractName.Name = "comboBox_contractName";
-            this.comboBox_contractName.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_contractName.Size = new System.Drawing.Size(218, 25);
             this.comboBox_contractName.TabIndex = 10;
             // 
             // label_contractName
@@ -779,7 +796,7 @@
             this.label_contractName.Location = new System.Drawing.Point(9, 200);
             this.label_contractName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractName.Name = "label_contractName";
-            this.label_contractName.Size = new System.Drawing.Size(148, 28);
+            this.label_contractName.Size = new System.Drawing.Size(100, 17);
             this.label_contractName.TabIndex = 1;
             this.label_contractName.Text = "Contract Name";
             // 
@@ -789,7 +806,7 @@
             this.label_projectNo.Location = new System.Drawing.Point(9, 303);
             this.label_projectNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectNo.Name = "label_projectNo";
-            this.label_projectNo.Size = new System.Drawing.Size(108, 28);
+            this.label_projectNo.Size = new System.Drawing.Size(72, 17);
             this.label_projectNo.TabIndex = 1;
             this.label_projectNo.Text = "Project No";
             this.defaultToolTip.SetToolTip(this.label_projectNo, "In project currency");
@@ -800,7 +817,7 @@
             this.comboBox_projectNo.Location = new System.Drawing.Point(193, 298);
             this.comboBox_projectNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectNo.Name = "comboBox_projectNo";
-            this.comboBox_projectNo.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_projectNo.Size = new System.Drawing.Size(218, 25);
             this.comboBox_projectNo.TabIndex = 3;
             // 
             // label_taskType
@@ -809,7 +826,7 @@
             this.label_taskType.Location = new System.Drawing.Point(9, 252);
             this.label_taskType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_taskType.Name = "label_taskType";
-            this.label_taskType.Size = new System.Drawing.Size(100, 28);
+            this.label_taskType.Size = new System.Drawing.Size(66, 17);
             this.label_taskType.TabIndex = 1;
             this.label_taskType.Text = "Task Type";
             this.defaultToolTip.SetToolTip(this.label_taskType, "In expense currency");
@@ -820,7 +837,7 @@
             this.comboBox_taskType.Location = new System.Drawing.Point(193, 247);
             this.comboBox_taskType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_taskType.Name = "comboBox_taskType";
-            this.comboBox_taskType.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_taskType.Size = new System.Drawing.Size(218, 25);
             this.comboBox_taskType.TabIndex = 3;
             // 
             // label_endDate
@@ -829,7 +846,7 @@
             this.label_endDate.Location = new System.Drawing.Point(9, 148);
             this.label_endDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_endDate.Name = "label_endDate";
-            this.label_endDate.Size = new System.Drawing.Size(94, 28);
+            this.label_endDate.Size = new System.Drawing.Size(63, 17);
             this.label_endDate.TabIndex = 1;
             this.label_endDate.Text = "End Date";
             // 
@@ -839,7 +856,7 @@
             this.comboBox_endDate.Location = new System.Drawing.Point(193, 143);
             this.comboBox_endDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_endDate.Name = "comboBox_endDate";
-            this.comboBox_endDate.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_endDate.Size = new System.Drawing.Size(218, 25);
             this.comboBox_endDate.TabIndex = 3;
             // 
             // label_startDate
@@ -848,7 +865,7 @@
             this.label_startDate.Location = new System.Drawing.Point(9, 97);
             this.label_startDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_startDate.Name = "label_startDate";
-            this.label_startDate.Size = new System.Drawing.Size(102, 28);
+            this.label_startDate.Size = new System.Drawing.Size(69, 17);
             this.label_startDate.TabIndex = 1;
             this.label_startDate.Text = "Start Date";
             // 
@@ -858,7 +875,7 @@
             this.comboBox_startDate.Location = new System.Drawing.Point(193, 92);
             this.comboBox_startDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_startDate.Name = "comboBox_startDate";
-            this.comboBox_startDate.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_startDate.Size = new System.Drawing.Size(218, 25);
             this.comboBox_startDate.TabIndex = 3;
             // 
             // label_taskName
@@ -867,7 +884,7 @@
             this.label_taskName.Location = new System.Drawing.Point(9, 45);
             this.label_taskName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_taskName.Name = "label_taskName";
-            this.label_taskName.Size = new System.Drawing.Size(111, 28);
+            this.label_taskName.Size = new System.Drawing.Size(74, 17);
             this.label_taskName.TabIndex = 1;
             this.label_taskName.Text = "Task Name";
             // 
@@ -877,7 +894,7 @@
             this.comboBox_taskName.Location = new System.Drawing.Point(193, 40);
             this.comboBox_taskName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_taskName.Name = "comboBox_taskName";
-            this.comboBox_taskName.Size = new System.Drawing.Size(218, 36);
+            this.comboBox_taskName.Size = new System.Drawing.Size(218, 25);
             this.comboBox_taskName.TabIndex = 3;
             // 
             // label_taskSetup
@@ -888,7 +905,7 @@
             this.label_taskSetup.Location = new System.Drawing.Point(10, 27);
             this.label_taskSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_taskSetup.Name = "label_taskSetup";
-            this.label_taskSetup.Size = new System.Drawing.Size(302, 48);
+            this.label_taskSetup.Size = new System.Drawing.Size(202, 32);
             this.label_taskSetup.TabIndex = 0;
             this.label_taskSetup.Text = "Task Data Import";
             // 
@@ -918,23 +935,6 @@
             // 
             this.defaultToolTip.ShowAlways = true;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label_taskTDRProperties);
-            this.panel1.Location = new System.Drawing.Point(0, 517);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(629, 47);
-            this.panel1.TabIndex = 19;
-            // 
-            // label_taskTDRProperties
-            // 
-            this.label_taskTDRProperties.AutoSize = true;
-            this.label_taskTDRProperties.Location = new System.Drawing.Point(14, 9);
-            this.label_taskTDRProperties.Name = "label_taskTDRProperties";
-            this.label_taskTDRProperties.Size = new System.Drawing.Size(233, 28);
-            this.label_taskTDRProperties.TabIndex = 0;
-            this.label_taskTDRProperties.Text = "Properties for TDR tasks";
-            // 
             // UserControl_TaskImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -945,7 +945,7 @@
             this.Controls.Add(this.panel_taskDataTable);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_TaskImport";
-            this.Size = new System.Drawing.Size(1437, 1570);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_taskDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_task)).EndInit();
@@ -959,10 +959,10 @@
             this.panel_NonMandatoryButton.PerformLayout();
             this.panel_NonMandatoryFields.ResumeLayout(false);
             this.panel_NonMandatoryFields.PerformLayout();
-            this.groupBox_taskMandatoryFields.ResumeLayout(false);
-            this.groupBox_taskMandatoryFields.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox_taskMandatoryFields.ResumeLayout(false);
+            this.groupBox_taskMandatoryFields.PerformLayout();
             this.ResumeLayout(false);
 
         }

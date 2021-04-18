@@ -54,6 +54,8 @@
             this.label_delimiter = new System.Windows.Forms.Label();
             this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
             this.groupBox_timeregistrationMandatoryFields = new System.Windows.Forms.GroupBox();
+            this.label_timeregistrationAbsenceCode = new System.Windows.Forms.Label();
+            this.comboBox_timeregistrationAbcenseCode = new System.Windows.Forms.ComboBox();
             this.label_timeregistrationCostPriceName = new System.Windows.Forms.Label();
             this.comboBox_timeregistrationCostPriceName = new System.Windows.Forms.ComboBox();
             this.label_timeregistrationCostPrice = new System.Windows.Forms.Label();
@@ -84,8 +86,6 @@
             this.button_timeregistrationSelectFile = new System.Windows.Forms.Button();
             this.tmrExpand = new System.Windows.Forms.Timer(this.components);
             this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label_timeregistrationAbsenceCode = new System.Windows.Forms.Label();
-            this.comboBox_timeregistrationAbcenseCode = new System.Windows.Forms.ComboBox();
             this.panel_timeregistrationDataTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_timeregistration)).BeginInit();
             this.panel_timeregistrationMessage.SuspendLayout();
@@ -108,10 +108,10 @@
             this.panel_timeregistrationDataTable.Controls.Add(this.dataGridView_timeregistration);
             this.panel_timeregistrationDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_timeregistrationDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_timeregistrationDataTable.Location = new System.Drawing.Point(0, 968);
+            this.panel_timeregistrationDataTable.Location = new System.Drawing.Point(0, 770);
             this.panel_timeregistrationDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_timeregistrationDataTable.Name = "panel_timeregistrationDataTable";
-            this.panel_timeregistrationDataTable.Size = new System.Drawing.Size(1437, 602);
+            this.panel_timeregistrationDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_timeregistrationDataTable.TabIndex = 6;
             // 
             // dataGridView_timeregistration
@@ -121,18 +121,18 @@
             this.dataGridView_timeregistration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_timeregistration.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_timeregistration.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_timeregistration.Location = new System.Drawing.Point(0, 17);
+            this.dataGridView_timeregistration.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_timeregistration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_timeregistration.Name = "dataGridView_timeregistration";
             this.dataGridView_timeregistration.RowHeadersWidth = 62;
-            this.dataGridView_timeregistration.Size = new System.Drawing.Size(1437, 585);
+            this.dataGridView_timeregistration.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_timeregistration.TabIndex = 0;
             // 
             // panel_timeregistrationMessage
             // 
             this.panel_timeregistrationMessage.Controls.Add(this.textBox_timeregistrationImportMessages);
             this.panel_timeregistrationMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_timeregistrationMessage.Location = new System.Drawing.Point(0, 661);
+            this.panel_timeregistrationMessage.Location = new System.Drawing.Point(0, 463);
             this.panel_timeregistrationMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_timeregistrationMessage.Name = "panel_timeregistrationMessage";
             this.panel_timeregistrationMessage.Size = new System.Drawing.Size(1437, 307);
@@ -166,7 +166,7 @@
             this.panel_timeregistrationButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_timeregistrationButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_timeregistrationButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_timeregistrationButtons.Location = new System.Drawing.Point(0, 574);
+            this.panel_timeregistrationButtons.Location = new System.Drawing.Point(0, 376);
             this.panel_timeregistrationButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_timeregistrationButtons.Name = "panel_timeregistrationButtons";
             this.panel_timeregistrationButtons.Size = new System.Drawing.Size(1437, 87);
@@ -259,7 +259,7 @@
             this.panel_timeregistrationFieldMapping.Location = new System.Drawing.Point(0, 0);
             this.panel_timeregistrationFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_timeregistrationFieldMapping.Name = "panel_timeregistrationFieldMapping";
-            this.panel_timeregistrationFieldMapping.Size = new System.Drawing.Size(1437, 574);
+            this.panel_timeregistrationFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_timeregistrationFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_nonMandatoryFields
@@ -440,6 +440,25 @@
             this.groupBox_timeregistrationMandatoryFields.TabIndex = 5;
             this.groupBox_timeregistrationMandatoryFields.TabStop = false;
             this.groupBox_timeregistrationMandatoryFields.Text = "Mandatory";
+            // 
+            // label_timeregistrationAbsenceCode
+            // 
+            this.label_timeregistrationAbsenceCode.AutoSize = true;
+            this.label_timeregistrationAbsenceCode.Location = new System.Drawing.Point(9, 390);
+            this.label_timeregistrationAbsenceCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_timeregistrationAbsenceCode.Name = "label_timeregistrationAbsenceCode";
+            this.label_timeregistrationAbsenceCode.Size = new System.Drawing.Size(94, 17);
+            this.label_timeregistrationAbsenceCode.TabIndex = 21;
+            this.label_timeregistrationAbsenceCode.Text = "Absence Code";
+            // 
+            // comboBox_timeregistrationAbcenseCode
+            // 
+            this.comboBox_timeregistrationAbcenseCode.FormattingEnabled = true;
+            this.comboBox_timeregistrationAbcenseCode.Location = new System.Drawing.Point(197, 385);
+            this.comboBox_timeregistrationAbcenseCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox_timeregistrationAbcenseCode.Name = "comboBox_timeregistrationAbcenseCode";
+            this.comboBox_timeregistrationAbcenseCode.Size = new System.Drawing.Size(197, 25);
+            this.comboBox_timeregistrationAbcenseCode.TabIndex = 22;
             // 
             // label_timeregistrationCostPriceName
             // 
@@ -726,25 +745,6 @@
             // 
             this.defaultToolTip.ShowAlways = true;
             // 
-            // label_timeregistrationAbsenceCode
-            // 
-            this.label_timeregistrationAbsenceCode.AutoSize = true;
-            this.label_timeregistrationAbsenceCode.Location = new System.Drawing.Point(9, 390);
-            this.label_timeregistrationAbsenceCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_timeregistrationAbsenceCode.Name = "label_timeregistrationAbsenceCode";
-            this.label_timeregistrationAbsenceCode.Size = new System.Drawing.Size(94, 17);
-            this.label_timeregistrationAbsenceCode.TabIndex = 21;
-            this.label_timeregistrationAbsenceCode.Text = "Absence Code";
-            // 
-            // comboBox_timeregistrationAbcenseCode
-            // 
-            this.comboBox_timeregistrationAbcenseCode.FormattingEnabled = true;
-            this.comboBox_timeregistrationAbcenseCode.Location = new System.Drawing.Point(197, 385);
-            this.comboBox_timeregistrationAbcenseCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_timeregistrationAbcenseCode.Name = "comboBox_timeregistrationAbcenseCode";
-            this.comboBox_timeregistrationAbcenseCode.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_timeregistrationAbcenseCode.TabIndex = 22;
-            // 
             // UserControl_TimeregistrationImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -755,7 +755,7 @@
             this.Controls.Add(this.panel_timeregistrationDataTable);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_TimeregistrationImport";
-            this.Size = new System.Drawing.Size(1437, 1570);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_timeregistrationDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_timeregistration)).EndInit();

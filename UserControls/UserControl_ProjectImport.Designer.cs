@@ -106,10 +106,10 @@
             this.panel_projectDataTable.Controls.Add(this.dataGridView_project);
             this.panel_projectDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_projectDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_projectDataTable.Location = new System.Drawing.Point(0, 968);
+            this.panel_projectDataTable.Location = new System.Drawing.Point(0, 770);
             this.panel_projectDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectDataTable.Name = "panel_projectDataTable";
-            this.panel_projectDataTable.Size = new System.Drawing.Size(1437, 602);
+            this.panel_projectDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_projectDataTable.TabIndex = 6;
             // 
             // dataGridView_project
@@ -119,18 +119,18 @@
             this.dataGridView_project.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_project.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_project.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_project.Location = new System.Drawing.Point(0, 17);
+            this.dataGridView_project.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_project.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_project.Name = "dataGridView_project";
             this.dataGridView_project.RowHeadersWidth = 62;
-            this.dataGridView_project.Size = new System.Drawing.Size(1437, 585);
+            this.dataGridView_project.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_project.TabIndex = 0;
             // 
             // panel_projectMessage
             // 
             this.panel_projectMessage.Controls.Add(this.textBox_projectImportMessages);
             this.panel_projectMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_projectMessage.Location = new System.Drawing.Point(0, 661);
+            this.panel_projectMessage.Location = new System.Drawing.Point(0, 463);
             this.panel_projectMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectMessage.Name = "panel_projectMessage";
             this.panel_projectMessage.Size = new System.Drawing.Size(1437, 307);
@@ -141,7 +141,7 @@
             this.textBox_projectImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox_projectImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_projectImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_projectImportMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_projectImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox_projectImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox_projectImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox_projectImportMessages.Location = new System.Drawing.Point(0, 0);
@@ -164,7 +164,7 @@
             this.panel_projectButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_projectButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_projectButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_projectButtons.Location = new System.Drawing.Point(0, 574);
+            this.panel_projectButtons.Location = new System.Drawing.Point(0, 376);
             this.panel_projectButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectButtons.Name = "panel_projectButtons";
             this.panel_projectButtons.Size = new System.Drawing.Size(1437, 87);
@@ -257,7 +257,7 @@
             this.panel_projectFieldMapping.Location = new System.Drawing.Point(0, 0);
             this.panel_projectFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectFieldMapping.Name = "panel_projectFieldMapping";
-            this.panel_projectFieldMapping.Size = new System.Drawing.Size(1437, 574);
+            this.panel_projectFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_projectFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_nonMandatoryFields
@@ -287,7 +287,7 @@
             this.label_nonMandatoryFields.Location = new System.Drawing.Point(66, 13);
             this.label_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_nonMandatoryFields.Name = "label_nonMandatoryFields";
-            this.label_nonMandatoryFields.Size = new System.Drawing.Size(158, 28);
+            this.label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
             this.label_nonMandatoryFields.TabIndex = 1;
             this.label_nonMandatoryFields.Text = "Non-Mandatory";
             // 
@@ -335,7 +335,7 @@
             this.checkBox_defaultProjectCategory.Location = new System.Drawing.Point(411, 222);
             this.checkBox_defaultProjectCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultProjectCategory.Name = "checkBox_defaultProjectCategory";
-            this.checkBox_defaultProjectCategory.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultProjectCategory.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultProjectCategory.TabIndex = 5;
             this.checkBox_defaultProjectCategory.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultProjectCategory, "Set default values for all rows of a particular column field");
@@ -348,7 +348,7 @@
             this.label_projectNo.Location = new System.Drawing.Point(14, 17);
             this.label_projectNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectNo.Name = "label_projectNo";
-            this.label_projectNo.Size = new System.Drawing.Size(108, 28);
+            this.label_projectNo.Size = new System.Drawing.Size(72, 17);
             this.label_projectNo.TabIndex = 1;
             this.label_projectNo.Text = "Project No";
             // 
@@ -358,7 +358,7 @@
             this.comboBox_projectNo.Location = new System.Drawing.Point(204, 12);
             this.comboBox_projectNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectNo.Name = "comboBox_projectNo";
-            this.comboBox_projectNo.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectNo.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectNo.TabIndex = 3;
             // 
             // label_projectCategory
@@ -367,7 +367,7 @@
             this.label_projectCategory.Location = new System.Drawing.Point(14, 223);
             this.label_projectCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectCategory.Name = "label_projectCategory";
-            this.label_projectCategory.Size = new System.Drawing.Size(163, 28);
+            this.label_projectCategory.Size = new System.Drawing.Size(110, 17);
             this.label_projectCategory.TabIndex = 1;
             this.label_projectCategory.Text = "Project Category";
             // 
@@ -377,7 +377,7 @@
             this.comboBox_description.Location = new System.Drawing.Point(204, 63);
             this.comboBox_description.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_description.Name = "comboBox_description";
-            this.comboBox_description.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_description.Size = new System.Drawing.Size(197, 25);
             this.comboBox_description.TabIndex = 3;
             // 
             // comboBox_projectCategory
@@ -386,7 +386,7 @@
             this.comboBox_projectCategory.Location = new System.Drawing.Point(204, 218);
             this.comboBox_projectCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectCategory.Name = "comboBox_projectCategory";
-            this.comboBox_projectCategory.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectCategory.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectCategory.TabIndex = 3;
             // 
             // label_description
@@ -395,7 +395,7 @@
             this.label_description.Location = new System.Drawing.Point(14, 68);
             this.label_description.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_description.Name = "label_description";
-            this.label_description.Size = new System.Drawing.Size(115, 28);
+            this.label_description.Size = new System.Drawing.Size(76, 17);
             this.label_description.TabIndex = 1;
             this.label_description.Text = "Description";
             // 
@@ -405,7 +405,7 @@
             this.comboBox_projectStartDate.Location = new System.Drawing.Point(204, 115);
             this.comboBox_projectStartDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectStartDate.Name = "comboBox_projectStartDate";
-            this.comboBox_projectStartDate.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectStartDate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectStartDate.TabIndex = 3;
             // 
             // label_projectStartDate
@@ -414,7 +414,7 @@
             this.label_projectStartDate.Location = new System.Drawing.Point(14, 120);
             this.label_projectStartDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectStartDate.Name = "label_projectStartDate";
-            this.label_projectStartDate.Size = new System.Drawing.Size(171, 28);
+            this.label_projectStartDate.Size = new System.Drawing.Size(115, 17);
             this.label_projectStartDate.TabIndex = 1;
             this.label_projectStartDate.Text = "Project Start Date";
             // 
@@ -424,7 +424,7 @@
             this.label_projectEndDate.Location = new System.Drawing.Point(14, 172);
             this.label_projectEndDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectEndDate.Name = "label_projectEndDate";
-            this.label_projectEndDate.Size = new System.Drawing.Size(163, 28);
+            this.label_projectEndDate.Size = new System.Drawing.Size(109, 17);
             this.label_projectEndDate.TabIndex = 1;
             this.label_projectEndDate.Text = "Project End Date";
             // 
@@ -434,7 +434,7 @@
             this.comboBox_projectEndDate.Location = new System.Drawing.Point(204, 167);
             this.comboBox_projectEndDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectEndDate.Name = "comboBox_projectEndDate";
-            this.comboBox_projectEndDate.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectEndDate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectEndDate.TabIndex = 3;
             // 
             // label_delimiter
@@ -443,7 +443,7 @@
             this.label_delimiter.Location = new System.Drawing.Point(14, 125);
             this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_delimiter.Name = "label_delimiter";
-            this.label_delimiter.Size = new System.Drawing.Size(95, 28);
+            this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
             this.label_delimiter.Text = "Delimiter";
             // 
@@ -453,7 +453,7 @@
             this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
             this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 36);
+            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
             this.comboBox_delimiter.TabIndex = 6;
             // 
             // groupBox_projectMandatoryFields
@@ -494,7 +494,7 @@
             this.checkBox_defaultProjectDepartment.Location = new System.Drawing.Point(404, 405);
             this.checkBox_defaultProjectDepartment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultProjectDepartment.Name = "checkBox_defaultProjectDepartment";
-            this.checkBox_defaultProjectDepartment.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultProjectDepartment.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultProjectDepartment.TabIndex = 9;
             this.checkBox_defaultProjectDepartment.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultProjectDepartment, "Set default values for all rows of a particular column field");
@@ -507,7 +507,7 @@
             this.label_projectDepartment.Location = new System.Drawing.Point(9, 407);
             this.label_projectDepartment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectDepartment.Name = "label_projectDepartment";
-            this.label_projectDepartment.Size = new System.Drawing.Size(182, 28);
+            this.label_projectDepartment.Size = new System.Drawing.Size(121, 17);
             this.label_projectDepartment.TabIndex = 7;
             this.label_projectDepartment.Text = "Department Name";
             // 
@@ -517,7 +517,7 @@
             this.comboBox_projectDepartment.Location = new System.Drawing.Point(197, 402);
             this.comboBox_projectDepartment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectDepartment.Name = "comboBox_projectDepartment";
-            this.comboBox_projectDepartment.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectDepartment.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectDepartment.TabIndex = 8;
             // 
             // checkBox_defaultLegalEntity
@@ -526,7 +526,7 @@
             this.checkBox_defaultLegalEntity.Location = new System.Drawing.Point(404, 302);
             this.checkBox_defaultLegalEntity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultLegalEntity.Name = "checkBox_defaultLegalEntity";
-            this.checkBox_defaultLegalEntity.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultLegalEntity.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultLegalEntity.TabIndex = 6;
             this.checkBox_defaultLegalEntity.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultLegalEntity, "Set default values for all rows of a particular column field");
@@ -539,7 +539,7 @@
             this.checkBox_defaultProjectTemplate.Location = new System.Drawing.Point(404, 147);
             this.checkBox_defaultProjectTemplate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultProjectTemplate.Name = "checkBox_defaultProjectTemplate";
-            this.checkBox_defaultProjectTemplate.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultProjectTemplate.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultProjectTemplate.TabIndex = 5;
             this.checkBox_defaultProjectTemplate.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultProjectTemplate, "Set default values for all rows of a particular column field");
@@ -552,7 +552,7 @@
             this.checkBox_defaultProjectType.Location = new System.Drawing.Point(404, 353);
             this.checkBox_defaultProjectType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultProjectType.Name = "checkBox_defaultProjectType";
-            this.checkBox_defaultProjectType.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultProjectType.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultProjectType.TabIndex = 4;
             this.checkBox_defaultProjectType.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultProjectType, "Set default values for all rows of a particular column field");
@@ -565,7 +565,7 @@
             this.checkBox_defaultCurrencyISO.Location = new System.Drawing.Point(404, 250);
             this.checkBox_defaultCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultCurrencyISO.Name = "checkBox_defaultCurrencyISO";
-            this.checkBox_defaultCurrencyISO.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultCurrencyISO.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultCurrencyISO.TabIndex = 4;
             this.checkBox_defaultCurrencyISO.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultCurrencyISO, "Set default values for all rows of a particular column field");
@@ -578,7 +578,7 @@
             this.label_projectLegalEntity.Location = new System.Drawing.Point(9, 303);
             this.label_projectLegalEntity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectLegalEntity.Name = "label_projectLegalEntity";
-            this.label_projectLegalEntity.Size = new System.Drawing.Size(117, 28);
+            this.label_projectLegalEntity.Size = new System.Drawing.Size(78, 17);
             this.label_projectLegalEntity.TabIndex = 1;
             this.label_projectLegalEntity.Text = "Legal Entity";
             // 
@@ -588,7 +588,7 @@
             this.comboBox_projectLegalEntity.Location = new System.Drawing.Point(197, 298);
             this.comboBox_projectLegalEntity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectLegalEntity.Name = "comboBox_projectLegalEntity";
-            this.comboBox_projectLegalEntity.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectLegalEntity.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectLegalEntity.TabIndex = 3;
             // 
             // label_projectCurrencyISO
@@ -597,7 +597,7 @@
             this.label_projectCurrencyISO.Location = new System.Drawing.Point(9, 252);
             this.label_projectCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectCurrencyISO.Name = "label_projectCurrencyISO";
-            this.label_projectCurrencyISO.Size = new System.Drawing.Size(130, 28);
+            this.label_projectCurrencyISO.Size = new System.Drawing.Size(87, 17);
             this.label_projectCurrencyISO.TabIndex = 1;
             this.label_projectCurrencyISO.Text = "Currency ISO";
             // 
@@ -607,7 +607,7 @@
             this.label_projectType.Location = new System.Drawing.Point(9, 355);
             this.label_projectType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectType.Name = "label_projectType";
-            this.label_projectType.Size = new System.Drawing.Size(124, 28);
+            this.label_projectType.Size = new System.Drawing.Size(82, 17);
             this.label_projectType.TabIndex = 1;
             this.label_projectType.Text = "Project Type";
             // 
@@ -617,7 +617,7 @@
             this.comboBox_projectCurrencyISO.Location = new System.Drawing.Point(197, 247);
             this.comboBox_projectCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectCurrencyISO.Name = "comboBox_projectCurrencyISO";
-            this.comboBox_projectCurrencyISO.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectCurrencyISO.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectCurrencyISO.TabIndex = 3;
             // 
             // label_projectManager
@@ -626,7 +626,7 @@
             this.label_projectManager.Location = new System.Drawing.Point(9, 200);
             this.label_projectManager.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectManager.Name = "label_projectManager";
-            this.label_projectManager.Size = new System.Drawing.Size(120, 28);
+            this.label_projectManager.Size = new System.Drawing.Size(79, 17);
             this.label_projectManager.TabIndex = 1;
             this.label_projectManager.Text = "P. M. Initials";
             // 
@@ -636,7 +636,7 @@
             this.comboBox_projectManager.Location = new System.Drawing.Point(197, 195);
             this.comboBox_projectManager.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectManager.Name = "comboBox_projectManager";
-            this.comboBox_projectManager.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectManager.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectManager.TabIndex = 3;
             // 
             // label_projectTemplate
@@ -645,7 +645,7 @@
             this.label_projectTemplate.Location = new System.Drawing.Point(9, 148);
             this.label_projectTemplate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectTemplate.Name = "label_projectTemplate";
-            this.label_projectTemplate.Size = new System.Drawing.Size(164, 28);
+            this.label_projectTemplate.Size = new System.Drawing.Size(109, 17);
             this.label_projectTemplate.TabIndex = 1;
             this.label_projectTemplate.Text = "Project Template";
             // 
@@ -655,7 +655,7 @@
             this.comboBox_projectType.Location = new System.Drawing.Point(197, 350);
             this.comboBox_projectType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectType.Name = "comboBox_projectType";
-            this.comboBox_projectType.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectType.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectType.TabIndex = 3;
             // 
             // comboBox_projectTemplate
@@ -664,7 +664,7 @@
             this.comboBox_projectTemplate.Location = new System.Drawing.Point(197, 143);
             this.comboBox_projectTemplate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectTemplate.Name = "comboBox_projectTemplate";
-            this.comboBox_projectTemplate.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectTemplate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectTemplate.TabIndex = 3;
             // 
             // label_projectCustomerNo
@@ -673,7 +673,7 @@
             this.label_projectCustomerNo.Location = new System.Drawing.Point(9, 97);
             this.label_projectCustomerNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectCustomerNo.Name = "label_projectCustomerNo";
-            this.label_projectCustomerNo.Size = new System.Drawing.Size(133, 28);
+            this.label_projectCustomerNo.Size = new System.Drawing.Size(89, 17);
             this.label_projectCustomerNo.TabIndex = 1;
             this.label_projectCustomerNo.Text = "Customer No";
             // 
@@ -683,7 +683,7 @@
             this.comboBox_projectCustomerNo.Location = new System.Drawing.Point(197, 92);
             this.comboBox_projectCustomerNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectCustomerNo.Name = "comboBox_projectCustomerNo";
-            this.comboBox_projectCustomerNo.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectCustomerNo.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectCustomerNo.TabIndex = 3;
             // 
             // label_projectName
@@ -692,7 +692,7 @@
             this.label_projectName.Location = new System.Drawing.Point(9, 45);
             this.label_projectName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectName.Name = "label_projectName";
-            this.label_projectName.Size = new System.Drawing.Size(135, 28);
+            this.label_projectName.Size = new System.Drawing.Size(90, 17);
             this.label_projectName.TabIndex = 1;
             this.label_projectName.Text = "Project Name";
             // 
@@ -702,7 +702,7 @@
             this.comboBox_projectName.Location = new System.Drawing.Point(197, 40);
             this.comboBox_projectName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectName.Name = "comboBox_projectName";
-            this.comboBox_projectName.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectName.TabIndex = 3;
             // 
             // label_projectSetup
@@ -713,7 +713,7 @@
             this.label_projectSetup.Location = new System.Drawing.Point(10, 27);
             this.label_projectSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectSetup.Name = "label_projectSetup";
-            this.label_projectSetup.Size = new System.Drawing.Size(345, 48);
+            this.label_projectSetup.Size = new System.Drawing.Size(231, 32);
             this.label_projectSetup.TabIndex = 0;
             this.label_projectSetup.Text = "Project Data Import";
             // 
@@ -753,7 +753,7 @@
             this.Controls.Add(this.panel_projectDataTable);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_ProjectImport";
-            this.Size = new System.Drawing.Size(1437, 1570);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_projectDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_project)).EndInit();

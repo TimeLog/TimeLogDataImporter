@@ -138,10 +138,10 @@
             this.panel_projectDataTable.Controls.Add(this.dataGridView_contract);
             this.panel_projectDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_projectDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_projectDataTable.Location = new System.Drawing.Point(0, 968);
+            this.panel_projectDataTable.Location = new System.Drawing.Point(0, 770);
             this.panel_projectDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectDataTable.Name = "panel_projectDataTable";
-            this.panel_projectDataTable.Size = new System.Drawing.Size(1437, 602);
+            this.panel_projectDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_projectDataTable.TabIndex = 6;
             // 
             // dataGridView_contract
@@ -151,18 +151,18 @@
             this.dataGridView_contract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_contract.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_contract.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_contract.Location = new System.Drawing.Point(0, 17);
+            this.dataGridView_contract.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_contract.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_contract.Name = "dataGridView_contract";
             this.dataGridView_contract.RowHeadersWidth = 62;
-            this.dataGridView_contract.Size = new System.Drawing.Size(1437, 585);
+            this.dataGridView_contract.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_contract.TabIndex = 0;
             // 
             // panel_projectMessage
             // 
             this.panel_projectMessage.Controls.Add(this.textBox_contractImportMessages);
             this.panel_projectMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_projectMessage.Location = new System.Drawing.Point(0, 661);
+            this.panel_projectMessage.Location = new System.Drawing.Point(0, 463);
             this.panel_projectMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectMessage.Name = "panel_projectMessage";
             this.panel_projectMessage.Size = new System.Drawing.Size(1437, 307);
@@ -173,7 +173,7 @@
             this.textBox_contractImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox_contractImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_contractImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_contractImportMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_contractImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox_contractImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox_contractImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox_contractImportMessages.Location = new System.Drawing.Point(0, 0);
@@ -196,7 +196,7 @@
             this.panel_contractButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_contractButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_contractButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_contractButtons.Location = new System.Drawing.Point(0, 574);
+            this.panel_contractButtons.Location = new System.Drawing.Point(0, 376);
             this.panel_contractButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_contractButtons.Name = "panel_contractButtons";
             this.panel_contractButtons.Size = new System.Drawing.Size(1437, 87);
@@ -296,8 +296,9 @@
             this.panel_contractFieldMapping.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel_contractFieldMapping.Location = new System.Drawing.Point(0, 0);
             this.panel_contractFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel_contractFieldMapping.MinimumSize = new System.Drawing.Size(0, 200);
             this.panel_contractFieldMapping.Name = "panel_contractFieldMapping";
-            this.panel_contractFieldMapping.Size = new System.Drawing.Size(1437, 574);
+            this.panel_contractFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_contractFieldMapping.TabIndex = 13;
             // 
             // textBox5
@@ -307,7 +308,7 @@
             this.textBox5.Location = new System.Drawing.Point(446, 1103);
             this.textBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(323, 33);
+            this.textBox5.Size = new System.Drawing.Size(323, 25);
             this.textBox5.TabIndex = 15;
             this.textBox5.Text = "Fixed Price and TDR Contract -->";
             // 
@@ -318,7 +319,7 @@
             this.textBox6.Location = new System.Drawing.Point(444, 1048);
             this.textBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(323, 33);
+            this.textBox6.Size = new System.Drawing.Size(323, 25);
             this.textBox6.TabIndex = 14;
             this.textBox6.Text = "Fixed Price and TDR Contract -->";
             // 
@@ -329,7 +330,7 @@
             this.textBox7.Location = new System.Drawing.Point(444, 997);
             this.textBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(323, 33);
+            this.textBox7.Size = new System.Drawing.Size(323, 25);
             this.textBox7.TabIndex = 13;
             this.textBox7.Text = "TDR Contract -->";
             // 
@@ -340,7 +341,7 @@
             this.textBox8.Location = new System.Drawing.Point(444, 945);
             this.textBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(323, 33);
+            this.textBox8.Size = new System.Drawing.Size(323, 25);
             this.textBox8.TabIndex = 12;
             this.textBox8.Text = "TDR Contract -->";
             // 
@@ -351,7 +352,7 @@
             this.textBox4.Location = new System.Drawing.Point(444, 890);
             this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(323, 33);
+            this.textBox4.Size = new System.Drawing.Size(323, 25);
             this.textBox4.TabIndex = 11;
             this.textBox4.Text = "TDR Contract -->";
             // 
@@ -362,7 +363,7 @@
             this.textBox3.Location = new System.Drawing.Point(444, 838);
             this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(323, 33);
+            this.textBox3.Size = new System.Drawing.Size(323, 25);
             this.textBox3.TabIndex = 10;
             this.textBox3.Text = "Prepaid Service and TDR contract-->";
             // 
@@ -373,7 +374,7 @@
             this.textBox2.Location = new System.Drawing.Point(444, 787);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(323, 33);
+            this.textBox2.Size = new System.Drawing.Size(323, 25);
             this.textBox2.TabIndex = 9;
             this.textBox2.Text = "Prepaid Service contract -->";
             // 
@@ -384,7 +385,7 @@
             this.textBox1.Location = new System.Drawing.Point(444, 735);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(323, 33);
+            this.textBox1.Size = new System.Drawing.Size(323, 25);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "Prepaid Service contract -->";
             // 
@@ -415,7 +416,7 @@
             this.label_nonMandatoryFields.Location = new System.Drawing.Point(66, 13);
             this.label_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_nonMandatoryFields.Name = "label_nonMandatoryFields";
-            this.label_nonMandatoryFields.Size = new System.Drawing.Size(158, 28);
+            this.label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
             this.label_nonMandatoryFields.TabIndex = 1;
             this.label_nonMandatoryFields.Text = "Non-Mandatory";
             // 
@@ -493,7 +494,7 @@
             this.checkBox_defaultContractIsFixedHourlyRate.Location = new System.Drawing.Point(484, 578);
             this.checkBox_defaultContractIsFixedHourlyRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractIsFixedHourlyRate.Name = "checkBox_defaultContractIsFixedHourlyRate";
-            this.checkBox_defaultContractIsFixedHourlyRate.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractIsFixedHourlyRate.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractIsFixedHourlyRate.TabIndex = 48;
             this.checkBox_defaultContractIsFixedHourlyRate.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractIsFixedHourlyRate, "Set default values for all rows of a particular column field");
@@ -506,7 +507,7 @@
             this.label_contractIsFixedHourlyRate.Location = new System.Drawing.Point(14, 580);
             this.label_contractIsFixedHourlyRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractIsFixedHourlyRate.Name = "label_contractIsFixedHourlyRate";
-            this.label_contractIsFixedHourlyRate.Size = new System.Drawing.Size(194, 28);
+            this.label_contractIsFixedHourlyRate.Size = new System.Drawing.Size(130, 17);
             this.label_contractIsFixedHourlyRate.TabIndex = 46;
             this.label_contractIsFixedHourlyRate.Text = "Is Fixed Hourly Rate";
             // 
@@ -516,7 +517,7 @@
             this.comboBox_contractIsFixedHourlyRate.Location = new System.Drawing.Point(277, 575);
             this.comboBox_contractIsFixedHourlyRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractIsFixedHourlyRate.Name = "comboBox_contractIsFixedHourlyRate";
-            this.comboBox_contractIsFixedHourlyRate.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractIsFixedHourlyRate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractIsFixedHourlyRate.TabIndex = 47;
             // 
             // label_contractHourlyRateName
@@ -525,7 +526,7 @@
             this.label_contractHourlyRateName.Location = new System.Drawing.Point(14, 632);
             this.label_contractHourlyRateName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractHourlyRateName.Name = "label_contractHourlyRateName";
-            this.label_contractHourlyRateName.Size = new System.Drawing.Size(179, 28);
+            this.label_contractHourlyRateName.Size = new System.Drawing.Size(120, 17);
             this.label_contractHourlyRateName.TabIndex = 44;
             this.label_contractHourlyRateName.Text = "Hourly Rate Name";
             // 
@@ -535,7 +536,7 @@
             this.comboBox_contractHourlyRateName.Location = new System.Drawing.Point(277, 627);
             this.comboBox_contractHourlyRateName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractHourlyRateName.Name = "comboBox_contractHourlyRateName";
-            this.comboBox_contractHourlyRateName.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractHourlyRateName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractHourlyRateName.TabIndex = 45;
             // 
             // checkBox_defaultContractIsTravelLinked
@@ -544,7 +545,7 @@
             this.checkBox_defaultContractIsTravelLinked.Location = new System.Drawing.Point(484, 943);
             this.checkBox_defaultContractIsTravelLinked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractIsTravelLinked.Name = "checkBox_defaultContractIsTravelLinked";
-            this.checkBox_defaultContractIsTravelLinked.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractIsTravelLinked.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractIsTravelLinked.TabIndex = 43;
             this.checkBox_defaultContractIsTravelLinked.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractIsTravelLinked, "Set default values for all rows of a particular column field");
@@ -557,7 +558,7 @@
             this.checkBox_defaultContractIsExpensesLinked.Location = new System.Drawing.Point(484, 892);
             this.checkBox_defaultContractIsExpensesLinked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractIsExpensesLinked.Name = "checkBox_defaultContractIsExpensesLinked";
-            this.checkBox_defaultContractIsExpensesLinked.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractIsExpensesLinked.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractIsExpensesLinked.TabIndex = 40;
             this.checkBox_defaultContractIsExpensesLinked.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractIsExpensesLinked, "Set default values for all rows of a particular column field");
@@ -570,7 +571,7 @@
             this.label_contractIsExpensesLinked.Location = new System.Drawing.Point(14, 893);
             this.label_contractIsExpensesLinked.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractIsExpensesLinked.Name = "label_contractIsExpensesLinked";
-            this.label_contractIsExpensesLinked.Size = new System.Drawing.Size(184, 28);
+            this.label_contractIsExpensesLinked.Size = new System.Drawing.Size(121, 17);
             this.label_contractIsExpensesLinked.TabIndex = 38;
             this.label_contractIsExpensesLinked.Text = "Is Expenses Linked";
             // 
@@ -580,7 +581,7 @@
             this.label_contractIsTravelLinked.Location = new System.Drawing.Point(14, 945);
             this.label_contractIsTravelLinked.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractIsTravelLinked.Name = "label_contractIsTravelLinked";
-            this.label_contractIsTravelLinked.Size = new System.Drawing.Size(152, 28);
+            this.label_contractIsTravelLinked.Size = new System.Drawing.Size(100, 17);
             this.label_contractIsTravelLinked.TabIndex = 41;
             this.label_contractIsTravelLinked.Text = "Is Travel Linked";
             // 
@@ -590,7 +591,7 @@
             this.comboBox_contractIsTravelLinked.Location = new System.Drawing.Point(277, 940);
             this.comboBox_contractIsTravelLinked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractIsTravelLinked.Name = "comboBox_contractIsTravelLinked";
-            this.comboBox_contractIsTravelLinked.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractIsTravelLinked.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractIsTravelLinked.TabIndex = 42;
             // 
             // comboBox_contractIsExpensesLinked
@@ -599,7 +600,7 @@
             this.comboBox_contractIsExpensesLinked.Location = new System.Drawing.Point(277, 888);
             this.comboBox_contractIsExpensesLinked.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractIsExpensesLinked.Name = "comboBox_contractIsExpensesLinked";
-            this.comboBox_contractIsExpensesLinked.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractIsExpensesLinked.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractIsExpensesLinked.TabIndex = 39;
             // 
             // label_contractRevenueTravelAmount
@@ -608,7 +609,7 @@
             this.label_contractRevenueTravelAmount.Location = new System.Drawing.Point(14, 843);
             this.label_contractRevenueTravelAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractRevenueTravelAmount.Name = "label_contractRevenueTravelAmount";
-            this.label_contractRevenueTravelAmount.Size = new System.Drawing.Size(228, 28);
+            this.label_contractRevenueTravelAmount.Size = new System.Drawing.Size(153, 17);
             this.label_contractRevenueTravelAmount.TabIndex = 35;
             this.label_contractRevenueTravelAmount.Text = "Revenue Travel Amount";
             // 
@@ -618,7 +619,7 @@
             this.comboBox_contractRevenueTravelAmount.Location = new System.Drawing.Point(277, 838);
             this.comboBox_contractRevenueTravelAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractRevenueTravelAmount.Name = "comboBox_contractRevenueTravelAmount";
-            this.comboBox_contractRevenueTravelAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractRevenueTravelAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractRevenueTravelAmount.TabIndex = 36;
             // 
             // label_contractRevenueExpensesAmount
@@ -627,7 +628,7 @@
             this.label_contractRevenueExpensesAmount.Location = new System.Drawing.Point(14, 790);
             this.label_contractRevenueExpensesAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractRevenueExpensesAmount.Name = "label_contractRevenueExpensesAmount";
-            this.label_contractRevenueExpensesAmount.Size = new System.Drawing.Size(251, 28);
+            this.label_contractRevenueExpensesAmount.Size = new System.Drawing.Size(168, 17);
             this.label_contractRevenueExpensesAmount.TabIndex = 32;
             this.label_contractRevenueExpensesAmount.Text = "Revenue Expense Amount";
             // 
@@ -637,7 +638,7 @@
             this.comboBox_contractRevenueExpensesAmount.Location = new System.Drawing.Point(277, 785);
             this.comboBox_contractRevenueExpensesAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractRevenueExpensesAmount.Name = "comboBox_contractRevenueExpensesAmount";
-            this.comboBox_contractRevenueExpensesAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractRevenueExpensesAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractRevenueExpensesAmount.TabIndex = 33;
             // 
             // label_contractPaymentPlanAmount
@@ -646,7 +647,7 @@
             this.label_contractPaymentPlanAmount.Location = new System.Drawing.Point(14, 735);
             this.label_contractPaymentPlanAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractPaymentPlanAmount.Name = "label_contractPaymentPlanAmount";
-            this.label_contractPaymentPlanAmount.Size = new System.Drawing.Size(216, 28);
+            this.label_contractPaymentPlanAmount.Size = new System.Drawing.Size(146, 17);
             this.label_contractPaymentPlanAmount.TabIndex = 29;
             this.label_contractPaymentPlanAmount.Text = "Payment Plan Amount";
             // 
@@ -656,7 +657,7 @@
             this.comboBox_contractPaymentPlanAmount.Location = new System.Drawing.Point(277, 730);
             this.comboBox_contractPaymentPlanAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractPaymentPlanAmount.Name = "comboBox_contractPaymentPlanAmount";
-            this.comboBox_contractPaymentPlanAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractPaymentPlanAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractPaymentPlanAmount.TabIndex = 30;
             // 
             // label_contractTargetHourlyRate
@@ -665,7 +666,7 @@
             this.label_contractTargetHourlyRate.Location = new System.Drawing.Point(14, 683);
             this.label_contractTargetHourlyRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractTargetHourlyRate.Name = "label_contractTargetHourlyRate";
-            this.label_contractTargetHourlyRate.Size = new System.Drawing.Size(181, 28);
+            this.label_contractTargetHourlyRate.Size = new System.Drawing.Size(122, 17);
             this.label_contractTargetHourlyRate.TabIndex = 26;
             this.label_contractTargetHourlyRate.Text = "Target Hourly Rate";
             // 
@@ -675,7 +676,7 @@
             this.comboBox_contractTargetHourlyRate.Location = new System.Drawing.Point(277, 678);
             this.comboBox_contractTargetHourlyRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractTargetHourlyRate.Name = "comboBox_contractTargetHourlyRate";
-            this.comboBox_contractTargetHourlyRate.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractTargetHourlyRate.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractTargetHourlyRate.TabIndex = 27;
             // 
             // checkBox_defaultContractHasBudgetOverrunNotification
@@ -684,7 +685,7 @@
             this.checkBox_defaultContractHasBudgetOverrunNotification.Location = new System.Drawing.Point(484, 438);
             this.checkBox_defaultContractHasBudgetOverrunNotification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractHasBudgetOverrunNotification.Name = "checkBox_defaultContractHasBudgetOverrunNotification";
-            this.checkBox_defaultContractHasBudgetOverrunNotification.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractHasBudgetOverrunNotification.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractHasBudgetOverrunNotification.TabIndex = 19;
             this.checkBox_defaultContractHasBudgetOverrunNotification.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractHasBudgetOverrunNotification, "Set default values for all rows of a particular column field");
@@ -697,7 +698,7 @@
             this.label_contractHasBudgetOverrunNotification.Location = new System.Drawing.Point(14, 440);
             this.label_contractHasBudgetOverrunNotification.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractHasBudgetOverrunNotification.Name = "label_contractHasBudgetOverrunNotification";
-            this.label_contractHasBudgetOverrunNotification.Size = new System.Drawing.Size(270, 28);
+            this.label_contractHasBudgetOverrunNotification.Size = new System.Drawing.Size(180, 17);
             this.label_contractHasBudgetOverrunNotification.TabIndex = 17;
             this.label_contractHasBudgetOverrunNotification.Text = "Budget Overrun Notification";
             // 
@@ -707,7 +708,7 @@
             this.comboBox_contractHasBudgetOverrunNotification.Location = new System.Drawing.Point(277, 435);
             this.comboBox_contractHasBudgetOverrunNotification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractHasBudgetOverrunNotification.Name = "comboBox_contractHasBudgetOverrunNotification";
-            this.comboBox_contractHasBudgetOverrunNotification.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractHasBudgetOverrunNotification.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractHasBudgetOverrunNotification.TabIndex = 18;
             // 
             // checkBox_defaultContractIsDefaultExpenses
@@ -716,7 +717,7 @@
             this.checkBox_defaultContractIsDefaultExpenses.Location = new System.Drawing.Point(484, 387);
             this.checkBox_defaultContractIsDefaultExpenses.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractIsDefaultExpenses.Name = "checkBox_defaultContractIsDefaultExpenses";
-            this.checkBox_defaultContractIsDefaultExpenses.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractIsDefaultExpenses.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractIsDefaultExpenses.TabIndex = 16;
             this.checkBox_defaultContractIsDefaultExpenses.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractIsDefaultExpenses, "Set default values for all rows of a particular column field");
@@ -729,7 +730,7 @@
             this.label_contractIsDefaultExpenses.Location = new System.Drawing.Point(14, 388);
             this.label_contractIsDefaultExpenses.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractIsDefaultExpenses.Name = "label_contractIsDefaultExpenses";
-            this.label_contractIsDefaultExpenses.Size = new System.Drawing.Size(189, 28);
+            this.label_contractIsDefaultExpenses.Size = new System.Drawing.Size(125, 17);
             this.label_contractIsDefaultExpenses.TabIndex = 14;
             this.label_contractIsDefaultExpenses.Text = "Is Default Expenses";
             // 
@@ -739,7 +740,7 @@
             this.comboBox_contractIsDefaultExpenses.Location = new System.Drawing.Point(277, 383);
             this.comboBox_contractIsDefaultExpenses.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractIsDefaultExpenses.Name = "comboBox_contractIsDefaultExpenses";
-            this.comboBox_contractIsDefaultExpenses.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractIsDefaultExpenses.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractIsDefaultExpenses.TabIndex = 15;
             // 
             // checkBox_defaultContractIsMileageBillable
@@ -748,7 +749,7 @@
             this.checkBox_defaultContractIsMileageBillable.Location = new System.Drawing.Point(484, 330);
             this.checkBox_defaultContractIsMileageBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractIsMileageBillable.Name = "checkBox_defaultContractIsMileageBillable";
-            this.checkBox_defaultContractIsMileageBillable.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractIsMileageBillable.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractIsMileageBillable.TabIndex = 13;
             this.checkBox_defaultContractIsMileageBillable.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractIsMileageBillable, "Set default values for all rows of a particular column field");
@@ -761,7 +762,7 @@
             this.label_contractIsMileageBillable.Location = new System.Drawing.Point(14, 332);
             this.label_contractIsMileageBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractIsMileageBillable.Name = "label_contractIsMileageBillable";
-            this.label_contractIsMileageBillable.Size = new System.Drawing.Size(176, 28);
+            this.label_contractIsMileageBillable.Size = new System.Drawing.Size(115, 17);
             this.label_contractIsMileageBillable.TabIndex = 11;
             this.label_contractIsMileageBillable.Text = "Is Mileage Billable";
             // 
@@ -771,7 +772,7 @@
             this.comboBox_contractIsMileageBillable.Location = new System.Drawing.Point(277, 327);
             this.comboBox_contractIsMileageBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractIsMileageBillable.Name = "comboBox_contractIsMileageBillable";
-            this.comboBox_contractIsMileageBillable.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractIsMileageBillable.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractIsMileageBillable.TabIndex = 12;
             // 
             // checkBox_defaultContractCompletionNotificationPercentage
@@ -780,7 +781,7 @@
             this.checkBox_defaultContractCompletionNotificationPercentage.Location = new System.Drawing.Point(484, 273);
             this.checkBox_defaultContractCompletionNotificationPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractCompletionNotificationPercentage.Name = "checkBox_defaultContractCompletionNotificationPercentage";
-            this.checkBox_defaultContractCompletionNotificationPercentage.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractCompletionNotificationPercentage.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractCompletionNotificationPercentage.TabIndex = 10;
             this.checkBox_defaultContractCompletionNotificationPercentage.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractCompletionNotificationPercentage, "Set default values for all rows of a particular column field");
@@ -793,7 +794,7 @@
             this.label_contractCompletionNotificationPercentage.Location = new System.Drawing.Point(14, 275);
             this.label_contractCompletionNotificationPercentage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractCompletionNotificationPercentage.Name = "label_contractCompletionNotificationPercentage";
-            this.label_contractCompletionNotificationPercentage.Size = new System.Drawing.Size(253, 28);
+            this.label_contractCompletionNotificationPercentage.Size = new System.Drawing.Size(167, 17);
             this.label_contractCompletionNotificationPercentage.TabIndex = 8;
             this.label_contractCompletionNotificationPercentage.Text = "Completion Notification %";
             // 
@@ -803,7 +804,7 @@
             this.comboBox_contractCompletionNotificationPercentage.Location = new System.Drawing.Point(277, 270);
             this.comboBox_contractCompletionNotificationPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractCompletionNotificationPercentage.Name = "comboBox_contractCompletionNotificationPercentage";
-            this.comboBox_contractCompletionNotificationPercentage.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractCompletionNotificationPercentage.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractCompletionNotificationPercentage.TabIndex = 9;
             // 
             // comboBox_contractBudgetExpensesAmount
@@ -812,7 +813,7 @@
             this.comboBox_contractBudgetExpensesAmount.Location = new System.Drawing.Point(277, 12);
             this.comboBox_contractBudgetExpensesAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractBudgetExpensesAmount.Name = "comboBox_contractBudgetExpensesAmount";
-            this.comboBox_contractBudgetExpensesAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractBudgetExpensesAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractBudgetExpensesAmount.TabIndex = 7;
             // 
             // label_contractBudgetExpensesAmount
@@ -821,7 +822,7 @@
             this.label_contractBudgetExpensesAmount.Location = new System.Drawing.Point(14, 17);
             this.label_contractBudgetExpensesAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractBudgetExpensesAmount.Name = "label_contractBudgetExpensesAmount";
-            this.label_contractBudgetExpensesAmount.Size = new System.Drawing.Size(248, 28);
+            this.label_contractBudgetExpensesAmount.Size = new System.Drawing.Size(166, 17);
             this.label_contractBudgetExpensesAmount.TabIndex = 6;
             this.label_contractBudgetExpensesAmount.Text = "Budget Expenses Amount";
             // 
@@ -831,7 +832,7 @@
             this.checkBox_defaultContractHasCompletionNotification.Location = new System.Drawing.Point(484, 222);
             this.checkBox_defaultContractHasCompletionNotification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractHasCompletionNotification.Name = "checkBox_defaultContractHasCompletionNotification";
-            this.checkBox_defaultContractHasCompletionNotification.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractHasCompletionNotification.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractHasCompletionNotification.TabIndex = 5;
             this.checkBox_defaultContractHasCompletionNotification.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractHasCompletionNotification, "Set default values for all rows of a particular column field");
@@ -844,7 +845,7 @@
             this.label_contractHasCompletionNotification.Location = new System.Drawing.Point(14, 223);
             this.label_contractHasCompletionNotification.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractHasCompletionNotification.Name = "label_contractHasCompletionNotification";
-            this.label_contractHasCompletionNotification.Size = new System.Drawing.Size(270, 28);
+            this.label_contractHasCompletionNotification.Size = new System.Drawing.Size(179, 17);
             this.label_contractHasCompletionNotification.TabIndex = 1;
             this.label_contractHasCompletionNotification.Text = "Has Completion Notification";
             // 
@@ -854,7 +855,7 @@
             this.comboBox_contractBudgetTravelAmount.Location = new System.Drawing.Point(277, 63);
             this.comboBox_contractBudgetTravelAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractBudgetTravelAmount.Name = "comboBox_contractBudgetTravelAmount";
-            this.comboBox_contractBudgetTravelAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractBudgetTravelAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractBudgetTravelAmount.TabIndex = 3;
             // 
             // comboBox_contractHasCompletionNotification
@@ -863,7 +864,7 @@
             this.comboBox_contractHasCompletionNotification.Location = new System.Drawing.Point(277, 218);
             this.comboBox_contractHasCompletionNotification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractHasCompletionNotification.Name = "comboBox_contractHasCompletionNotification";
-            this.comboBox_contractHasCompletionNotification.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractHasCompletionNotification.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractHasCompletionNotification.TabIndex = 3;
             // 
             // label_contractBudgetTravelAmount
@@ -872,7 +873,7 @@
             this.label_contractBudgetTravelAmount.Location = new System.Drawing.Point(14, 68);
             this.label_contractBudgetTravelAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractBudgetTravelAmount.Name = "label_contractBudgetTravelAmount";
-            this.label_contractBudgetTravelAmount.Size = new System.Drawing.Size(216, 28);
+            this.label_contractBudgetTravelAmount.Size = new System.Drawing.Size(145, 17);
             this.label_contractBudgetTravelAmount.TabIndex = 1;
             this.label_contractBudgetTravelAmount.Text = "Budget Travel Amount";
             // 
@@ -882,7 +883,7 @@
             this.comboBox_contractBudgetWorkAmount.Location = new System.Drawing.Point(277, 115);
             this.comboBox_contractBudgetWorkAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractBudgetWorkAmount.Name = "comboBox_contractBudgetWorkAmount";
-            this.comboBox_contractBudgetWorkAmount.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractBudgetWorkAmount.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractBudgetWorkAmount.TabIndex = 3;
             // 
             // label_contractBudgetWorkAmount
@@ -891,7 +892,7 @@
             this.label_contractBudgetWorkAmount.Location = new System.Drawing.Point(14, 120);
             this.label_contractBudgetWorkAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractBudgetWorkAmount.Name = "label_contractBudgetWorkAmount";
-            this.label_contractBudgetWorkAmount.Size = new System.Drawing.Size(212, 28);
+            this.label_contractBudgetWorkAmount.Size = new System.Drawing.Size(143, 17);
             this.label_contractBudgetWorkAmount.TabIndex = 1;
             this.label_contractBudgetWorkAmount.Text = "Budget Work Amount";
             // 
@@ -901,7 +902,7 @@
             this.label_contractBudgetWorkHour.Location = new System.Drawing.Point(14, 172);
             this.label_contractBudgetWorkHour.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractBudgetWorkHour.Name = "label_contractBudgetWorkHour";
-            this.label_contractBudgetWorkHour.Size = new System.Drawing.Size(184, 28);
+            this.label_contractBudgetWorkHour.Size = new System.Drawing.Size(124, 17);
             this.label_contractBudgetWorkHour.TabIndex = 1;
             this.label_contractBudgetWorkHour.Text = "Budget Work Hour";
             // 
@@ -911,7 +912,7 @@
             this.comboBox_contractBudgetWorkHour.Location = new System.Drawing.Point(277, 167);
             this.comboBox_contractBudgetWorkHour.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractBudgetWorkHour.Name = "comboBox_contractBudgetWorkHour";
-            this.comboBox_contractBudgetWorkHour.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractBudgetWorkHour.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractBudgetWorkHour.TabIndex = 3;
             // 
             // label_delimiter
@@ -920,7 +921,7 @@
             this.label_delimiter.Location = new System.Drawing.Point(14, 125);
             this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_delimiter.Name = "label_delimiter";
-            this.label_delimiter.Size = new System.Drawing.Size(95, 28);
+            this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
             this.label_delimiter.Text = "Delimiter";
             // 
@@ -930,7 +931,7 @@
             this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
             this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 36);
+            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
             this.comboBox_delimiter.TabIndex = 6;
             // 
             // groupBox_contractMandatoryFields
@@ -962,7 +963,7 @@
             this.checkBox_defaultContractModel.Location = new System.Drawing.Point(435, 250);
             this.checkBox_defaultContractModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractModel.Name = "checkBox_defaultContractModel";
-            this.checkBox_defaultContractModel.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractModel.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractModel.TabIndex = 8;
             this.checkBox_defaultContractModel.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractModel, "Set default values for all rows of a particular column field");
@@ -975,7 +976,7 @@
             this.label_contractModel.Location = new System.Drawing.Point(9, 252);
             this.label_contractModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractModel.Name = "label_contractModel";
-            this.label_contractModel.Size = new System.Drawing.Size(152, 28);
+            this.label_contractModel.Size = new System.Drawing.Size(102, 17);
             this.label_contractModel.TabIndex = 6;
             this.label_contractModel.Text = "Contract Model";
             // 
@@ -985,7 +986,7 @@
             this.comboBox_ContractModel.Location = new System.Drawing.Point(228, 247);
             this.comboBox_ContractModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_ContractModel.Name = "comboBox_ContractModel";
-            this.comboBox_ContractModel.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_ContractModel.Size = new System.Drawing.Size(197, 25);
             this.comboBox_ContractModel.TabIndex = 7;
             // 
             // label_projectNo
@@ -994,7 +995,7 @@
             this.label_projectNo.Location = new System.Drawing.Point(7, 97);
             this.label_projectNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectNo.Name = "label_projectNo";
-            this.label_projectNo.Size = new System.Drawing.Size(108, 28);
+            this.label_projectNo.Size = new System.Drawing.Size(72, 17);
             this.label_projectNo.TabIndex = 1;
             this.label_projectNo.Text = "Project No";
             // 
@@ -1004,7 +1005,7 @@
             this.checkBox_defaultContractStatus.Location = new System.Drawing.Point(435, 147);
             this.checkBox_defaultContractStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultContractStatus.Name = "checkBox_defaultContractStatus";
-            this.checkBox_defaultContractStatus.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultContractStatus.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultContractStatus.TabIndex = 5;
             this.checkBox_defaultContractStatus.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultContractStatus, "Set default values for all rows of a particular column field");
@@ -1017,7 +1018,7 @@
             this.comboBox_projectNo.Location = new System.Drawing.Point(228, 92);
             this.comboBox_projectNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectNo.Name = "comboBox_projectNo";
-            this.comboBox_projectNo.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_projectNo.Size = new System.Drawing.Size(197, 25);
             this.comboBox_projectNo.TabIndex = 3;
             // 
             // label_contractOwnerInitials
@@ -1026,7 +1027,7 @@
             this.label_contractOwnerInitials.Location = new System.Drawing.Point(9, 200);
             this.label_contractOwnerInitials.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractOwnerInitials.Name = "label_contractOwnerInitials";
-            this.label_contractOwnerInitials.Size = new System.Drawing.Size(219, 28);
+            this.label_contractOwnerInitials.Size = new System.Drawing.Size(147, 17);
             this.label_contractOwnerInitials.TabIndex = 1;
             this.label_contractOwnerInitials.Text = "Contract Owner Initials";
             // 
@@ -1036,7 +1037,7 @@
             this.comboBox_contractOwnerInitials.Location = new System.Drawing.Point(228, 195);
             this.comboBox_contractOwnerInitials.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractOwnerInitials.Name = "comboBox_contractOwnerInitials";
-            this.comboBox_contractOwnerInitials.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractOwnerInitials.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractOwnerInitials.TabIndex = 3;
             // 
             // label_contractStatus
@@ -1045,7 +1046,7 @@
             this.label_contractStatus.Location = new System.Drawing.Point(9, 148);
             this.label_contractStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractStatus.Name = "label_contractStatus";
-            this.label_contractStatus.Size = new System.Drawing.Size(149, 28);
+            this.label_contractStatus.Size = new System.Drawing.Size(102, 17);
             this.label_contractStatus.TabIndex = 1;
             this.label_contractStatus.Text = "Contract Status";
             // 
@@ -1055,7 +1056,7 @@
             this.comboBox_contractStatus.Location = new System.Drawing.Point(228, 143);
             this.comboBox_contractStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractStatus.Name = "comboBox_contractStatus";
-            this.comboBox_contractStatus.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractStatus.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractStatus.TabIndex = 3;
             // 
             // label_projectName
@@ -1064,7 +1065,7 @@
             this.label_projectName.Location = new System.Drawing.Point(9, 45);
             this.label_projectName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectName.Name = "label_projectName";
-            this.label_projectName.Size = new System.Drawing.Size(148, 28);
+            this.label_projectName.Size = new System.Drawing.Size(100, 17);
             this.label_projectName.TabIndex = 1;
             this.label_projectName.Text = "Contract Name";
             // 
@@ -1074,7 +1075,7 @@
             this.comboBox_contractName.Location = new System.Drawing.Point(228, 40);
             this.comboBox_contractName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractName.Name = "comboBox_contractName";
-            this.comboBox_contractName.Size = new System.Drawing.Size(197, 36);
+            this.comboBox_contractName.Size = new System.Drawing.Size(197, 25);
             this.comboBox_contractName.TabIndex = 3;
             // 
             // label_contractSetup
@@ -1085,7 +1086,7 @@
             this.label_contractSetup.Location = new System.Drawing.Point(10, 27);
             this.label_contractSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractSetup.Name = "label_contractSetup";
-            this.label_contractSetup.Size = new System.Drawing.Size(371, 48);
+            this.label_contractSetup.Size = new System.Drawing.Size(249, 32);
             this.label_contractSetup.TabIndex = 0;
             this.label_contractSetup.Text = "Contract Data Import";
             // 
@@ -1142,7 +1143,7 @@
             this.Controls.Add(this.panel_projectDataTable);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_ContractImport";
-            this.Size = new System.Drawing.Size(1437, 1570);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_projectDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_contract)).EndInit();

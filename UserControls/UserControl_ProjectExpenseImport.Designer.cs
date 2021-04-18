@@ -112,9 +112,10 @@
             this.panel_employeeDataTable.Controls.Add(this.dataGridView_projectExpense);
             this.panel_employeeDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_employeeDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_employeeDataTable.Location = new System.Drawing.Point(0, 581);
+            this.panel_employeeDataTable.Location = new System.Drawing.Point(0, 770);
+            this.panel_employeeDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_employeeDataTable.Name = "panel_employeeDataTable";
-            this.panel_employeeDataTable.Size = new System.Drawing.Size(1006, 361);
+            this.panel_employeeDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_employeeDataTable.TabIndex = 6;
             // 
             // dataGridView_projectExpense
@@ -124,18 +125,20 @@
             this.dataGridView_projectExpense.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_projectExpense.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_projectExpense.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_projectExpense.Location = new System.Drawing.Point(0, 10);
+            this.dataGridView_projectExpense.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView_projectExpense.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_projectExpense.Name = "dataGridView_projectExpense";
-            this.dataGridView_projectExpense.Size = new System.Drawing.Size(1006, 351);
+            this.dataGridView_projectExpense.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_projectExpense.TabIndex = 0;
             // 
             // panel_projectMessage
             // 
             this.panel_projectMessage.Controls.Add(this.textBox_projectExpenseImportMessages);
             this.panel_projectMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_projectMessage.Location = new System.Drawing.Point(0, 397);
+            this.panel_projectMessage.Location = new System.Drawing.Point(0, 463);
+            this.panel_projectMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectMessage.Name = "panel_projectMessage";
-            this.panel_projectMessage.Size = new System.Drawing.Size(1006, 184);
+            this.panel_projectMessage.Size = new System.Drawing.Size(1437, 307);
             this.panel_projectMessage.TabIndex = 10;
             // 
             // textBox_projectExpenseImportMessages
@@ -143,15 +146,16 @@
             this.textBox_projectExpenseImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox_projectExpenseImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_projectExpenseImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_projectExpenseImportMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_projectExpenseImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox_projectExpenseImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox_projectExpenseImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox_projectExpenseImportMessages.Location = new System.Drawing.Point(0, 0);
+            this.textBox_projectExpenseImportMessages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox_projectExpenseImportMessages.Multiline = true;
             this.textBox_projectExpenseImportMessages.Name = "textBox_projectExpenseImportMessages";
             this.textBox_projectExpenseImportMessages.ReadOnly = true;
             this.textBox_projectExpenseImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_projectExpenseImportMessages.Size = new System.Drawing.Size(1006, 184);
+            this.textBox_projectExpenseImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_projectExpenseImportMessages.TabIndex = 0;
             this.defaultToolTip.SetToolTip(this.textBox_projectExpenseImportMessages, "Validation or import status");
             this.textBox_projectExpenseImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_projectExpenseImportMessages_MouseClick);
@@ -165,9 +169,10 @@
             this.panel_projectExpenseButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_projectExpenseButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_projectExpenseButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_projectExpenseButtons.Location = new System.Drawing.Point(0, 345);
+            this.panel_projectExpenseButtons.Location = new System.Drawing.Point(0, 376);
+            this.panel_projectExpenseButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectExpenseButtons.Name = "panel_projectExpenseButtons";
-            this.panel_projectExpenseButtons.Size = new System.Drawing.Size(1006, 52);
+            this.panel_projectExpenseButtons.Size = new System.Drawing.Size(1437, 87);
             this.panel_projectExpenseButtons.TabIndex = 12;
             // 
             // button_clear
@@ -178,9 +183,10 @@
             this.button_clear.FlatAppearance.BorderSize = 0;
             this.button_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_clear.ForeColor = System.Drawing.Color.White;
-            this.button_clear.Location = new System.Drawing.Point(14, 12);
+            this.button_clear.Location = new System.Drawing.Point(20, 20);
+            this.button_clear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_clear.Name = "button_clear";
-            this.button_clear.Size = new System.Drawing.Size(80, 29);
+            this.button_clear.Size = new System.Drawing.Size(114, 48);
             this.button_clear.TabIndex = 12;
             this.button_clear.Text = "Reset All";
             this.defaultToolTip.SetToolTip(this.button_clear, "Reset all file input above and data table below");
@@ -195,9 +201,10 @@
             this.button_import.FlatAppearance.BorderSize = 0;
             this.button_import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_import.ForeColor = System.Drawing.Color.White;
-            this.button_import.Location = new System.Drawing.Point(917, 12);
+            this.button_import.Location = new System.Drawing.Point(1310, 20);
+            this.button_import.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_import.Name = "button_import";
-            this.button_import.Size = new System.Drawing.Size(80, 29);
+            this.button_import.Size = new System.Drawing.Size(114, 48);
             this.button_import.TabIndex = 7;
             this.button_import.Text = "Import";
             this.defaultToolTip.SetToolTip(this.button_import, "Import all data");
@@ -212,9 +219,10 @@
             this.button_validate.FlatAppearance.BorderSize = 0;
             this.button_validate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_validate.ForeColor = System.Drawing.Color.White;
-            this.button_validate.Location = new System.Drawing.Point(745, 12);
+            this.button_validate.Location = new System.Drawing.Point(1064, 20);
+            this.button_validate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_validate.Name = "button_validate";
-            this.button_validate.Size = new System.Drawing.Size(80, 29);
+            this.button_validate.Size = new System.Drawing.Size(114, 48);
             this.button_validate.TabIndex = 8;
             this.button_validate.Text = "Validate";
             this.defaultToolTip.SetToolTip(this.button_validate, "Validate data input before importing data");
@@ -229,9 +237,10 @@
             this.button_stop.FlatAppearance.BorderSize = 0;
             this.button_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_stop.ForeColor = System.Drawing.Color.White;
-            this.button_stop.Location = new System.Drawing.Point(831, 12);
+            this.button_stop.Location = new System.Drawing.Point(1187, 20);
+            this.button_stop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_stop.Name = "button_stop";
-            this.button_stop.Size = new System.Drawing.Size(80, 29);
+            this.button_stop.Size = new System.Drawing.Size(114, 48);
             this.button_stop.TabIndex = 11;
             this.button_stop.Text = "Stop";
             this.defaultToolTip.SetToolTip(this.button_stop, "Stop validation or import");
@@ -251,33 +260,37 @@
             this.panel_projectExpenseFieldMapping.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_projectExpenseFieldMapping.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel_projectExpenseFieldMapping.Location = new System.Drawing.Point(0, 0);
+            this.panel_projectExpenseFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_projectExpenseFieldMapping.Name = "panel_projectExpenseFieldMapping";
-            this.panel_projectExpenseFieldMapping.Size = new System.Drawing.Size(1006, 345);
+            this.panel_projectExpenseFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_projectExpenseFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_nonMandatoryFields
             // 
             this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryButton);
             this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryFields);
-            this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(572, 60);
+            this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(817, 100);
+            this.flowLayoutPanel_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flowLayoutPanel_nonMandatoryFields.Name = "flowLayoutPanel_nonMandatoryFields";
-            this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(390, 215);
+            this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(557, 358);
             this.flowLayoutPanel_nonMandatoryFields.TabIndex = 7;
             // 
             // panel_NonMandatoryButton
             // 
             this.panel_NonMandatoryButton.Controls.Add(this.label_nonMandatoryFields);
             this.panel_NonMandatoryButton.Controls.Add(this.button_expandNonMandatory);
-            this.panel_NonMandatoryButton.Location = new System.Drawing.Point(3, 3);
+            this.panel_NonMandatoryButton.Location = new System.Drawing.Point(4, 5);
+            this.panel_NonMandatoryButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_NonMandatoryButton.Name = "panel_NonMandatoryButton";
-            this.panel_NonMandatoryButton.Size = new System.Drawing.Size(382, 32);
+            this.panel_NonMandatoryButton.Size = new System.Drawing.Size(546, 53);
             this.panel_NonMandatoryButton.TabIndex = 0;
             // 
             // label_nonMandatoryFields
             // 
             this.label_nonMandatoryFields.AutoSize = true;
             this.label_nonMandatoryFields.ForeColor = System.Drawing.Color.Black;
-            this.label_nonMandatoryFields.Location = new System.Drawing.Point(46, 8);
+            this.label_nonMandatoryFields.Location = new System.Drawing.Point(66, 13);
+            this.label_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_nonMandatoryFields.Name = "label_nonMandatoryFields";
             this.label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
             this.label_nonMandatoryFields.TabIndex = 1;
@@ -291,9 +304,10 @@
             this.button_expandNonMandatory.FlatAppearance.BorderSize = 0;
             this.button_expandNonMandatory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expandNonMandatory.ForeColor = System.Drawing.Color.White;
-            this.button_expandNonMandatory.Location = new System.Drawing.Point(10, 1);
+            this.button_expandNonMandatory.Location = new System.Drawing.Point(14, 2);
+            this.button_expandNonMandatory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_expandNonMandatory.Name = "button_expandNonMandatory";
-            this.button_expandNonMandatory.Size = new System.Drawing.Size(30, 30);
+            this.button_expandNonMandatory.Size = new System.Drawing.Size(43, 50);
             this.button_expandNonMandatory.TabIndex = 0;
             this.button_expandNonMandatory.UseVisualStyleBackColor = false;
             this.button_expandNonMandatory.Click += new System.EventHandler(this.button_expand_Click);
@@ -311,25 +325,28 @@
             this.panel_NonMandatoryFields.Controls.Add(this.label_comment);
             this.panel_NonMandatoryFields.Controls.Add(this.label_supplierNo);
             this.panel_NonMandatoryFields.Controls.Add(this.comboBox_supplierNo);
-            this.panel_NonMandatoryFields.Location = new System.Drawing.Point(3, 41);
-            this.panel_NonMandatoryFields.MaximumSize = new System.Drawing.Size(382, 165);
-            this.panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(382, 0);
+            this.panel_NonMandatoryFields.Location = new System.Drawing.Point(4, 68);
+            this.panel_NonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel_NonMandatoryFields.MaximumSize = new System.Drawing.Size(546, 275);
+            this.panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(546, 0);
             this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
-            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(382, 165);
+            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(546, 275);
             this.panel_NonMandatoryFields.TabIndex = 1;
             // 
             // comboBox_profitRatio
             // 
             this.comboBox_profitRatio.FormattingEnabled = true;
-            this.comboBox_profitRatio.Location = new System.Drawing.Point(153, 131);
+            this.comboBox_profitRatio.Location = new System.Drawing.Point(219, 218);
+            this.comboBox_profitRatio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_profitRatio.Name = "comboBox_profitRatio";
-            this.comboBox_profitRatio.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_profitRatio.Size = new System.Drawing.Size(213, 25);
             this.comboBox_profitRatio.TabIndex = 10;
             // 
             // label_profitRatio
             // 
             this.label_profitRatio.AutoSize = true;
-            this.label_profitRatio.Location = new System.Drawing.Point(10, 134);
+            this.label_profitRatio.Location = new System.Drawing.Point(14, 223);
+            this.label_profitRatio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_profitRatio.Name = "label_profitRatio";
             this.label_profitRatio.Size = new System.Drawing.Size(76, 17);
             this.label_profitRatio.TabIndex = 1;
@@ -338,7 +355,8 @@
             // label_externalID
             // 
             this.label_externalID.AutoSize = true;
-            this.label_externalID.Location = new System.Drawing.Point(10, 10);
+            this.label_externalID.Location = new System.Drawing.Point(14, 17);
+            this.label_externalID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_externalID.Name = "label_externalID";
             this.label_externalID.Size = new System.Drawing.Size(74, 17);
             this.label_externalID.TabIndex = 1;
@@ -347,15 +365,17 @@
             // comboBox_externalID
             // 
             this.comboBox_externalID.FormattingEnabled = true;
-            this.comboBox_externalID.Location = new System.Drawing.Point(153, 7);
+            this.comboBox_externalID.Location = new System.Drawing.Point(219, 12);
+            this.comboBox_externalID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_externalID.Name = "comboBox_externalID";
-            this.comboBox_externalID.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_externalID.Size = new System.Drawing.Size(213, 25);
             this.comboBox_externalID.TabIndex = 3;
-            //  
+            // 
             // label_supplierInvoiceNo
             // 
             this.label_supplierInvoiceNo.AutoSize = true;
-            this.label_supplierInvoiceNo.Location = new System.Drawing.Point(10, 103);
+            this.label_supplierInvoiceNo.Location = new System.Drawing.Point(14, 172);
+            this.label_supplierInvoiceNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_supplierInvoiceNo.Name = "label_supplierInvoiceNo";
             this.label_supplierInvoiceNo.Size = new System.Drawing.Size(126, 17);
             this.label_supplierInvoiceNo.TabIndex = 1;
@@ -364,23 +384,26 @@
             // comboBox_supplierInvoiceNo
             // 
             this.comboBox_supplierInvoiceNo.FormattingEnabled = true;
-            this.comboBox_supplierInvoiceNo.Location = new System.Drawing.Point(153, 100);
+            this.comboBox_supplierInvoiceNo.Location = new System.Drawing.Point(219, 167);
+            this.comboBox_supplierInvoiceNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_supplierInvoiceNo.Name = "comboBox_supplierInvoiceNo";
-            this.comboBox_supplierInvoiceNo.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_supplierInvoiceNo.Size = new System.Drawing.Size(213, 25);
             this.comboBox_supplierInvoiceNo.TabIndex = 3;
             // 
             // comboBox_comment
             // 
             this.comboBox_comment.FormattingEnabled = true;
-            this.comboBox_comment.Location = new System.Drawing.Point(153, 38);
+            this.comboBox_comment.Location = new System.Drawing.Point(219, 63);
+            this.comboBox_comment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_comment.Name = "comboBox_comment";
-            this.comboBox_comment.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_comment.Size = new System.Drawing.Size(213, 25);
             this.comboBox_comment.TabIndex = 3;
             // 
             // label_comment
             // 
             this.label_comment.AutoSize = true;
-            this.label_comment.Location = new System.Drawing.Point(10, 41);
+            this.label_comment.Location = new System.Drawing.Point(14, 68);
+            this.label_comment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_comment.Name = "label_comment";
             this.label_comment.Size = new System.Drawing.Size(68, 17);
             this.label_comment.TabIndex = 1;
@@ -389,7 +412,8 @@
             // label_supplierNo
             // 
             this.label_supplierNo.AutoSize = true;
-            this.label_supplierNo.Location = new System.Drawing.Point(10, 72);
+            this.label_supplierNo.Location = new System.Drawing.Point(14, 120);
+            this.label_supplierNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_supplierNo.Name = "label_supplierNo";
             this.label_supplierNo.Size = new System.Drawing.Size(79, 17);
             this.label_supplierNo.TabIndex = 1;
@@ -398,15 +422,17 @@
             // comboBox_supplierNo
             // 
             this.comboBox_supplierNo.FormattingEnabled = true;
-            this.comboBox_supplierNo.Location = new System.Drawing.Point(153, 69);
+            this.comboBox_supplierNo.Location = new System.Drawing.Point(219, 115);
+            this.comboBox_supplierNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_supplierNo.Name = "comboBox_supplierNo";
-            this.comboBox_supplierNo.Size = new System.Drawing.Size(150, 25);
+            this.comboBox_supplierNo.Size = new System.Drawing.Size(213, 25);
             this.comboBox_supplierNo.TabIndex = 3;
             // 
             // label_delimiter
             // 
             this.label_delimiter.AutoSize = true;
-            this.label_delimiter.Location = new System.Drawing.Point(10, 75);
+            this.label_delimiter.Location = new System.Drawing.Point(14, 125);
+            this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_delimiter.Name = "label_delimiter";
             this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
@@ -415,9 +441,10 @@
             // comboBox_delimiter
             // 
             this.comboBox_delimiter.FormattingEnabled = true;
-            this.comboBox_delimiter.Location = new System.Drawing.Point(82, 72);
+            this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
+            this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(56, 25);
+            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
             this.comboBox_delimiter.TabIndex = 6;
             // 
             // groupBox_projectExpenseMandatoryFields
@@ -450,9 +477,11 @@
             this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_purchaseDate);
             this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.label_projectNo);
             this.groupBox_projectExpenseMandatoryFields.Controls.Add(this.comboBox_projectNo);
-            this.groupBox_projectExpenseMandatoryFields.Location = new System.Drawing.Point(160, 62);
+            this.groupBox_projectExpenseMandatoryFields.Location = new System.Drawing.Point(229, 103);
+            this.groupBox_projectExpenseMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox_projectExpenseMandatoryFields.Name = "groupBox_projectExpenseMandatoryFields";
-            this.groupBox_projectExpenseMandatoryFields.Size = new System.Drawing.Size(394, 405);
+            this.groupBox_projectExpenseMandatoryFields.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox_projectExpenseMandatoryFields.Size = new System.Drawing.Size(563, 675);
             this.groupBox_projectExpenseMandatoryFields.TabIndex = 5;
             this.groupBox_projectExpenseMandatoryFields.TabStop = false;
             this.groupBox_projectExpenseMandatoryFields.Text = "Mandatory";
@@ -460,7 +489,8 @@
             // checkBox_defaultIsBillable
             // 
             this.checkBox_defaultIsBillable.AutoSize = true;
-            this.checkBox_defaultIsBillable.Location = new System.Drawing.Point(323, 212);
+            this.checkBox_defaultIsBillable.Location = new System.Drawing.Point(461, 353);
+            this.checkBox_defaultIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultIsBillable.Name = "checkBox_defaultIsBillable";
             this.checkBox_defaultIsBillable.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultIsBillable.TabIndex = 14;
@@ -472,7 +502,8 @@
             // checkBox_defaultExpenseCurrencyISO
             // 
             this.checkBox_defaultExpenseCurrencyISO.AutoSize = true;
-            this.checkBox_defaultExpenseCurrencyISO.Location = new System.Drawing.Point(323, 305);
+            this.checkBox_defaultExpenseCurrencyISO.Location = new System.Drawing.Point(461, 508);
+            this.checkBox_defaultExpenseCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultExpenseCurrencyISO.Name = "checkBox_defaultExpenseCurrencyISO";
             this.checkBox_defaultExpenseCurrencyISO.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultExpenseCurrencyISO.TabIndex = 12;
@@ -484,39 +515,44 @@
             // comboBox_contractName
             // 
             this.comboBox_contractName.FormattingEnabled = true;
-            this.comboBox_contractName.Location = new System.Drawing.Point(163, 334);
+            this.comboBox_contractName.Location = new System.Drawing.Point(233, 557);
+            this.comboBox_contractName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_contractName.Name = "comboBox_contractName";
-            this.comboBox_contractName.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_contractName.Size = new System.Drawing.Size(218, 25);
             this.comboBox_contractName.TabIndex = 10;
             // 
             // comboBox_expenseCurrencyISO
             // 
             this.comboBox_expenseCurrencyISO.FormattingEnabled = true;
-            this.comboBox_expenseCurrencyISO.Location = new System.Drawing.Point(163, 303);
+            this.comboBox_expenseCurrencyISO.Location = new System.Drawing.Point(233, 505);
+            this.comboBox_expenseCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_expenseCurrencyISO.Name = "comboBox_expenseCurrencyISO";
-            this.comboBox_expenseCurrencyISO.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseCurrencyISO.Size = new System.Drawing.Size(218, 25);
             this.comboBox_expenseCurrencyISO.TabIndex = 9;
             // 
             // comboBox_VATAmount
             // 
             this.comboBox_VATAmount.FormattingEnabled = true;
-            this.comboBox_VATAmount.Location = new System.Drawing.Point(163, 272);
+            this.comboBox_VATAmount.Location = new System.Drawing.Point(233, 453);
+            this.comboBox_VATAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_VATAmount.Name = "comboBox_VATAmount";
-            this.comboBox_VATAmount.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_VATAmount.Size = new System.Drawing.Size(218, 25);
             this.comboBox_VATAmount.TabIndex = 8;
             // 
             // comboBox_expenseNo
             // 
             this.comboBox_expenseNo.FormattingEnabled = true;
-            this.comboBox_expenseNo.Location = new System.Drawing.Point(163, 241);
+            this.comboBox_expenseNo.Location = new System.Drawing.Point(233, 402);
+            this.comboBox_expenseNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_expenseNo.Name = "comboBox_expenseNo";
-            this.comboBox_expenseNo.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseNo.Size = new System.Drawing.Size(218, 25);
             this.comboBox_expenseNo.TabIndex = 7;
             // 
             // label_contractName
             // 
             this.label_contractName.AutoSize = true;
-            this.label_contractName.Location = new System.Drawing.Point(6, 337);
+            this.label_contractName.Location = new System.Drawing.Point(9, 562);
+            this.label_contractName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_contractName.Name = "label_contractName";
             this.label_contractName.Size = new System.Drawing.Size(100, 17);
             this.label_contractName.TabIndex = 1;
@@ -525,7 +561,8 @@
             // label_expenseCurrencyISO
             // 
             this.label_expenseCurrencyISO.AutoSize = true;
-            this.label_expenseCurrencyISO.Location = new System.Drawing.Point(6, 306);
+            this.label_expenseCurrencyISO.Location = new System.Drawing.Point(9, 510);
+            this.label_expenseCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_expenseCurrencyISO.Name = "label_expenseCurrencyISO";
             this.label_expenseCurrencyISO.Size = new System.Drawing.Size(141, 17);
             this.label_expenseCurrencyISO.TabIndex = 1;
@@ -534,7 +571,8 @@
             // label_VATAmountCurrency
             // 
             this.label_VATAmountCurrency.AutoSize = true;
-            this.label_VATAmountCurrency.Location = new System.Drawing.Point(6, 275);
+            this.label_VATAmountCurrency.Location = new System.Drawing.Point(9, 458);
+            this.label_VATAmountCurrency.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_VATAmountCurrency.Name = "label_VATAmountCurrency";
             this.label_VATAmountCurrency.Size = new System.Drawing.Size(84, 17);
             this.label_VATAmountCurrency.TabIndex = 1;
@@ -544,7 +582,8 @@
             // label_expenseNo
             // 
             this.label_expenseNo.AutoSize = true;
-            this.label_expenseNo.Location = new System.Drawing.Point(6, 244);
+            this.label_expenseNo.Location = new System.Drawing.Point(9, 407);
+            this.label_expenseNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_expenseNo.Name = "label_expenseNo";
             this.label_expenseNo.Size = new System.Drawing.Size(80, 17);
             this.label_expenseNo.TabIndex = 1;
@@ -553,7 +592,8 @@
             // checkBox_defaultExpenseType
             // 
             this.checkBox_defaultExpenseType.AutoSize = true;
-            this.checkBox_defaultExpenseType.Location = new System.Drawing.Point(323, 119);
+            this.checkBox_defaultExpenseType.Location = new System.Drawing.Point(461, 198);
+            this.checkBox_defaultExpenseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultExpenseType.Name = "checkBox_defaultExpenseType";
             this.checkBox_defaultExpenseType.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultExpenseType.TabIndex = 6;
@@ -565,7 +605,8 @@
             // checkBox_defaultPaymentMethod
             // 
             this.checkBox_defaultPaymentMethod.AutoSize = true;
-            this.checkBox_defaultPaymentMethod.Location = new System.Drawing.Point(323, 88);
+            this.checkBox_defaultPaymentMethod.Location = new System.Drawing.Point(461, 147);
+            this.checkBox_defaultPaymentMethod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultPaymentMethod.Name = "checkBox_defaultPaymentMethod";
             this.checkBox_defaultPaymentMethod.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPaymentMethod.TabIndex = 4;
@@ -577,7 +618,8 @@
             // label_salesPriceAmount
             // 
             this.label_salesPriceAmount.AutoSize = true;
-            this.label_salesPriceAmount.Location = new System.Drawing.Point(6, 182);
+            this.label_salesPriceAmount.Location = new System.Drawing.Point(9, 303);
+            this.label_salesPriceAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_salesPriceAmount.Name = "label_salesPriceAmount";
             this.label_salesPriceAmount.Size = new System.Drawing.Size(125, 17);
             this.label_salesPriceAmount.TabIndex = 1;
@@ -587,23 +629,26 @@
             // comboBox_salesPriceAmount
             // 
             this.comboBox_salesPriceAmount.FormattingEnabled = true;
-            this.comboBox_salesPriceAmount.Location = new System.Drawing.Point(163, 179);
+            this.comboBox_salesPriceAmount.Location = new System.Drawing.Point(233, 298);
+            this.comboBox_salesPriceAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_salesPriceAmount.Name = "comboBox_salesPriceAmount";
-            this.comboBox_salesPriceAmount.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_salesPriceAmount.Size = new System.Drawing.Size(218, 25);
             this.comboBox_salesPriceAmount.TabIndex = 3;
             // 
             // comboBox_exchangeRate
             // 
             this.comboBox_exchangeRate.FormattingEnabled = true;
-            this.comboBox_exchangeRate.Location = new System.Drawing.Point(163, 365);
+            this.comboBox_exchangeRate.Location = new System.Drawing.Point(233, 608);
+            this.comboBox_exchangeRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_exchangeRate.Name = "comboBox_exchangeRate";
-            this.comboBox_exchangeRate.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_exchangeRate.Size = new System.Drawing.Size(218, 25);
             this.comboBox_exchangeRate.TabIndex = 3;
             // 
             // label_amountIncludingVAT
             // 
             this.label_amountIncludingVAT.AutoSize = true;
-            this.label_amountIncludingVAT.Location = new System.Drawing.Point(6, 151);
+            this.label_amountIncludingVAT.Location = new System.Drawing.Point(9, 252);
+            this.label_amountIncludingVAT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_amountIncludingVAT.Name = "label_amountIncludingVAT";
             this.label_amountIncludingVAT.Size = new System.Drawing.Size(108, 17);
             this.label_amountIncludingVAT.TabIndex = 1;
@@ -613,7 +658,8 @@
             // label_isBillable
             // 
             this.label_isBillable.AutoSize = true;
-            this.label_isBillable.Location = new System.Drawing.Point(6, 213);
+            this.label_isBillable.Location = new System.Drawing.Point(9, 355);
+            this.label_isBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_isBillable.Name = "label_isBillable";
             this.label_isBillable.Size = new System.Drawing.Size(64, 17);
             this.label_isBillable.TabIndex = 1;
@@ -622,7 +668,8 @@
             // label_exchangeRate
             // 
             this.label_exchangeRate.AutoSize = true;
-            this.label_exchangeRate.Location = new System.Drawing.Point(6, 368);
+            this.label_exchangeRate.Location = new System.Drawing.Point(9, 613);
+            this.label_exchangeRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_exchangeRate.Name = "label_exchangeRate";
             this.label_exchangeRate.Size = new System.Drawing.Size(97, 17);
             this.label_exchangeRate.TabIndex = 1;
@@ -631,15 +678,17 @@
             // comboBox_amountIncludingVAT
             // 
             this.comboBox_amountIncludingVAT.FormattingEnabled = true;
-            this.comboBox_amountIncludingVAT.Location = new System.Drawing.Point(163, 148);
+            this.comboBox_amountIncludingVAT.Location = new System.Drawing.Point(233, 247);
+            this.comboBox_amountIncludingVAT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_amountIncludingVAT.Name = "comboBox_amountIncludingVAT";
-            this.comboBox_amountIncludingVAT.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_amountIncludingVAT.Size = new System.Drawing.Size(218, 25);
             this.comboBox_amountIncludingVAT.TabIndex = 3;
             // 
             // label_expenseType
             // 
             this.label_expenseType.AutoSize = true;
-            this.label_expenseType.Location = new System.Drawing.Point(6, 120);
+            this.label_expenseType.Location = new System.Drawing.Point(9, 200);
+            this.label_expenseType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_expenseType.Name = "label_expenseType";
             this.label_expenseType.Size = new System.Drawing.Size(90, 17);
             this.label_expenseType.TabIndex = 1;
@@ -648,15 +697,17 @@
             // comboBox_expenseType
             // 
             this.comboBox_expenseType.FormattingEnabled = true;
-            this.comboBox_expenseType.Location = new System.Drawing.Point(163, 117);
+            this.comboBox_expenseType.Location = new System.Drawing.Point(233, 195);
+            this.comboBox_expenseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_expenseType.Name = "comboBox_expenseType";
-            this.comboBox_expenseType.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_expenseType.Size = new System.Drawing.Size(218, 25);
             this.comboBox_expenseType.TabIndex = 3;
             // 
             // label_paymentMethod
             // 
             this.label_paymentMethod.AutoSize = true;
-            this.label_paymentMethod.Location = new System.Drawing.Point(6, 89);
+            this.label_paymentMethod.Location = new System.Drawing.Point(9, 148);
+            this.label_paymentMethod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentMethod.Name = "label_paymentMethod";
             this.label_paymentMethod.Size = new System.Drawing.Size(114, 17);
             this.label_paymentMethod.TabIndex = 1;
@@ -665,23 +716,26 @@
             // comboBox_isBillable
             // 
             this.comboBox_isBillable.FormattingEnabled = true;
-            this.comboBox_isBillable.Location = new System.Drawing.Point(163, 210);
+            this.comboBox_isBillable.Location = new System.Drawing.Point(233, 350);
+            this.comboBox_isBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_isBillable.Name = "comboBox_isBillable";
-            this.comboBox_isBillable.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_isBillable.Size = new System.Drawing.Size(218, 25);
             this.comboBox_isBillable.TabIndex = 3;
             // 
             // comboBox_paymentMethod
             // 
             this.comboBox_paymentMethod.FormattingEnabled = true;
-            this.comboBox_paymentMethod.Location = new System.Drawing.Point(163, 86);
+            this.comboBox_paymentMethod.Location = new System.Drawing.Point(233, 143);
+            this.comboBox_paymentMethod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentMethod.Name = "comboBox_paymentMethod";
-            this.comboBox_paymentMethod.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_paymentMethod.Size = new System.Drawing.Size(218, 25);
             this.comboBox_paymentMethod.TabIndex = 3;
             // 
             // label_purchaseDate
             // 
             this.label_purchaseDate.AutoSize = true;
-            this.label_purchaseDate.Location = new System.Drawing.Point(6, 58);
+            this.label_purchaseDate.Location = new System.Drawing.Point(9, 97);
+            this.label_purchaseDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_purchaseDate.Name = "label_purchaseDate";
             this.label_purchaseDate.Size = new System.Drawing.Size(95, 17);
             this.label_purchaseDate.TabIndex = 1;
@@ -690,15 +744,17 @@
             // comboBox_purchaseDate
             // 
             this.comboBox_purchaseDate.FormattingEnabled = true;
-            this.comboBox_purchaseDate.Location = new System.Drawing.Point(163, 55);
+            this.comboBox_purchaseDate.Location = new System.Drawing.Point(233, 92);
+            this.comboBox_purchaseDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_purchaseDate.Name = "comboBox_purchaseDate";
-            this.comboBox_purchaseDate.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_purchaseDate.Size = new System.Drawing.Size(218, 25);
             this.comboBox_purchaseDate.TabIndex = 3;
             // 
             // label_projectNo
             // 
             this.label_projectNo.AutoSize = true;
-            this.label_projectNo.Location = new System.Drawing.Point(6, 27);
+            this.label_projectNo.Location = new System.Drawing.Point(9, 45);
+            this.label_projectNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectNo.Name = "label_projectNo";
             this.label_projectNo.Size = new System.Drawing.Size(72, 17);
             this.label_projectNo.TabIndex = 1;
@@ -707,9 +763,10 @@
             // comboBox_projectNo
             // 
             this.comboBox_projectNo.FormattingEnabled = true;
-            this.comboBox_projectNo.Location = new System.Drawing.Point(163, 24);
+            this.comboBox_projectNo.Location = new System.Drawing.Point(233, 40);
+            this.comboBox_projectNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_projectNo.Name = "comboBox_projectNo";
-            this.comboBox_projectNo.Size = new System.Drawing.Size(154, 25);
+            this.comboBox_projectNo.Size = new System.Drawing.Size(218, 25);
             this.comboBox_projectNo.TabIndex = 3;
             // 
             // label_projectExpenseSetup
@@ -717,7 +774,8 @@
             this.label_projectExpenseSetup.AutoSize = true;
             this.label_projectExpenseSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label_projectExpenseSetup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label_projectExpenseSetup.Location = new System.Drawing.Point(7, 16);
+            this.label_projectExpenseSetup.Location = new System.Drawing.Point(10, 27);
+            this.label_projectExpenseSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_projectExpenseSetup.Name = "label_projectExpenseSetup";
             this.label_projectExpenseSetup.Size = new System.Drawing.Size(326, 32);
             this.label_projectExpenseSetup.TabIndex = 0;
@@ -730,9 +788,10 @@
             this.button_projectExpenseSelectFile.FlatAppearance.BorderSize = 0;
             this.button_projectExpenseSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_projectExpenseSelectFile.ForeColor = System.Drawing.Color.White;
-            this.button_projectExpenseSelectFile.Location = new System.Drawing.Point(13, 111);
+            this.button_projectExpenseSelectFile.Location = new System.Drawing.Point(19, 185);
+            this.button_projectExpenseSelectFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_projectExpenseSelectFile.Name = "button_projectExpenseSelectFile";
-            this.button_projectExpenseSelectFile.Size = new System.Drawing.Size(80, 29);
+            this.button_projectExpenseSelectFile.Size = new System.Drawing.Size(114, 48);
             this.button_projectExpenseSelectFile.TabIndex = 4;
             this.button_projectExpenseSelectFile.Text = "Select File";
             this.defaultToolTip.SetToolTip(this.button_projectExpenseSelectFile, "Select input CSV file");
@@ -750,14 +809,15 @@
             // 
             // UserControl_ProjectExpenseImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel_projectExpenseFieldMapping);
             this.Controls.Add(this.panel_projectExpenseButtons);
             this.Controls.Add(this.panel_projectMessage);
             this.Controls.Add(this.panel_employeeDataTable);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_ProjectExpenseImport";
-            this.Size = new System.Drawing.Size(1006, 942);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_employeeDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_projectExpense)).EndInit();

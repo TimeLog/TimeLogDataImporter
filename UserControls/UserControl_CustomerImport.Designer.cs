@@ -201,10 +201,10 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_customerDataTable.Controls.Add(this.dataGridView_customer);
             this.panel_customerDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_customerDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_customerDataTable.Location = new System.Drawing.Point(0, 968);
+            this.panel_customerDataTable.Location = new System.Drawing.Point(0, 770);
             this.panel_customerDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_customerDataTable.Name = "panel_customerDataTable";
-            this.panel_customerDataTable.Size = new System.Drawing.Size(1437, 602);
+            this.panel_customerDataTable.Size = new System.Drawing.Size(1437, 300);
             this.panel_customerDataTable.TabIndex = 6;
             // 
             // dataGridView_customer
@@ -214,11 +214,11 @@ namespace TimeLog.DataImporter.UserControls
             this.dataGridView_customer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_customer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView_customer.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_customer.Location = new System.Drawing.Point(0, 17);
+            this.dataGridView_customer.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_customer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView_customer.Name = "dataGridView_customer";
             this.dataGridView_customer.RowHeadersWidth = 62;
-            this.dataGridView_customer.Size = new System.Drawing.Size(1437, 585);
+            this.dataGridView_customer.Size = new System.Drawing.Size(1437, 300);
             this.dataGridView_customer.TabIndex = 0;
             this.defaultToolTip.SetToolTip(this.dataGridView_customer, "Customer input data table");
             // 
@@ -226,7 +226,7 @@ namespace TimeLog.DataImporter.UserControls
             // 
             this.panel_customerMessage.Controls.Add(this.textBox_customerImportMessages);
             this.panel_customerMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_customerMessage.Location = new System.Drawing.Point(0, 661);
+            this.panel_customerMessage.Location = new System.Drawing.Point(0, 463);
             this.panel_customerMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_customerMessage.Name = "panel_customerMessage";
             this.panel_customerMessage.Size = new System.Drawing.Size(1437, 307);
@@ -237,7 +237,7 @@ namespace TimeLog.DataImporter.UserControls
             this.textBox_customerImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox_customerImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_customerImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_customerImportMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_customerImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox_customerImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox_customerImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox_customerImportMessages.Location = new System.Drawing.Point(0, 0);
@@ -260,7 +260,7 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_customerButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_customerButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel_customerButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_customerButtons.Location = new System.Drawing.Point(0, 574);
+            this.panel_customerButtons.Location = new System.Drawing.Point(0, 376);
             this.panel_customerButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_customerButtons.Name = "panel_customerButtons";
             this.panel_customerButtons.Size = new System.Drawing.Size(1437, 87);
@@ -353,7 +353,7 @@ namespace TimeLog.DataImporter.UserControls
             this.panel_customerFieldMapping.Location = new System.Drawing.Point(0, 0);
             this.panel_customerFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel_customerFieldMapping.Name = "panel_customerFieldMapping";
-            this.panel_customerFieldMapping.Size = new System.Drawing.Size(1437, 574);
+            this.panel_customerFieldMapping.Size = new System.Drawing.Size(1437, 376);
             this.panel_customerFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_NonMandatoryFields
@@ -393,7 +393,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerDetails.Location = new System.Drawing.Point(64, 13);
             this.label_customerDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerDetails.Name = "label_customerDetails";
-            this.label_customerDetails.Size = new System.Drawing.Size(167, 28);
+            this.label_customerDetails.Size = new System.Drawing.Size(111, 17);
             this.label_customerDetails.TabIndex = 1;
             this.label_customerDetails.Text = "Customer Details";
             // 
@@ -444,7 +444,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerNo.Location = new System.Drawing.Point(14, 25);
             this.label_customerNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerNo.Name = "label_customerNo";
-            this.label_customerNo.Size = new System.Drawing.Size(133, 28);
+            this.label_customerNo.Size = new System.Drawing.Size(89, 17);
             this.label_customerNo.TabIndex = 1;
             this.label_customerNo.Text = "Customer No";
             // 
@@ -454,7 +454,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_nickname.Location = new System.Drawing.Point(14, 77);
             this.label_nickname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_nickname.Name = "label_nickname";
-            this.label_nickname.Size = new System.Drawing.Size(103, 28);
+            this.label_nickname.Size = new System.Drawing.Size(68, 17);
             this.label_nickname.TabIndex = 1;
             this.label_nickname.Text = "Nickname";
             // 
@@ -464,7 +464,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultIndustryName.Location = new System.Drawing.Point(424, 282);
             this.checkBox_defaultIndustryName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultIndustryName.Name = "checkBox_defaultIndustryName";
-            this.checkBox_defaultIndustryName.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultIndustryName.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultIndustryName.TabIndex = 8;
             this.checkBox_defaultIndustryName.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultIndustryName, "Set default values for all rows of a particular column field");
@@ -477,7 +477,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerSince.Location = new System.Drawing.Point(14, 232);
             this.label_customerSince.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerSince.Name = "label_customerSince";
-            this.label_customerSince.Size = new System.Drawing.Size(154, 28);
+            this.label_customerSince.Size = new System.Drawing.Size(102, 17);
             this.label_customerSince.TabIndex = 1;
             this.label_customerSince.Text = "Customer Since";
             // 
@@ -487,7 +487,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultSecondaryKAM.Location = new System.Drawing.Point(424, 178);
             this.checkBox_defaultSecondaryKAM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultSecondaryKAM.Name = "checkBox_defaultSecondaryKAM";
-            this.checkBox_defaultSecondaryKAM.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultSecondaryKAM.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultSecondaryKAM.TabIndex = 8;
             this.checkBox_defaultSecondaryKAM.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultSecondaryKAM, "Set default values for all rows of a particular column field");
@@ -500,7 +500,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_primaryKAM.Location = new System.Drawing.Point(14, 128);
             this.label_primaryKAM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_primaryKAM.Name = "label_primaryKAM";
-            this.label_primaryKAM.Size = new System.Drawing.Size(131, 28);
+            this.label_primaryKAM.Size = new System.Drawing.Size(89, 17);
             this.label_primaryKAM.TabIndex = 1;
             this.label_primaryKAM.Text = "Primary KAM";
             // 
@@ -510,7 +510,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_industryName.Location = new System.Drawing.Point(219, 278);
             this.comboBox_industryName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_industryName.Name = "comboBox_industryName";
-            this.comboBox_industryName.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_industryName.Size = new System.Drawing.Size(195, 25);
             this.comboBox_industryName.TabIndex = 3;
             // 
             // label_secondaryKAM
@@ -519,7 +519,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_secondaryKAM.Location = new System.Drawing.Point(14, 180);
             this.label_secondaryKAM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_secondaryKAM.Name = "label_secondaryKAM";
-            this.label_secondaryKAM.Size = new System.Drawing.Size(156, 28);
+            this.label_secondaryKAM.Size = new System.Drawing.Size(105, 17);
             this.label_secondaryKAM.TabIndex = 1;
             this.label_secondaryKAM.Text = "Secondary KAM";
             // 
@@ -529,7 +529,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerSince.Location = new System.Drawing.Point(219, 227);
             this.comboBox_customerSince.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_customerSince.Name = "comboBox_customerSince";
-            this.comboBox_customerSince.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_customerSince.Size = new System.Drawing.Size(195, 25);
             this.comboBox_customerSince.TabIndex = 3;
             // 
             // label_industryName
@@ -538,7 +538,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_industryName.Location = new System.Drawing.Point(14, 283);
             this.label_industryName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_industryName.Name = "label_industryName";
-            this.label_industryName.Size = new System.Drawing.Size(148, 28);
+            this.label_industryName.Size = new System.Drawing.Size(100, 17);
             this.label_industryName.TabIndex = 1;
             this.label_industryName.Text = "Industry Name";
             // 
@@ -548,7 +548,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_primaryKAM.Location = new System.Drawing.Point(219, 123);
             this.comboBox_primaryKAM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_primaryKAM.Name = "comboBox_primaryKAM";
-            this.comboBox_primaryKAM.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_primaryKAM.Size = new System.Drawing.Size(195, 25);
             this.comboBox_primaryKAM.TabIndex = 3;
             // 
             // comboBox_secondaryKAM
@@ -557,7 +557,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_secondaryKAM.Location = new System.Drawing.Point(219, 175);
             this.comboBox_secondaryKAM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_secondaryKAM.Name = "comboBox_secondaryKAM";
-            this.comboBox_secondaryKAM.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_secondaryKAM.Size = new System.Drawing.Size(195, 25);
             this.comboBox_secondaryKAM.TabIndex = 3;
             // 
             // comboBox_nickName
@@ -566,7 +566,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_nickName.Location = new System.Drawing.Point(219, 72);
             this.comboBox_nickName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_nickName.Name = "comboBox_nickName";
-            this.comboBox_nickName.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_nickName.Size = new System.Drawing.Size(195, 25);
             this.comboBox_nickName.TabIndex = 3;
             // 
             // comboBox_customerNo
@@ -575,7 +575,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerNo.Location = new System.Drawing.Point(219, 20);
             this.comboBox_customerNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_customerNo.Name = "comboBox_customerNo";
-            this.comboBox_customerNo.Size = new System.Drawing.Size(195, 36);
+            this.comboBox_customerNo.Size = new System.Drawing.Size(195, 25);
             this.comboBox_customerNo.TabIndex = 3;
             // 
             // checkBox_defaultPrimaryKAM
@@ -584,7 +584,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultPrimaryKAM.Location = new System.Drawing.Point(424, 127);
             this.checkBox_defaultPrimaryKAM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultPrimaryKAM.Name = "checkBox_defaultPrimaryKAM";
-            this.checkBox_defaultPrimaryKAM.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultPrimaryKAM.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPrimaryKAM.TabIndex = 8;
             this.checkBox_defaultPrimaryKAM.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultPrimaryKAM, "Set default values for all rows of a particular column field");
@@ -608,7 +608,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_ContactDetails.Location = new System.Drawing.Point(64, 13);
             this.label_ContactDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_ContactDetails.Name = "label_ContactDetails";
-            this.label_ContactDetails.Size = new System.Drawing.Size(148, 28);
+            this.label_ContactDetails.Size = new System.Drawing.Size(99, 17);
             this.label_ContactDetails.TabIndex = 1;
             this.label_ContactDetails.Text = "Contact Details";
             // 
@@ -664,7 +664,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_phone.Location = new System.Drawing.Point(14, 25);
             this.label_phone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_phone.Name = "label_phone";
-            this.label_phone.Size = new System.Drawing.Size(104, 28);
+            this.label_phone.Size = new System.Drawing.Size(69, 17);
             this.label_phone.TabIndex = 1;
             this.label_phone.Text = "Phone No";
             // 
@@ -674,7 +674,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_fax.Location = new System.Drawing.Point(14, 77);
             this.label_fax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_fax.Name = "label_fax";
-            this.label_fax.Size = new System.Drawing.Size(74, 28);
+            this.label_fax.Size = new System.Drawing.Size(51, 17);
             this.label_fax.TabIndex = 1;
             this.label_fax.Text = "Fax No";
             // 
@@ -684,7 +684,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_website.Location = new System.Drawing.Point(14, 180);
             this.label_website.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_website.Name = "label_website";
-            this.label_website.Size = new System.Drawing.Size(85, 28);
+            this.label_website.Size = new System.Drawing.Size(57, 17);
             this.label_website.TabIndex = 1;
             this.label_website.Text = "Website";
             // 
@@ -694,7 +694,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_address.Location = new System.Drawing.Point(14, 232);
             this.label_address.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_address.Name = "label_address";
-            this.label_address.Size = new System.Drawing.Size(85, 28);
+            this.label_address.Size = new System.Drawing.Size(57, 17);
             this.label_address.TabIndex = 1;
             this.label_address.Text = "Address";
             // 
@@ -704,7 +704,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_address2.Location = new System.Drawing.Point(14, 283);
             this.label_address2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_address2.Name = "label_address2";
-            this.label_address2.Size = new System.Drawing.Size(102, 28);
+            this.label_address2.Size = new System.Drawing.Size(68, 17);
             this.label_address2.TabIndex = 1;
             this.label_address2.Text = "Address 2";
             // 
@@ -714,7 +714,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_address3.Location = new System.Drawing.Point(14, 335);
             this.label_address3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_address3.Name = "label_address3";
-            this.label_address3.Size = new System.Drawing.Size(102, 28);
+            this.label_address3.Size = new System.Drawing.Size(68, 17);
             this.label_address3.TabIndex = 1;
             this.label_address3.Text = "Address 3";
             // 
@@ -724,7 +724,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_zipCode.Location = new System.Drawing.Point(14, 387);
             this.label_zipCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_zipCode.Name = "label_zipCode";
-            this.label_zipCode.Size = new System.Drawing.Size(94, 28);
+            this.label_zipCode.Size = new System.Drawing.Size(62, 17);
             this.label_zipCode.TabIndex = 1;
             this.label_zipCode.Text = "Zip Code";
             // 
@@ -734,7 +734,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_city.Location = new System.Drawing.Point(14, 438);
             this.label_city.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_city.Name = "label_city";
-            this.label_city.Size = new System.Drawing.Size(46, 28);
+            this.label_city.Size = new System.Drawing.Size(31, 17);
             this.label_city.TabIndex = 1;
             this.label_city.Text = "City";
             // 
@@ -744,7 +744,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_state.Location = new System.Drawing.Point(14, 490);
             this.label_state.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_state.Name = "label_state";
-            this.label_state.Size = new System.Drawing.Size(57, 28);
+            this.label_state.Size = new System.Drawing.Size(39, 17);
             this.label_state.TabIndex = 1;
             this.label_state.Text = "State";
             // 
@@ -754,7 +754,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_email.Location = new System.Drawing.Point(14, 128);
             this.label_email.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_email.Name = "label_email";
-            this.label_email.Size = new System.Drawing.Size(60, 28);
+            this.label_email.Size = new System.Drawing.Size(40, 17);
             this.label_email.TabIndex = 1;
             this.label_email.Text = "Email";
             // 
@@ -764,7 +764,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_phoneNo.Location = new System.Drawing.Point(171, 20);
             this.comboBox_phoneNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_phoneNo.Name = "comboBox_phoneNo";
-            this.comboBox_phoneNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_phoneNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_phoneNo.TabIndex = 3;
             // 
             // comboBox_faxNo
@@ -773,7 +773,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_faxNo.Location = new System.Drawing.Point(171, 72);
             this.comboBox_faxNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_faxNo.Name = "comboBox_faxNo";
-            this.comboBox_faxNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_faxNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_faxNo.TabIndex = 3;
             // 
             // comboBox_email
@@ -782,7 +782,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_email.Location = new System.Drawing.Point(171, 123);
             this.comboBox_email.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_email.Name = "comboBox_email";
-            this.comboBox_email.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_email.Size = new System.Drawing.Size(188, 25);
             this.comboBox_email.TabIndex = 3;
             // 
             // comboBox_website
@@ -791,7 +791,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_website.Location = new System.Drawing.Point(171, 175);
             this.comboBox_website.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_website.Name = "comboBox_website";
-            this.comboBox_website.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_website.Size = new System.Drawing.Size(188, 25);
             this.comboBox_website.TabIndex = 3;
             // 
             // comboBox_address
@@ -800,7 +800,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address.Location = new System.Drawing.Point(171, 227);
             this.comboBox_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_address.Name = "comboBox_address";
-            this.comboBox_address.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_address.Size = new System.Drawing.Size(188, 25);
             this.comboBox_address.TabIndex = 3;
             // 
             // comboBox_address2
@@ -809,7 +809,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address2.Location = new System.Drawing.Point(171, 278);
             this.comboBox_address2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_address2.Name = "comboBox_address2";
-            this.comboBox_address2.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_address2.Size = new System.Drawing.Size(188, 25);
             this.comboBox_address2.TabIndex = 3;
             // 
             // comboBox_address3
@@ -818,7 +818,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_address3.Location = new System.Drawing.Point(171, 330);
             this.comboBox_address3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_address3.Name = "comboBox_address3";
-            this.comboBox_address3.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_address3.Size = new System.Drawing.Size(188, 25);
             this.comboBox_address3.TabIndex = 3;
             // 
             // comboBox_zipCode
@@ -827,7 +827,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_zipCode.Location = new System.Drawing.Point(171, 382);
             this.comboBox_zipCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_zipCode.Name = "comboBox_zipCode";
-            this.comboBox_zipCode.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_zipCode.Size = new System.Drawing.Size(188, 25);
             this.comboBox_zipCode.TabIndex = 3;
             // 
             // comboBox_city
@@ -836,7 +836,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_city.Location = new System.Drawing.Point(171, 433);
             this.comboBox_city.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_city.Name = "comboBox_city";
-            this.comboBox_city.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_city.Size = new System.Drawing.Size(188, 25);
             this.comboBox_city.TabIndex = 3;
             // 
             // comboBox_state
@@ -845,7 +845,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_state.Location = new System.Drawing.Point(171, 485);
             this.comboBox_state.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_state.Name = "comboBox_state";
-            this.comboBox_state.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_state.Size = new System.Drawing.Size(188, 25);
             this.comboBox_state.TabIndex = 3;
             // 
             // panel_invoiceAddressButton
@@ -865,7 +865,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoiceAddress.Location = new System.Drawing.Point(64, 13);
             this.label_invoiceAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoiceAddress.Name = "label_invoiceAddress";
-            this.label_invoiceAddress.Size = new System.Drawing.Size(156, 28);
+            this.label_invoiceAddress.Size = new System.Drawing.Size(104, 17);
             this.label_invoiceAddress.TabIndex = 1;
             this.label_invoiceAddress.Text = "Invoice Address";
             // 
@@ -918,7 +918,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultInvoicingAddressCountryISO.Location = new System.Drawing.Point(487, 385);
             this.checkBox_defaultInvoicingAddressCountryISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultInvoicingAddressCountryISO.Name = "checkBox_defaultInvoicingAddressCountryISO";
-            this.checkBox_defaultInvoicingAddressCountryISO.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultInvoicingAddressCountryISO.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultInvoicingAddressCountryISO.TabIndex = 6;
             this.checkBox_defaultInvoicingAddressCountryISO.Text = "Default";
             this.checkBox_defaultInvoicingAddressCountryISO.UseVisualStyleBackColor = true;
@@ -930,7 +930,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_useInvoicingAddress.Location = new System.Drawing.Point(14, 25);
             this.label_useInvoicingAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_useInvoicingAddress.Name = "label_useInvoicingAddress";
-            this.label_useInvoicingAddress.Size = new System.Drawing.Size(214, 28);
+            this.label_useInvoicingAddress.Size = new System.Drawing.Size(142, 17);
             this.label_useInvoicingAddress.TabIndex = 1;
             this.label_useInvoicingAddress.Text = "Use Invoicing Address";
             // 
@@ -940,7 +940,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddress.Location = new System.Drawing.Point(14, 77);
             this.label_invoicingAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddress.Name = "label_invoicingAddress";
-            this.label_invoicingAddress.Size = new System.Drawing.Size(174, 28);
+            this.label_invoicingAddress.Size = new System.Drawing.Size(116, 17);
             this.label_invoicingAddress.TabIndex = 1;
             this.label_invoicingAddress.Text = "Invoicing Address";
             // 
@@ -950,7 +950,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddressCity.Location = new System.Drawing.Point(14, 283);
             this.label_invoicingAddressCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddressCity.Name = "label_invoicingAddressCity";
-            this.label_invoicingAddressCity.Size = new System.Drawing.Size(214, 28);
+            this.label_invoicingAddressCity.Size = new System.Drawing.Size(143, 17);
             this.label_invoicingAddressCity.TabIndex = 1;
             this.label_invoicingAddressCity.Text = "Invoicing Address City";
             // 
@@ -960,7 +960,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddressZipCode.Location = new System.Drawing.Point(14, 232);
             this.label_invoicingAddressZipCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddressZipCode.Name = "label_invoicingAddressZipCode";
-            this.label_invoicingAddressZipCode.Size = new System.Drawing.Size(262, 28);
+            this.label_invoicingAddressZipCode.Size = new System.Drawing.Size(174, 17);
             this.label_invoicingAddressZipCode.TabIndex = 1;
             this.label_invoicingAddressZipCode.Text = "Invoicing Address Zip Code";
             // 
@@ -970,7 +970,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddress2.Location = new System.Drawing.Point(14, 128);
             this.label_invoicingAddress2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddress2.Name = "label_invoicingAddress2";
-            this.label_invoicingAddress2.Size = new System.Drawing.Size(191, 28);
+            this.label_invoicingAddress2.Size = new System.Drawing.Size(127, 17);
             this.label_invoicingAddress2.TabIndex = 1;
             this.label_invoicingAddress2.Text = "Invoicing Address 2";
             // 
@@ -980,7 +980,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddress3.Location = new System.Drawing.Point(14, 180);
             this.label_invoicingAddress3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddress3.Name = "label_invoicingAddress3";
-            this.label_invoicingAddress3.Size = new System.Drawing.Size(191, 28);
+            this.label_invoicingAddress3.Size = new System.Drawing.Size(127, 17);
             this.label_invoicingAddress3.TabIndex = 1;
             this.label_invoicingAddress3.Text = "Invoicing Address 3";
             // 
@@ -990,7 +990,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddressState.Location = new System.Drawing.Point(14, 335);
             this.label_invoicingAddressState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddressState.Name = "label_invoicingAddressState";
-            this.label_invoicingAddressState.Size = new System.Drawing.Size(225, 28);
+            this.label_invoicingAddressState.Size = new System.Drawing.Size(151, 17);
             this.label_invoicingAddressState.TabIndex = 1;
             this.label_invoicingAddressState.Text = "Invoicing Address State";
             // 
@@ -1000,7 +1000,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoicingAddressCountryID.Location = new System.Drawing.Point(14, 387);
             this.label_invoicingAddressCountryID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoicingAddressCountryID.Name = "label_invoicingAddressCountryID";
-            this.label_invoicingAddressCountryID.Size = new System.Drawing.Size(279, 28);
+            this.label_invoicingAddressCountryID.Size = new System.Drawing.Size(187, 17);
             this.label_invoicingAddressCountryID.TabIndex = 5;
             this.label_invoicingAddressCountryID.Text = "Invoicing Address Country ID";
             // 
@@ -1010,7 +1010,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_useInvoicingAddress.Location = new System.Drawing.Point(289, 20);
             this.comboBox_useInvoicingAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_useInvoicingAddress.Name = "comboBox_useInvoicingAddress";
-            this.comboBox_useInvoicingAddress.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_useInvoicingAddress.Size = new System.Drawing.Size(188, 25);
             this.comboBox_useInvoicingAddress.TabIndex = 3;
             // 
             // comboBox_invoicingAddress
@@ -1019,7 +1019,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress.Location = new System.Drawing.Point(289, 72);
             this.comboBox_invoicingAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddress.Name = "comboBox_invoicingAddress";
-            this.comboBox_invoicingAddress.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddress.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddress.TabIndex = 3;
             // 
             // comboBox_invoicingAddress2
@@ -1028,7 +1028,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress2.Location = new System.Drawing.Point(289, 123);
             this.comboBox_invoicingAddress2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddress2.Name = "comboBox_invoicingAddress2";
-            this.comboBox_invoicingAddress2.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddress2.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddress2.TabIndex = 3;
             // 
             // comboBox_invoicingAddress3
@@ -1037,7 +1037,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddress3.Location = new System.Drawing.Point(289, 175);
             this.comboBox_invoicingAddress3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddress3.Name = "comboBox_invoicingAddress3";
-            this.comboBox_invoicingAddress3.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddress3.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddress3.TabIndex = 3;
             // 
             // comboBox_invoicingAddressZipCode
@@ -1046,7 +1046,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressZipCode.Location = new System.Drawing.Point(289, 227);
             this.comboBox_invoicingAddressZipCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddressZipCode.Name = "comboBox_invoicingAddressZipCode";
-            this.comboBox_invoicingAddressZipCode.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddressZipCode.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddressZipCode.TabIndex = 3;
             // 
             // comboBox_invoicingAddressCity
@@ -1055,7 +1055,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressCity.Location = new System.Drawing.Point(289, 278);
             this.comboBox_invoicingAddressCity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddressCity.Name = "comboBox_invoicingAddressCity";
-            this.comboBox_invoicingAddressCity.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddressCity.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddressCity.TabIndex = 3;
             // 
             // comboBox_invoicingAddressState
@@ -1064,7 +1064,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressState.Location = new System.Drawing.Point(289, 330);
             this.comboBox_invoicingAddressState.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddressState.Name = "comboBox_invoicingAddressState";
-            this.comboBox_invoicingAddressState.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddressState.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddressState.TabIndex = 3;
             // 
             // comboBox_invoicingAddressCountryISO
@@ -1073,7 +1073,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_invoicingAddressCountryISO.Location = new System.Drawing.Point(289, 382);
             this.comboBox_invoicingAddressCountryISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_invoicingAddressCountryISO.Name = "comboBox_invoicingAddressCountryISO";
-            this.comboBox_invoicingAddressCountryISO.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_invoicingAddressCountryISO.Size = new System.Drawing.Size(188, 25);
             this.comboBox_invoicingAddressCountryISO.TabIndex = 3;
             // 
             // panel2
@@ -1093,7 +1093,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_financeCompanyInfo.Location = new System.Drawing.Point(64, 13);
             this.label_financeCompanyInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_financeCompanyInfo.Name = "label_financeCompanyInfo";
-            this.label_financeCompanyInfo.Size = new System.Drawing.Size(230, 28);
+            this.label_financeCompanyInfo.Size = new System.Drawing.Size(153, 17);
             this.label_financeCompanyInfo.TabIndex = 1;
             this.label_financeCompanyInfo.Text = "Finance - Company Info";
             // 
@@ -1137,7 +1137,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_organizationNo.Location = new System.Drawing.Point(14, 25);
             this.label_organizationNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_organizationNo.Name = "label_organizationNo";
-            this.label_organizationNo.Size = new System.Drawing.Size(161, 28);
+            this.label_organizationNo.Size = new System.Drawing.Size(108, 17);
             this.label_organizationNo.TabIndex = 1;
             this.label_organizationNo.Text = "Organization No";
             // 
@@ -1147,7 +1147,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_vatNo.Location = new System.Drawing.Point(14, 77);
             this.label_vatNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_vatNo.Name = "label_vatNo";
-            this.label_vatNo.Size = new System.Drawing.Size(80, 28);
+            this.label_vatNo.Size = new System.Drawing.Size(52, 17);
             this.label_vatNo.TabIndex = 1;
             this.label_vatNo.Text = "VAT No";
             // 
@@ -1157,7 +1157,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_organizationNo.Location = new System.Drawing.Point(193, 20);
             this.comboBox_organizationNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_organizationNo.Name = "comboBox_organizationNo";
-            this.comboBox_organizationNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_organizationNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_organizationNo.TabIndex = 3;
             // 
             // comboBox_VATNo
@@ -1166,7 +1166,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_VATNo.Location = new System.Drawing.Point(193, 72);
             this.comboBox_VATNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_VATNo.Name = "comboBox_VATNo";
-            this.comboBox_VATNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_VATNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_VATNo.TabIndex = 3;
             // 
             // comboBox_eanNo
@@ -1175,7 +1175,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_eanNo.Location = new System.Drawing.Point(193, 175);
             this.comboBox_eanNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_eanNo.Name = "comboBox_eanNo";
-            this.comboBox_eanNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_eanNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_eanNo.TabIndex = 3;
             // 
             // comboBox_useEanNo
@@ -1184,7 +1184,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_useEanNo.Location = new System.Drawing.Point(193, 123);
             this.comboBox_useEanNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_useEanNo.Name = "comboBox_useEanNo";
-            this.comboBox_useEanNo.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_useEanNo.Size = new System.Drawing.Size(188, 25);
             this.comboBox_useEanNo.TabIndex = 3;
             // 
             // label_eanNo
@@ -1193,7 +1193,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_eanNo.Location = new System.Drawing.Point(14, 180);
             this.label_eanNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_eanNo.Name = "label_eanNo";
-            this.label_eanNo.Size = new System.Drawing.Size(77, 28);
+            this.label_eanNo.Size = new System.Drawing.Size(52, 17);
             this.label_eanNo.TabIndex = 1;
             this.label_eanNo.Text = "Ean No";
             // 
@@ -1203,7 +1203,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_useEanNo.Location = new System.Drawing.Point(14, 128);
             this.label_useEanNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_useEanNo.Name = "label_useEanNo";
-            this.label_useEanNo.Size = new System.Drawing.Size(117, 28);
+            this.label_useEanNo.Size = new System.Drawing.Size(78, 17);
             this.label_useEanNo.TabIndex = 1;
             this.label_useEanNo.Text = "Use Ean No";
             // 
@@ -1224,7 +1224,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_defaultInvoiceSettings.Location = new System.Drawing.Point(64, 13);
             this.label_defaultInvoiceSettings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_defaultInvoiceSettings.Name = "label_defaultInvoiceSettings";
-            this.label_defaultInvoiceSettings.Size = new System.Drawing.Size(318, 28);
+            this.label_defaultInvoiceSettings.Size = new System.Drawing.Size(210, 17);
             this.label_defaultInvoiceSettings.TabIndex = 1;
             this.label_defaultInvoiceSettings.Text = "Finance - Default Invoice Settings";
             // 
@@ -1270,7 +1270,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultVATPercentage.Location = new System.Drawing.Point(473, 179);
             this.checkBox_defaultVATPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultVATPercentage.Name = "checkBox_defaultVATPercentage";
-            this.checkBox_defaultVATPercentage.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultVATPercentage.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultVATPercentage.TabIndex = 8;
             this.checkBox_defaultVATPercentage.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultVATPercentage, "Set default values for all rows of a particular column field");
@@ -1283,7 +1283,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultPaymentTerm.Location = new System.Drawing.Point(473, 22);
             this.checkBox_defaultPaymentTerm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultPaymentTerm.Name = "checkBox_defaultPaymentTerm";
-            this.checkBox_defaultPaymentTerm.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultPaymentTerm.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultPaymentTerm.TabIndex = 8;
             this.checkBox_defaultPaymentTerm.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentTerm, "Set default values for all rows of a particular column field");
@@ -1296,7 +1296,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_paymentTerm.Location = new System.Drawing.Point(20, 24);
             this.label_paymentTerm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_paymentTerm.Name = "label_paymentTerm";
-            this.label_paymentTerm.Size = new System.Drawing.Size(142, 28);
+            this.label_paymentTerm.Size = new System.Drawing.Size(96, 17);
             this.label_paymentTerm.TabIndex = 1;
             this.label_paymentTerm.Text = "Payment Term";
             // 
@@ -1306,7 +1306,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_discountPercentage.Location = new System.Drawing.Point(20, 77);
             this.label_discountPercentage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_discountPercentage.Name = "label_discountPercentage";
-            this.label_discountPercentage.Size = new System.Drawing.Size(199, 28);
+            this.label_discountPercentage.Size = new System.Drawing.Size(133, 17);
             this.label_discountPercentage.TabIndex = 1;
             this.label_discountPercentage.Text = "Discount Percentage";
             // 
@@ -1316,7 +1316,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_calculateVAT.Location = new System.Drawing.Point(20, 129);
             this.label_calculateVAT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_calculateVAT.Name = "label_calculateVAT";
-            this.label_calculateVAT.Size = new System.Drawing.Size(134, 28);
+            this.label_calculateVAT.Size = new System.Drawing.Size(88, 17);
             this.label_calculateVAT.TabIndex = 1;
             this.label_calculateVAT.Text = "Calculate VAT";
             // 
@@ -1326,7 +1326,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_VATPercentage.Location = new System.Drawing.Point(247, 176);
             this.comboBox_VATPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_VATPercentage.Name = "comboBox_VATPercentage";
-            this.comboBox_VATPercentage.Size = new System.Drawing.Size(215, 36);
+            this.comboBox_VATPercentage.Size = new System.Drawing.Size(215, 25);
             this.comboBox_VATPercentage.TabIndex = 3;
             // 
             // label_vatPercentage
@@ -1335,7 +1335,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_vatPercentage.Location = new System.Drawing.Point(20, 181);
             this.label_vatPercentage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_vatPercentage.Name = "label_vatPercentage";
-            this.label_vatPercentage.Size = new System.Drawing.Size(154, 28);
+            this.label_vatPercentage.Size = new System.Drawing.Size(102, 17);
             this.label_vatPercentage.TabIndex = 1;
             this.label_vatPercentage.Text = "VAT Percentage";
             // 
@@ -1345,7 +1345,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_calculateVAT.Location = new System.Drawing.Point(247, 124);
             this.comboBox_calculateVAT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_calculateVAT.Name = "comboBox_calculateVAT";
-            this.comboBox_calculateVAT.Size = new System.Drawing.Size(215, 36);
+            this.comboBox_calculateVAT.Size = new System.Drawing.Size(215, 25);
             this.comboBox_calculateVAT.TabIndex = 3;
             // 
             // comboBox_discountPercentage
@@ -1354,7 +1354,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_discountPercentage.Location = new System.Drawing.Point(247, 72);
             this.comboBox_discountPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_discountPercentage.Name = "comboBox_discountPercentage";
-            this.comboBox_discountPercentage.Size = new System.Drawing.Size(215, 36);
+            this.comboBox_discountPercentage.Size = new System.Drawing.Size(215, 25);
             this.comboBox_discountPercentage.TabIndex = 3;
             // 
             // comboBox_paymentTerm
@@ -1363,7 +1363,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_paymentTerm.Location = new System.Drawing.Point(247, 21);
             this.comboBox_paymentTerm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_paymentTerm.Name = "comboBox_paymentTerm";
-            this.comboBox_paymentTerm.Size = new System.Drawing.Size(215, 36);
+            this.comboBox_paymentTerm.Size = new System.Drawing.Size(215, 25);
             this.comboBox_paymentTerm.TabIndex = 3;
             // 
             // panel_invoiceExternalCosts
@@ -1383,7 +1383,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_invoiceExternalCosts.Location = new System.Drawing.Point(64, 13);
             this.label_invoiceExternalCosts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_invoiceExternalCosts.Name = "label_invoiceExternalCosts";
-            this.label_invoiceExternalCosts.Size = new System.Drawing.Size(372, 28);
+            this.label_invoiceExternalCosts.Size = new System.Drawing.Size(248, 17);
             this.label_invoiceExternalCosts.TabIndex = 1;
             this.label_invoiceExternalCosts.Text = "Finance - Re-Invoicing of External Costs";
             // 
@@ -1429,7 +1429,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultExpenseIsBillable.Location = new System.Drawing.Point(487, 77);
             this.checkBox_defaultExpenseIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultExpenseIsBillable.Name = "checkBox_defaultExpenseIsBillable";
-            this.checkBox_defaultExpenseIsBillable.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultExpenseIsBillable.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultExpenseIsBillable.TabIndex = 5;
             this.checkBox_defaultExpenseIsBillable.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultExpenseIsBillable, "Set default values for all rows of a particular column field");
@@ -1442,7 +1442,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultMileageIsBillable.Location = new System.Drawing.Point(487, 127);
             this.checkBox_defaultMileageIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultMileageIsBillable.Name = "checkBox_defaultMileageIsBillable";
-            this.checkBox_defaultMileageIsBillable.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultMileageIsBillable.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultMileageIsBillable.TabIndex = 4;
             this.checkBox_defaultMileageIsBillable.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultMileageIsBillable, "Set default values for all rows of a particular column field");
@@ -1455,7 +1455,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_defaultMileageDistance.Location = new System.Drawing.Point(14, 25);
             this.label_defaultMileageDistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_defaultMileageDistance.Name = "label_defaultMileageDistance";
-            this.label_defaultMileageDistance.Size = new System.Drawing.Size(239, 28);
+            this.label_defaultMileageDistance.Size = new System.Drawing.Size(157, 17);
             this.label_defaultMileageDistance.TabIndex = 1;
             this.label_defaultMileageDistance.Text = "Default Mileage Distance";
             // 
@@ -1465,7 +1465,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_defaultDistIsMaxBillable.Location = new System.Drawing.Point(14, 180);
             this.label_defaultDistIsMaxBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_defaultDistIsMaxBillable.Name = "label_defaultDistIsMaxBillable";
-            this.label_defaultDistIsMaxBillable.Size = new System.Drawing.Size(255, 28);
+            this.label_defaultDistIsMaxBillable.Size = new System.Drawing.Size(168, 17);
             this.label_defaultDistIsMaxBillable.TabIndex = 1;
             this.label_defaultDistIsMaxBillable.Text = "Default Dist Is Max Billable";
             // 
@@ -1475,7 +1475,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_expenseIsBillable.Location = new System.Drawing.Point(14, 77);
             this.label_expenseIsBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_expenseIsBillable.Name = "label_expenseIsBillable";
-            this.label_expenseIsBillable.Size = new System.Drawing.Size(179, 28);
+            this.label_expenseIsBillable.Size = new System.Drawing.Size(118, 17);
             this.label_expenseIsBillable.TabIndex = 1;
             this.label_expenseIsBillable.Text = "Expense Is Billable";
             // 
@@ -1485,7 +1485,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_mileageIsBillable.Location = new System.Drawing.Point(14, 128);
             this.label_mileageIsBillable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_mileageIsBillable.Name = "label_mileageIsBillable";
-            this.label_mileageIsBillable.Size = new System.Drawing.Size(176, 28);
+            this.label_mileageIsBillable.Size = new System.Drawing.Size(115, 17);
             this.label_mileageIsBillable.TabIndex = 1;
             this.label_mileageIsBillable.Text = "Mileage Is Billable";
             // 
@@ -1495,7 +1495,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_defaultDistIsMaxBillable.Location = new System.Drawing.Point(266, 175);
             this.comboBox_defaultDistIsMaxBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_defaultDistIsMaxBillable.Name = "comboBox_defaultDistIsMaxBillable";
-            this.comboBox_defaultDistIsMaxBillable.Size = new System.Drawing.Size(257, 36);
+            this.comboBox_defaultDistIsMaxBillable.Size = new System.Drawing.Size(257, 25);
             this.comboBox_defaultDistIsMaxBillable.TabIndex = 3;
             // 
             // comboBox_defaultMileageDistance
@@ -1504,7 +1504,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_defaultMileageDistance.Location = new System.Drawing.Point(266, 20);
             this.comboBox_defaultMileageDistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_defaultMileageDistance.Name = "comboBox_defaultMileageDistance";
-            this.comboBox_defaultMileageDistance.Size = new System.Drawing.Size(257, 36);
+            this.comboBox_defaultMileageDistance.Size = new System.Drawing.Size(257, 25);
             this.comboBox_defaultMileageDistance.TabIndex = 3;
             // 
             // comboBox_expenseIsBillable
@@ -1513,7 +1513,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_expenseIsBillable.Location = new System.Drawing.Point(266, 72);
             this.comboBox_expenseIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_expenseIsBillable.Name = "comboBox_expenseIsBillable";
-            this.comboBox_expenseIsBillable.Size = new System.Drawing.Size(211, 36);
+            this.comboBox_expenseIsBillable.Size = new System.Drawing.Size(211, 25);
             this.comboBox_expenseIsBillable.TabIndex = 3;
             // 
             // comboBox_mileageIsBillable
@@ -1522,7 +1522,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_mileageIsBillable.Location = new System.Drawing.Point(266, 123);
             this.comboBox_mileageIsBillable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_mileageIsBillable.Name = "comboBox_mileageIsBillable";
-            this.comboBox_mileageIsBillable.Size = new System.Drawing.Size(211, 36);
+            this.comboBox_mileageIsBillable.Size = new System.Drawing.Size(211, 25);
             this.comboBox_mileageIsBillable.TabIndex = 3;
             // 
             // label_delimiter
@@ -1531,7 +1531,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_delimiter.Location = new System.Drawing.Point(14, 125);
             this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_delimiter.Name = "label_delimiter";
-            this.label_delimiter.Size = new System.Drawing.Size(95, 28);
+            this.label_delimiter.Size = new System.Drawing.Size(62, 17);
             this.label_delimiter.TabIndex = 1;
             this.label_delimiter.Text = "Delimiter";
             // 
@@ -1541,7 +1541,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
             this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 36);
+            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
             this.comboBox_delimiter.TabIndex = 7;
             // 
             // groupBox_customerMandatoryFields
@@ -1572,7 +1572,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultCountryISO.Location = new System.Drawing.Point(396, 205);
             this.checkBox_defaultCountryISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultCountryISO.Name = "checkBox_defaultCountryISO";
-            this.checkBox_defaultCountryISO.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultCountryISO.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultCountryISO.TabIndex = 8;
             this.checkBox_defaultCountryISO.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultCountryISO, "Set default values for all rows of a particular column field");
@@ -1585,7 +1585,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultCustomerStatus.Location = new System.Drawing.Point(396, 153);
             this.checkBox_defaultCustomerStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultCustomerStatus.Name = "checkBox_defaultCustomerStatus";
-            this.checkBox_defaultCustomerStatus.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultCustomerStatus.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultCustomerStatus.TabIndex = 8;
             this.checkBox_defaultCustomerStatus.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultCustomerStatus, "Set default values for all rows of a particular column field");
@@ -1598,7 +1598,7 @@ namespace TimeLog.DataImporter.UserControls
             this.checkBox_defaultCurrencyISO.Location = new System.Drawing.Point(396, 105);
             this.checkBox_defaultCurrencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox_defaultCurrencyISO.Name = "checkBox_defaultCurrencyISO";
-            this.checkBox_defaultCurrencyISO.Size = new System.Drawing.Size(104, 32);
+            this.checkBox_defaultCurrencyISO.Size = new System.Drawing.Size(70, 21);
             this.checkBox_defaultCurrencyISO.TabIndex = 8;
             this.checkBox_defaultCurrencyISO.Text = "Default";
             this.defaultToolTip.SetToolTip(this.checkBox_defaultCurrencyISO, "Set default values for all rows of a particular column field");
@@ -1611,7 +1611,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_countryISO.Location = new System.Drawing.Point(9, 207);
             this.label_countryISO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_countryISO.Name = "label_countryISO";
-            this.label_countryISO.Size = new System.Drawing.Size(123, 28);
+            this.label_countryISO.Size = new System.Drawing.Size(83, 17);
             this.label_countryISO.TabIndex = 5;
             this.label_countryISO.Text = "Country ISO";
             // 
@@ -1621,7 +1621,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerStatus.Location = new System.Drawing.Point(7, 155);
             this.label_customerStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerStatus.Name = "label_customerStatus";
-            this.label_customerStatus.Size = new System.Drawing.Size(161, 28);
+            this.label_customerStatus.Size = new System.Drawing.Size(109, 17);
             this.label_customerStatus.TabIndex = 5;
             this.label_customerStatus.Text = "Customer Status";
             // 
@@ -1631,7 +1631,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_countryISO.Location = new System.Drawing.Point(197, 202);
             this.comboBox_countryISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_countryISO.Name = "comboBox_countryISO";
-            this.comboBox_countryISO.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_countryISO.Size = new System.Drawing.Size(188, 25);
             this.comboBox_countryISO.TabIndex = 7;
             // 
             // comboBox_customerStatus
@@ -1640,7 +1640,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerStatus.Location = new System.Drawing.Point(197, 150);
             this.comboBox_customerStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_customerStatus.Name = "comboBox_customerStatus";
-            this.comboBox_customerStatus.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_customerStatus.Size = new System.Drawing.Size(188, 25);
             this.comboBox_customerStatus.TabIndex = 6;
             // 
             // label_currencyISO
@@ -1649,7 +1649,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_currencyISO.Location = new System.Drawing.Point(9, 103);
             this.label_currencyISO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_currencyISO.Name = "label_currencyISO";
-            this.label_currencyISO.Size = new System.Drawing.Size(130, 28);
+            this.label_currencyISO.Size = new System.Drawing.Size(87, 17);
             this.label_currencyISO.TabIndex = 5;
             this.label_currencyISO.Text = "Currency ISO";
             // 
@@ -1659,7 +1659,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_currencyISO.Location = new System.Drawing.Point(197, 98);
             this.comboBox_currencyISO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_currencyISO.Name = "comboBox_currencyISO";
-            this.comboBox_currencyISO.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_currencyISO.Size = new System.Drawing.Size(188, 25);
             this.comboBox_currencyISO.TabIndex = 4;
             // 
             // label_customerName
@@ -1668,7 +1668,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerName.Location = new System.Drawing.Point(9, 52);
             this.label_customerName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerName.Name = "label_customerName";
-            this.label_customerName.Size = new System.Drawing.Size(160, 28);
+            this.label_customerName.Size = new System.Drawing.Size(107, 17);
             this.label_customerName.TabIndex = 1;
             this.label_customerName.Text = "Customer Name";
             // 
@@ -1678,7 +1678,7 @@ namespace TimeLog.DataImporter.UserControls
             this.comboBox_customerName.Location = new System.Drawing.Point(197, 47);
             this.comboBox_customerName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox_customerName.Name = "comboBox_customerName";
-            this.comboBox_customerName.Size = new System.Drawing.Size(188, 36);
+            this.comboBox_customerName.Size = new System.Drawing.Size(188, 25);
             this.comboBox_customerName.TabIndex = 3;
             // 
             // label_customerSetup
@@ -1688,7 +1688,7 @@ namespace TimeLog.DataImporter.UserControls
             this.label_customerSetup.Location = new System.Drawing.Point(9, 27);
             this.label_customerSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_customerSetup.Name = "label_customerSetup";
-            this.label_customerSetup.Size = new System.Drawing.Size(389, 48);
+            this.label_customerSetup.Size = new System.Drawing.Size(260, 32);
             this.label_customerSetup.TabIndex = 0;
             this.label_customerSetup.Text = "Customer Data Import";
             // 
@@ -1758,7 +1758,7 @@ namespace TimeLog.DataImporter.UserControls
             this.Controls.Add(this.panel_customerDataTable);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserControl_CustomerImport";
-            this.Size = new System.Drawing.Size(1437, 1570);
+            this.Size = new System.Drawing.Size(1437, 1070);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel_customerDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_customer)).EndInit();
