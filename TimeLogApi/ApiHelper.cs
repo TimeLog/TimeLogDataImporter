@@ -62,7 +62,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllPaymentMethodEndpoint = "/api/v1/payment-method?$page={0}&$pagesize=500";
         public string GetAllProjectEndpoint = "/api/v1/project/get-all?$page={0}&$pagesize=500";
         public string GetAllProjectTemplateEndpoint = "/api/v1/project-template/get-all?$page={0}&$pagesize=500";
-        public string GetAllLegalEntityEndpoint = "/api/v1/legalentity?$page={0}&$pagesize=500";
+        public string GetAllLegalEntityEndpoint = "/api/v1/legal-entity?$page={0}&$pagesize=500";
         public string GetAllProjectTypeEndpoint = "/api/v1/ProjectType?$page={0}&$pagesize=500";
         public string GetAllProjectCategoryEndpoint = "/api/v1/ProjectCategory?$page={0}&$pagesize=500";
         public string GetAllTaskEndpoint = "/api/v1/task?$page={0}&$pagesize=500";
