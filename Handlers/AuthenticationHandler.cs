@@ -28,7 +28,7 @@ namespace TimeLog.DataImporter.Handlers
 
             var _options = new OidcClientOptions
             {
-                Authority = "https://newlogin.timelog.com",
+                Authority = "https://login.timelog.com",
                 ClientId = "tdi",
                 ClientSecret = "a2c06677-ad29-4213-9c84-983c301379af",
                 Scope = "openid profile tlp",
