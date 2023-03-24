@@ -352,7 +352,7 @@ namespace TimeLog.DataImporter.Handlers
                                 {
                                     if (_property.Name == "Properties")
                                     {
-                                        _apiResponse.Add(JsonConvert.DeserializeObject<CustomerReadModel>(_property.Value.ToString()));
+                                        _apiResponse.Add(JsonConvert.DeserializeObject<EmployeeReadModel>(_property.Value.ToString()));
                                     }
                                 }
                             }

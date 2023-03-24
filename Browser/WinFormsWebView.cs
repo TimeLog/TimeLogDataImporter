@@ -70,6 +70,9 @@ namespace TimeLog.DataImporter
                     }
                 };
 
+
+                browser.ScriptErrorsSuppressed = true;
+
                 try
                 {
                     form.Controls.Add(browser);
