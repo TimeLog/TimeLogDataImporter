@@ -37,8 +37,13 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string TaskDrivenRevenueCreateEndpoint = "/api/v1/contract/create-task-driven-revenue-contract";
         public string PaymentValidateEndpoint = "/api/v1/payment/validate-new-payment";
         public string PaymentCreateEndpoint = "/api/v1/payment";
-        public string TimeregistrationValidateEndpoint = "/api/v1/time-registration/validate-import-timeregistration";
-        public string TimeregistrationCreateEndpoint = "/api/v1/time-registration/import-timeregistration";
+        public string TimeregistrationValidateEndpoint = "/api/v1/time-registration/validate-import";
+        public string TimeregistrationCreateEndpoint = "/api/v1/time-registration/import";
+
+        public string RecurringPaymentPlanAmountUpdateEndpoint = "/api/v1/contract/update-recurring-contract-payment-plan-amount";
+        public string RecurringPaymentPlanAmountUpdateValidateEndpoint = "/api/v1/contract/validate-update-recurring-contract-payment-plan-amount";
+
+        
 
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page={0}&$pagesize=500";
