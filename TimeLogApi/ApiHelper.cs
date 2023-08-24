@@ -43,7 +43,9 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string RecurringPaymentPlanAmountUpdateEndpoint = "/api/v1/contract/update-recurring-contract-payment-plan-amount";
         public string RecurringPaymentPlanAmountUpdateValidateEndpoint = "/api/v1/contract/validate-update-recurring-contract-payment-plan-amount";
 
-        
+        public string HourlyRateCreateEndpoint = "/api/v1/contract-hourly-rate/create-hourly-rate";
+        public string HourlyRateValidateEndpoint = "/api/v1/contract-hourly-rate/validate-hourly-rate";
+
 
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page={0}&$pagesize=500";

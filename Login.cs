@@ -23,8 +23,9 @@ namespace TimeLog.DataImporter
             }
             else
             {
-
+#if !DEBUG
                 ApiHelper.Instance.SiteUrl = textBox_siteUrl.Text;
+#endif
 
                 var _token = await AuthenticationHandler.Instance.Authenticate();
 
