@@ -70,10 +70,11 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _discountPercentage = "Discount Percentage";
         private readonly string _calculateVAT = "Calculate VAT";
         private readonly string _VATPercentage = "VAT Percentage";
+        private readonly string _contactPerson = "Contact Person Email";
 
         //default value lists
-        private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
-        private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
+        private static readonly List<string> ExpenseIsBillableList = new List<string> { "true", "false" };
+        private static readonly List<string> MileageIsBillableList = new List<string> { "true", "false" };
         private static List<string> VATPercentageList = new List<string>();
 
 
@@ -85,7 +86,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>();
-
+        private static readonly List<KeyValuePair<int, string>> ContactPersonList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -161,6 +162,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllSecondaryKAMFromApi();
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
+            GetContactPersonFromApi();
             VATPercentageList = CustomerHandler.Instance.GetPercentageList();
         }
 
@@ -179,7 +181,7 @@ namespace TimeLog.DataImporter.UserControls
                 textBox_customerImportMessages.Text = string.Empty;
                 ClearAndResetAllCheckBoxes();
                 ClearAndResetAllComboBoxes();
-                Invoke((MethodInvoker) (() => button_import.Enabled = false));
+                Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
                 if (dataGridView_customer.RowCount > 1)
                 {
@@ -233,9 +235,10 @@ namespace TimeLog.DataImporter.UserControls
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_discountPercentage, _discountPercentage);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_calculateVAT, _calculateVAT);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATPercentage, _VATPercentage);
+                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contactPerson, _contactPerson);
 
 
-
+                this.comboBox_contactPerson.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactPerson_SelectedIndexChanged);
                 this.comboBox_industryName.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryName_SelectedIndexChanged);
                 this.comboBox_customerSince.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerSince_SelectedIndexChanged);
                 this.comboBox_primaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAM_SelectedIndexChanged);
@@ -288,7 +291,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_customerImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -300,7 +303,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_customerImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -310,7 +313,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_customerImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
-            Invoke((MethodInvoker) (() => button_import.Enabled = false));
+            Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_customer.DataSource = null;
             _customerTable = CustomerHandler.Instance.InitializeDomainDataTable(MandatoryFields);
@@ -339,10 +342,10 @@ namespace TimeLog.DataImporter.UserControls
                 _errorRowCount = 0;
 
                 //while validating, deactivate other buttons
-                Invoke((MethodInvoker) (() => button_validate.Enabled = false));
-                Invoke((MethodInvoker) (() => button_import.Enabled = false));
-                Invoke((MethodInvoker) (() => button_clear.Enabled = false));
-                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = false));
+                Invoke((MethodInvoker)(() => button_validate.Enabled = false));
+                Invoke((MethodInvoker)(() => button_import.Enabled = false));
+                Invoke((MethodInvoker)(() => button_clear.Enabled = false));
+                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = false));
 
                 Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Start time: " + DateTime.Now)));
 
@@ -363,9 +366,9 @@ namespace TimeLog.DataImporter.UserControls
                             CustomerCreateModel _newCustomer = new CustomerCreateModel
                             {
                                 Name = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerName, _row),
-                                CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
-                                CustomerStatusID = (int) MapFieldValueToID(_customerStatus, _row, false),
-                                CountryID = (int) MapFieldValueToID(_countryISO, _row, false),
+                                CurrencyID = (int)MapFieldValueToID(_currencyISO, _row, false),
+                                CustomerStatusID = (int)MapFieldValueToID(_customerStatus, _row, false),
+                                CountryID = (int)MapFieldValueToID(_countryISO, _row, false),
                                 CustomerNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerNo, _row),
                                 NickName = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _nickname, _row),
                                 PrimaryKAMID = MapFieldValueToID(_primaryKAM, _row, true),
@@ -393,15 +396,16 @@ namespace TimeLog.DataImporter.UserControls
                                 InvoicingAddressZipCode = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressZipCode, _row),
                                 InvoicingAddressCity = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressCity, _row),
                                 InvoicingAddressState = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressState, _row),
-                                InvoicingAddressCountryID = (int) MapFieldValueToID(_invoicingAddressCountryISO, _row, false),
+                                InvoicingAddressCountryID = (int)MapFieldValueToID(_invoicingAddressCountryISO, _row, false),
                                 DefaultMileageDistance = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _defaultMileageDistance, _row),
                                 ExpenseIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _expenseIsBillable, _row),
                                 MileageIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _mileageIsBillable, _row),
                                 DefaultDistIsMaxBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _defaultDistIsMaxBillable, _row),
-                                PaymentTermID = (int) MapFieldValueToID(_paymentTerm, _row, false),
+                                PaymentTermID = (int)MapFieldValueToID(_paymentTerm, _row, false),
                                 DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
                                 CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
-                                VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row)
+                                VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row),
+                                ContactID = (int)MapFieldValueToID(_contactPerson, _row, true)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -439,9 +443,9 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //reactivate buttons after work is done
-                Invoke((MethodInvoker) (() => button_validate.Enabled = true));
-                Invoke((MethodInvoker) (() => button_clear.Enabled = true));
-                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = true));
+                Invoke((MethodInvoker)(() => button_validate.Enabled = true));
+                Invoke((MethodInvoker)(() => button_clear.Enabled = true));
+                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = true));
             }
         }
 
@@ -451,6 +455,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
+            comboBox_contactPerson.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);
             comboBox_currencyISO.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerStatus.Items.AddRange(fileColumnHeaderArray);
@@ -545,6 +550,14 @@ namespace TimeLog.DataImporter.UserControls
                     }
                 }
 
+                else if (columnName == _contactPerson)
+                {
+                    _result = CustomerHandler.Instance.GetIDFromFieldValue(ContactPersonList, _fieldValue);
+                    if (_result == -1)
+                    {
+                        _result = 0;
+                    }
+                }
 
                 if (_result != -1)
                 {
@@ -563,7 +576,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            
+
 
             return 0;
         }
@@ -590,6 +603,8 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_customerSince.Items.Clear();
             comboBox_industryName.ResetText();
             comboBox_industryName.Items.Clear();
+            comboBox_contactPerson.ResetText();
+            comboBox_contactPerson.Items.Clear();
             comboBox_phoneNo.ResetText();
             comboBox_phoneNo.Items.Clear();
             comboBox_faxNo.ResetText();
@@ -765,6 +780,20 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
+        private void GetContactPersonFromApi()
+        {
+            var _apiResponse = CustomerHandler.Instance.GetContactPersonMethod(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _contactPerson in _apiResponse)
+                {
+                    ContactPersonList.Add(new KeyValuePair<int, string>(_contactPerson.ID,
+                        _contactPerson.Email));
+                }
+            }
+        }
+
         #endregion
 
         #region Combobox implementations
@@ -817,6 +846,10 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_industryName_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_industryName, _industryName, checkBox_defaultIndustryName);
+        }
+        private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_contactPerson, _contactPerson);
         }
 
         private void comboBox_phoneNo_SelectedIndexChanged(object sender, EventArgs e)

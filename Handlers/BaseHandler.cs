@@ -1616,6 +1616,59 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
+        public List<ContactPersonMethodReadModel> GetContactPersonMethod(string token)
+        {
+            var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetContactPersonMethodEndpoint, 1);
+
+            try
+            {
+                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                {
+                    List<ContactPersonMethodReadModel> _apiResponse = new List<ContactPersonMethodReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                    foreach (var _entity in _jsonDeserializedObject.Entities)
+                    {
+                        foreach (var _property in _entity.Properties())
+                        {
+                            _apiResponse.Add(JsonConvert.DeserializeObject<ContactPersonMethodReadModel>(_property.Value.ToString()));
+                        }
+                    }
+
+                    while (_totalPages > _currentPage)
+                    {
+                        _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, _currentPage + 1);
+                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                        _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
+                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        {
+                            _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
+
+                            foreach (var _entity in _jsonDeserializedObject.Entities)
+                            {
+                                foreach (var _property in _entity.Properties())
+                                {
+                                    _apiResponse.Add(JsonConvert.DeserializeObject<ContactPersonMethodReadModel>(_property.Value.ToString()));
+                                }
+                            }
+                        }
+                    }
+                    return _apiResponse;
+                }
+            }
+            catch (WebException _webEx)
+            {
+                MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Helper - Get data of different type methods
