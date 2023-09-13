@@ -70,7 +70,6 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _discountPercentage = "Discount Percentage";
         private readonly string _calculateVAT = "Calculate VAT";
         private readonly string _VATPercentage = "VAT Percentage";
-        private readonly string _contactPerson = "Contact Person Email";
 
         //default value lists
         private static readonly List<string> ExpenseIsBillableList = new List<string> { "true", "false" };
@@ -86,7 +85,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> SecondaryKAMList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> IndustryNameList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> PaymentTermList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> ContactPersonList = new List<KeyValuePair<int, string>>();
+
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -162,7 +161,6 @@ namespace TimeLog.DataImporter.UserControls
             GetAllSecondaryKAMFromApi();
             GetAllIndustryFromApi();
             GetAllPaymentTermFromApi();
-            GetContactPersonFromApi();
             VATPercentageList = CustomerHandler.Instance.GetPercentageList();
         }
 
@@ -235,10 +233,9 @@ namespace TimeLog.DataImporter.UserControls
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_discountPercentage, _discountPercentage);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_calculateVAT, _calculateVAT);
                 CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_VATPercentage, _VATPercentage);
-                CustomerHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contactPerson, _contactPerson);
 
 
-                this.comboBox_contactPerson.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactPerson_SelectedIndexChanged);
+
                 this.comboBox_industryName.SelectedIndexChanged += new System.EventHandler(this.comboBox_industryName_SelectedIndexChanged);
                 this.comboBox_customerSince.SelectedIndexChanged += new System.EventHandler(this.comboBox_customerSince_SelectedIndexChanged);
                 this.comboBox_primaryKAM.SelectedIndexChanged += new System.EventHandler(this.comboBox_primaryKAM_SelectedIndexChanged);
@@ -404,8 +401,7 @@ namespace TimeLog.DataImporter.UserControls
                                 PaymentTermID = (int)MapFieldValueToID(_paymentTerm, _row, false),
                                 DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
                                 CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
-                                VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row),
-                                ContactID = (int)MapFieldValueToID(_contactPerson, _row, true)
+                                VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -455,7 +451,6 @@ namespace TimeLog.DataImporter.UserControls
 
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
-            comboBox_contactPerson.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerName.Items.AddRange(fileColumnHeaderArray);
             comboBox_currencyISO.Items.AddRange(fileColumnHeaderArray);
             comboBox_customerStatus.Items.AddRange(fileColumnHeaderArray);
@@ -550,14 +545,6 @@ namespace TimeLog.DataImporter.UserControls
                     }
                 }
 
-                else if (columnName == _contactPerson)
-                {
-                    _result = CustomerHandler.Instance.GetIDFromFieldValue(ContactPersonList, _fieldValue);
-                    if (_result == -1)
-                    {
-                        _result = 0;
-                    }
-                }
 
                 if (_result != -1)
                 {
@@ -603,8 +590,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_customerSince.Items.Clear();
             comboBox_industryName.ResetText();
             comboBox_industryName.Items.Clear();
-            comboBox_contactPerson.ResetText();
-            comboBox_contactPerson.Items.Clear();
             comboBox_phoneNo.ResetText();
             comboBox_phoneNo.Items.Clear();
             comboBox_faxNo.ResetText();
@@ -780,20 +765,6 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetContactPersonFromApi()
-        {
-            var _apiResponse = CustomerHandler.Instance.GetContactPersonMethod(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _contactPerson in _apiResponse)
-                {
-                    ContactPersonList.Add(new KeyValuePair<int, string>(_contactPerson.ID,
-                        _contactPerson.Email));
-                }
-            }
-        }
-
         #endregion
 
         #region Combobox implementations
@@ -846,10 +817,6 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_industryName_SelectedIndexChanged(object sender, EventArgs e)
         {
             CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_industryName, _industryName, checkBox_defaultIndustryName);
-        }
-        private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomerHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_customer, _customerTable, comboBox_contactPerson, _contactPerson);
         }
 
         private void comboBox_phoneNo_SelectedIndexChanged(object sender, EventArgs e)
