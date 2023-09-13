@@ -51,6 +51,10 @@ namespace TimeLog.DataImporter
             this.userControl_TaskImport = new UserControl_TaskImport();
             this.tabPage_timeregistration = new System.Windows.Forms.TabPage();
             this.userControl_TimeregistrationImport = new UserControl_TimeregistrationImport();
+            this.tabPage_recurringPaymentPlanUpdate = new System.Windows.Forms.TabPage();
+            this.userControl_RecurringPaymentPlanUpdate = new UserControl_RecurringPaymentPlanUpdate();
+            this.tabPage_hourlyRate= new System.Windows.Forms.TabPage();
+            this.userControl_HourlyRateImport = new UserControl_HourlyRateImport();
             this.tabPage_help = new System.Windows.Forms.TabPage();
             this.userControl_Help = new UserControl_Help();
             this.tabPage_logout = new System.Windows.Forms.TabPage();
@@ -65,6 +69,8 @@ namespace TimeLog.DataImporter
             this.tabPage_projectExpense.SuspendLayout();
             this.tabPage_task.SuspendLayout();
             this.tabPage_timeregistration.SuspendLayout();
+            this.tabPage_recurringPaymentPlanUpdate.SuspendLayout();
+            this.tabPage_hourlyRate.SuspendLayout();
             this.tabPage_help.SuspendLayout();
             this.tabPage_logout.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +86,9 @@ namespace TimeLog.DataImporter
             this.tabControl1.Controls.Add(this.tabPage_payment);
             this.tabControl1.Controls.Add(this.tabPage_projectExpense);
             this.tabControl1.Controls.Add(this.tabPage_timeregistration);
+            this.tabControl1.Controls.Add(this.tabPage_recurringPaymentPlanUpdate);
+            this.tabControl1.Controls.Add(this.tabPage_hourlyRate);
+            
             this.tabControl1.Controls.Add(this.tabPage_help);
             this.tabControl1.Controls.Add(this.tabPage_logout);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -270,6 +279,48 @@ namespace TimeLog.DataImporter
             this.userControl_TimeregistrationImport.Name = "userControl_TimeregistrationImport";
             this.userControl_TimeregistrationImport.Size = new System.Drawing.Size(992, 908);
             this.userControl_TimeregistrationImport.TabIndex = 0;
+
+            // 
+            // tabPage_recurringPaymentPlanUpdate
+            // 
+            this.tabPage_recurringPaymentPlanUpdate.AutoScroll = true;
+            this.tabPage_recurringPaymentPlanUpdate.Controls.Add(this.userControl_RecurringPaymentPlanUpdate);
+            this.tabPage_recurringPaymentPlanUpdate.Location = new System.Drawing.Point(4, 24);
+            this.tabPage_recurringPaymentPlanUpdate.Name = "tabPage_recurringPaymentPlanUpdate";
+            this.tabPage_recurringPaymentPlanUpdate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_recurringPaymentPlanUpdate.Size = new System.Drawing.Size(998, 914);
+            this.tabPage_recurringPaymentPlanUpdate.TabIndex = 4;
+            this.tabPage_recurringPaymentPlanUpdate.Text = "RecurringPaymentPlanUpdate";
+            this.tabPage_recurringPaymentPlanUpdate.UseVisualStyleBackColor = true;
+            // 
+            // userControl_RecurringPaymentPlanUpdate
+            // 
+            this.userControl_RecurringPaymentPlanUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl_RecurringPaymentPlanUpdate.Location = new System.Drawing.Point(3, 3);
+            this.userControl_RecurringPaymentPlanUpdate.Name = "userControl_RecurringPaymentPlanUpdate";
+            this.userControl_RecurringPaymentPlanUpdate.Size = new System.Drawing.Size(992, 908);
+            this.userControl_RecurringPaymentPlanUpdate.TabIndex = 0;
+
+            // 
+            // tabPage_hourlyRate
+            // 
+            this.tabPage_hourlyRate.AutoScroll = true;
+            this.tabPage_hourlyRate.Controls.Add(this.userControl_HourlyRateImport);
+            this.tabPage_hourlyRate.Location = new System.Drawing.Point(4, 24);
+            this.tabPage_hourlyRate.Name = "tabPage_hourlyRate";
+            this.tabPage_hourlyRate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_hourlyRate.Size = new System.Drawing.Size(998, 914);
+            this.tabPage_hourlyRate.TabIndex = 4;
+            this.tabPage_hourlyRate.Text = "Hourly Rate";
+            this.tabPage_hourlyRate.UseVisualStyleBackColor = true;
+            // 
+            // userControl_HourlyRateImport
+            // 
+            this.userControl_HourlyRateImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl_HourlyRateImport.Location = new System.Drawing.Point(3, 3);
+            this.userControl_HourlyRateImport.Name = "userControl_HourlyRateImport";
+            this.userControl_HourlyRateImport.Size = new System.Drawing.Size(992, 908);
+            this.userControl_HourlyRateImport.TabIndex = 0;
             // 
             // tabPage_help
             // 
@@ -332,6 +383,8 @@ namespace TimeLog.DataImporter
             this.tabPage_projectExpense.ResumeLayout(false);
             this.tabPage_task.ResumeLayout(false);
             this.tabPage_timeregistration.ResumeLayout(false);
+            this.tabPage_recurringPaymentPlanUpdate.ResumeLayout(false);
+            this.tabPage_hourlyRate.ResumeLayout(false);
             this.tabPage_help.ResumeLayout(false);
             this.tabPage_logout.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -350,6 +403,8 @@ namespace TimeLog.DataImporter
         public TabPage tabPage_projectExpense;
         public TabPage tabPage_task;
         public TabPage tabPage_timeregistration;
+        public TabPage tabPage_recurringPaymentPlanUpdate;
+        public TabPage tabPage_hourlyRate;
         public TabPage tabPage_help;
         public TabPage tabPage_logout;
         public UserControl_CustomerImport userControl_CustomerImport;
@@ -360,6 +415,8 @@ namespace TimeLog.DataImporter
         public UserControl_ProjectExpenseImport userControl_ProjectExpenseImport;
         public UserControl_TaskImport userControl_TaskImport;
         public UserControl_TimeregistrationImport userControl_TimeregistrationImport;
+        public UserControl_RecurringPaymentPlanUpdate userControl_RecurringPaymentPlanUpdate;
+        public UserControl_HourlyRateImport userControl_HourlyRateImport;
         public UserControl_PaymentImport userControl_PaymentImport;
         public UserControl_Help userControl_Help;
         public UserControl_Logout userControl_Logout;
