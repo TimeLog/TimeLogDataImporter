@@ -1619,18 +1619,15 @@ namespace TimeLog.DataImporter.Handlers
         public List<ContactPersonMethodReadModel> GetContactPersonMethod(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetContactPersonMethodEndpoint, 1);
-            _address = "http://localhost/tlp/api/v1/contact";
+            
             try
-            {
-                token = "D323A8932B571C8F6AF64558B1959C49341C1B564C9FF61950A2AC5900BE5D85-1";
+            {                
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ContactPersonMethodReadModel> _apiResponse = new List<ContactPersonMethodReadModel>();
-                    //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
-                    //var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {

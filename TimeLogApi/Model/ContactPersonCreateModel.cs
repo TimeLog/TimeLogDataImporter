@@ -28,12 +28,12 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         #region Optional
 
         /// <summary>
-        /// Gets or sets the customer no.
+        /// Gets or sets the customer ID.
         /// </summary>
         /// <value>
-        /// The customer no.
+        /// The customer ID.
         /// </value>
-        public string CustomerNo { get; set; }
+        public string CustomerID { get; set; }
 
         /// <summary>
         /// Gets or sets the job title 
