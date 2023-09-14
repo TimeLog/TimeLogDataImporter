@@ -52,6 +52,9 @@ namespace TimeLog.DataImporter.UserControls
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> CountryISOList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> CustomerList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> DepartmentList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> EmployeeList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -109,6 +112,9 @@ namespace TimeLog.DataImporter.UserControls
         private void InitializeAllDefaultValues()
         {
             GetAllCountryFromApi();
+            GetAllDepartmentsFromApi();
+            GetAllEmployeeFromApi();
+            GetAllCustomerFromApi();
         }
 
         #endregion
@@ -270,12 +276,11 @@ namespace TimeLog.DataImporter.UserControls
                                 FirstName = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _firstName, _row),
                                 LastName = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _lastName, _row),
                                 CountryID = (int)MapFieldValueToID(_country, _row, false),
-                                CustomerNo = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _customerNo, _row),
-                                Owner = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _owner, _row),
-                                Department = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _department, _row),
+                                CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
+                                OwnerID = (int)MapFieldValueToID(_owner, _row, false),
+                                DepartmentID = (int)MapFieldValueToID(_department, _row, false),
                                 JobTitle = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _jobTitle, _row),
                                 Birthday = ContactPersonHandler.Instance.CheckAndGetDate(dataGridView_contactPerson, _birthday, _row),
-
                                 Phone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _phoneNo, _row),
                                 MobilePhone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _mobilePhone, _row),
                                 HomePhone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _homePhone, _row),
@@ -372,6 +377,19 @@ namespace TimeLog.DataImporter.UserControls
                     _result = ContactPersonHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
                 }
 
+               else if (columnName == _customerNo)
+                {
+                    _result = ContactPersonHandler.Instance.GetIDFromFieldValue(CustomerList, _fieldValue);
+                }
+
+               else if (columnName == _department)
+                {
+                    _result = ContactPersonHandler.Instance.GetIDFromFieldValue(DepartmentList, _fieldValue);
+                }
+               else if (columnName == _owner)
+                {
+                    _result = ContactPersonHandler.Instance.GetIDFromFieldValue(EmployeeList, _fieldValue);
+                }
                 if (_result != -1)
                 {
                     return _result;
@@ -458,6 +476,44 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
+        private void GetAllCustomerFromApi()
+        {
+            var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _supplier in _apiResponse)
+                {
+                    CustomerList.Add(new KeyValuePair<int, string>(_supplier.CustomerID, _supplier.No));
+                }
+            }
+        }
+
+        private void GetAllEmployeeFromApi()
+        {
+            var _apiResponse = ContractHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _employee in _apiResponse)
+                {
+                    EmployeeList.Add(new KeyValuePair<int, string>(_employee.UserID, _employee.Initials));
+                }
+            }
+        }
+
+        private void GetAllDepartmentsFromApi()
+        {
+            var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _department in _apiResponse)
+                {
+                    DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
+                }
+            }
+        }
         #endregion
 
         #region Combobox implementations

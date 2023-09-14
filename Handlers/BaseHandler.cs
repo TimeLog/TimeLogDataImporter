@@ -1619,7 +1619,7 @@ namespace TimeLog.DataImporter.Handlers
         public List<ContactPersonMethodReadModel> GetContactPersonMethod(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetContactPersonMethodEndpoint, 1);
-            
+             
             try
             {                
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);

@@ -33,7 +33,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The customer ID.
         /// </value>
-        public string CustomerID { get; set; }
+        public int CustomerID { get; set; }
 
         /// <summary>
         /// Gets or sets the job title 
@@ -49,7 +49,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The owner initial
         /// </value>
-        public string Owner { get; set; }
+        public int OwnerID { get; set; }
 
         /// <summary>
         /// Gets or sets the reports to
@@ -65,7 +65,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The department
         /// </value>
-        public string Department { get; set; }
+        public int DepartmentID { get; set; }
 
         /// <summary>
         /// Gets or sets the date the birth day

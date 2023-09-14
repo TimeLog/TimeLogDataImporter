@@ -11,7 +11,7 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        //public string SiteUrl = "https://app4.timelog.com/coldemo";
+        //public string SiteUrl = "https://app8.timelog.com/mdutestsite";
         public string SiteUrl = "http://localhost/tlp";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
