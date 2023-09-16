@@ -47,6 +47,12 @@ namespace TimeLog.DataImporter.UserControls
             button_personDetails = new Button();
             label_personDetails = new Label();
             panel_personDetails = new Panel();
+            comboBox_profTitle2 = new ComboBox();
+            label_profTitle2 = new Label();
+            comboBox_profTitle1 = new ComboBox();
+            label_proftitle1 = new Label();
+            comboBox_initials = new ComboBox();
+            label_initials = new Label();
             label_customerNo = new Label();
             label_jobTitle = new Label();
             label_birthday = new Label();
@@ -71,7 +77,6 @@ namespace TimeLog.DataImporter.UserControls
             label_country = new Label();
             label_phone = new Label();
             label_fax = new Label();
-            label_website = new Label();
             label_address = new Label();
             label_address2 = new Label();
             label_address3 = new Label();
@@ -82,7 +87,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_phoneNo = new ComboBox();
             comboBox_faxNo = new ComboBox();
             comboBox_email = new ComboBox();
-            comboBox_website = new ComboBox();
             comboBox_address = new ComboBox();
             comboBox_address2 = new ComboBox();
             comboBox_address3 = new ComboBox();
@@ -332,6 +336,12 @@ namespace TimeLog.DataImporter.UserControls
             // panel_personDetails
             // 
             panel_personDetails.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            panel_personDetails.Controls.Add(comboBox_profTitle2);
+            panel_personDetails.Controls.Add(label_profTitle2);
+            panel_personDetails.Controls.Add(comboBox_profTitle1);
+            panel_personDetails.Controls.Add(label_proftitle1);
+            panel_personDetails.Controls.Add(comboBox_initials);
+            panel_personDetails.Controls.Add(label_initials);
             panel_personDetails.Controls.Add(label_customerNo);
             panel_personDetails.Controls.Add(label_jobTitle);
             panel_personDetails.Controls.Add(label_birthday);
@@ -346,11 +356,66 @@ namespace TimeLog.DataImporter.UserControls
             panel_personDetails.Controls.Add(comboBox_customerNo);
             panel_personDetails.Location = new System.Drawing.Point(3, 54);
             panel_personDetails.Margin = new Padding(3, 4, 3, 4);
-            panel_personDetails.MaximumSize = new System.Drawing.Size(487, 270);
+            panel_personDetails.MaximumSize = new System.Drawing.Size(487, 390);
             panel_personDetails.MinimumSize = new System.Drawing.Size(487, 0);
             panel_personDetails.Name = "panel_personDetails";
-            panel_personDetails.Size = new System.Drawing.Size(487, 270);
+            panel_personDetails.Size = new System.Drawing.Size(487, 390);
             panel_personDetails.TabIndex = 10;
+            // 
+            // comboBox_profTitle2
+            // 
+            comboBox_profTitle2.FormattingEnabled = true;
+            comboBox_profTitle2.Location = new System.Drawing.Point(176, 183);
+            comboBox_profTitle2.Margin = new Padding(3, 4, 3, 4);
+            comboBox_profTitle2.Name = "comboBox_profTitle2";
+            comboBox_profTitle2.Size = new System.Drawing.Size(157, 29);
+            comboBox_profTitle2.TabIndex = 9;
+            // 
+            // label_profTitle2
+            // 
+            label_profTitle2.AutoSize = true;
+            label_profTitle2.Location = new System.Drawing.Point(13, 189);
+            label_profTitle2.Name = "label_profTitle2";
+            label_profTitle2.Size = new System.Drawing.Size(150, 23);
+            label_profTitle2.TabIndex = 8;
+            label_profTitle2.Text = "Professional title 2";
+            // 
+            // comboBox_profTitle1
+            // 
+            comboBox_profTitle1.FormattingEnabled = true;
+            comboBox_profTitle1.Location = new System.Drawing.Point(175, 140);
+            comboBox_profTitle1.Margin = new Padding(3, 4, 3, 4);
+            comboBox_profTitle1.Name = "comboBox_profTitle1";
+            comboBox_profTitle1.Size = new System.Drawing.Size(157, 29);
+            comboBox_profTitle1.TabIndex = 7;
+            // 
+            // label_proftitle1
+            // 
+            label_proftitle1.AutoSize = true;
+            label_proftitle1.Location = new System.Drawing.Point(11, 146);
+            label_proftitle1.Name = "label_proftitle1";
+            label_proftitle1.Size = new System.Drawing.Size(148, 23);
+            label_proftitle1.TabIndex = 6;
+            label_proftitle1.Text = "Professional title 1";
+            // 
+            // comboBox_initials
+            // 
+            comboBox_initials.FormattingEnabled = true;
+            comboBox_initials.Location = new System.Drawing.Point(175, 99);
+            comboBox_initials.Margin = new Padding(3, 4, 3, 4);
+            comboBox_initials.Name = "comboBox_initials";
+            comboBox_initials.Size = new System.Drawing.Size(157, 29);
+            comboBox_initials.TabIndex = 5;
+            // 
+            // label_initials
+            // 
+            label_initials.AutoSize = true;
+            label_initials.Location = new System.Drawing.Point(12, 102);
+            label_initials.Name = "label_initials";
+            label_initials.Size = new System.Drawing.Size(59, 23);
+            label_initials.TabIndex = 4;
+            label_initials.Text = "Initials";
+            label_initials.Click += label2_Click_1;
             // 
             // label_customerNo
             // 
@@ -373,7 +438,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_birthday
             // 
             label_birthday.AutoSize = true;
-            label_birthday.Location = new System.Drawing.Point(11, 186);
+            label_birthday.Location = new System.Drawing.Point(16, 312);
             label_birthday.Name = "label_birthday";
             label_birthday.Size = new System.Drawing.Size(74, 23);
             label_birthday.TabIndex = 1;
@@ -382,7 +447,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_owner
             // 
             label_owner.AutoSize = true;
-            label_owner.Location = new System.Drawing.Point(11, 102);
+            label_owner.Location = new System.Drawing.Point(14, 231);
             label_owner.Name = "label_owner";
             label_owner.Size = new System.Drawing.Size(61, 23);
             label_owner.TabIndex = 1;
@@ -391,7 +456,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_department
             // 
             comboBox_department.FormattingEnabled = true;
-            comboBox_department.Location = new System.Drawing.Point(175, 222);
+            comboBox_department.Location = new System.Drawing.Point(172, 347);
             comboBox_department.Margin = new Padding(3, 4, 3, 4);
             comboBox_department.Name = "comboBox_department";
             comboBox_department.Size = new System.Drawing.Size(157, 29);
@@ -400,7 +465,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_reportsTo
             // 
             label_reportsTo.AutoSize = true;
-            label_reportsTo.Location = new System.Drawing.Point(11, 144);
+            label_reportsTo.Location = new System.Drawing.Point(17, 273);
             label_reportsTo.Name = "label_reportsTo";
             label_reportsTo.Size = new System.Drawing.Size(91, 23);
             label_reportsTo.TabIndex = 1;
@@ -409,7 +474,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_birthday
             // 
             comboBox_birthday.FormattingEnabled = true;
-            comboBox_birthday.Location = new System.Drawing.Point(175, 182);
+            comboBox_birthday.Location = new System.Drawing.Point(173, 308);
             comboBox_birthday.Margin = new Padding(3, 4, 3, 4);
             comboBox_birthday.Name = "comboBox_birthday";
             comboBox_birthday.Size = new System.Drawing.Size(157, 29);
@@ -418,7 +483,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_department
             // 
             label_department.AutoSize = true;
-            label_department.Location = new System.Drawing.Point(11, 226);
+            label_department.Location = new System.Drawing.Point(15, 351);
             label_department.Name = "label_department";
             label_department.Size = new System.Drawing.Size(102, 23);
             label_department.TabIndex = 1;
@@ -427,7 +492,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_owner
             // 
             comboBox_owner.FormattingEnabled = true;
-            comboBox_owner.Location = new System.Drawing.Point(175, 98);
+            comboBox_owner.Location = new System.Drawing.Point(175, 228);
             comboBox_owner.Margin = new Padding(3, 4, 3, 4);
             comboBox_owner.Name = "comboBox_owner";
             comboBox_owner.Size = new System.Drawing.Size(157, 29);
@@ -436,7 +501,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_reportsTo
             // 
             comboBox_reportsTo.FormattingEnabled = true;
-            comboBox_reportsTo.Location = new System.Drawing.Point(175, 140);
+            comboBox_reportsTo.Location = new System.Drawing.Point(174, 269);
             comboBox_reportsTo.Margin = new Padding(3, 4, 3, 4);
             comboBox_reportsTo.Name = "comboBox_reportsTo";
             comboBox_reportsTo.Size = new System.Drawing.Size(157, 29);
@@ -464,7 +529,7 @@ namespace TimeLog.DataImporter.UserControls
             // 
             panel_contactDetailsButton.Controls.Add(button_contactDetails);
             panel_contactDetailsButton.Controls.Add(label_ContactDetails);
-            panel_contactDetailsButton.Location = new System.Drawing.Point(3, 332);
+            panel_contactDetailsButton.Location = new System.Drawing.Point(3, 452);
             panel_contactDetailsButton.Margin = new Padding(3, 4, 3, 4);
             panel_contactDetailsButton.Name = "panel_contactDetailsButton";
             panel_contactDetailsButton.Size = new System.Drawing.Size(487, 42);
@@ -506,7 +571,6 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactDetails.Controls.Add(label_country);
             panel_contactDetails.Controls.Add(label_phone);
             panel_contactDetails.Controls.Add(label_fax);
-            panel_contactDetails.Controls.Add(label_website);
             panel_contactDetails.Controls.Add(label_address);
             panel_contactDetails.Controls.Add(label_address2);
             panel_contactDetails.Controls.Add(label_address3);
@@ -517,19 +581,18 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactDetails.Controls.Add(comboBox_phoneNo);
             panel_contactDetails.Controls.Add(comboBox_faxNo);
             panel_contactDetails.Controls.Add(comboBox_email);
-            panel_contactDetails.Controls.Add(comboBox_website);
             panel_contactDetails.Controls.Add(comboBox_address);
             panel_contactDetails.Controls.Add(comboBox_address2);
             panel_contactDetails.Controls.Add(comboBox_address3);
             panel_contactDetails.Controls.Add(comboBox_zipCode);
             panel_contactDetails.Controls.Add(comboBox_city);
             panel_contactDetails.Controls.Add(comboBox_state);
-            panel_contactDetails.Location = new System.Drawing.Point(3, 382);
+            panel_contactDetails.Location = new System.Drawing.Point(3, 502);
             panel_contactDetails.Margin = new Padding(3, 4, 3, 4);
-            panel_contactDetails.MaximumSize = new System.Drawing.Size(487, 560);
+            panel_contactDetails.MaximumSize = new System.Drawing.Size(487, 520);
             panel_contactDetails.MinimumSize = new System.Drawing.Size(487, 0);
             panel_contactDetails.Name = "panel_contactDetails";
-            panel_contactDetails.Size = new System.Drawing.Size(487, 560);
+            panel_contactDetails.Size = new System.Drawing.Size(487, 520);
             panel_contactDetails.TabIndex = 1;
             panel_contactDetails.Paint += panel_contactDetails_Paint;
             // 
@@ -572,7 +635,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_country
             // 
             comboBox_country.FormattingEnabled = true;
-            comboBox_country.Location = new System.Drawing.Point(137, 518);
+            comboBox_country.Location = new System.Drawing.Point(136, 477);
             comboBox_country.Margin = new Padding(3, 4, 3, 4);
             comboBox_country.Name = "comboBox_country";
             comboBox_country.Size = new System.Drawing.Size(151, 29);
@@ -581,11 +644,11 @@ namespace TimeLog.DataImporter.UserControls
             // label_country
             // 
             label_country.AutoSize = true;
-            label_country.Location = new System.Drawing.Point(16, 524);
+            label_country.Location = new System.Drawing.Point(15, 483);
             label_country.Name = "label_country";
-            label_country.Size = new System.Drawing.Size(73, 23);
+            label_country.Size = new System.Drawing.Size(105, 23);
             label_country.TabIndex = 4;
-            label_country.Text = "Country";
+            label_country.Text = "Country ISO";
             label_country.Click += label2_Click;
             // 
             // label_phone
@@ -606,19 +669,10 @@ namespace TimeLog.DataImporter.UserControls
             label_fax.TabIndex = 1;
             label_fax.Text = "Fax No";
             // 
-            // label_website
-            // 
-            label_website.AutoSize = true;
-            label_website.Location = new System.Drawing.Point(16, 226);
-            label_website.Name = "label_website";
-            label_website.Size = new System.Drawing.Size(71, 23);
-            label_website.TabIndex = 1;
-            label_website.Text = "Website";
-            // 
             // label_address
             // 
             label_address.AutoSize = true;
-            label_address.Location = new System.Drawing.Point(16, 274);
+            label_address.Location = new System.Drawing.Point(15, 233);
             label_address.Name = "label_address";
             label_address.Size = new System.Drawing.Size(70, 23);
             label_address.TabIndex = 1;
@@ -628,7 +682,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_address2
             // 
             label_address2.AutoSize = true;
-            label_address2.Location = new System.Drawing.Point(17, 314);
+            label_address2.Location = new System.Drawing.Point(16, 273);
             label_address2.Name = "label_address2";
             label_address2.Size = new System.Drawing.Size(84, 23);
             label_address2.TabIndex = 1;
@@ -637,7 +691,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_address3
             // 
             label_address3.AutoSize = true;
-            label_address3.Location = new System.Drawing.Point(16, 357);
+            label_address3.Location = new System.Drawing.Point(15, 316);
             label_address3.Name = "label_address3";
             label_address3.Size = new System.Drawing.Size(84, 23);
             label_address3.TabIndex = 1;
@@ -646,7 +700,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_zipCode
             // 
             label_zipCode.AutoSize = true;
-            label_zipCode.Location = new System.Drawing.Point(17, 400);
+            label_zipCode.Location = new System.Drawing.Point(16, 359);
             label_zipCode.Name = "label_zipCode";
             label_zipCode.Size = new System.Drawing.Size(79, 23);
             label_zipCode.TabIndex = 1;
@@ -655,7 +709,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_city
             // 
             label_city.AutoSize = true;
-            label_city.Location = new System.Drawing.Point(17, 442);
+            label_city.Location = new System.Drawing.Point(16, 401);
             label_city.Name = "label_city";
             label_city.Size = new System.Drawing.Size(40, 23);
             label_city.TabIndex = 1;
@@ -664,7 +718,7 @@ namespace TimeLog.DataImporter.UserControls
             // label_state
             // 
             label_state.AutoSize = true;
-            label_state.Location = new System.Drawing.Point(17, 482);
+            label_state.Location = new System.Drawing.Point(16, 441);
             label_state.Name = "label_state";
             label_state.Size = new System.Drawing.Size(49, 23);
             label_state.TabIndex = 1;
@@ -706,19 +760,10 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_email.Size = new System.Drawing.Size(151, 29);
             comboBox_email.TabIndex = 3;
             // 
-            // comboBox_website
-            // 
-            comboBox_website.FormattingEnabled = true;
-            comboBox_website.Location = new System.Drawing.Point(137, 223);
-            comboBox_website.Margin = new Padding(3, 4, 3, 4);
-            comboBox_website.Name = "comboBox_website";
-            comboBox_website.Size = new System.Drawing.Size(151, 29);
-            comboBox_website.TabIndex = 3;
-            // 
             // comboBox_address
             // 
             comboBox_address.FormattingEnabled = true;
-            comboBox_address.Location = new System.Drawing.Point(137, 266);
+            comboBox_address.Location = new System.Drawing.Point(136, 225);
             comboBox_address.Margin = new Padding(3, 4, 3, 4);
             comboBox_address.Name = "comboBox_address";
             comboBox_address.Size = new System.Drawing.Size(151, 29);
@@ -727,7 +772,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_address2
             // 
             comboBox_address2.FormattingEnabled = true;
-            comboBox_address2.Location = new System.Drawing.Point(137, 308);
+            comboBox_address2.Location = new System.Drawing.Point(136, 267);
             comboBox_address2.Margin = new Padding(3, 4, 3, 4);
             comboBox_address2.Name = "comboBox_address2";
             comboBox_address2.Size = new System.Drawing.Size(151, 29);
@@ -736,7 +781,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_address3
             // 
             comboBox_address3.FormattingEnabled = true;
-            comboBox_address3.Location = new System.Drawing.Point(137, 351);
+            comboBox_address3.Location = new System.Drawing.Point(136, 310);
             comboBox_address3.Margin = new Padding(3, 4, 3, 4);
             comboBox_address3.Name = "comboBox_address3";
             comboBox_address3.Size = new System.Drawing.Size(151, 29);
@@ -745,7 +790,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_zipCode
             // 
             comboBox_zipCode.FormattingEnabled = true;
-            comboBox_zipCode.Location = new System.Drawing.Point(137, 394);
+            comboBox_zipCode.Location = new System.Drawing.Point(136, 353);
             comboBox_zipCode.Margin = new Padding(3, 4, 3, 4);
             comboBox_zipCode.Name = "comboBox_zipCode";
             comboBox_zipCode.Size = new System.Drawing.Size(151, 29);
@@ -754,7 +799,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_city
             // 
             comboBox_city.FormattingEnabled = true;
-            comboBox_city.Location = new System.Drawing.Point(137, 436);
+            comboBox_city.Location = new System.Drawing.Point(136, 395);
             comboBox_city.Margin = new Padding(3, 4, 3, 4);
             comboBox_city.Name = "comboBox_city";
             comboBox_city.Size = new System.Drawing.Size(151, 29);
@@ -763,7 +808,7 @@ namespace TimeLog.DataImporter.UserControls
             // comboBox_state
             // 
             comboBox_state.FormattingEnabled = true;
-            comboBox_state.Location = new System.Drawing.Point(137, 476);
+            comboBox_state.Location = new System.Drawing.Point(136, 435);
             comboBox_state.Margin = new Padding(3, 4, 3, 4);
             comboBox_state.Name = "comboBox_state";
             comboBox_state.Size = new System.Drawing.Size(151, 29);
@@ -985,7 +1030,6 @@ namespace TimeLog.DataImporter.UserControls
         private Label label_address3;
         private Label label_address2;
         private Label label_address;
-        private Label label_website;
         private Label label_fax;
         private Label label_phone;
         private Label label_birthday;
@@ -998,7 +1042,6 @@ namespace TimeLog.DataImporter.UserControls
         private ComboBox comboBox_address3;
         private ComboBox comboBox_address2;
         private ComboBox comboBox_address;
-        private ComboBox comboBox_website;
         private ComboBox comboBox_email;
         private ComboBox comboBox_faxNo;
         private ComboBox comboBox_phoneNo;
@@ -1029,5 +1072,11 @@ namespace TimeLog.DataImporter.UserControls
         private Button button_personDetails;
         private Button button_contactDetails;
         private Label label_personDetails;
+        private Label label_initials;
+        private ComboBox comboBox_initials;
+        private ComboBox comboBox_profTitle2;
+        private Label label_profTitle2;
+        private ComboBox comboBox_profTitle1;
+        private Label label_proftitle1;
     }
 }

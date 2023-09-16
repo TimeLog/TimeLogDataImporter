@@ -28,32 +28,33 @@ namespace TimeLog.DataImporter.UserControls
         };
 
         //all column header variables
-        private readonly string _firstName = "First Name";
-        private readonly string _lastName = "Last Name";
-        private readonly string _customerNo = "Customer No";
-        private readonly string _owner = "Owner Initial";
+        private readonly string _firstName = "First name";
+        private readonly string _lastName = "Last name";
+        private readonly string _customerNo = @"Customer #";
+        private readonly string _owner = "Owner initials";
         private readonly string _reportsTo = "Reports To";
-        private readonly string _jobTitle = "Job Title";
+        private readonly string _jobTitle = "Job title";
         private readonly string _department = "Department";
         private readonly string _birthday = "Birthday";
-        private readonly string _phoneNo = "Phone";
-        private readonly string _mobilePhone = "Mobile Phone";
-        private readonly string _homePhone = "Home Phone";
-        private readonly string _faxNo = "Fax No";
-        private readonly string _email = "Email";
-        private readonly string _website = "Website";
+        private readonly string _phoneNo = "Phone no";
+        private readonly string _mobilePhone = "Mobile phone no";
+        private readonly string _homePhone = "Home phone no";
+        private readonly string _faxNo = "Fax";
+        private readonly string _email = "E-mail";
         private readonly string _address = "Address";
         private readonly string _address2 = "Address 2";
         private readonly string _address3 = "Address 3";
-        private readonly string _zipCode = "Zip Code";
+        private readonly string _zipCode = "Zip code";
         private readonly string _city = "City";
         private readonly string _state = "State";
-        private readonly string _country = "Country";
+        private readonly string _country = "Country ISO";
+        private readonly string _professionalTitle1 = "Professional title 1";
+        private readonly string _initials = "Initials";
+        private readonly string _professionalTitle2 = "Professional title 2";
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> CountryISOList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> CustomerList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> DepartmentList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> EmployeeList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
@@ -112,7 +113,6 @@ namespace TimeLog.DataImporter.UserControls
         private void InitializeAllDefaultValues()
         {
             GetAllCountryFromApi();
-            GetAllDepartmentsFromApi();
             GetAllEmployeeFromApi();
             GetAllCustomerFromApi();
         }
@@ -145,7 +145,9 @@ namespace TimeLog.DataImporter.UserControls
 
                 AddFileColumnHeaderToComboBox(ContactPersonHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
-
+                ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_profTitle1, _professionalTitle1);
+                ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_profTitle2, _professionalTitle2);
+                ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_initials, _initials);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contactPersonFirstName, _firstName);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contactPersonLastName, _lastName);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_country, _country);
@@ -160,7 +162,6 @@ namespace TimeLog.DataImporter.UserControls
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_homePhone, _homePhone);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_faxNo, _faxNo);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_email, _email);
-                ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_website, _website);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address, _address);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address2, _address2);
                 ContactPersonHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_address3, _address3);
@@ -181,7 +182,6 @@ namespace TimeLog.DataImporter.UserControls
                 this.comboBox_homePhone.SelectedIndexChanged += new System.EventHandler(this.comboBox_phoneNo_SelectedIndexChanged);
                 this.comboBox_faxNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_faxNo_SelectedIndexChanged);
                 this.comboBox_email.SelectedIndexChanged += new System.EventHandler(this.comboBox_email_SelectedIndexChanged);
-                this.comboBox_website.SelectedIndexChanged += new System.EventHandler(this.comboBox_website_SelectedIndexChanged);
                 this.comboBox_address.SelectedIndexChanged += new System.EventHandler(this.comboBox_address_SelectedIndexChanged);
                 this.comboBox_address2.SelectedIndexChanged += new System.EventHandler(this.comboBox_address2_SelectedIndexChanged);
                 this.comboBox_address3.SelectedIndexChanged += new System.EventHandler(this.comboBox_address3_SelectedIndexChanged);
@@ -189,6 +189,9 @@ namespace TimeLog.DataImporter.UserControls
                 this.comboBox_city.SelectedIndexChanged += new System.EventHandler(this.comboBox_city_SelectedIndexChanged);
                 this.comboBox_state.SelectedIndexChanged += new System.EventHandler(this.comboBox_state_SelectedIndexChanged);
                 this.comboBox_country.SelectedIndexChanged += new System.EventHandler(this.comboBox_country_SelectedIndexChanged);
+                this.comboBox_initials.SelectedIndexChanged += new System.EventHandler(this.comboBox_initials_SelectedIndexChanged);
+                this.comboBox_profTitle1.SelectedIndexChanged += new System.EventHandler(this.comboBox_profTitle1_SelectedIndexChanged);
+                this.comboBox_profTitle2.SelectedIndexChanged += new System.EventHandler(this.comboBox_profTitle2_SelectedIndexChanged);
             }
             else
             {
@@ -273,20 +276,22 @@ namespace TimeLog.DataImporter.UserControls
                         {
                             ContactPersonCreateModel _newContactPerson = new ContactPersonCreateModel
                             {
+                                ProfessionalTitle1 = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _professionalTitle1, _row),
+                                ProfessionalTitle2 = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _professionalTitle2, _row),
+                                Initials = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _initials, _row),
                                 FirstName = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _firstName, _row),
                                 LastName = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _lastName, _row),
                                 CountryID = (int)MapFieldValueToID(_country, _row, false),
                                 CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
                                 OwnerID = (int)MapFieldValueToID(_owner, _row, false),
-                                DepartmentID = (int)MapFieldValueToID(_department, _row, false),
                                 JobTitle = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _jobTitle, _row),
                                 Birthday = ContactPersonHandler.Instance.CheckAndGetDate(dataGridView_contactPerson, _birthday, _row),
                                 Phone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _phoneNo, _row),
-                                MobilePhone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _mobilePhone, _row),
-                                HomePhone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _homePhone, _row),
+                                Mobile = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _mobilePhone, _row),
+                                PrivatePhone = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _homePhone, _row),
                                 Fax = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _faxNo, _row),
                                 Email = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _email, _row),
-                                Website = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _website, _row),
+                                Department = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _department, _row),
                                 Address = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _address, _row),
                                 Address2 = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _address2, _row),
                                 Address3 = ContactPersonHandler.Instance.CheckAndGetString(dataGridView_contactPerson, _address3, _row),
@@ -299,7 +304,7 @@ namespace TimeLog.DataImporter.UserControls
                             {
                                 if (_senderButton.Name == button_validate.Name)
                                 {
-                                    var _defaultApiResponse = ContactPersonHandler.Instance.ValidateCustomer(_newContactPerson,
+                                    var _defaultApiResponse = ContactPersonHandler.Instance.ValidateContactPerson(_newContactPerson,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
@@ -307,7 +312,7 @@ namespace TimeLog.DataImporter.UserControls
                                 }
                                 else
                                 {
-                                    var _defaultApiResponse = ContactPersonHandler.Instance.ImportCustomer(_newContactPerson,
+                                    var _defaultApiResponse = ContactPersonHandler.Instance.ImportContactPerson(_newContactPerson,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
@@ -356,13 +361,15 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_homePhone.Items.AddRange(fileColumnHeaderArray);
             comboBox_faxNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_email.Items.AddRange(fileColumnHeaderArray);
-            comboBox_website.Items.AddRange(fileColumnHeaderArray);
             comboBox_address.Items.AddRange(fileColumnHeaderArray);
             comboBox_address2.Items.AddRange(fileColumnHeaderArray);
             comboBox_address3.Items.AddRange(fileColumnHeaderArray);
             comboBox_zipCode.Items.AddRange(fileColumnHeaderArray);
             comboBox_city.Items.AddRange(fileColumnHeaderArray);
             comboBox_state.Items.AddRange(fileColumnHeaderArray);
+            comboBox_initials.Items.AddRange(fileColumnHeaderArray);
+            comboBox_profTitle1.Items.AddRange(fileColumnHeaderArray);
+            comboBox_profTitle2.Items.AddRange(fileColumnHeaderArray);
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -377,16 +384,12 @@ namespace TimeLog.DataImporter.UserControls
                     _result = ContactPersonHandler.Instance.GetIDFromFieldValue(CountryISOList, _fieldValue);
                 }
 
-               else if (columnName == _customerNo)
+                else if (columnName == _customerNo)
                 {
                     _result = ContactPersonHandler.Instance.GetIDFromFieldValue(CustomerList, _fieldValue);
                 }
 
-               else if (columnName == _department)
-                {
-                    _result = ContactPersonHandler.Instance.GetIDFromFieldValue(DepartmentList, _fieldValue);
-                }
-               else if (columnName == _owner)
+                else if (columnName == _owner)
                 {
                     _result = ContactPersonHandler.Instance.GetIDFromFieldValue(EmployeeList, _fieldValue);
                 }
@@ -414,6 +417,12 @@ namespace TimeLog.DataImporter.UserControls
 
         private void ClearAndResetAllComboBoxes()
         {
+            comboBox_profTitle1.ResetText();
+            comboBox_profTitle1.Items.Clear();
+            comboBox_profTitle2.ResetText();
+            comboBox_profTitle2.Items.Clear();
+            comboBox_initials.ResetText();
+            comboBox_initials.Items.Clear();
             comboBox_contactPersonFirstName.ResetText();
             comboBox_contactPersonFirstName.Items.Clear();
             comboBox_contactPersonLastName.ResetText();
@@ -438,8 +447,6 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_faxNo.Items.Clear();
             comboBox_email.ResetText();
             comboBox_email.Items.Clear();
-            comboBox_website.ResetText();
-            comboBox_website.Items.Clear();
             comboBox_address.ResetText();
             comboBox_address.Items.Clear();
             comboBox_address2.ResetText();
@@ -502,18 +509,6 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetAllDepartmentsFromApi()
-        {
-            var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
-
-            if (_apiResponse != null)
-            {
-                foreach (var _department in _apiResponse)
-                {
-                    DepartmentList.Add(new KeyValuePair<int, string>(_department.DepartmentID, _department.Name));
-                }
-            }
-        }
         #endregion
 
         #region Combobox implementations
@@ -588,11 +583,6 @@ namespace TimeLog.DataImporter.UserControls
             ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_email, _email);
         }
 
-        private void comboBox_website_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_website, _website);
-        }
-
         private void comboBox_address_SelectedIndexChanged(object sender, EventArgs e)
         {
             ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_address, _address);
@@ -617,6 +607,18 @@ namespace TimeLog.DataImporter.UserControls
         {
             ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_city, _city);
         }
+        private void comboBox_profTitle1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_profTitle1, _professionalTitle1);
+        }
+        private void comboBox_profTitle2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_profTitle2, _professionalTitle2);
+        }
+        private void comboBox_initials_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_initials, _initials);
+        }
 
         private void comboBox_state_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -636,6 +638,11 @@ namespace TimeLog.DataImporter.UserControls
         }
 
         private void label_address_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
         {
 
         }

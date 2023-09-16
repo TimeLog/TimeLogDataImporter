@@ -1,79 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TimeLog.DataImporter.TimeLogApi.Model
 {
     public class ContactPersonCreateModel
     {
-        #region Mendatory Fields
+        //Mandatory
+
         /// <summary>
-        /// Gets or sets the first name
+        /// Gets or sets the Name
         /// </summary>
         /// /// <value>
-        /// The first name
+        /// The Name
         /// </value>
         public string FirstName { get; set; }
 
         /// <summary>
-        /// Gets or sets the last name
+        /// Gets or sets the Last Name
         /// </summary>
         /// /// <value>
-        /// The last name
+        /// The Last Name
         /// </value>
         public string LastName { get; set; }
-
-        #endregion
-
-        #region Optional
-
-        /// <summary>
-        /// Gets or sets the customer ID.
-        /// </summary>
-        /// <value>
-        /// The customer ID.
-        /// </value>
-        public int CustomerID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the job title 
-        /// </summary>
-        /// <value>
-        /// The job title
-        /// </value>
-        public string JobTitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the owner initial
-        /// </summary>
-        /// <value>
-        /// The owner initial
-        /// </value>
-        public int OwnerID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the reports to
-        /// </summary>
-        /// <value>
-        /// The reports to
-        /// </value>
-        public string ReportsTo { get; set; }
-
-        /// <summary>
-        /// Gets or sets the department 
-        /// </summary>
-        /// <value>
-        /// The department
-        /// </value>
-        public int DepartmentID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the date the birth day
-        /// </summary>
-        /// <value>
-        /// The start date of the birth day
-        /// </value>
-        public DateTime Birthday { get; set; }
 
         /// <summary>
         /// Gets or sets the phone number 
@@ -82,22 +29,6 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// The phone number
         /// </value>
         public string Phone { get; set; }
-
-        /// <summary>
-        /// Gets or sets the mobile phone number 
-        /// </summary>
-        /// <value>
-        /// The mobile phone number
-        /// </value>
-        public string MobilePhone { get; set; }
-
-        /// <summary>
-        /// Gets or sets the home phone number 
-        /// </summary>
-        /// <value>
-        /// The home phone number
-        /// </value>
-        public string HomePhone { get; set; }
 
         /// <summary>
         /// Gets or sets the fax number
@@ -116,12 +47,12 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets or sets the customers website
+        /// Gets or sets the Department
         /// </summary>
         /// <value>
-        /// The website address
+        /// The Department
         /// </value>
-        public string Website { get; set; }
+        public string Department { get; set; }
 
         /// <summary>
         /// Gets or sets the customer address
@@ -179,6 +110,92 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// </value>
         public int CountryID { get; set; }
 
-        #endregion
+        /// <summary>
+        /// Gets or sets the owner ID 
+        /// </summary>
+        /// <value>
+        /// The  Owner ID
+        /// </value>
+        public int OwnerID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Customer ID 
+        /// </summary>
+        /// <value>
+        /// The Customer ID
+        /// </value>
+        public int CustomerID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Salutation
+        /// </summary>
+        /// <value>
+        /// The Salutation
+        /// </value>
+        public string Salutation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the initials
+        /// </summary>
+        /// <value>
+        /// The initials
+        /// </value>
+        public string Initials { get; set; }
+
+        /// <summary>
+        /// Gets or sets the job title 
+        /// </summary>
+        /// <value>
+        /// The job title
+        /// </value>
+        public string JobTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mobile phone number
+        /// </summary>
+        /// <value>
+        /// The mobile
+        /// </value>
+        public string Mobile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the private phone number
+        /// </summary>
+        /// <value>
+        /// The private phone
+        /// </value>
+        public string PrivatePhone { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mobile phone number
+        /// </summary>
+        /// <value>
+        /// The mobile
+        /// </value>
+        public string Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Professional Title1
+        /// </summary>
+        /// <value>
+        /// The Professional Title1
+        /// </value>
+        public string ProfessionalTitle1 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ProfessionalTitle2
+        /// </summary>
+        /// <value>
+        /// The Professional Title2
+        /// </value>
+        public string ProfessionalTitle2 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Birthday
+        /// </summary>
+        /// <value>
+        /// The Birthday
+        /// </value>
+        public DateTime? Birthday { get; set; }
     }
 }
