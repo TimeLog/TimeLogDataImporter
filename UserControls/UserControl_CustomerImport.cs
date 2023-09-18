@@ -72,8 +72,8 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _VATPercentage = "VAT Percentage";
 
         //default value lists
-        private static readonly List<string> ExpenseIsBillableList = new List<string> {"true", "false"};
-        private static readonly List<string> MileageIsBillableList = new List<string> {"true", "false"};
+        private static readonly List<string> ExpenseIsBillableList = new List<string> { "true", "false" };
+        private static readonly List<string> MileageIsBillableList = new List<string> { "true", "false" };
         private static List<string> VATPercentageList = new List<string>();
 
 
@@ -179,7 +179,7 @@ namespace TimeLog.DataImporter.UserControls
                 textBox_customerImportMessages.Text = string.Empty;
                 ClearAndResetAllCheckBoxes();
                 ClearAndResetAllComboBoxes();
-                Invoke((MethodInvoker) (() => button_import.Enabled = false));
+                Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
                 if (dataGridView_customer.RowCount > 1)
                 {
@@ -288,7 +288,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_customerImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -300,7 +300,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_customerImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -310,7 +310,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_customerImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
-            Invoke((MethodInvoker) (() => button_import.Enabled = false));
+            Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_customer.DataSource = null;
             _customerTable = CustomerHandler.Instance.InitializeDomainDataTable(MandatoryFields);
@@ -339,10 +339,10 @@ namespace TimeLog.DataImporter.UserControls
                 _errorRowCount = 0;
 
                 //while validating, deactivate other buttons
-                Invoke((MethodInvoker) (() => button_validate.Enabled = false));
-                Invoke((MethodInvoker) (() => button_import.Enabled = false));
-                Invoke((MethodInvoker) (() => button_clear.Enabled = false));
-                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = false));
+                Invoke((MethodInvoker)(() => button_validate.Enabled = false));
+                Invoke((MethodInvoker)(() => button_import.Enabled = false));
+                Invoke((MethodInvoker)(() => button_clear.Enabled = false));
+                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = false));
 
                 Invoke((MethodInvoker)(() => textBox_customerImportMessages.AppendText("Start time: " + DateTime.Now)));
 
@@ -363,9 +363,9 @@ namespace TimeLog.DataImporter.UserControls
                             CustomerCreateModel _newCustomer = new CustomerCreateModel
                             {
                                 Name = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerName, _row),
-                                CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
-                                CustomerStatusID = (int) MapFieldValueToID(_customerStatus, _row, false),
-                                CountryID = (int) MapFieldValueToID(_countryISO, _row, false),
+                                CurrencyID = (int)MapFieldValueToID(_currencyISO, _row, false),
+                                CustomerStatusID = (int)MapFieldValueToID(_customerStatus, _row, false),
+                                CountryID = (int)MapFieldValueToID(_countryISO, _row, false),
                                 CustomerNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _customerNo, _row),
                                 NickName = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _nickname, _row),
                                 PrimaryKAMID = MapFieldValueToID(_primaryKAM, _row, true),
@@ -393,12 +393,12 @@ namespace TimeLog.DataImporter.UserControls
                                 InvoicingAddressZipCode = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressZipCode, _row),
                                 InvoicingAddressCity = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressCity, _row),
                                 InvoicingAddressState = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddressState, _row),
-                                InvoicingAddressCountryID = (int) MapFieldValueToID(_invoicingAddressCountryISO, _row, false),
+                                InvoicingAddressCountryID = (int)MapFieldValueToID(_invoicingAddressCountryISO, _row, false),
                                 DefaultMileageDistance = CustomerHandler.Instance.CheckAndGetInteger(dataGridView_customer, _defaultMileageDistance, _row),
                                 ExpenseIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _expenseIsBillable, _row),
                                 MileageIsBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _mileageIsBillable, _row),
                                 DefaultDistIsMaxBillable = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _defaultDistIsMaxBillable, _row),
-                                PaymentTermID = (int) MapFieldValueToID(_paymentTerm, _row, false),
+                                PaymentTermID = (int)MapFieldValueToID(_paymentTerm, _row, false),
                                 DiscountPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _discountPercentage, _row),
                                 CalculateVat = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _calculateVAT, _row),
                                 VatPercentage = CustomerHandler.Instance.CheckAndGetDouble(dataGridView_customer, _VATPercentage, _row)
@@ -439,9 +439,9 @@ namespace TimeLog.DataImporter.UserControls
                 }
 
                 //reactivate buttons after work is done
-                Invoke((MethodInvoker) (() => button_validate.Enabled = true));
-                Invoke((MethodInvoker) (() => button_clear.Enabled = true));
-                Invoke((MethodInvoker) (() => button_customerSelectFile.Enabled = true));
+                Invoke((MethodInvoker)(() => button_validate.Enabled = true));
+                Invoke((MethodInvoker)(() => button_clear.Enabled = true));
+                Invoke((MethodInvoker)(() => button_customerSelectFile.Enabled = true));
             }
         }
 
@@ -563,7 +563,7 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-            
+
 
             return 0;
         }

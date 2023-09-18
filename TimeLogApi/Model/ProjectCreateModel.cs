@@ -109,5 +109,17 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// The department ID
         /// </value>
         public int DepartmentID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contact person
+        /// </summary>
+        /// <value>
+        /// The ID of the contact person
+        /// /// Additional options
+        /// [-1]: Project's contact
+        /// [0]: Select when invoicing
+        /// [>0]: ID of existing customer contact person
+        /// </value>
+        public int ContactID { get; set; }
     }
 }

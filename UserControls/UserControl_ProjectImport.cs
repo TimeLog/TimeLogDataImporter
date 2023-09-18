@@ -47,6 +47,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _projectEndDate = "Project End Date";
         private readonly string _projectType = "Project Type";
         private readonly string _projectCategory = "Project Category";
+        private readonly string _contactPerson = "Customer contact person";
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> _projectTemplateList = new List<KeyValuePair<int, string>>();
@@ -57,6 +58,7 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> _projectCategoryList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _customerNoList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _projectManagerList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> ContactPersonList = new List<KeyValuePair<int, string>>();
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -82,7 +84,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void UserControl1_Load(object sender, EventArgs e)
         {
-          
+
         }
 
         #region Initialization methods
@@ -119,6 +121,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllProjectCategoryFromApi();
             GetAllProjectManagerFromApi();
             GetAllCustomerFromApi();
+            GetContactPersonFromApi();
         }
 
         #endregion
@@ -150,6 +153,7 @@ namespace TimeLog.DataImporter.UserControls
                 AddFileColumnHeaderToComboBox(ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
 
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectName, _projectName);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_contactPerson, _contactPerson);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCustomerNo, _customerNo);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectTemplate, _projectTemplate);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectManager, _projectManager);
@@ -176,7 +180,7 @@ namespace TimeLog.DataImporter.UserControls
                 this.comboBox_projectTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectTemplate_SelectedIndexChanged);
                 this.comboBox_projectCustomerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomerNo_SelectedIndexChanged);
                 this.comboBox_projectName.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectName_SelectedIndexChanged);
-
+                this.comboBox_contactPerson.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactPerson_SelectedIndexChanged);
             }
             else
             {
@@ -187,7 +191,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_projectImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -273,10 +277,10 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
                                 ProjectTypeID =  MapFieldValueToID(_projectType, _row, true),
                                 ProjectCategoryID =  MapFieldValueToID(_projectCategory, _row, true),
-                                DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false)
-
+                                DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false),
+                                ContactID = (int)MapFieldValueToID(_contactPerson, _row, true)
                             };
-
+                            
                             if (_isMappingFieldValueToIDCorrect)
                             {
                                 if (_senderButton.Name == button_validate.Name)
@@ -324,6 +328,7 @@ namespace TimeLog.DataImporter.UserControls
         private void AddFileColumnHeaderToComboBox(object[] fileColumnHeaderArray)
         {
             comboBox_projectName.Items.AddRange(fileColumnHeaderArray);
+            comboBox_contactPerson.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectCustomerNo.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectManager.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectTemplate.Items.AddRange(fileColumnHeaderArray);
@@ -377,6 +382,10 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     _result = ProjectHandler.Instance.GetIDFromFieldValue(_departmentList, _fieldValue);
                 }
+                else if (columnName == _contactPerson)
+                {
+                    _result = ProjectHandler.Instance.GetIDFromFieldValue(ContactPersonList, _fieldValue);
+                }
 
                 if (_result != -1)
                 {
@@ -395,13 +404,15 @@ namespace TimeLog.DataImporter.UserControls
                 _isFirstTimeInvalidMapping = false;
             }
 
-           
+
 
             return 0;
         }
 
         private void ClearAndResetAllComboBoxes()
         {
+            comboBox_contactPerson.ResetText();
+            comboBox_contactPerson.Items.Clear();
             comboBox_projectName.ResetText();
             comboBox_projectName.Items.Clear();
             comboBox_projectCustomerNo.ResetText();
@@ -543,9 +554,23 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                foreach (var _customer in _apiResponse.Where(x=>x.CustomerStatusID == _customerStatus.First(y=>y.IsDefault).CustomerStatusID))
+                foreach (var _customer in _apiResponse.Where(x=>x.CustomerStatusID == _customerStatus.First(y => y.IsDefault).CustomerStatusID))
                 {
                     _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
+                }
+            }
+        }
+
+        private void GetContactPersonFromApi()
+        {
+            var _apiResponse = CustomerHandler.Instance.GetContactPersonMethod(AuthenticationHandler.Instance.Token);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _contactPerson in _apiResponse)
+                {
+                    ContactPersonList.Add(new KeyValuePair<int, string>(_contactPerson.ID,
+                        _contactPerson.Email));
                 }
             }
         }
@@ -553,6 +578,11 @@ namespace TimeLog.DataImporter.UserControls
         #endregion
 
         #region Combobox implementations
+
+        private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
+        }
 
         private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -566,7 +596,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_projectTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectTemplate, _projectTemplate,  checkBox_defaultProjectTemplate);
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_projectTemplate, _projectTemplate, checkBox_defaultProjectTemplate);
         }
 
         private void comboBox_projectManager_SelectedIndexChanged(object sender, EventArgs e)

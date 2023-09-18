@@ -54,7 +54,6 @@ namespace TimeLog.DataImporter.Handlers
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var _address = ApiHelper.Instance.SiteUrl + ApiHelper.Instance.CustomerCreateEndpoint;
             businessRulesApiResponse = null;
-
             try
             {
                 var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);

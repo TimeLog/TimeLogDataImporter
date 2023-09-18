@@ -11,11 +11,13 @@ namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        //public string SiteUrl = "https://app4.timelog.com/coldemo";
-        public string SiteUrl = "http://localhost/tlp";
+        public string SiteUrl = "https://app8.timelog.com/mdutestsite";
+        //public string SiteUrl = "http://localhost/tlp";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
+        public string ContactValidateEndpoint = "/api/v1/contact/validate-new-contact";
+        public string ContactCreateEndpoint = "/api/v1/contact/create";
         public string ProjectValidateEndpoint = "/api/v1/project/validate-create-from-template";
         public string ProjectCreateEndpoint = "/api/v1/project/create-from-template";
         public string EmployeeValidateEndpoint = "/api/v1/user/validate-new-user";
@@ -79,6 +81,7 @@ namespace TimeLog.DataImporter.TimeLogApi
         public string GetAllContractModelsEndpoint = "/api/v1/ContractModel?$page={0}&$pagesize=500";
         public string GetAllUnitTypeEndpoint = "/api/v1/unit-type?$page={0}&$pagesize=500";
         public string GetAllAbsenceCodeEndpoint = "/api/v1/absence-code?$page={0}&$pagesize=500";
+        public string GetContactPersonMethodEndpoint = "/api/v1/contact";
 
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();
