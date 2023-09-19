@@ -210,7 +210,7 @@ namespace TimeLog.DataImporter.UserControls
             button_clear.Size = new System.Drawing.Size(91, 38);
             button_clear.TabIndex = 12;
             button_clear.Text = "Reset All";
-            defaultToolTip.SetToolTip(button_clear, "Reset all file input above and data table below");
+            defaultToolTip.SetToolTip(button_clear, "Reset everything and reload data from TLP");
             button_clear.UseVisualStyleBackColor = false;
             button_clear.Click += button_clear_Click;
             // 

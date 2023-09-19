@@ -213,6 +213,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_projectImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_project.DataSource = null;
@@ -484,6 +485,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectTemplateFromApi()
         {
+            _projectTemplateList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectTemplate(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -497,6 +499,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCurrencyFromApi()
         {
+            _currencyISOList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -510,6 +513,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllLegalEntityFromApi()
         {
+            _legalEntityList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllLegalEntity(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -523,6 +527,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllDepartmentsFromApi()
         {
+            _departmentList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -536,6 +541,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectTypeFromApi()
         {
+            _projectTypeList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -549,6 +555,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectCategoryFromApi()
         {
+            _projectCategoryList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectCategory(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -562,6 +569,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectManagerFromApi()
         {
+            _projectManagerList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -575,6 +583,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCustomerFromApi()
         {
+            _customerNoList.Clear();
             var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
 
             var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
@@ -590,7 +599,8 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContactPersonFromApi()
         {
-            
+            _contactPersonList.Clear();
+
             _contactPersonList.Add(new KeyValuePair<int, string>(-1, "Projects contact"));
             _contactPersonList.Add(new KeyValuePair<int, string>(0, "select on invoicing"));
 

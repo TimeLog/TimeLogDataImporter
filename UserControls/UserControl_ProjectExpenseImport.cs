@@ -223,6 +223,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_projectExpenseImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_projectExpense.DataSource = null;
@@ -464,6 +465,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectFromApi()
         {
+            ProjectNoList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -477,6 +479,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllPaymentMethodFromApi()
         {
+            PaymentMethodList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllPaymentMethod(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -490,6 +493,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllExpenseTypeFromApi()
         {
+            ExpenseTypeList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllExpenseType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -503,6 +507,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllExpenseCurrencyISOFromApi()
         {
+            ExpenseCurrencyISOList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -516,6 +521,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractFromApi(int projectID)
         {
+            ContractNameList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, projectID);
 
             if (_apiResponse != null)
@@ -529,6 +535,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllSupplierFromApi()
         {
+            SupplierNoList.Clear();
             var _apiResponse = ProjectExpenseHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

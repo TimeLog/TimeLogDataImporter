@@ -310,6 +310,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_customerImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_customer.DataSource = null;
@@ -674,6 +675,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCurrencyFromApi()
         {
+            CurrencyISOList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -687,6 +689,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCountryFromApi()
         {
+            CountryISOList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllCountry(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -700,6 +703,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCustomerStatusFromApi()
         {
+            CustomerStatusList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -713,6 +717,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllPrimaryKAMFromApi()
         {
+            PrimaryKAMList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -726,6 +731,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllSecondaryKAMFromApi()
         {
+            SecondaryKAMList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -740,6 +746,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllIndustryFromApi()
         {
+            IndustryNameList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllIndustry(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -753,6 +760,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllPaymentTermFromApi()
         {
+            PaymentTermList.Clear();
             var _apiResponse = CustomerHandler.Instance.GetAllPaymentTerm(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

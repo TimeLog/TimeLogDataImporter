@@ -181,8 +181,9 @@
             this.button_clear.Size = new System.Drawing.Size(80, 29);
             this.button_clear.TabIndex = 12;
             this.button_clear.Text = "Reset All";
-            this.defaultToolTip.SetToolTip(this.button_clear, "Reset all file input above and data table below");
+            this.defaultToolTip.SetToolTip(this.button_clear, "Reset everything and reload data from TLP");
             this.button_clear.UseVisualStyleBackColor = false;
+            this.button_clear.Click += button_clear_Click;
             // 
             // button_import
             // 

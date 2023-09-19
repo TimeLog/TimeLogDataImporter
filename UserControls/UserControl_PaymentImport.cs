@@ -193,6 +193,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_paymentImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_payment.DataSource = null;
@@ -437,6 +438,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllUnitTypeFromApi()
         {
+            _unitTypeList.Clear();
             var _apiResponse = PaymentHandler.Instance.GetAllUnitType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -450,6 +452,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectFromApi()
         {
+            _projectList.Clear();
             var _apiResponse = PaymentHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

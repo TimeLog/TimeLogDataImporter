@@ -228,6 +228,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_taskImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_task.DataSource = null;
@@ -518,6 +519,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllTaskTypeFromApi()
         {
+            TaskTypeList.Clear();
             var _apiResponse = TaskHandler.Instance.GetAllTaskType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -532,6 +534,7 @@ namespace TimeLog.DataImporter.UserControls
        
         private void GetAllProjectFromApi()
         {
+            ProjectNoList.Clear();
             var _apiResponse = TaskHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -545,6 +548,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractFromApi(int projectID)
         {
+            ContractNameList.Clear();
             var _apiResponse = TaskHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, projectID);
 
             if (_apiResponse != null)

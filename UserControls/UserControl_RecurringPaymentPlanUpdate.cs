@@ -166,6 +166,7 @@ namespace TimeLog.DataImporter.UserControls
             RecurringPaymentPlanAmountHandler.Instance.FileColumnHeaders = new List<string>();
             textBox_recurringPaymentPlanAmountUpdateImportMessages.Text = string.Empty;
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_recurringPaymentPlanAmountUpdate.DataSource = null;
@@ -361,6 +362,7 @@ namespace TimeLog.DataImporter.UserControls
         #region Get default values from API
         private void GetAllProjectFromApi()
         {
+            ProjectList.Clear();
             var _apiResponse = RecurringPaymentPlanAmountHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
