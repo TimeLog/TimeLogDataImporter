@@ -47,7 +47,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _projectEndDate = "Project End Date";
         private readonly string _projectType = "Project Type";
         private readonly string _projectCategory = "Project Category";
-        private readonly string _contactPerson = "Customer contact person";
+        private readonly string _contactPerson = "Contact Person (email)";
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> _projectTemplateList = new List<KeyValuePair<int, string>>();
@@ -203,7 +203,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_projectImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -266,21 +266,21 @@ namespace TimeLog.DataImporter.UserControls
                             ProjectCreateModel _newProject = new ProjectCreateModel
                             {
                                 Name = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectName, _row),
-                                CustomerID = (int) MapFieldValueToID(_customerNo, _row, false),
-                                ProjectTemplateID = (int) MapFieldValueToID(_projectTemplate, _row, false),
-                                ProjectManagerID = (int) MapFieldValueToID(_projectManager, _row, false),
-                                CurrencyID = (int) MapFieldValueToID(_currencyISO, _row, false),
-                                LegalEntityID = (int) MapFieldValueToID(_legalEntity, _row, false),
+                                CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
+                                ProjectTemplateID = (int)MapFieldValueToID(_projectTemplate, _row, false),
+                                ProjectManagerID = (int)MapFieldValueToID(_projectManager, _row, false),
+                                CurrencyID = (int)MapFieldValueToID(_currencyISO, _row, false),
+                                LegalEntityID = (int)MapFieldValueToID(_legalEntity, _row, false),
                                 ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectNo, _row),
                                 Description = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _description, _row),
                                 ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
                                 ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
-                                ProjectTypeID =  MapFieldValueToID(_projectType, _row, true),
-                                ProjectCategoryID =  MapFieldValueToID(_projectCategory, _row, true),
+                                ProjectTypeID = MapFieldValueToID(_projectType, _row, true),
+                                ProjectCategoryID = MapFieldValueToID(_projectCategory, _row, true),
                                 DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false),
                                 ContactID = (int)MapFieldValueToID(_contactPerson, _row, true)
                             };
-                            
+
                             if (_isMappingFieldValueToIDCorrect)
                             {
                                 if (_senderButton.Name == button_validate.Name)
@@ -554,7 +554,7 @@ namespace TimeLog.DataImporter.UserControls
 
             if (_apiResponse != null)
             {
-                foreach (var _customer in _apiResponse.Where(x=>x.CustomerStatusID == _customerStatus.First(y => y.IsDefault).CustomerStatusID))
+                foreach (var _customer in _apiResponse.Where(x => x.CustomerStatusID == _customerStatus.First(y => y.IsDefault).CustomerStatusID))
                 {
                     _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
                 }
