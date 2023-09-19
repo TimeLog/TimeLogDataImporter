@@ -120,6 +120,18 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// [0]: Select when invoicing
         /// [>0]: ID of existing customer contact person
         /// </value>
-        public int ContactID { get; set; }
+        public int? ContactID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Customer Reference ID on the projects invoicing settings
+        /// </summary>
+        /// <value>
+        /// The Customer Reference ID
+        /// Additional options
+        /// [-1]: Project's contact
+        /// [0]: Select when invoicing
+        /// [>0]: ID of existing customer Reference Id
+        /// </value>
+        public int? InvoicingCustomerReferenceID { get; set; }
     }
 }

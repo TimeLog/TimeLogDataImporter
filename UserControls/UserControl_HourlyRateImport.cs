@@ -373,6 +373,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractFromApi(int projectID)
         {
+            ContractNameList.Clear();
             var _apiResponse = TaskHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, projectID);
 
             if (_apiResponse != null)
