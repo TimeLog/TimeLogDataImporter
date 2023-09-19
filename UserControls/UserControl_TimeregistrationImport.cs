@@ -228,6 +228,7 @@ namespace TimeLog.DataImporter.UserControls
             TimeregistrationHandler.Instance.FileColumnHeaders = new List<string>();
             textBox_timeregistrationImportMessages.Text = string.Empty;
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_timeregistration.DataSource = null;
@@ -517,6 +518,7 @@ namespace TimeLog.DataImporter.UserControls
         #region Get default values from API
         private void GetAllProjectFromApi()
         {
+            ProjectList.Clear();
             var _apiResponse = TimeregistrationHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -530,6 +532,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllUsersFromApi()
         {
+            UserList.Clear();
             var _apiResponse = TimeregistrationHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -543,6 +546,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllAbsenceCodesFromApi()
         {
+            AbsenceCodeList.Clear();
             var _apiResponse = TimeregistrationHandler.Instance.GetAllAbsenceCode(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

@@ -255,6 +255,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contractImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker) (() => button_import.Enabled = false));
 
             dataGridView_contract.DataSource = null;
@@ -634,6 +635,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractModelsFromApi()
         {
+            ContractModelList.Clear();
             var _apiResponse = ContractHandler.Instance.GetAllContractModels(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -647,6 +649,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectsFromApi()
         {
+            ProjectList.Clear();
             var _apiResponse = ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -660,6 +663,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractOwnersFromApi()
         {
+            ContractOwnerList.Clear();
             var _apiResponse = ContractHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)

@@ -224,6 +224,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contactPersonImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_contactPerson.DataSource = null;
@@ -472,6 +473,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCountryFromApi()
         {
+            CountryISOList.Clear();
             var _apiResponse = ContactPersonHandler.Instance.GetAllCountry(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -485,6 +487,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCustomerFromApi()
         {
+            CustomerList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -498,6 +501,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllEmployeeFromApi()
         {
+            EmployeeList.Clear();
             var _apiResponse = ContractHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
