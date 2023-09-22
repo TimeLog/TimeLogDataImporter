@@ -581,7 +581,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
         }
 
         private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)
@@ -688,6 +688,11 @@ namespace TimeLog.DataImporter.UserControls
                 _departmentName, checkBox_defaultProjectDepartment, _departmentList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
+        //private void checkBox_defaultContactPerson_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    ProjectHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_project, _projectTable, comboBox_contactPerson,
+        //        _contactPerson, checkBox_defaultProjectDepartment, _departmentList, ProjectHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+        //}
         #endregion
 
 
