@@ -581,7 +581,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
+            ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
         }
 
         private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)

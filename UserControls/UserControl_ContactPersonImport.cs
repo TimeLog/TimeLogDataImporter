@@ -525,7 +525,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void comboBox_country_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ContactPersonHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_country, _country);
+            ContactPersonHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contactPerson, _contactPersonTable, comboBox_country, _country);
         }
 
         private void comboBox_customerNo_SelectedIndexChanged(object sender, EventArgs e)
