@@ -238,12 +238,11 @@ namespace TimeLog.DataImporter.UserControls
 
         private void button_clear_Click(object sender, EventArgs e)
         {
-            InitializeAllDefaultValues();
-
             EmployeeHandler.Instance.FileColumnHeaders = new List<string>();
             textBox_employeeImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_employee.DataSource = null;

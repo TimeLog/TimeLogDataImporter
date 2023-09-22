@@ -1628,6 +1628,8 @@ namespace TimeLog.DataImporter.Handlers
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<ContactPersonMethodReadModel> _apiResponse = new List<ContactPersonMethodReadModel>();
+                    var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
+                    var _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
                     foreach (var _entity in _jsonDeserializedObject.Entities)
                     {
@@ -1637,7 +1639,7 @@ namespace TimeLog.DataImporter.Handlers
                         }
                     }
 
-                    /*while (_totalPages > _currentPage)
+                    while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, _currentPage + 1);
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
@@ -1655,7 +1657,7 @@ namespace TimeLog.DataImporter.Handlers
                                 }
                             }
                         }
-                    }*/
+                    }
                     return _apiResponse;
                 }
             }

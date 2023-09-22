@@ -48,6 +48,7 @@ namespace TimeLog.DataImporter.UserControls
         private readonly string _projectType = "Project Type";
         private readonly string _projectCategory = "Project Category";
         private readonly string _contactPerson = "Contact Person (email)";
+        private readonly string _invoicingCustomerReference = "Customer Inv. Ref.";
 
         //default value lists from API 
         private static readonly List<KeyValuePair<int, string>> _projectTemplateList = new List<KeyValuePair<int, string>>();
@@ -58,7 +59,9 @@ namespace TimeLog.DataImporter.UserControls
         private static readonly List<KeyValuePair<int, string>> _projectCategoryList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _customerNoList = new List<KeyValuePair<int, string>>();
         private static readonly List<KeyValuePair<int, string>> _projectManagerList = new List<KeyValuePair<int, string>>();
-        private static readonly List<KeyValuePair<int, string>> ContactPersonList = new List<KeyValuePair<int, string>>();
+        private static readonly List<KeyValuePair<int, string>> _contactPersonList = new List<KeyValuePair<int, string>>();
+
+
 
         //expanding panels' current states, expand panels, expand buttons
         private BaseHandler.ExpandState[] _expandStates;
@@ -80,11 +83,6 @@ namespace TimeLog.DataImporter.UserControls
             _projectTable = ProjectHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_project.DataSource = _projectTable;
             button_import.Enabled = false;
-        }
-
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
         }
 
         #region Initialization methods
@@ -121,7 +119,7 @@ namespace TimeLog.DataImporter.UserControls
             GetAllProjectCategoryFromApi();
             GetAllProjectManagerFromApi();
             GetAllCustomerFromApi();
-            GetContactPersonFromApi();
+            GetAllContactPersonFromApi();
         }
 
         #endregion
@@ -166,6 +164,7 @@ namespace TimeLog.DataImporter.UserControls
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectType, _projectType);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectCategory, _projectCategory);
                 ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_projectDepartment, _departmentName);
+                ProjectHandler.Instance.AutoMapFileColumns(_fileContent, comboBox_customerInvRef, _invoicingCustomerReference);
 
                 this.comboBox_projectNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectNo_SelectedIndexChanged);
                 this.comboBox_description.SelectedIndexChanged += new System.EventHandler(this.comboBox_description_SelectedIndexChanged);
@@ -181,6 +180,7 @@ namespace TimeLog.DataImporter.UserControls
                 this.comboBox_projectCustomerNo.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectCustomerNo_SelectedIndexChanged);
                 this.comboBox_projectName.SelectedIndexChanged += new System.EventHandler(this.comboBox_projectName_SelectedIndexChanged);
                 this.comboBox_contactPerson.SelectedIndexChanged += new System.EventHandler(this.comboBox_contactPerson_SelectedIndexChanged);
+                this.comboBox_customerInvRef.SelectedIndexChanged += new System.EventHandler(this.comboBox_InvoicingCustomerReference_SelectedIndexChanged);
             }
             else
             {
@@ -213,6 +213,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_projectImportMessages.Text = string.Empty;
             ClearAndResetAllCheckBoxes();
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_project.DataSource = null;
@@ -278,7 +279,8 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectTypeID = MapFieldValueToID(_projectType, _row, true),
                                 ProjectCategoryID = MapFieldValueToID(_projectCategory, _row, true),
                                 DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false),
-                                ContactID = (int)MapFieldValueToID(_contactPerson, _row, true)
+                                ContactID = MapFieldValueToID(_contactPerson, _row, true),
+                                InvoicingCustomerReferenceID = MapFieldValueToID(_invoicingCustomerReference, _row, true)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
@@ -341,6 +343,7 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_projectType.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectCategory.Items.AddRange(fileColumnHeaderArray);
             comboBox_projectDepartment.Items.AddRange(fileColumnHeaderArray);
+            comboBox_customerInvRef.Items.AddRange(fileColumnHeaderArray);
         }
 
         private int? MapFieldValueToID(string columnName, DataGridViewRow row, bool isNullableField)
@@ -384,7 +387,30 @@ namespace TimeLog.DataImporter.UserControls
                 }
                 else if (columnName == _contactPerson)
                 {
-                    _result = ProjectHandler.Instance.GetIDFromFieldValue(ContactPersonList, _fieldValue);
+                    if (string.IsNullOrWhiteSpace(_fieldValue))
+                    {
+                        return null;
+                    }
+
+                    _result = ProjectHandler.Instance.GetIDFromFieldValue(_contactPersonList, _fieldValue);
+                    
+                    if(_result == -1)
+                    {
+                        isNullableField = false;
+                    }
+                }
+                else if (columnName == _invoicingCustomerReference)
+                {
+                    switch (_fieldValue)
+                    {
+                        case "-1":
+                            return -1;
+                        case "0":
+                            return 0;
+                        default:
+                            _result = ProjectHandler.Instance.GetIDFromFieldValue(_contactPersonList, _fieldValue);
+                            break;
+                    }
                 }
 
                 if (_result != -1)
@@ -439,6 +465,8 @@ namespace TimeLog.DataImporter.UserControls
             comboBox_projectCategory.Items.Clear();
             comboBox_projectDepartment.ResetText();
             comboBox_projectDepartment.Items.Clear();
+            comboBox_customerInvRef.Items.Clear();
+            comboBox_customerInvRef.ResetText();
         }
 
         private void ClearAndResetAllCheckBoxes()
@@ -457,6 +485,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectTemplateFromApi()
         {
+            _projectTemplateList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectTemplate(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -470,6 +499,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCurrencyFromApi()
         {
+            _currencyISOList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllCurrency(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -483,6 +513,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllLegalEntityFromApi()
         {
+            _legalEntityList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllLegalEntity(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -496,6 +527,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllDepartmentsFromApi()
         {
+            _departmentList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllDepartment(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -509,6 +541,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectTypeFromApi()
         {
+            _projectTypeList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectType(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -522,6 +555,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectCategoryFromApi()
         {
+            _projectCategoryList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllProjectCategory(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -535,6 +569,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllProjectManagerFromApi()
         {
+            _projectManagerList.Clear();
             var _apiResponse = ProjectHandler.Instance.GetAllEmployee(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -548,6 +583,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllCustomerFromApi()
         {
+            _customerNoList.Clear();
             var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
 
             var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
@@ -561,15 +597,20 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-        private void GetContactPersonFromApi()
+        private void GetAllContactPersonFromApi()
         {
+            _contactPersonList.Clear();
+
+            _contactPersonList.Add(new KeyValuePair<int, string>(-1, "Projects contact"));
+            _contactPersonList.Add(new KeyValuePair<int, string>(0, "select on invoicing"));
+
             var _apiResponse = CustomerHandler.Instance.GetContactPersonMethod(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
                 foreach (var _contactPerson in _apiResponse)
                 {
-                    ContactPersonList.Add(new KeyValuePair<int, string>(_contactPerson.ID,
+                    _contactPersonList.Add(new KeyValuePair<int, string>(_contactPerson.ID,
                         _contactPerson.Email));
                 }
             }
@@ -582,6 +623,11 @@ namespace TimeLog.DataImporter.UserControls
         private void comboBox_contactPerson_SelectedIndexChanged(object sender, EventArgs e)
         {
             ProjectHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_contactPerson, _contactPerson);
+        }
+
+        private void comboBox_InvoicingCustomerReference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProjectHandler.Instance.MapMandatorySelectedColumnToTable(_fileContent, dataGridView_project, _projectTable, comboBox_customerInvRef, _contactPerson);
         }
 
         private void comboBox_projectName_SelectedIndexChanged(object sender, EventArgs e)

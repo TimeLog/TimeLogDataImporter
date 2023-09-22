@@ -173,7 +173,9 @@ namespace TimeLog.DataImporter.UserControls
         {
             HourlyRateHandler.Instance.FileColumnHeaders = new List<string>();
             textBox_contractHourlyRateImportMessages.Text = string.Empty;
+            
             ClearAndResetAllComboBoxes();
+            InitializeAllDefaultValues();
             Invoke((MethodInvoker)(() => button_import.Enabled = false));
 
             dataGridView_contractHourlyRate.DataSource = null;
@@ -360,6 +362,7 @@ namespace TimeLog.DataImporter.UserControls
         #region Get default values from API
         private void GetAllProjectFromApi()
         {
+            ProjectList.Clear();
             var _apiResponse = HourlyRateHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
@@ -373,6 +376,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private void GetAllContractFromApi(int projectID)
         {
+            ContractNameList.Clear();
             var _apiResponse = TaskHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, projectID);
 
             if (_apiResponse != null)
