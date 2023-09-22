@@ -301,6 +301,12 @@ namespace TimeLog.DataImporter.UserControls
                     if (!string.IsNullOrWhiteSpace(_fieldValue))
                     {
                         var _projectID = RecurringPaymentPlanAmountHandler.Instance.GetIDFromFieldValue(ProjectList, RecurringPaymentPlanAmountHandler.Instance.CheckAndGetString(dataGridView_recurringPaymentPlanAmountUpdate, _projectNo, row));
+                        if (_projectID == -1)
+                        {
+                            // The project does not exist. Don't try to get contracts.
+                            return _result;
+                        }
+
                         var _projectContracts = RecurringPaymentPlanAmountHandler.Instance.GetAllContract(AuthenticationHandler.Instance.Token, _projectID);
 
                         try
