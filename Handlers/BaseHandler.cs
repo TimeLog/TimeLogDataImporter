@@ -1566,7 +1566,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
                 {
                     List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
