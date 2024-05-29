@@ -301,7 +301,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// Gets or sets the customer address or the customer contact address should be used for invoicing
         /// </summary>
         /// <value>
-        ///  CustomersAddress = 1,
+        /// CustomersAddress = 1,
         /// ContactsAddress = 2,
         /// CustomerInvoicingAddress = 4,
         /// NotSpecified = 0
