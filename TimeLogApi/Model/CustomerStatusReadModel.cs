@@ -43,5 +43,13 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
         /// </value>
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CustomerStatus Type.
+        /// </summary>
+        /// <value>
+        /// The CustomerStatus Type. 1=Customer, 2= supplier, 3=Partner
+        /// </value>
+        public int CustomerStatusType { get; set; }
     }
 }

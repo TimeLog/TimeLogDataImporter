@@ -584,15 +584,18 @@ namespace TimeLog.DataImporter.UserControls
         private void GetAllCustomerFromApi()
         {
             _customerNoList.Clear();
-            var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token);
+            var _customerStatus = ProjectHandler.Instance.GetAllCustomerStatus(AuthenticationHandler.Instance.Token).Where(x=>x.CustomerStatusType == 1).ToList();
 
             var _apiResponse = ProjectHandler.Instance.GetAllCustomer(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
-                foreach (var _customer in _apiResponse.Where(x => x.CustomerStatusID == _customerStatus.First(y => y.IsDefault).CustomerStatusID))
+                foreach (var _customer in _apiResponse)
                 {
-                    _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
+                    if(_customerStatus.Any(x=>x.CustomerStatusID == _customer.CustomerStatusID))
+                    {
+                        _customerNoList.Add(new KeyValuePair<int, string>(_customer.CustomerID, _customer.No));
+                    }
                 }
             }
         }
