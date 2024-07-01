@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using TimeLog.DataImporter.Handlers;
 using TimeLog.DataImporter.TimeLogApi;
 
@@ -59,7 +58,7 @@ namespace TimeLog.DataImporter
             {
                 ApiHelper.Instance.SiteUrl = textBox_siteUrl.Text;
 
-                var _token = await AuthenticationHandler.Instance.Authenticate(Strings.Trim(textbox_PAT.Text));
+                var _token = await AuthenticationHandler.Instance.Authenticate(textbox_PAT.Text.Trim());
 
                 if (!string.IsNullOrEmpty(_token))
                 {
