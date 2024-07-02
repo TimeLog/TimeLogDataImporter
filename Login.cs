@@ -41,9 +41,39 @@ namespace TimeLog.DataImporter
 
                     MainForm.Show();
                 }
+            }
         }
-    }
 
-       
+        private async void button_pat_login_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox_siteUrl.Text))
+            {
+                MessageBox.Show("Please enter a site url.");
+            }
+            else if (string.IsNullOrWhiteSpace(textbox_PAT.Text))
+            {
+                MessageBox.Show("Please enter a personal access token.");
+            }
+            else
+            {
+                ApiHelper.Instance.SiteUrl = textBox_siteUrl.Text;
+
+                var _token = await AuthenticationHandler.Instance.Authenticate(textbox_PAT.Text.Trim());
+
+                if (!string.IsNullOrEmpty(_token))
+                {
+                    Hide();
+
+                    if (MainForm == null)
+                    {
+                        MainForm = new Main();
+                        MainForm.Closed += (s, args) => Close();
+                    }
+
+                    MainForm.Show();
+                }
+            }
+
+        }
     }
 }
