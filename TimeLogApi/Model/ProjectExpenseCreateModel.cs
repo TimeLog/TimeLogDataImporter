@@ -58,7 +58,7 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value> 
         /// The sales price amount
         /// </value>
-        public double SalesPriceAmountProjectCurrency { get; set; }
+        public double? SalesPriceAmountProjectCurrency { get; set; }
 
         /// <summary>
         /// Gets or sets whether the expense is billable
@@ -138,6 +138,6 @@ namespace TimeLog.DataImporter.TimeLogApi.Model
         /// <value>
         /// The profit ratio
         /// </value>
-        public double ProfitRatio { get; set; }
+        public double? ProfitRatio { get; set; }
     }
 }
