@@ -388,6 +388,7 @@ namespace TimeLog.DataImporter.UserControls
                                 OrganizationNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _organizationNo, _row),
                                 VatNo = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _VATNo, _row),
                                 UseInvoicingAddress = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _useInvoicingAddress, _row),
+                                InvoiceAddressToUse = CustomerHandler.Instance.CheckAndGetBoolean(dataGridView_customer, _useInvoicingAddress, _row) ? 4 : 1,
                                 InvoicingAddress = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress, _row),
                                 InvoicingAddress2 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress2, _row),
                                 InvoicingAddress3 = CustomerHandler.Instance.CheckAndGetString(dataGridView_customer, _invoicingAddress3, _row),
