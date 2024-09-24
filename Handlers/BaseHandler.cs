@@ -1792,7 +1792,27 @@ namespace TimeLog.DataImporter.Handlers
 
             return _intList.ToArray();
         }
+        public double? CheckAndGetNullableDouble(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
+        {
+            if (dataGridView.Columns[columnName] != null)
+            {
+                try
+                {
+                    if (dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value == DBNull.Value | dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value.ToString() == "")
+                    {
+                        return null;
+                    }
 
+                    return Convert.ToDouble(dataGridViewRow.Cells[dataGridView.Columns[columnName].Index].Value);
+                }
+                catch (Exception)
+                {
+                    throw new FormatException("String format cannot be converted to double or null for column [" + columnName + "]. Please recheck input.");
+                }
+            }
+
+            return null;
+        }
         public double CheckAndGetDouble(DataGridView dataGridView, string columnName, DataGridViewRow dataGridViewRow)
         {
             if (dataGridView.Columns[columnName] != null)

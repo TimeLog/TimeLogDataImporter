@@ -282,7 +282,7 @@ namespace TimeLog.DataImporter.UserControls
                                 PaymentMethodID = (int) MapFieldValueToID(PaymentMethod, _row, false),
                                 ExpenseTypeID = (int) MapFieldValueToID(ExpenseType, _row, false),
                                 AmountIncludingVatExpenseCurrency = ProjectExpenseHandler.Instance.CheckAndGetDouble(dataGridView_projectExpense, AmountIncludingVAT, _row),
-                                SalesPriceAmountProjectCurrency = ProjectExpenseHandler.Instance.CheckAndGetDouble(dataGridView_projectExpense, SalesPriceAmount, _row),
+                                SalesPriceAmountProjectCurrency = ProjectExpenseHandler.Instance.CheckAndGetNullableDouble(dataGridView_projectExpense, SalesPriceAmount, _row),
                                 IsBillable = ProjectExpenseHandler.Instance.CheckAndGetBoolean(dataGridView_projectExpense, IsBillable, _row),
                                 ExpenseNo = ProjectExpenseHandler.Instance.CheckAndGetString(dataGridView_projectExpense, ExpenseNo, _row),
                                 VatAmountExpenseCurrency = ProjectExpenseHandler.Instance.CheckAndGetDouble(dataGridView_projectExpense, VATAmount, _row),
@@ -292,7 +292,7 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectExpenseExchangeRate = ProjectExpenseHandler.Instance.CheckAndGetDouble(dataGridView_projectExpense, ExchangeRate, _row),
                                 SupplierID = MapFieldValueToID(SupplierNo, _row, true),
                                 SupplierInvoiceNo = ProjectExpenseHandler.Instance.CheckAndGetString(dataGridView_projectExpense, SupplierInvoiceNo, _row),
-                                ProfitRatio = ProjectExpenseHandler.Instance.CheckAndGetDouble(dataGridView_projectExpense, ProfitRatio, _row)
+                                ProfitRatio = ProjectExpenseHandler.Instance.CheckAndGetNullableDouble(dataGridView_projectExpense, ProfitRatio, _row)
                             };
 
                             if (_isMappingFieldValueToIDCorrect)
