@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+	<SelfContained>true</SelfContained>
     <ApplicationIcon>TimeLog.ico</ApplicationIcon>
   </PropertyGroup>
 
