@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
 using TimeLog.DataImporter.TimeLogApi;
@@ -204,6 +207,13 @@ namespace TimeLog.DataImporter.UserControls
             {
                 _errorRowCount = 0;
 
+                string errorLog = "FailedImports"+ DateTime.Now.ToString("yyyyMMdd") + ".csv";
+
+                if(File.Exists(errorLog))
+                    File.Delete(errorLog);
+
+                File.WriteAllText(errorLog, "Project No;Contract Name;Hourly Rate Category;Hourly rate;Hourly Rate Name" + Environment.NewLine);
+
                 //while validating, deactivate other buttons
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
@@ -216,46 +226,65 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     foreach (DataGridViewRow _row in dataGridView_contractHourlyRate.Rows)
                     {
-                        if (WorkerFetcher.CancellationPending)
-                        {
-                            break;
-                        }
-
-                        _isMappingFieldValueToIDCorrect = true;
-                        _isFirstTimeInvalidMapping = true;
-
-                        if (_row.DataBoundItem != null)
-                        {
-                            ContractHourlyRateApiCreateModel _newContractHourlyRate = new ContractHourlyRateApiCreateModel
+                        try { 
+                            if (WorkerFetcher.CancellationPending)
                             {
-                                ProjectId = (int)MapFieldValueToID(_projectNo, _row, false),
-                                ProjectSubContractId = (int)MapFieldValueToID(_contractName, _row, false),
-                                ContractHourlyRateValue = HourlyRateHandler.Instance.CheckAndGetDouble(dataGridView_contractHourlyRate, _contractHourlyRateAmount, _row),
-                                ContractHourlyRateName = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHourlyRateName, _row),
-                                ProductNo = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHourlyRateProductNo, _row),
-                                ContractHourlyRateCreateCategory = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHhourlyRateCategory, _row),
+                                break;
+                            }
 
-                            };
+                            _isMappingFieldValueToIDCorrect = true;
+                            _isFirstTimeInvalidMapping = true;
 
-                            if (_isMappingFieldValueToIDCorrect)
+                            if (_row.DataBoundItem != null)
                             {
-                                if (_senderButton.Name == button_validate.Name)
+                                ContractHourlyRateApiCreateModel _newContractHourlyRate = new ContractHourlyRateApiCreateModel
                                 {
-                                    var _defaultApiResponse = HourlyRateHandler.Instance.ValidateHourlyRate(_newContractHourlyRate,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                    ProjectId = (int)MapFieldValueToID(_projectNo, _row, false),
+                                    ProjectSubContractId = (int)MapFieldValueToID(_contractName, _row, false),
+                                    ContractHourlyRateValue = HourlyRateHandler.Instance.CheckAndGetDouble(dataGridView_contractHourlyRate, _contractHourlyRateAmount, _row),
+                                    ContractHourlyRateName = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHourlyRateName, _row),
+                                    ProductNo = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHourlyRateProductNo, _row),
+                                    ContractHourlyRateCreateCategory = HourlyRateHandler.Instance.CheckAndGetString(dataGridView_contractHourlyRate, _contractHhourlyRateCategory, _row),
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
-                                }
-                                else
+                                };
+
+                                if (_isMappingFieldValueToIDCorrect)
                                 {
-                                    var _defaultApiResponse = HourlyRateHandler.Instance.ImportHourlyRate(_newContractHourlyRate,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                    if (_senderButton.Name == button_validate.Name)
+                                    {
+                                        var _defaultApiResponse = HourlyRateHandler.Instance.ValidateHourlyRate(_newContractHourlyRate,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    }
+                                    else
+                                    {
+                                        var _defaultApiResponse = HourlyRateHandler.Instance.ImportHourlyRate(_newContractHourlyRate,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+
+                                        int currCount = _errorRowCount;
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
+
+                                        if(currCount != _errorRowCount)
+                                            WriteRowToCSV(_row, errorLog);
+
+                                    }
+                                } else
+                                {
+                                    WriteRowToCSV(_row, errorLog);
                                 }
                             }
+                        } 
+                        catch (Exception _ex)
+                        {
+                            this.Invoke((MethodInvoker)(() => _row.DefaultCellStyle.BackColor = Color.Red));
+                            this.Invoke((MethodInvoker)(() => textBox_contractHourlyRateImportMessages.AppendText(Environment.NewLine)));
+                            this.Invoke((MethodInvoker)(() => textBox_contractHourlyRateImportMessages.AppendText("Row " + (_row.Index + 1) + " - " + _ex.Message)));                            
+                            _errorRowCount++;
+
+                            WriteRowToCSV(_row,errorLog);
                         }
                     }
 
@@ -392,6 +421,33 @@ namespace TimeLog.DataImporter.UserControls
 
 
         #endregion
+
+        public void WriteRowToCSV(DataGridViewRow row, string filePath)
+        {
+            // Create CSV line from the cells
+            var values = row.Cells.Cast<DataGridViewCell>().Select(cell => FormatCellValue(cell.Value)).ToList();
+
+            string csvLine = string.Join(";", values) + Environment.NewLine;
+            
+            File.AppendAllText(filePath, csvLine, Encoding.UTF8);
+        }
+
+        private string FormatCellValue(object value)
+        {
+            if (value == null)
+                return "";
+
+            string stringValue = value.ToString();
+
+            // If the value contains a comma, quote, or newline, wrap it in quotes and escape existing quotes
+            if (stringValue.Contains(",") || stringValue.Contains("\"") || stringValue.Contains("\n") || stringValue.Contains(";"))
+            {
+                stringValue = $"\"{stringValue.Replace("\"", "\"\"")}\"";
+            }
+
+            return stringValue;
+        }
+
 
         #region Combobox implementations
 

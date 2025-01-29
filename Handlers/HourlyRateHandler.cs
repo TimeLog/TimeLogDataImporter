@@ -71,6 +71,13 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
+                
+                if(_webEx.Status == WebExceptionStatus.Timeout)
+                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, "Timeout", out businessRulesApiResponse);//make pretty
+
+                if (_webEx.Response == null)
+                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _webEx.Message, out businessRulesApiResponse);//make pretty
+
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
 

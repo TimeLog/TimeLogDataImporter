@@ -101,13 +101,15 @@ namespace TimeLog.DataImporter.TimeLogApi
             }
         }
 
-        public WebClient WebClient(string token)
+        public WebClientWithTimeout WebClient(string token)
         {
-            var _client = new WebClient();
+            var _client = new WebClientWithTimeout();
             _client.Encoding = Encoding.UTF8;
             _client.Headers.Add("Authorization", "Bearer " + token);
             _client.Headers.Add("Accept", "*/*");
             _client.Headers.Add("Content-Type", "application/json");
+            _client.Timeout = 120000;
+
             return _client;
         }
 
@@ -205,4 +207,26 @@ namespace TimeLog.DataImporter.TimeLogApi
             control.Invoke((MethodInvoker)(() => Program.LoginForm.Show()));
         }
     }
+
+    public class WebClientWithTimeout : WebClient
+    {
+        private int _timeout = 30000; // Default 30 seconds
+
+        public int Timeout
+        {
+            get { return _timeout; }
+            set { _timeout = value; }
+        }
+
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            WebRequest request = base.GetWebRequest(address);
+            if (request is HttpWebRequest)
+            {
+                ((HttpWebRequest)request).Timeout = _timeout;
+            }
+            return request;
+        }
+    }
+
 }

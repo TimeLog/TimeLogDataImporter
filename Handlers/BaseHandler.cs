@@ -20,6 +20,7 @@ namespace TimeLog.DataImporter.Handlers
         public List<string> FileColumnHeaders = new List<string>();
         private readonly List<string> _delimiterList = new List<string> { ",", ";", "|" };
         private readonly List<string> _percentageList = new List<string>() ;
+        bool silent = true;
 
         // The state of expanding or collapsing panel
         public enum ExpandState
@@ -492,7 +493,18 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                string _jsonResult;
+
+                try { 
+                    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                } 
+                catch (WebException _webEx) when (_webEx.Status == WebExceptionStatus.Timeout)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                }
+
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -554,7 +566,17 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+
+                string _jsonResult;
+                try
+                {
+                    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                } catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                }
+
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -603,6 +625,9 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
+                
+                //Why are you here you are just a pain.
+                if(!silent)
                 MessageBox.Show("Failed to obtain default project sub contract ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
