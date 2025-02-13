@@ -44,6 +44,10 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
+
+                if (_webEx.Response == null)
+                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, "No response", out businessRulesApiResponse);
+
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
 
@@ -71,6 +75,10 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
+
+                if (_webEx.Response == null)
+                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, "No response", out businessRulesApiResponse);
+
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
 
