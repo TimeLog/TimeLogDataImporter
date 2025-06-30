@@ -136,10 +136,14 @@ namespace TimeLog.DataImporter.TimeLogApi
                 {
                     businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
                     businessRulesApiResponse.Code = 102;
-                }
-                else
+                } 
+                else if (_apiResponseObject.Code.ToString() == "100")
                 {
-                    MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
+                    businessRulesApiResponse.Code = 100;
+                } else
+                {
+                    //MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 
@@ -190,6 +194,13 @@ namespace TimeLog.DataImporter.TimeLogApi
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
                                                     + " - " + businessRulesResponse.Message + " Details: "
                                                     + string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message)))));
+                    errorRowCount++;
+                }
+                if (businessRulesResponse.Code == 100)
+                {
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + businessRulesResponse.Message )));
                     errorRowCount++;
                 }
             }

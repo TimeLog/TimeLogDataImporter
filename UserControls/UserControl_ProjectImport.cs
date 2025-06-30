@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
 using TimeLog.DataImporter.TimeLogApi;
@@ -19,6 +22,7 @@ namespace TimeLog.DataImporter.UserControls
         private int _errorRowCount;
         private bool _isMappingFieldValueToIDCorrect;
         private bool _isFirstTimeInvalidMapping;
+        private Encoding? ANSI = CodePagesEncodingProvider.Instance.GetEncoding(1252);
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
@@ -242,6 +246,13 @@ namespace TimeLog.DataImporter.UserControls
             {
                 _errorRowCount = 0;
 
+                string errorLog = "FailedProjectsImports" + DateTime.Now.ToString("yyyyMMddHHmm") + ".csv";
+
+                if (File.Exists(errorLog))
+                    File.Delete(errorLog);
+
+                File.WriteAllText(errorLog, "Project Name;Customer No;Project Template;Project Manager Initials;Currency ISO;Legal entity Name;Project Type;Department Name;Project no;Description;Project start date;Project end date;Project Status" + Environment.NewLine,ANSI);
+
                 //while validating, deactivate other buttons
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
@@ -254,54 +265,73 @@ namespace TimeLog.DataImporter.UserControls
                 {
                     foreach (DataGridViewRow _row in dataGridView_project.Rows)
                     {
-                        if (WorkerFetcher.CancellationPending)
+                        try
                         {
-                            break;
-                        }
-
-                        _isMappingFieldValueToIDCorrect = true;
-                        _isFirstTimeInvalidMapping = true;
-
-                        if (_row.DataBoundItem != null)
-                        {
-                            ProjectCreateModel _newProject = new ProjectCreateModel
+                            if (WorkerFetcher.CancellationPending)
                             {
-                                Name = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectName, _row),
-                                CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
-                                ProjectTemplateID = (int)MapFieldValueToID(_projectTemplate, _row, false),
-                                ProjectManagerID = (int)MapFieldValueToID(_projectManager, _row, false),
-                                CurrencyID = (int)MapFieldValueToID(_currencyISO, _row, false),
-                                LegalEntityID = (int)MapFieldValueToID(_legalEntity, _row, false),
-                                ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectNo, _row),
-                                Description = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _description, _row),
-                                ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
-                                ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
-                                ProjectTypeID = MapFieldValueToID(_projectType, _row, true),
-                                ProjectCategoryID = MapFieldValueToID(_projectCategory, _row, true),
-                                DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false),
-                                ContactID = MapFieldValueToID(_contactPerson, _row, true),
-                                InvoicingCustomerReferenceID = MapFieldValueToID(_invoicingCustomerReference, _row, true)
-                            };
+                                break;
+                            }
 
-                            if (_isMappingFieldValueToIDCorrect)
+                            _isMappingFieldValueToIDCorrect = true;
+                            _isFirstTimeInvalidMapping = true;
+
+                            if (_row.DataBoundItem != null)
                             {
-                                if (_senderButton.Name == button_validate.Name)
+                                ProjectCreateModel _newProject = new ProjectCreateModel
                                 {
-                                    var _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                    Name = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectName, _row),
+                                    CustomerID = (int)MapFieldValueToID(_customerNo, _row, false),
+                                    ProjectTemplateID = (int)MapFieldValueToID(_projectTemplate, _row, false),
+                                    ProjectManagerID = (int)MapFieldValueToID(_projectManager, _row, false),
+                                    CurrencyID = (int)MapFieldValueToID(_currencyISO, _row, false),
+                                    LegalEntityID = (int)MapFieldValueToID(_legalEntity, _row, false),
+                                    ProjectNo = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _projectNo, _row),
+                                    Description = ProjectHandler.Instance.CheckAndGetString(dataGridView_project, _description, _row),
+                                    ProjectStartDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectStartDate, _row),
+                                    ProjectEndDate = ProjectHandler.Instance.CheckAndGetDate(dataGridView_project, _projectEndDate, _row),
+                                    ProjectTypeID = MapFieldValueToID(_projectType, _row, true),
+                                    ProjectCategoryID = MapFieldValueToID(_projectCategory, _row, true),
+                                    DepartmentID = (int)MapFieldValueToID(_departmentName, _row, false),
+                                    ContactID = MapFieldValueToID(_contactPerson, _row, true),
+                                    InvoicingCustomerReferenceID = MapFieldValueToID(_invoicingCustomerReference, _row, true)
+                                };
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
-                                }
-                                else
+                                if (_isMappingFieldValueToIDCorrect)
                                 {
-                                    var _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    int currCount = _errorRowCount;
+                                    if (_senderButton.Name == button_validate.Name)
+                                    {
+                                        var _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    }
+                                    else
+                                    {
+                                        var _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                        
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        
+                                    }
+
+                                    if (currCount != _errorRowCount)
+                                        WriteRowToCSV(_row, errorLog);
+
+                                } else {
+                                    WriteRowToCSV(_row, errorLog);
                                 }
                             }
+                        } catch (Exception _ex) {
+                            this.Invoke((MethodInvoker)(() => _row.DefaultCellStyle.BackColor = Color.Red));
+                            this.Invoke((MethodInvoker)(() => textBox_projectImportMessages.AppendText(Environment.NewLine)));
+                            this.Invoke((MethodInvoker)(() => textBox_projectImportMessages.AppendText("Row " + (_row.Index + 1) + " - " + _ex.Message)));
+                            _errorRowCount++;
+
+                            WriteRowToCSV(_row, errorLog);
                         }
                     }
 
@@ -324,6 +354,32 @@ namespace TimeLog.DataImporter.UserControls
         }
 
         #endregion
+
+        public void WriteRowToCSV(DataGridViewRow row, string filePath)
+        {
+            // Create CSV line from the cells
+            var values = row.Cells.Cast<DataGridViewCell>().Select(cell => FormatCellValue(cell.Value)).ToList();
+
+            string csvLine = string.Join(";", values) + Environment.NewLine;
+
+            File.AppendAllText(filePath, csvLine, ANSI);
+        }
+
+        private string FormatCellValue(object value)
+        {
+            if (value == null)
+                return "";
+
+            string stringValue = value.ToString();
+
+            // If the value contains a comma, quote, or newline, wrap it in quotes and escape existing quotes
+            if (stringValue.Contains(",") || stringValue.Contains("\"") || stringValue.Contains("\n") || stringValue.Contains(";"))
+            {
+                stringValue = $"\"{stringValue.Replace("\"", "\"\"")}\"";
+            }
+
+            return stringValue;
+        }
 
         #region Helper methods
 

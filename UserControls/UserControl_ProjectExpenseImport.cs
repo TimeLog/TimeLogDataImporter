@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
+using TimeLog.DataImporter.Helpers;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
 
@@ -310,8 +313,11 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = ProjectExpenseHandler.Instance.ImportProjectExpense(_newProjectExpense,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
+                                    
                                     _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                         textBox_projectExpenseImportMessages, _errorRowCount, WorkerFetcher, this);
+
+                                    
                                 }
                             }
                         }
@@ -466,7 +472,14 @@ namespace TimeLog.DataImporter.UserControls
         private void GetAllProjectFromApi()
         {
             ProjectNoList.Clear();
-            var _apiResponse = ProjectExpenseHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+
+            var _apiResponse = CacheManager.GetOrCreate("AllProject", () =>
+            {
+                // This will only execute if the data is not in cache
+                return ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+            }, TimeSpan.FromMinutes(5));
+
+            //var _apiResponse = ProjectExpenseHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
@@ -548,6 +561,8 @@ namespace TimeLog.DataImporter.UserControls
         }
 
         #endregion
+
+        
 
         #region Combobox implementations
 

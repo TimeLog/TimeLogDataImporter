@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
+using TimeLog.DataImporter.Helpers;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
 using TimeLog.DataImporter.TimeLogApi.Model.Contracts;
@@ -20,6 +24,7 @@ namespace TimeLog.DataImporter.UserControls
         private int _errorRowCount;
         private bool _isMappingFieldValueToIDCorrect;
         private bool _isFirstTimeInvalidMapping;
+        private Encoding? ANSI = CodePagesEncodingProvider.Instance.GetEncoding(1252);
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
@@ -195,6 +200,13 @@ namespace TimeLog.DataImporter.UserControls
             {
                 _errorRowCount = 0;
 
+                string errorLog = "FailedRecurringPaymentPlanImports" + DateTime.Now.ToString("yyyyMMddHHmm") + ".csv";
+
+                if (File.Exists(errorLog))
+                    File.Delete(errorLog);
+
+                File.WriteAllText(errorLog, "Project No;Contract Name;Payment Plan Amount" + Environment.NewLine, ANSI);
+
                 //while validating, deactivate other buttons
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
                 Invoke((MethodInvoker)(() => button_import.Enabled = false));
@@ -203,58 +215,63 @@ namespace TimeLog.DataImporter.UserControls
 
                 Invoke((MethodInvoker)(() => textBox_recurringPaymentPlanAmountUpdateImportMessages.AppendText("Start time: " + DateTime.Now)));
 
-                try
-                {
-                    foreach (DataGridViewRow _row in dataGridView_recurringPaymentPlanAmountUpdate.Rows)
-                    {
-                        if (WorkerFetcher.CancellationPending)
-                        {
-                            break;
-                        }
-
-                        _isMappingFieldValueToIDCorrect = true;
-                        _isFirstTimeInvalidMapping = true;
-
-                        if (_row.DataBoundItem != null)
-                        {
-                            RecurringPaymentPlanAmountUpdateModel _newRecurringPaymentPlanAmountUpdateModel = new RecurringPaymentPlanAmountUpdateModel
-                            {
-                                ProjectId = (int)MapFieldValueToID(_projectNo, _row, false),
-                                ProjectSubContractId = (int)MapFieldValueToID(_contractName, _row, false),
-                                PaymentPlanAmount = RecurringPaymentPlanAmountHandler.Instance.CheckAndGetDouble(dataGridView_recurringPaymentPlanAmountUpdate, _paymentPlanAmount, _row),
-
-                            };
-
-                            if (_isMappingFieldValueToIDCorrect)
-                            {
-                                if (_senderButton.Name == button_validate.Name)
-                                {
-                                    var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ValidateRecurringPaymentPlanAmountUpdate(_newRecurringPaymentPlanAmountUpdateModel,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
-                                }
-                                else
-                                {
-                                    var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ImportRecurringPaymentPlanAmount(_newRecurringPaymentPlanAmountUpdateModel,
-                                        AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
-                                }
+                try {
+                    foreach (DataGridViewRow _row in dataGridView_recurringPaymentPlanAmountUpdate.Rows) {
+                        try {
+                            if (WorkerFetcher.CancellationPending) {
+                                break;
                             }
+
+                            _isMappingFieldValueToIDCorrect = true;
+                            _isFirstTimeInvalidMapping = true;
+
+                            if (_row.DataBoundItem != null) {
+                                RecurringPaymentPlanAmountUpdateModel _newRecurringPaymentPlanAmountUpdateModel = new RecurringPaymentPlanAmountUpdateModel
+                                {
+                                    ProjectId = (int)MapFieldValueToID(_projectNo, _row, false),
+                                    ProjectSubContractId = (int)MapFieldValueToID(_contractName, _row, false),
+                                    PaymentPlanAmount = RecurringPaymentPlanAmountHandler.Instance.CheckAndGetDouble(dataGridView_recurringPaymentPlanAmountUpdate, _paymentPlanAmount, _row),
+
+                                };
+
+                                if (_isMappingFieldValueToIDCorrect) {
+                                    int currCount = _errorRowCount;
+                                    
+                                    if (_senderButton.Name == button_validate.Name) {
+                                        var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ValidateRecurringPaymentPlanAmountUpdate(_newRecurringPaymentPlanAmountUpdateModel,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                        
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                        
+                                    } else {
+                                        var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ImportRecurringPaymentPlanAmount(_newRecurringPaymentPlanAmountUpdateModel,
+                                            AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
+                                        
+                                        _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                            textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    }
+                                    
+                                    if (currCount != _errorRowCount)
+                                        WriteRowToCSV(_row, errorLog);
+                                } else {
+                                    WriteRowToCSV(_row, errorLog);
+                                }
+                            } 
+                        } catch (Exception _ex) {
+                            this.Invoke((MethodInvoker)(() => _row.DefaultCellStyle.BackColor = Color.Red));
+                            this.Invoke((MethodInvoker)(() => textBox_recurringPaymentPlanAmountUpdateImportMessages.AppendText(Environment.NewLine)));
+                            this.Invoke((MethodInvoker)(() => textBox_recurringPaymentPlanAmountUpdateImportMessages.AppendText("Row " + (_row.Index + 1) + " - " + _ex.Message)));
+                            _errorRowCount++;
+
+                            WriteRowToCSV(_row, errorLog);
                         }
                     }
 
                     RecurringPaymentPlanAmountHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_recurringPaymentPlanAmountUpdateImportMessages, this);
-                }
-                catch (FormatException _ex)
-                {
+                } catch (FormatException _ex) {
                     MessageBox.Show(_ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                catch (Exception _ex)
-                {
+                } catch (Exception _ex) {
                     MessageBox.Show(_ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
@@ -369,7 +386,14 @@ namespace TimeLog.DataImporter.UserControls
         private void GetAllProjectFromApi()
         {
             ProjectList.Clear();
-            var _apiResponse = RecurringPaymentPlanAmountHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+
+            var _apiResponse = CacheManager.GetOrCreate("AllProject", () =>
+            {
+                // This will only execute if the data is not in cache
+                return ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+            }, TimeSpan.FromMinutes(5));
+
+            //var _apiResponse = RecurringPaymentPlanAmountHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
@@ -380,10 +404,36 @@ namespace TimeLog.DataImporter.UserControls
             }
         }
 
-       
+
 
 
         #endregion
+
+        public void WriteRowToCSV(DataGridViewRow row, string filePath)
+        {
+            // Create CSV line from the cells
+            var values = row.Cells.Cast<DataGridViewCell>().Select(cell => FormatCellValue(cell.Value)).ToList();
+
+            string csvLine = string.Join(";", values) + Environment.NewLine;
+
+            File.AppendAllText(filePath, csvLine, ANSI);
+        }
+
+        private string FormatCellValue(object value)
+        {
+            if (value == null)
+                return "";
+
+            string stringValue = value.ToString();
+
+            // If the value contains a comma, quote, or newline, wrap it in quotes and escape existing quotes
+            if (stringValue.Contains(",") || stringValue.Contains("\"") || stringValue.Contains("\n") || stringValue.Contains(";"))
+            {
+                stringValue = $"\"{stringValue.Replace("\"", "\"\"")}\"";
+            }
+
+            return stringValue;
+        }
 
         #region Combobox implementations
 

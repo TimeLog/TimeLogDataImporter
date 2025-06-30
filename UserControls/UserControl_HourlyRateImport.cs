@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
+using TimeLog.DataImporter.Helpers;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
 
@@ -22,6 +23,7 @@ namespace TimeLog.DataImporter.UserControls
         private int _errorRowCount;
         private bool _isMappingFieldValueToIDCorrect;
         private bool _isFirstTimeInvalidMapping;
+        private Encoding? ANSI = CodePagesEncodingProvider.Instance.GetEncoding(1252);
 
         private static readonly Dictionary<int, string> MandatoryFields = new Dictionary<int, string>
         {
@@ -207,12 +209,12 @@ namespace TimeLog.DataImporter.UserControls
             {
                 _errorRowCount = 0;
 
-                string errorLog = "FailedImports"+ DateTime.Now.ToString("yyyyMMdd") + ".csv";
+                string errorLog = "FailedHourlyRateImports" + DateTime.Now.ToString("yyyyMMddHHmm") + ".csv";
 
                 if(File.Exists(errorLog))
                     File.Delete(errorLog);
 
-                File.WriteAllText(errorLog, "Project No;Contract Name;Hourly Rate Category;Hourly rate;Hourly Rate Name" + Environment.NewLine);
+                File.WriteAllText(errorLog, "Project No;Contract Name;Hourly Rate Category;Hourly rate;Hourly Rate Name" + Environment.NewLine, ANSI);
 
                 //while validating, deactivate other buttons
                 Invoke((MethodInvoker)(() => button_validate.Enabled = false));
@@ -250,29 +252,26 @@ namespace TimeLog.DataImporter.UserControls
 
                                 if (_isMappingFieldValueToIDCorrect)
                                 {
-                                    if (_senderButton.Name == button_validate.Name)
-                                    {
+                                    int currCount = _errorRowCount;
+                                    if (_senderButton.Name == button_validate.Name) {
                                         var _defaultApiResponse = HourlyRateHandler.Instance.ValidateHourlyRate(_newContractHourlyRate,
                                             AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
                                         _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                             textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         var _defaultApiResponse = HourlyRateHandler.Instance.ImportHourlyRate(_newContractHourlyRate,
                                             AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                        int currCount = _errorRowCount;
                                         _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                             textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
 
-                                        if(currCount != _errorRowCount)
-                                            WriteRowToCSV(_row, errorLog);
+                                        
 
                                     }
-                                } else
-                                {
+                                    if (currCount != _errorRowCount)
+                                        WriteRowToCSV(_row, errorLog);
+                                } else {
                                     WriteRowToCSV(_row, errorLog);
                                 }
                             }
@@ -392,7 +391,14 @@ namespace TimeLog.DataImporter.UserControls
         private void GetAllProjectFromApi()
         {
             ProjectList.Clear();
-            var _apiResponse = HourlyRateHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+
+            var _apiResponse = CacheManager.GetOrCreate("AllProject", () =>
+            {
+                // This will only execute if the data is not in cache
+                return ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+            }, TimeSpan.FromMinutes(5));
+
+            //var _apiResponse = HourlyRateHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
@@ -429,7 +435,7 @@ namespace TimeLog.DataImporter.UserControls
 
             string csvLine = string.Join(";", values) + Environment.NewLine;
             
-            File.AppendAllText(filePath, csvLine, Encoding.UTF8);
+            File.AppendAllText(filePath, csvLine, ANSI);
         }
 
         private string FormatCellValue(object value)

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
+using TimeLog.DataImporter.Helpers;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
 
@@ -519,7 +520,14 @@ namespace TimeLog.DataImporter.UserControls
         private void GetAllProjectFromApi()
         {
             ProjectList.Clear();
-            var _apiResponse = TimeregistrationHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+
+            var _apiResponse = CacheManager.GetOrCreate("AllProject", () =>
+            {
+                // This will only execute if the data is not in cache
+                return ContractHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
+            }, TimeSpan.FromMinutes(5));
+
+            //var _apiResponse = TimeregistrationHandler.Instance.GetAllProject(AuthenticationHandler.Instance.Token);
 
             if (_apiResponse != null)
             {
