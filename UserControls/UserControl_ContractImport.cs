@@ -246,6 +246,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contractImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
+            ContractHandler.Instance.InvalidateCache("AllProjects");
         }
 
         private void button_clear_Click(object sender, EventArgs e)

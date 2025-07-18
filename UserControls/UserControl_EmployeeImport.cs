@@ -234,6 +234,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_employeeImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
+            EmployeeHandler.Instance.InvalidateCache("AllEmployee");
         }
 
         private void button_clear_Click(object sender, EventArgs e)

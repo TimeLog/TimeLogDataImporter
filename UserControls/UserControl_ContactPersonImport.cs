@@ -216,6 +216,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contactPersonImportMessages.Text = string.Empty;
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
+            ContactPersonHandler.Instance.InvalidateCache("AllContractModels");
         }
 
         private void button_clear_Click(object sender, EventArgs e)
