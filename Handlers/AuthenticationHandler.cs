@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Duende.IdentityModel.Client;
+using Duende.IdentityModel.OidcClient;
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IdentityModel.Client;
-using IdentityModel.OidcClient;
 using TimeLog.DataImporter.TimeLogApi;
 
 namespace TimeLog.DataImporter.Handlers
@@ -38,8 +38,6 @@ namespace TimeLog.DataImporter.Handlers
                 ClientSecret = "a2c06677-ad29-4213-9c84-983c301379af",
                 Scope = "openid profile tlp",
                 RedirectUri = "com.timelog:/oauthredirect",
-                ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect,
-                Flow = OidcClientOptions.AuthenticationFlow.AuthorizationCode,
                 Policy = new Policy { Discovery = new DiscoveryPolicy { RequireHttps = false } },
                 Browser = new WinFormsWebView()
             };
