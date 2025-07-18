@@ -185,6 +185,8 @@ namespace TimeLog.DataImporter.UserControls
             textBox_paymentImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
+            PaymentHandler.Instance.InvalidateCache("AllPaymentMethod");
+            PaymentHandler.Instance.InvalidateCache("AllPaymentTerm");
         }
 
         private void button_clear_Click(object sender, EventArgs e)

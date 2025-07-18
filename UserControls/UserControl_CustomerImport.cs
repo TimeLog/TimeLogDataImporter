@@ -302,6 +302,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_customerImportMessages.Text = string.Empty;
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
+            CustomerHandler.Instance.InvalidateCache("AllCustomer");
         }
 
         private void button_clear_Click(object sender, EventArgs e)

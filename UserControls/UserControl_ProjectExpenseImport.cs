@@ -215,6 +215,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_projectExpenseImportMessages.Text = string.Empty;
             _senderButton = (Button) sender;
             WorkerFetcher.RunWorkerAsync();
+            ProjectExpenseHandler.Instance.InvalidateCache("AllExpenseType");
         }
 
         private void button_clear_Click(object sender, EventArgs e)
