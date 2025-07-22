@@ -14,9 +14,7 @@ namespace TimeLog.DataImporter.UserControls
 
         private async void button_logout_Click(object sender, EventArgs e)
         {
-            var _errorResult = await AuthenticationHandler.Instance.Logout();
-
-            if (Login.MainForm != null && _errorResult == null)
+            if (Login.MainForm != null)
             {
                 Invoke((MethodInvoker)(() => Login.MainForm.Hide()));
                 Invoke((MethodInvoker)(() => Login.MainForm = null));
