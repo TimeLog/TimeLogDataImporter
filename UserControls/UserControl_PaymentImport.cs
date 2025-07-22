@@ -271,16 +271,16 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = PaymentHandler.Instance.ValidatePayment(_newPayment,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_paymentImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_paymentImportMessages, WorkerFetcher, this);
                                 }
                                 else
                                 {
                                     var _defaultApiResponse = PaymentHandler.Instance.ImportPayment(_newPayment,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_paymentImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_paymentImportMessages, WorkerFetcher, this);
                                 }
                             }
                         }

@@ -232,16 +232,16 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ValidateRecurringPaymentPlanAmountUpdate(_newRecurringPaymentPlanAmountUpdateModel,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, WorkerFetcher, this);
                                 }
                                 else
                                 {
                                     var _defaultApiResponse = RecurringPaymentPlanAmountHandler.Instance.ImportRecurringPaymentPlanAmount(_newRecurringPaymentPlanAmountUpdateModel,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_recurringPaymentPlanAmountUpdateImportMessages, WorkerFetcher, this);
                                 }
                             }
                         }

@@ -339,12 +339,12 @@ namespace TimeLog.DataImporter.UserControls
                                         if (_senderButton.Name == button_validate.Name)
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialBasicContract(_timeMaterialBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                         else
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ImportTimeMaterialBasicContract(_timeMaterialBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                     }
 
@@ -370,12 +370,12 @@ namespace TimeLog.DataImporter.UserControls
                                         if (_senderButton.Name == button_validate.Name)
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ValidateFixedPriceBasicContract(_fixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                         else
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ImportFixedPriceBasicContract(_fixedPriceBasicContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                     }
 
@@ -397,12 +397,12 @@ namespace TimeLog.DataImporter.UserControls
                                         if (_senderButton.Name == button_validate.Name)
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ValidateTimeMaterialAccountEndBalancingContract(_timeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                         else
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ImportTimeMaterialAccountEndBalancingContract(_timeMaterialAccountEndBalancingContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                     }
                                     break;
@@ -423,12 +423,12 @@ namespace TimeLog.DataImporter.UserControls
                                         if (_senderButton.Name == button_validate.Name)
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ValidatePrepaidServicesContract(_prepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                         else
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ImportPrepaidServicesContract(_prepaidServicesContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                     }
                                     break;
@@ -454,12 +454,12 @@ namespace TimeLog.DataImporter.UserControls
                                         if (_senderButton.Name == button_validate.Name)
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ValidateTaskDrivenRevenueContract(_taskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                         else
                                         {
                                             var _defaultApiResponse = ContractHandler.Instance.ImportTaskDrivenRevenueContract(_taskDrivenRevenueContractCreateModel, AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
-                                            _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, _errorRowCount, WorkerFetcher, this);
+                                            _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse, textBox_contractImportMessages, WorkerFetcher, this);
                                         }
                                     } 
                                     break;
