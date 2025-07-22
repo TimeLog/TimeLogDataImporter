@@ -127,6 +127,7 @@
             this.textBox_contractHourlyRateImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_contractHourlyRateImportMessages.Size = new System.Drawing.Size(1006, 184);
             this.textBox_contractHourlyRateImportMessages.TabIndex = 0;
+            this.textBox_contractHourlyRateImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_contractHourlyRateImportMessages, "Validation or import status");
             this.textBox_contractHourlyRateImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_contractHourlyRateImportMessages_MouseClick);
             // 

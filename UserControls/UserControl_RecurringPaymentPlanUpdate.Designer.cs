@@ -120,6 +120,7 @@
             this.textBox_recurringPaymentPlanAmountUpdateImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_recurringPaymentPlanAmountUpdateImportMessages.Size = new System.Drawing.Size(1006, 184);
             this.textBox_recurringPaymentPlanAmountUpdateImportMessages.TabIndex = 0;
+            this.textBox_recurringPaymentPlanAmountUpdateImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_recurringPaymentPlanAmountUpdateImportMessages, "Validation or import status");
             this.textBox_recurringPaymentPlanAmountUpdateImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_recurringPaymentPlanAmountUpdateImportMessages_MouseClick);
             // 

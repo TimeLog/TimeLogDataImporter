@@ -2421,19 +2421,20 @@ namespace TimeLog.DataImporter.Handlers
         {
             if (e.Button == MouseButtons.Left)
             {
-                var _position = domainTextBox.GetCharIndexFromPosition(e.Location);
-                var _lineNo = domainTextBox.GetLineFromCharIndex(_position) - 1;
+                dataGridView.ClearSelection();
+                dataGridView.CurrentCell = null;
 
-                for (var i = 0; i < dataGridView.Rows.Count - 1; i++)
+                int selectedIndex = domainTextBox.SelectionStart;
+                int _lineNo = domainTextBox.GetLineFromCharIndex(selectedIndex);
+
+                
+                if (_lineNo > 0 && domainTextBox.Lines[_lineNo].ToLower().StartsWith("row"))
                 {
-                    if (i == _lineNo)
-                    {
-                        dataGridView.Rows[i].Selected = true;
-                        dataGridView.FirstDisplayedScrollingRowIndex = i;
-                        dataGridView.Focus();
-                        break;
-                    }
+                    dataGridView.Rows[_lineNo-1].Selected = true;
+                    dataGridView.FirstDisplayedScrollingRowIndex = _lineNo-1;
+                    dataGridView.Focus();
                 }
+
             }
         }
 

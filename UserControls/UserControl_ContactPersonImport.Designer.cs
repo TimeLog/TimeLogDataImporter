@@ -178,6 +178,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contactPersonImportMessages.ScrollBars = ScrollBars.Vertical;
             textBox_contactPersonImportMessages.Size = new System.Drawing.Size(1150, 246);
             textBox_contactPersonImportMessages.TabIndex = 0;
+            textBox_contactPersonImportMessages.WordWrap = false;
             defaultToolTip.SetToolTip(textBox_contactPersonImportMessages, "Validation or import status");
             textBox_contactPersonImportMessages.MouseClick += textBox_contactPersonImportMessages_MouseClick;
             // 

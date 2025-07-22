@@ -184,6 +184,7 @@
             this.textBox_contractImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_contractImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_contractImportMessages.TabIndex = 0;
+            this.textBox_contractImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_contractImportMessages, "Validation or import status");
             this.textBox_contractImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_projectImportMessages_MouseClick);
             // 

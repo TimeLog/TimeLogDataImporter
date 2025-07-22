@@ -157,6 +157,7 @@
             this.textBox_projectExpenseImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_projectExpenseImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_projectExpenseImportMessages.TabIndex = 0;
+            this.textBox_projectExpenseImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_projectExpenseImportMessages, "Validation or import status");
             this.textBox_projectExpenseImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_projectExpenseImportMessages_MouseClick);
             // 

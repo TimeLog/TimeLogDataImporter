@@ -154,6 +154,7 @@
             this.textBox_timeregistrationImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_timeregistrationImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_timeregistrationImportMessages.TabIndex = 0;
+            this.textBox_timeregistrationImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_timeregistrationImportMessages, "Validation or import status");
             this.textBox_timeregistrationImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_timeregistrationImportMessages_MouseClick);
             // 

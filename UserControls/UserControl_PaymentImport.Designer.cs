@@ -147,6 +147,7 @@
             this.textBox_paymentImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_paymentImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_paymentImportMessages.TabIndex = 0;
+            this.textBox_paymentImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_paymentImportMessages, "Validation or import status");
             this.textBox_paymentImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_paymentImportMessages_MouseClick);
             // 
