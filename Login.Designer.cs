@@ -81,6 +81,7 @@
             textbox_PAT.PlaceholderText = "Personal Access Token";
             textbox_PAT.Size = new System.Drawing.Size(334, 29);
             textbox_PAT.TabIndex = 2;
+            textbox_PAT.KeyPress += textbox_PAT_KeyPress;
             // 
             // label_PAT
             // 
