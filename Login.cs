@@ -32,13 +32,19 @@ namespace TimeLog.DataImporter
 
                 if (!string.IsNullOrEmpty(_token))
                 {
-                    Hide();
+
+                    button_pat_login.Text = "Getting ready...";
+                    button_pat_login.Enabled = false;
 
                     if (MainForm == null)
                     {
                         MainForm = new Main();
                         MainForm.Closed += (s, args) => Close();
                     }
+
+                    button_pat_login.Text = "Login using PAT";
+                    button_pat_login.Enabled = true;
+                    Hide();
 
                     MainForm.Show();
                 }
@@ -54,7 +60,8 @@ namespace TimeLog.DataImporter
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                loginUsingPat();
+                if (button_pat_login.Enabled)
+                    loginUsingPat();
             }
         }
 
