@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
 using TimeLog.DataImporter.TimeLogApi;
@@ -51,9 +52,30 @@ namespace TimeLog.DataImporter
 
         private void textbox_PAT_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 loginUsingPat();
+            }
+        }
+
+        private void link_PAT_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LinkLabel linkLabel = sender as LinkLabel;
+            string target = "https://login.timelog.com/PersonalToken";
+
+            try
+            {
+                System.Diagnostics.Process.Start(new ProcessStartInfo
+                {
+                    FileName = target,
+                    UseShellExecute = true
+                });
+
+                linkLabel.LinkVisited = true;
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Could not open link: {ex.Message}", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

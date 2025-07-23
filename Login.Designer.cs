@@ -30,31 +30,44 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             panel_login = new System.Windows.Forms.Panel();
+            link_PAT = new System.Windows.Forms.LinkLabel();
             button_pat_login = new System.Windows.Forms.Button();
             textbox_PAT = new System.Windows.Forms.TextBox();
             label_PAT = new System.Windows.Forms.Label();
             label_siteUrl = new System.Windows.Forms.Label();
             textBox_siteUrl = new System.Windows.Forms.TextBox();
-            label_loginText = new System.Windows.Forms.Label();
             label_login = new System.Windows.Forms.Label();
             panel_login.SuspendLayout();
             SuspendLayout();
             // 
             // panel_login
             // 
+            panel_login.Controls.Add(link_PAT);
             panel_login.Controls.Add(button_pat_login);
             panel_login.Controls.Add(textbox_PAT);
             panel_login.Controls.Add(label_PAT);
             panel_login.Controls.Add(label_siteUrl);
             panel_login.Controls.Add(textBox_siteUrl);
-            panel_login.Controls.Add(label_loginText);
             panel_login.Controls.Add(label_login);
             panel_login.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel_login.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            panel_login.Font = new System.Drawing.Font("Segoe UI", 10F);
             panel_login.Location = new System.Drawing.Point(0, 0);
             panel_login.Name = "panel_login";
             panel_login.Size = new System.Drawing.Size(990, 903);
             panel_login.TabIndex = 0;
+            // 
+            // link_PAT
+            // 
+            link_PAT.AutoSize = true;
+            link_PAT.BackColor = System.Drawing.Color.Transparent;
+            link_PAT.LinkColor = System.Drawing.Color.Gray;
+            link_PAT.Location = new System.Drawing.Point(400, 474);
+            link_PAT.Name = "link_PAT";
+            link_PAT.Size = new System.Drawing.Size(204, 19);
+            link_PAT.TabIndex = 6;
+            link_PAT.TabStop = true;
+            link_PAT.Text = "Manage Personal Access Tokens";
+            link_PAT.LinkClicked += link_PAT_LinkClicked;
             // 
             // button_pat_login
             // 
@@ -64,7 +77,7 @@
             button_pat_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button_pat_login.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
             button_pat_login.ForeColor = System.Drawing.Color.White;
-            button_pat_login.Location = new System.Drawing.Point(338, 470);
+            button_pat_login.Location = new System.Drawing.Point(338, 425);
             button_pat_login.Margin = new System.Windows.Forms.Padding(10);
             button_pat_login.Name = "button_pat_login";
             button_pat_login.Size = new System.Drawing.Size(334, 39);
@@ -76,7 +89,7 @@
             // textbox_PAT
             // 
             textbox_PAT.Font = new System.Drawing.Font("Segoe UI", 12F);
-            textbox_PAT.Location = new System.Drawing.Point(338, 418);
+            textbox_PAT.Location = new System.Drawing.Point(338, 373);
             textbox_PAT.Name = "textbox_PAT";
             textbox_PAT.PlaceholderText = "Personal Access Token";
             textbox_PAT.Size = new System.Drawing.Size(334, 29);
@@ -86,43 +99,35 @@
             // label_PAT
             // 
             label_PAT.AutoSize = true;
-            label_PAT.Font = new System.Drawing.Font("Segoe UI", 12F);
-            label_PAT.Location = new System.Drawing.Point(294, 421);
+            label_PAT.BackColor = System.Drawing.Color.Transparent;
+            label_PAT.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            label_PAT.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            label_PAT.Location = new System.Drawing.Point(294, 376);
             label_PAT.Name = "label_PAT";
-            label_PAT.Size = new System.Drawing.Size(38, 21);
+            label_PAT.Size = new System.Drawing.Size(42, 21);
             label_PAT.TabIndex = 5;
             label_PAT.Text = "PAT:";
             // 
             // label_siteUrl
             // 
             label_siteUrl.AutoSize = true;
-            label_siteUrl.Font = new System.Drawing.Font("Segoe UI", 12F);
-            label_siteUrl.Location = new System.Drawing.Point(270, 373);
+            label_siteUrl.BackColor = System.Drawing.Color.Transparent;
+            label_siteUrl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            label_siteUrl.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            label_siteUrl.Location = new System.Drawing.Point(270, 328);
             label_siteUrl.Name = "label_siteUrl";
-            label_siteUrl.Size = new System.Drawing.Size(62, 21);
+            label_siteUrl.Size = new System.Drawing.Size(68, 21);
             label_siteUrl.TabIndex = 4;
             label_siteUrl.Text = "Site url:";
             // 
             // textBox_siteUrl
             // 
             textBox_siteUrl.Font = new System.Drawing.Font("Segoe UI", 12F);
-            textBox_siteUrl.Location = new System.Drawing.Point(338, 370);
+            textBox_siteUrl.Location = new System.Drawing.Point(338, 325);
             textBox_siteUrl.Name = "textBox_siteUrl";
-            textBox_siteUrl.PlaceholderText = "E.g: https://app4.timelog.com/coldemo";
+            textBox_siteUrl.PlaceholderText = "https://app[x].timelog.com/[account name]";
             textBox_siteUrl.Size = new System.Drawing.Size(334, 29);
             textBox_siteUrl.TabIndex = 1;
-            // 
-            // label_loginText
-            // 
-            label_loginText.AutoSize = true;
-            label_loginText.BackColor = System.Drawing.Color.Transparent;
-            label_loginText.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            label_loginText.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            label_loginText.Location = new System.Drawing.Point(217, 329);
-            label_loginText.Name = "label_loginText";
-            label_loginText.Size = new System.Drawing.Size(573, 25);
-            label_loginText.TabIndex = 2;
-            label_loginText.Text = "Please press the Login button to be redirected to the Login Portal.";
             // 
             // label_login
             // 
@@ -154,12 +159,12 @@
 
         private System.Windows.Forms.Panel panel_login;
         private System.Windows.Forms.Label label_login;
-        private System.Windows.Forms.Label label_loginText;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label_siteUrl;
         private System.Windows.Forms.TextBox textBox_siteUrl;
         private System.Windows.Forms.Button button_pat_login;
         private System.Windows.Forms.TextBox textbox_PAT;
         private System.Windows.Forms.Label label_PAT;
+        private System.Windows.Forms.LinkLabel link_PAT;
     }
 }
