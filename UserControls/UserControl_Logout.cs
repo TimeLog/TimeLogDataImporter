@@ -1,7 +1,6 @@
 ﻿using LazyCache;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace TimeLog.DataImporter.UserControls
@@ -20,7 +19,7 @@ namespace TimeLog.DataImporter.UserControls
             //LazyCache does not have a nice way to clear the full cache so i found this hack
             var _cache = new CachingService();
             ICacheProvider cacheProvider = _cache.CacheProvider;
-            var memoryCache = (MemoryCache)cacheProvider.GetType().GetField("cache", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(cacheProvider);
+            var memoryCache = (MemoryCache)cacheProvider.GetType().GetField("cache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(cacheProvider);
             memoryCache.Compact(1.0);
 
             if (Login.MainForm != null)
