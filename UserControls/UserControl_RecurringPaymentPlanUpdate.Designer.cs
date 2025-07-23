@@ -303,7 +303,7 @@
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Controls.Add(comboBox_recurringPaymentPlanAmountUpdateProjectNo);
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Location = new System.Drawing.Point(184, 62);
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Name = "groupBox_recurringPaymentPlanAmountUpdateMandatoryFields";
-            groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Size = new System.Drawing.Size(358, 399);
+            groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Size = new System.Drawing.Size(358, 158);
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.TabIndex = 5;
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.TabStop = false;
             groupBox_recurringPaymentPlanAmountUpdateMandatoryFields.Text = "Mandatory";

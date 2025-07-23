@@ -28,673 +28,623 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.WorkerFetcher = new System.ComponentModel.BackgroundWorker();
-            this.panel_paymentDataTable = new System.Windows.Forms.Panel();
-            this.dataGridView_payment = new System.Windows.Forms.DataGridView();
-            this.panel_paymentMessage = new System.Windows.Forms.Panel();
-            this.textBox_paymentImportMessages = new System.Windows.Forms.TextBox();
-            this.panel_paymentButtons = new System.Windows.Forms.Panel();
-            this.button_clear = new System.Windows.Forms.Button();
-            this.button_import = new System.Windows.Forms.Button();
-            this.button_validate = new System.Windows.Forms.Button();
-            this.button_stop = new System.Windows.Forms.Button();
-            this.panel_paymentFieldMapping = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel_nonMandatoryFields = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel_NonMandatoryButton = new System.Windows.Forms.Panel();
-            this.label_nonMandatoryFields = new System.Windows.Forms.Label();
-            this.button_expandNonMandatory = new System.Windows.Forms.Button();
-            this.panel_NonMandatoryFields = new System.Windows.Forms.Panel();
-            this.label_paymentIsFixedPricePayment = new System.Windows.Forms.Label();
-            this.comboBox_paymentIsFixedPricePayment = new System.Windows.Forms.ComboBox();
-            this.label_paymentIsReadyForInvoicing = new System.Windows.Forms.Label();
-            this.comboBox_paymentIsReadyForInvoicing = new System.Windows.Forms.ComboBox();
-            this.label_paymentComment = new System.Windows.Forms.Label();
-            this.comboBox_paymentProductNo = new System.Windows.Forms.ComboBox();
-            this.comboBox_paymentComment = new System.Windows.Forms.ComboBox();
-            this.label_paymentProductNo = new System.Windows.Forms.Label();
-            this.label_paymentDiscountPercentage = new System.Windows.Forms.Label();
-            this.comboBox_paymentDiscountPercentage = new System.Windows.Forms.ComboBox();
-            this.label_paymentTaskNo = new System.Windows.Forms.Label();
-            this.comboBox_paymentTaskNo = new System.Windows.Forms.ComboBox();
-            this.label_delimiter = new System.Windows.Forms.Label();
-            this.comboBox_delimiter = new System.Windows.Forms.ComboBox();
-            this.groupBox_paymentMandatoryFields = new System.Windows.Forms.GroupBox();
-            this.checkBox_defaultPaymentUnitType = new System.Windows.Forms.CheckBox();
-            this.label_projectNo = new System.Windows.Forms.Label();
-            this.label_paymentUnitType = new System.Windows.Forms.Label();
-            this.comboBox_paymentProjectNo = new System.Windows.Forms.ComboBox();
-            this.comboBox_paymentUnitType = new System.Windows.Forms.ComboBox();
-            this.comboBox_paymentInvoiceDate = new System.Windows.Forms.ComboBox();
-            this.label_paymentInvoiceDate = new System.Windows.Forms.Label();
-            this.label_paymentAmount = new System.Windows.Forms.Label();
-            this.comboBox_paymentAmount = new System.Windows.Forms.ComboBox();
-            this.label_paymentQuantity = new System.Windows.Forms.Label();
-            this.label_paymentContractName = new System.Windows.Forms.Label();
-            this.comboBox_paymentQuantity = new System.Windows.Forms.ComboBox();
-            this.comboBox_paymentContractName = new System.Windows.Forms.ComboBox();
-            this.label_paymentName = new System.Windows.Forms.Label();
-            this.comboBox_paymentName = new System.Windows.Forms.ComboBox();
-            this.label_paymentSetup = new System.Windows.Forms.Label();
-            this.button_paymentSelectFile = new System.Windows.Forms.Button();
-            this.tmrExpand = new System.Windows.Forms.Timer(this.components);
-            this.defaultToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel_paymentDataTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_payment)).BeginInit();
-            this.panel_paymentMessage.SuspendLayout();
-            this.panel_paymentButtons.SuspendLayout();
-            this.panel_paymentFieldMapping.SuspendLayout();
-            this.flowLayoutPanel_nonMandatoryFields.SuspendLayout();
-            this.panel_NonMandatoryButton.SuspendLayout();
-            this.panel_NonMandatoryFields.SuspendLayout();
-            this.groupBox_paymentMandatoryFields.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            WorkerFetcher = new System.ComponentModel.BackgroundWorker();
+            panel_paymentDataTable = new System.Windows.Forms.Panel();
+            dataGridView_payment = new System.Windows.Forms.DataGridView();
+            panel_paymentMessage = new System.Windows.Forms.Panel();
+            textBox_paymentImportMessages = new System.Windows.Forms.TextBox();
+            panel_paymentButtons = new System.Windows.Forms.Panel();
+            button_clear = new System.Windows.Forms.Button();
+            button_import = new System.Windows.Forms.Button();
+            button_validate = new System.Windows.Forms.Button();
+            button_stop = new System.Windows.Forms.Button();
+            panel_paymentFieldMapping = new System.Windows.Forms.Panel();
+            flowLayoutPanel_nonMandatoryFields = new System.Windows.Forms.FlowLayoutPanel();
+            panel_NonMandatoryButton = new System.Windows.Forms.Panel();
+            label_nonMandatoryFields = new System.Windows.Forms.Label();
+            button_expandNonMandatory = new System.Windows.Forms.Button();
+            panel_NonMandatoryFields = new System.Windows.Forms.Panel();
+            label_paymentIsFixedPricePayment = new System.Windows.Forms.Label();
+            comboBox_paymentIsFixedPricePayment = new System.Windows.Forms.ComboBox();
+            label_paymentIsReadyForInvoicing = new System.Windows.Forms.Label();
+            comboBox_paymentIsReadyForInvoicing = new System.Windows.Forms.ComboBox();
+            label_paymentComment = new System.Windows.Forms.Label();
+            comboBox_paymentProductNo = new System.Windows.Forms.ComboBox();
+            comboBox_paymentComment = new System.Windows.Forms.ComboBox();
+            label_paymentProductNo = new System.Windows.Forms.Label();
+            label_paymentDiscountPercentage = new System.Windows.Forms.Label();
+            comboBox_paymentDiscountPercentage = new System.Windows.Forms.ComboBox();
+            label_paymentTaskNo = new System.Windows.Forms.Label();
+            comboBox_paymentTaskNo = new System.Windows.Forms.ComboBox();
+            label_delimiter = new System.Windows.Forms.Label();
+            comboBox_delimiter = new System.Windows.Forms.ComboBox();
+            groupBox_paymentMandatoryFields = new System.Windows.Forms.GroupBox();
+            checkBox_defaultPaymentUnitType = new System.Windows.Forms.CheckBox();
+            label_projectNo = new System.Windows.Forms.Label();
+            label_paymentUnitType = new System.Windows.Forms.Label();
+            comboBox_paymentProjectNo = new System.Windows.Forms.ComboBox();
+            comboBox_paymentUnitType = new System.Windows.Forms.ComboBox();
+            comboBox_paymentInvoiceDate = new System.Windows.Forms.ComboBox();
+            label_paymentInvoiceDate = new System.Windows.Forms.Label();
+            label_paymentAmount = new System.Windows.Forms.Label();
+            comboBox_paymentAmount = new System.Windows.Forms.ComboBox();
+            label_paymentQuantity = new System.Windows.Forms.Label();
+            label_paymentContractName = new System.Windows.Forms.Label();
+            comboBox_paymentQuantity = new System.Windows.Forms.ComboBox();
+            comboBox_paymentContractName = new System.Windows.Forms.ComboBox();
+            label_paymentName = new System.Windows.Forms.Label();
+            comboBox_paymentName = new System.Windows.Forms.ComboBox();
+            label_paymentSetup = new System.Windows.Forms.Label();
+            button_paymentSelectFile = new System.Windows.Forms.Button();
+            tmrExpand = new System.Windows.Forms.Timer(components);
+            defaultToolTip = new System.Windows.Forms.ToolTip(components);
+            panel_paymentDataTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_payment).BeginInit();
+            panel_paymentMessage.SuspendLayout();
+            panel_paymentButtons.SuspendLayout();
+            panel_paymentFieldMapping.SuspendLayout();
+            flowLayoutPanel_nonMandatoryFields.SuspendLayout();
+            panel_NonMandatoryButton.SuspendLayout();
+            panel_NonMandatoryFields.SuspendLayout();
+            groupBox_paymentMandatoryFields.SuspendLayout();
+            SuspendLayout();
             // 
             // WorkerFetcher
             // 
-            this.WorkerFetcher.WorkerReportsProgress = true;
-            this.WorkerFetcher.WorkerSupportsCancellation = true;
-            this.WorkerFetcher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.WorkerFetcherDoWork);
+            WorkerFetcher.WorkerReportsProgress = true;
+            WorkerFetcher.WorkerSupportsCancellation = true;
+            WorkerFetcher.DoWork += WorkerFetcherDoWork;
             // 
             // panel_paymentDataTable
             // 
-            this.panel_paymentDataTable.Controls.Add(this.dataGridView_payment);
-            this.panel_paymentDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_paymentDataTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_paymentDataTable.Location = new System.Drawing.Point(0, 770);
-            this.panel_paymentDataTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_paymentDataTable.Name = "panel_paymentDataTable";
-            this.panel_paymentDataTable.Size = new System.Drawing.Size(1437, 300);
-            this.panel_paymentDataTable.TabIndex = 6;
+            panel_paymentDataTable.Controls.Add(dataGridView_payment);
+            panel_paymentDataTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel_paymentDataTable.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            panel_paymentDataTable.Location = new System.Drawing.Point(0, 462);
+            panel_paymentDataTable.Name = "panel_paymentDataTable";
+            panel_paymentDataTable.Size = new System.Drawing.Size(1006, 180);
+            panel_paymentDataTable.TabIndex = 6;
             // 
             // dataGridView_payment
             // 
-            this.dataGridView_payment.BackgroundColor = System.Drawing.Color.DarkGray;
-            this.dataGridView_payment.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView_payment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_payment.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView_payment.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.dataGridView_payment.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView_payment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView_payment.Name = "dataGridView_payment";
-            this.dataGridView_payment.RowHeadersWidth = 62;
-            this.dataGridView_payment.Size = new System.Drawing.Size(1437, 300);
-            this.dataGridView_payment.TabIndex = 0;
+            dataGridView_payment.BackgroundColor = System.Drawing.Color.DarkGray;
+            dataGridView_payment.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridView_payment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_payment.Dock = System.Windows.Forms.DockStyle.Bottom;
+            dataGridView_payment.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridView_payment.Location = new System.Drawing.Point(0, 0);
+            dataGridView_payment.Name = "dataGridView_payment";
+            dataGridView_payment.RowHeadersWidth = 62;
+            dataGridView_payment.Size = new System.Drawing.Size(1006, 180);
+            dataGridView_payment.TabIndex = 0;
             // 
             // panel_paymentMessage
             // 
-            this.panel_paymentMessage.Controls.Add(this.textBox_paymentImportMessages);
-            this.panel_paymentMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_paymentMessage.Location = new System.Drawing.Point(0, 463);
-            this.panel_paymentMessage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_paymentMessage.Name = "panel_paymentMessage";
-            this.panel_paymentMessage.Size = new System.Drawing.Size(1437, 307);
-            this.panel_paymentMessage.TabIndex = 10;
+            panel_paymentMessage.Controls.Add(textBox_paymentImportMessages);
+            panel_paymentMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel_paymentMessage.Location = new System.Drawing.Point(0, 278);
+            panel_paymentMessage.Name = "panel_paymentMessage";
+            panel_paymentMessage.Size = new System.Drawing.Size(1006, 184);
+            panel_paymentMessage.TabIndex = 10;
             // 
             // textBox_paymentImportMessages
             // 
-            this.textBox_paymentImportMessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox_paymentImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_paymentImportMessages.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_paymentImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox_paymentImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox_paymentImportMessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_paymentImportMessages.Location = new System.Drawing.Point(0, 0);
-            this.textBox_paymentImportMessages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox_paymentImportMessages.Multiline = true;
-            this.textBox_paymentImportMessages.Name = "textBox_paymentImportMessages";
-            this.textBox_paymentImportMessages.ReadOnly = true;
-            this.textBox_paymentImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_paymentImportMessages.Size = new System.Drawing.Size(1437, 307);
-            this.textBox_paymentImportMessages.TabIndex = 0;
-            this.textBox_paymentImportMessages.WordWrap = false;
-            this.defaultToolTip.SetToolTip(this.textBox_paymentImportMessages, "Validation or import status");
-            this.textBox_paymentImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_paymentImportMessages_MouseClick);
+            textBox_paymentImportMessages.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            textBox_paymentImportMessages.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            textBox_paymentImportMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
+            textBox_paymentImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            textBox_paymentImportMessages.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            textBox_paymentImportMessages.Location = new System.Drawing.Point(0, 0);
+            textBox_paymentImportMessages.Multiline = true;
+            textBox_paymentImportMessages.Name = "textBox_paymentImportMessages";
+            textBox_paymentImportMessages.ReadOnly = true;
+            textBox_paymentImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            textBox_paymentImportMessages.Size = new System.Drawing.Size(1006, 184);
+            textBox_paymentImportMessages.TabIndex = 0;
+            defaultToolTip.SetToolTip(textBox_paymentImportMessages, "Validation or import status");
+            textBox_paymentImportMessages.WordWrap = false;
+            textBox_paymentImportMessages.MouseClick += textBox_paymentImportMessages_MouseClick;
             // 
             // panel_paymentButtons
             // 
-            this.panel_paymentButtons.Controls.Add(this.button_clear);
-            this.panel_paymentButtons.Controls.Add(this.button_import);
-            this.panel_paymentButtons.Controls.Add(this.button_validate);
-            this.panel_paymentButtons.Controls.Add(this.button_stop);
-            this.panel_paymentButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_paymentButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.panel_paymentButtons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_paymentButtons.Location = new System.Drawing.Point(0, 376);
-            this.panel_paymentButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_paymentButtons.Name = "panel_paymentButtons";
-            this.panel_paymentButtons.Size = new System.Drawing.Size(1437, 87);
-            this.panel_paymentButtons.TabIndex = 12;
+            panel_paymentButtons.Controls.Add(button_clear);
+            panel_paymentButtons.Controls.Add(button_import);
+            panel_paymentButtons.Controls.Add(button_validate);
+            panel_paymentButtons.Controls.Add(button_stop);
+            panel_paymentButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel_paymentButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            panel_paymentButtons.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            panel_paymentButtons.Location = new System.Drawing.Point(0, 226);
+            panel_paymentButtons.Name = "panel_paymentButtons";
+            panel_paymentButtons.Size = new System.Drawing.Size(1006, 52);
+            panel_paymentButtons.TabIndex = 12;
             // 
             // button_clear
             // 
-            this.button_clear.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button_clear.BackColor = System.Drawing.Color.DimGray;
-            this.button_clear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_clear.FlatAppearance.BorderSize = 0;
-            this.button_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_clear.ForeColor = System.Drawing.Color.White;
-            this.button_clear.Location = new System.Drawing.Point(20, 20);
-            this.button_clear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_clear.Name = "button_clear";
-            this.button_clear.Size = new System.Drawing.Size(114, 48);
-            this.button_clear.TabIndex = 12;
-            this.button_clear.Text = "Reset All";
-            this.defaultToolTip.SetToolTip(this.button_clear, "Reset everything and reload data from TLP");
-            this.button_clear.UseVisualStyleBackColor = false;
-            this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
+            button_clear.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            button_clear.BackColor = System.Drawing.Color.DimGray;
+            button_clear.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_clear.FlatAppearance.BorderSize = 0;
+            button_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_clear.ForeColor = System.Drawing.Color.White;
+            button_clear.Location = new System.Drawing.Point(14, 12);
+            button_clear.Name = "button_clear";
+            button_clear.Size = new System.Drawing.Size(80, 29);
+            button_clear.TabIndex = 12;
+            button_clear.Text = "Reset All";
+            defaultToolTip.SetToolTip(button_clear, "Reset everything and reload data from TLP");
+            button_clear.UseVisualStyleBackColor = false;
+            button_clear.Click += button_clear_Click;
             // 
             // button_import
             // 
-            this.button_import.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_import.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(43)))), ((int)(((byte)(141)))));
-            this.button_import.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_import.FlatAppearance.BorderSize = 0;
-            this.button_import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_import.ForeColor = System.Drawing.Color.White;
-            this.button_import.Location = new System.Drawing.Point(1310, 20);
-            this.button_import.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_import.Name = "button_import";
-            this.button_import.Size = new System.Drawing.Size(114, 48);
-            this.button_import.TabIndex = 7;
-            this.button_import.Text = "Import";
-            this.defaultToolTip.SetToolTip(this.button_import, "Import all data");
-            this.button_import.UseVisualStyleBackColor = false;
-            this.button_import.Click += new System.EventHandler(this.button_import_Click);
+            button_import.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            button_import.BackColor = System.Drawing.Color.FromArgb(226, 43, 141);
+            button_import.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_import.FlatAppearance.BorderSize = 0;
+            button_import.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_import.ForeColor = System.Drawing.Color.White;
+            button_import.Location = new System.Drawing.Point(917, 12);
+            button_import.Name = "button_import";
+            button_import.Size = new System.Drawing.Size(80, 29);
+            button_import.TabIndex = 7;
+            button_import.Text = "Import";
+            defaultToolTip.SetToolTip(button_import, "Import all data");
+            button_import.UseVisualStyleBackColor = false;
+            button_import.Click += button_import_Click;
             // 
             // button_validate
             // 
-            this.button_validate.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_validate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(43)))), ((int)(((byte)(141)))));
-            this.button_validate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_validate.FlatAppearance.BorderSize = 0;
-            this.button_validate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_validate.ForeColor = System.Drawing.Color.White;
-            this.button_validate.Location = new System.Drawing.Point(1064, 20);
-            this.button_validate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_validate.Name = "button_validate";
-            this.button_validate.Size = new System.Drawing.Size(114, 48);
-            this.button_validate.TabIndex = 8;
-            this.button_validate.Text = "Validate";
-            this.defaultToolTip.SetToolTip(this.button_validate, "Validate data input before importing data");
-            this.button_validate.UseVisualStyleBackColor = false;
-            this.button_validate.Click += new System.EventHandler(this.button_validate_Click);
+            button_validate.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            button_validate.BackColor = System.Drawing.Color.FromArgb(226, 43, 141);
+            button_validate.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_validate.FlatAppearance.BorderSize = 0;
+            button_validate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_validate.ForeColor = System.Drawing.Color.White;
+            button_validate.Location = new System.Drawing.Point(745, 12);
+            button_validate.Name = "button_validate";
+            button_validate.Size = new System.Drawing.Size(80, 29);
+            button_validate.TabIndex = 8;
+            button_validate.Text = "Validate";
+            defaultToolTip.SetToolTip(button_validate, "Validate data input before importing data");
+            button_validate.UseVisualStyleBackColor = false;
+            button_validate.Click += button_validate_Click;
             // 
             // button_stop
             // 
-            this.button_stop.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_stop.BackColor = System.Drawing.Color.DimGray;
-            this.button_stop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_stop.FlatAppearance.BorderSize = 0;
-            this.button_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_stop.ForeColor = System.Drawing.Color.White;
-            this.button_stop.Location = new System.Drawing.Point(1187, 20);
-            this.button_stop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_stop.Name = "button_stop";
-            this.button_stop.Size = new System.Drawing.Size(114, 48);
-            this.button_stop.TabIndex = 11;
-            this.button_stop.Text = "Stop";
-            this.defaultToolTip.SetToolTip(this.button_stop, "Stop validation or import");
-            this.button_stop.UseVisualStyleBackColor = false;
-            this.button_stop.Click += new System.EventHandler(this.button_stop_Click);
+            button_stop.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            button_stop.BackColor = System.Drawing.Color.DimGray;
+            button_stop.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_stop.FlatAppearance.BorderSize = 0;
+            button_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_stop.ForeColor = System.Drawing.Color.White;
+            button_stop.Location = new System.Drawing.Point(831, 12);
+            button_stop.Name = "button_stop";
+            button_stop.Size = new System.Drawing.Size(80, 29);
+            button_stop.TabIndex = 11;
+            button_stop.Text = "Stop";
+            defaultToolTip.SetToolTip(button_stop, "Stop validation or import");
+            button_stop.UseVisualStyleBackColor = false;
+            button_stop.Click += button_stop_Click;
             // 
             // panel_paymentFieldMapping
             // 
-            this.panel_paymentFieldMapping.AutoScroll = true;
-            this.panel_paymentFieldMapping.Controls.Add(this.flowLayoutPanel_nonMandatoryFields);
-            this.panel_paymentFieldMapping.Controls.Add(this.label_delimiter);
-            this.panel_paymentFieldMapping.Controls.Add(this.comboBox_delimiter);
-            this.panel_paymentFieldMapping.Controls.Add(this.groupBox_paymentMandatoryFields);
-            this.panel_paymentFieldMapping.Controls.Add(this.label_paymentSetup);
-            this.panel_paymentFieldMapping.Controls.Add(this.button_paymentSelectFile);
-            this.panel_paymentFieldMapping.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_paymentFieldMapping.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.panel_paymentFieldMapping.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_paymentFieldMapping.Location = new System.Drawing.Point(0, 0);
-            this.panel_paymentFieldMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_paymentFieldMapping.MinimumSize = new System.Drawing.Size(0, 200);
-            this.panel_paymentFieldMapping.Name = "panel_paymentFieldMapping";
-            this.panel_paymentFieldMapping.Size = new System.Drawing.Size(1437, 376);
-            this.panel_paymentFieldMapping.TabIndex = 13;
+            panel_paymentFieldMapping.AutoScroll = true;
+            panel_paymentFieldMapping.Controls.Add(flowLayoutPanel_nonMandatoryFields);
+            panel_paymentFieldMapping.Controls.Add(label_delimiter);
+            panel_paymentFieldMapping.Controls.Add(comboBox_delimiter);
+            panel_paymentFieldMapping.Controls.Add(groupBox_paymentMandatoryFields);
+            panel_paymentFieldMapping.Controls.Add(label_paymentSetup);
+            panel_paymentFieldMapping.Controls.Add(button_paymentSelectFile);
+            panel_paymentFieldMapping.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel_paymentFieldMapping.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            panel_paymentFieldMapping.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            panel_paymentFieldMapping.Location = new System.Drawing.Point(0, 0);
+            panel_paymentFieldMapping.MinimumSize = new System.Drawing.Size(0, 120);
+            panel_paymentFieldMapping.Name = "panel_paymentFieldMapping";
+            panel_paymentFieldMapping.Size = new System.Drawing.Size(1006, 226);
+            panel_paymentFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_nonMandatoryFields
             // 
-            this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryButton);
-            this.flowLayoutPanel_nonMandatoryFields.Controls.Add(this.panel_NonMandatoryFields);
-            this.flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(841, 100);
-            this.flowLayoutPanel_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.flowLayoutPanel_nonMandatoryFields.Name = "flowLayoutPanel_nonMandatoryFields";
-            this.flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(531, 465);
-            this.flowLayoutPanel_nonMandatoryFields.TabIndex = 7;
+            flowLayoutPanel_nonMandatoryFields.Controls.Add(panel_NonMandatoryButton);
+            flowLayoutPanel_nonMandatoryFields.Controls.Add(panel_NonMandatoryFields);
+            flowLayoutPanel_nonMandatoryFields.Location = new System.Drawing.Point(589, 60);
+            flowLayoutPanel_nonMandatoryFields.Name = "flowLayoutPanel_nonMandatoryFields";
+            flowLayoutPanel_nonMandatoryFields.Size = new System.Drawing.Size(372, 279);
+            flowLayoutPanel_nonMandatoryFields.TabIndex = 7;
             // 
             // panel_NonMandatoryButton
             // 
-            this.panel_NonMandatoryButton.Controls.Add(this.label_nonMandatoryFields);
-            this.panel_NonMandatoryButton.Controls.Add(this.button_expandNonMandatory);
-            this.panel_NonMandatoryButton.Location = new System.Drawing.Point(4, 5);
-            this.panel_NonMandatoryButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_NonMandatoryButton.Name = "panel_NonMandatoryButton";
-            this.panel_NonMandatoryButton.Size = new System.Drawing.Size(519, 53);
-            this.panel_NonMandatoryButton.TabIndex = 0;
+            panel_NonMandatoryButton.Controls.Add(label_nonMandatoryFields);
+            panel_NonMandatoryButton.Controls.Add(button_expandNonMandatory);
+            panel_NonMandatoryButton.Location = new System.Drawing.Point(3, 3);
+            panel_NonMandatoryButton.Name = "panel_NonMandatoryButton";
+            panel_NonMandatoryButton.Size = new System.Drawing.Size(363, 32);
+            panel_NonMandatoryButton.TabIndex = 0;
             // 
             // label_nonMandatoryFields
             // 
-            this.label_nonMandatoryFields.AutoSize = true;
-            this.label_nonMandatoryFields.ForeColor = System.Drawing.Color.Black;
-            this.label_nonMandatoryFields.Location = new System.Drawing.Point(66, 13);
-            this.label_nonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_nonMandatoryFields.Name = "label_nonMandatoryFields";
-            this.label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
-            this.label_nonMandatoryFields.TabIndex = 1;
-            this.label_nonMandatoryFields.Text = "Non-Mandatory";
+            label_nonMandatoryFields.AutoSize = true;
+            label_nonMandatoryFields.ForeColor = System.Drawing.Color.Black;
+            label_nonMandatoryFields.Location = new System.Drawing.Point(46, 8);
+            label_nonMandatoryFields.Name = "label_nonMandatoryFields";
+            label_nonMandatoryFields.Size = new System.Drawing.Size(107, 17);
+            label_nonMandatoryFields.TabIndex = 1;
+            label_nonMandatoryFields.Text = "Non-Mandatory";
             // 
             // button_expandNonMandatory
             // 
-            this.button_expandNonMandatory.BackColor = System.Drawing.Color.White;
-            this.button_expandNonMandatory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_expandNonMandatory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_expandNonMandatory.FlatAppearance.BorderSize = 0;
-            this.button_expandNonMandatory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_expandNonMandatory.ForeColor = System.Drawing.Color.White;
-            this.button_expandNonMandatory.Location = new System.Drawing.Point(14, 2);
-            this.button_expandNonMandatory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_expandNonMandatory.Name = "button_expandNonMandatory";
-            this.button_expandNonMandatory.Size = new System.Drawing.Size(43, 50);
-            this.button_expandNonMandatory.TabIndex = 0;
-            this.button_expandNonMandatory.UseVisualStyleBackColor = false;
-            this.button_expandNonMandatory.Click += new System.EventHandler(this.button_expand_Click);
+            button_expandNonMandatory.BackColor = System.Drawing.Color.White;
+            button_expandNonMandatory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            button_expandNonMandatory.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_expandNonMandatory.FlatAppearance.BorderSize = 0;
+            button_expandNonMandatory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_expandNonMandatory.ForeColor = System.Drawing.Color.White;
+            button_expandNonMandatory.Location = new System.Drawing.Point(10, 1);
+            button_expandNonMandatory.Name = "button_expandNonMandatory";
+            button_expandNonMandatory.Size = new System.Drawing.Size(30, 30);
+            button_expandNonMandatory.TabIndex = 0;
+            button_expandNonMandatory.UseVisualStyleBackColor = false;
+            button_expandNonMandatory.Click += button_expand_Click;
             // 
             // panel_NonMandatoryFields
             // 
-            this.panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentIsFixedPricePayment);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentIsFixedPricePayment);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentIsReadyForInvoicing);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentIsReadyForInvoicing);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentComment);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentProductNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentComment);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentProductNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentDiscountPercentage);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentDiscountPercentage);
-            this.panel_NonMandatoryFields.Controls.Add(this.label_paymentTaskNo);
-            this.panel_NonMandatoryFields.Controls.Add(this.comboBox_paymentTaskNo);
-            this.panel_NonMandatoryFields.Location = new System.Drawing.Point(4, 68);
-            this.panel_NonMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(519, 0);
-            this.panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
-            this.panel_NonMandatoryFields.Size = new System.Drawing.Size(519, 397);
-            this.panel_NonMandatoryFields.TabIndex = 1;
+            panel_NonMandatoryFields.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            panel_NonMandatoryFields.Controls.Add(label_paymentIsFixedPricePayment);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentIsFixedPricePayment);
+            panel_NonMandatoryFields.Controls.Add(label_paymentIsReadyForInvoicing);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentIsReadyForInvoicing);
+            panel_NonMandatoryFields.Controls.Add(label_paymentComment);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentProductNo);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentComment);
+            panel_NonMandatoryFields.Controls.Add(label_paymentProductNo);
+            panel_NonMandatoryFields.Controls.Add(label_paymentDiscountPercentage);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentDiscountPercentage);
+            panel_NonMandatoryFields.Controls.Add(label_paymentTaskNo);
+            panel_NonMandatoryFields.Controls.Add(comboBox_paymentTaskNo);
+            panel_NonMandatoryFields.Location = new System.Drawing.Point(3, 41);
+            panel_NonMandatoryFields.MinimumSize = new System.Drawing.Size(363, 0);
+            panel_NonMandatoryFields.Name = "panel_NonMandatoryFields";
+            panel_NonMandatoryFields.Size = new System.Drawing.Size(363, 214);
+            panel_NonMandatoryFields.TabIndex = 1;
             // 
             // label_paymentIsFixedPricePayment
             // 
-            this.label_paymentIsFixedPricePayment.AutoSize = true;
-            this.label_paymentIsFixedPricePayment.Location = new System.Drawing.Point(14, 290);
-            this.label_paymentIsFixedPricePayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentIsFixedPricePayment.Name = "label_paymentIsFixedPricePayment";
-            this.label_paymentIsFixedPricePayment.Size = new System.Drawing.Size(149, 17);
-            this.label_paymentIsFixedPricePayment.TabIndex = 4;
-            this.label_paymentIsFixedPricePayment.Text = "Is  Fixed Price Payment";
+            label_paymentIsFixedPricePayment.AutoSize = true;
+            label_paymentIsFixedPricePayment.Location = new System.Drawing.Point(10, 174);
+            label_paymentIsFixedPricePayment.Name = "label_paymentIsFixedPricePayment";
+            label_paymentIsFixedPricePayment.Size = new System.Drawing.Size(149, 17);
+            label_paymentIsFixedPricePayment.TabIndex = 4;
+            label_paymentIsFixedPricePayment.Text = "Is  Fixed Price Payment";
             // 
             // comboBox_paymentIsFixedPricePayment
             // 
-            this.comboBox_paymentIsFixedPricePayment.FormattingEnabled = true;
-            this.comboBox_paymentIsFixedPricePayment.Location = new System.Drawing.Point(257, 285);
-            this.comboBox_paymentIsFixedPricePayment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentIsFixedPricePayment.Name = "comboBox_paymentIsFixedPricePayment";
-            this.comboBox_paymentIsFixedPricePayment.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentIsFixedPricePayment.TabIndex = 6;
+            comboBox_paymentIsFixedPricePayment.FormattingEnabled = true;
+            comboBox_paymentIsFixedPricePayment.Location = new System.Drawing.Point(180, 171);
+            comboBox_paymentIsFixedPricePayment.Name = "comboBox_paymentIsFixedPricePayment";
+            comboBox_paymentIsFixedPricePayment.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentIsFixedPricePayment.TabIndex = 6;
             // 
             // label_paymentIsReadyForInvoicing
             // 
-            this.label_paymentIsReadyForInvoicing.AutoSize = true;
-            this.label_paymentIsReadyForInvoicing.Location = new System.Drawing.Point(14, 238);
-            this.label_paymentIsReadyForInvoicing.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentIsReadyForInvoicing.Name = "label_paymentIsReadyForInvoicing";
-            this.label_paymentIsReadyForInvoicing.Size = new System.Drawing.Size(142, 17);
-            this.label_paymentIsReadyForInvoicing.TabIndex = 5;
-            this.label_paymentIsReadyForInvoicing.Text = "Is Ready For Invoicing";
+            label_paymentIsReadyForInvoicing.AutoSize = true;
+            label_paymentIsReadyForInvoicing.Location = new System.Drawing.Point(10, 143);
+            label_paymentIsReadyForInvoicing.Name = "label_paymentIsReadyForInvoicing";
+            label_paymentIsReadyForInvoicing.Size = new System.Drawing.Size(142, 17);
+            label_paymentIsReadyForInvoicing.TabIndex = 5;
+            label_paymentIsReadyForInvoicing.Text = "Is Ready For Invoicing";
             // 
             // comboBox_paymentIsReadyForInvoicing
             // 
-            this.comboBox_paymentIsReadyForInvoicing.FormattingEnabled = true;
-            this.comboBox_paymentIsReadyForInvoicing.Location = new System.Drawing.Point(257, 233);
-            this.comboBox_paymentIsReadyForInvoicing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentIsReadyForInvoicing.Name = "comboBox_paymentIsReadyForInvoicing";
-            this.comboBox_paymentIsReadyForInvoicing.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentIsReadyForInvoicing.TabIndex = 7;
+            comboBox_paymentIsReadyForInvoicing.FormattingEnabled = true;
+            comboBox_paymentIsReadyForInvoicing.Location = new System.Drawing.Point(180, 140);
+            comboBox_paymentIsReadyForInvoicing.Name = "comboBox_paymentIsReadyForInvoicing";
+            comboBox_paymentIsReadyForInvoicing.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentIsReadyForInvoicing.TabIndex = 7;
             // 
             // label_paymentComment
             // 
-            this.label_paymentComment.AutoSize = true;
-            this.label_paymentComment.Location = new System.Drawing.Point(14, 187);
-            this.label_paymentComment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentComment.Name = "label_paymentComment";
-            this.label_paymentComment.Size = new System.Drawing.Size(68, 17);
-            this.label_paymentComment.TabIndex = 1;
-            this.label_paymentComment.Text = "Comment";
+            label_paymentComment.AutoSize = true;
+            label_paymentComment.Location = new System.Drawing.Point(10, 112);
+            label_paymentComment.Name = "label_paymentComment";
+            label_paymentComment.Size = new System.Drawing.Size(68, 17);
+            label_paymentComment.TabIndex = 1;
+            label_paymentComment.Text = "Comment";
             // 
             // comboBox_paymentProductNo
             // 
-            this.comboBox_paymentProductNo.FormattingEnabled = true;
-            this.comboBox_paymentProductNo.Location = new System.Drawing.Point(257, 78);
-            this.comboBox_paymentProductNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentProductNo.Name = "comboBox_paymentProductNo";
-            this.comboBox_paymentProductNo.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentProductNo.TabIndex = 3;
+            comboBox_paymentProductNo.FormattingEnabled = true;
+            comboBox_paymentProductNo.Location = new System.Drawing.Point(180, 47);
+            comboBox_paymentProductNo.Name = "comboBox_paymentProductNo";
+            comboBox_paymentProductNo.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentProductNo.TabIndex = 3;
             // 
             // comboBox_paymentComment
             // 
-            this.comboBox_paymentComment.FormattingEnabled = true;
-            this.comboBox_paymentComment.Location = new System.Drawing.Point(257, 182);
-            this.comboBox_paymentComment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentComment.Name = "comboBox_paymentComment";
-            this.comboBox_paymentComment.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentComment.TabIndex = 3;
+            comboBox_paymentComment.FormattingEnabled = true;
+            comboBox_paymentComment.Location = new System.Drawing.Point(180, 109);
+            comboBox_paymentComment.Name = "comboBox_paymentComment";
+            comboBox_paymentComment.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentComment.TabIndex = 3;
             // 
             // label_paymentProductNo
             // 
-            this.label_paymentProductNo.AutoSize = true;
-            this.label_paymentProductNo.Location = new System.Drawing.Point(14, 83);
-            this.label_paymentProductNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentProductNo.Name = "label_paymentProductNo";
-            this.label_paymentProductNo.Size = new System.Drawing.Size(78, 17);
-            this.label_paymentProductNo.TabIndex = 1;
-            this.label_paymentProductNo.Text = "Product No";
+            label_paymentProductNo.AutoSize = true;
+            label_paymentProductNo.Location = new System.Drawing.Point(10, 50);
+            label_paymentProductNo.Name = "label_paymentProductNo";
+            label_paymentProductNo.Size = new System.Drawing.Size(78, 17);
+            label_paymentProductNo.TabIndex = 1;
+            label_paymentProductNo.Text = "Product No";
             // 
             // label_paymentDiscountPercentage
             // 
-            this.label_paymentDiscountPercentage.AutoSize = true;
-            this.label_paymentDiscountPercentage.Location = new System.Drawing.Point(14, 135);
-            this.label_paymentDiscountPercentage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentDiscountPercentage.Name = "label_paymentDiscountPercentage";
-            this.label_paymentDiscountPercentage.Size = new System.Drawing.Size(76, 17);
-            this.label_paymentDiscountPercentage.TabIndex = 1;
-            this.label_paymentDiscountPercentage.Text = "Discount %";
+            label_paymentDiscountPercentage.AutoSize = true;
+            label_paymentDiscountPercentage.Location = new System.Drawing.Point(10, 81);
+            label_paymentDiscountPercentage.Name = "label_paymentDiscountPercentage";
+            label_paymentDiscountPercentage.Size = new System.Drawing.Size(76, 17);
+            label_paymentDiscountPercentage.TabIndex = 1;
+            label_paymentDiscountPercentage.Text = "Discount %";
             // 
             // comboBox_paymentDiscountPercentage
             // 
-            this.comboBox_paymentDiscountPercentage.FormattingEnabled = true;
-            this.comboBox_paymentDiscountPercentage.Location = new System.Drawing.Point(257, 130);
-            this.comboBox_paymentDiscountPercentage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentDiscountPercentage.Name = "comboBox_paymentDiscountPercentage";
-            this.comboBox_paymentDiscountPercentage.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentDiscountPercentage.TabIndex = 3;
+            comboBox_paymentDiscountPercentage.FormattingEnabled = true;
+            comboBox_paymentDiscountPercentage.Location = new System.Drawing.Point(180, 78);
+            comboBox_paymentDiscountPercentage.Name = "comboBox_paymentDiscountPercentage";
+            comboBox_paymentDiscountPercentage.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentDiscountPercentage.TabIndex = 3;
             // 
             // label_paymentTaskNo
             // 
-            this.label_paymentTaskNo.AutoSize = true;
-            this.label_paymentTaskNo.Location = new System.Drawing.Point(14, 33);
-            this.label_paymentTaskNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentTaskNo.Name = "label_paymentTaskNo";
-            this.label_paymentTaskNo.Size = new System.Drawing.Size(56, 17);
-            this.label_paymentTaskNo.TabIndex = 1;
-            this.label_paymentTaskNo.Text = "Task No";
+            label_paymentTaskNo.AutoSize = true;
+            label_paymentTaskNo.Location = new System.Drawing.Point(10, 20);
+            label_paymentTaskNo.Name = "label_paymentTaskNo";
+            label_paymentTaskNo.Size = new System.Drawing.Size(56, 17);
+            label_paymentTaskNo.TabIndex = 1;
+            label_paymentTaskNo.Text = "Task No";
             // 
             // comboBox_paymentTaskNo
             // 
-            this.comboBox_paymentTaskNo.FormattingEnabled = true;
-            this.comboBox_paymentTaskNo.Location = new System.Drawing.Point(257, 27);
-            this.comboBox_paymentTaskNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentTaskNo.Name = "comboBox_paymentTaskNo";
-            this.comboBox_paymentTaskNo.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentTaskNo.TabIndex = 3;
+            comboBox_paymentTaskNo.FormattingEnabled = true;
+            comboBox_paymentTaskNo.Location = new System.Drawing.Point(180, 16);
+            comboBox_paymentTaskNo.Name = "comboBox_paymentTaskNo";
+            comboBox_paymentTaskNo.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentTaskNo.TabIndex = 3;
             // 
             // label_delimiter
             // 
-            this.label_delimiter.AutoSize = true;
-            this.label_delimiter.Location = new System.Drawing.Point(14, 125);
-            this.label_delimiter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_delimiter.Name = "label_delimiter";
-            this.label_delimiter.Size = new System.Drawing.Size(62, 17);
-            this.label_delimiter.TabIndex = 1;
-            this.label_delimiter.Text = "Delimiter";
+            label_delimiter.AutoSize = true;
+            label_delimiter.Location = new System.Drawing.Point(10, 75);
+            label_delimiter.Name = "label_delimiter";
+            label_delimiter.Size = new System.Drawing.Size(62, 17);
+            label_delimiter.TabIndex = 1;
+            label_delimiter.Text = "Delimiter";
             // 
             // comboBox_delimiter
             // 
-            this.comboBox_delimiter.FormattingEnabled = true;
-            this.comboBox_delimiter.Location = new System.Drawing.Point(117, 120);
-            this.comboBox_delimiter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_delimiter.Name = "comboBox_delimiter";
-            this.comboBox_delimiter.Size = new System.Drawing.Size(78, 25);
-            this.comboBox_delimiter.TabIndex = 6;
+            comboBox_delimiter.FormattingEnabled = true;
+            comboBox_delimiter.Location = new System.Drawing.Point(82, 72);
+            comboBox_delimiter.Name = "comboBox_delimiter";
+            comboBox_delimiter.Size = new System.Drawing.Size(56, 25);
+            comboBox_delimiter.TabIndex = 6;
             // 
             // groupBox_paymentMandatoryFields
             // 
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.checkBox_defaultPaymentUnitType);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_projectNo);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentUnitType);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentProjectNo);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentUnitType);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentInvoiceDate);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentInvoiceDate);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentAmount);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentAmount);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentQuantity);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentContractName);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentQuantity);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentContractName);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.label_paymentName);
-            this.groupBox_paymentMandatoryFields.Controls.Add(this.comboBox_paymentName);
-            this.groupBox_paymentMandatoryFields.Location = new System.Drawing.Point(263, 103);
-            this.groupBox_paymentMandatoryFields.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox_paymentMandatoryFields.Name = "groupBox_paymentMandatoryFields";
-            this.groupBox_paymentMandatoryFields.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox_paymentMandatoryFields.Size = new System.Drawing.Size(549, 462);
-            this.groupBox_paymentMandatoryFields.TabIndex = 5;
-            this.groupBox_paymentMandatoryFields.TabStop = false;
-            this.groupBox_paymentMandatoryFields.Text = "Mandatory";
+            groupBox_paymentMandatoryFields.Controls.Add(checkBox_defaultPaymentUnitType);
+            groupBox_paymentMandatoryFields.Controls.Add(label_projectNo);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentUnitType);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentProjectNo);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentUnitType);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentInvoiceDate);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentInvoiceDate);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentAmount);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentAmount);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentQuantity);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentContractName);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentQuantity);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentContractName);
+            groupBox_paymentMandatoryFields.Controls.Add(label_paymentName);
+            groupBox_paymentMandatoryFields.Controls.Add(comboBox_paymentName);
+            groupBox_paymentMandatoryFields.Location = new System.Drawing.Point(184, 62);
+            groupBox_paymentMandatoryFields.Name = "groupBox_paymentMandatoryFields";
+            groupBox_paymentMandatoryFields.Size = new System.Drawing.Size(384, 253);
+            groupBox_paymentMandatoryFields.TabIndex = 5;
+            groupBox_paymentMandatoryFields.TabStop = false;
+            groupBox_paymentMandatoryFields.Text = "Mandatory";
             // 
             // checkBox_defaultPaymentUnitType
             // 
-            this.checkBox_defaultPaymentUnitType.AutoSize = true;
-            this.checkBox_defaultPaymentUnitType.Location = new System.Drawing.Point(440, 358);
-            this.checkBox_defaultPaymentUnitType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox_defaultPaymentUnitType.Name = "checkBox_defaultPaymentUnitType";
-            this.checkBox_defaultPaymentUnitType.Size = new System.Drawing.Size(70, 21);
-            this.checkBox_defaultPaymentUnitType.TabIndex = 9;
-            this.checkBox_defaultPaymentUnitType.Text = "Default";
-            this.defaultToolTip.SetToolTip(this.checkBox_defaultPaymentUnitType, "Set default values for all rows of a particular column field");
-            this.checkBox_defaultPaymentUnitType.UseVisualStyleBackColor = true;
-            this.checkBox_defaultPaymentUnitType.CheckedChanged += new System.EventHandler(this.checkBox_defaultPaymentUnitType_CheckedChanged);
+            checkBox_defaultPaymentUnitType.AutoSize = true;
+            checkBox_defaultPaymentUnitType.Location = new System.Drawing.Point(308, 215);
+            checkBox_defaultPaymentUnitType.Name = "checkBox_defaultPaymentUnitType";
+            checkBox_defaultPaymentUnitType.Size = new System.Drawing.Size(70, 21);
+            checkBox_defaultPaymentUnitType.TabIndex = 9;
+            checkBox_defaultPaymentUnitType.Text = "Default";
+            defaultToolTip.SetToolTip(checkBox_defaultPaymentUnitType, "Set default values for all rows of a particular column field");
+            checkBox_defaultPaymentUnitType.UseVisualStyleBackColor = true;
+            checkBox_defaultPaymentUnitType.CheckedChanged += checkBox_defaultPaymentUnitType_CheckedChanged;
             // 
             // label_projectNo
             // 
-            this.label_projectNo.AutoSize = true;
-            this.label_projectNo.Location = new System.Drawing.Point(7, 97);
-            this.label_projectNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_projectNo.Name = "label_projectNo";
-            this.label_projectNo.Size = new System.Drawing.Size(72, 17);
-            this.label_projectNo.TabIndex = 1;
-            this.label_projectNo.Text = "Project No";
+            label_projectNo.AutoSize = true;
+            label_projectNo.Location = new System.Drawing.Point(5, 58);
+            label_projectNo.Name = "label_projectNo";
+            label_projectNo.Size = new System.Drawing.Size(72, 17);
+            label_projectNo.TabIndex = 1;
+            label_projectNo.Text = "Project No";
             // 
             // label_paymentUnitType
             // 
-            this.label_paymentUnitType.AutoSize = true;
-            this.label_paymentUnitType.Location = new System.Drawing.Point(9, 355);
-            this.label_paymentUnitType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentUnitType.Name = "label_paymentUnitType";
-            this.label_paymentUnitType.Size = new System.Drawing.Size(64, 17);
-            this.label_paymentUnitType.TabIndex = 7;
-            this.label_paymentUnitType.Text = "Unit type";
+            label_paymentUnitType.AutoSize = true;
+            label_paymentUnitType.Location = new System.Drawing.Point(6, 213);
+            label_paymentUnitType.Name = "label_paymentUnitType";
+            label_paymentUnitType.Size = new System.Drawing.Size(64, 17);
+            label_paymentUnitType.TabIndex = 7;
+            label_paymentUnitType.Text = "Unit type";
             // 
             // comboBox_paymentProjectNo
             // 
-            this.comboBox_paymentProjectNo.FormattingEnabled = true;
-            this.comboBox_paymentProjectNo.Location = new System.Drawing.Point(233, 97);
-            this.comboBox_paymentProjectNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentProjectNo.Name = "comboBox_paymentProjectNo";
-            this.comboBox_paymentProjectNo.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentProjectNo.TabIndex = 3;
+            comboBox_paymentProjectNo.FormattingEnabled = true;
+            comboBox_paymentProjectNo.Location = new System.Drawing.Point(163, 58);
+            comboBox_paymentProjectNo.Name = "comboBox_paymentProjectNo";
+            comboBox_paymentProjectNo.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentProjectNo.TabIndex = 3;
             // 
             // comboBox_paymentUnitType
             // 
-            this.comboBox_paymentUnitType.FormattingEnabled = true;
-            this.comboBox_paymentUnitType.Location = new System.Drawing.Point(233, 355);
-            this.comboBox_paymentUnitType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentUnitType.Name = "comboBox_paymentUnitType";
-            this.comboBox_paymentUnitType.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentUnitType.TabIndex = 8;
+            comboBox_paymentUnitType.FormattingEnabled = true;
+            comboBox_paymentUnitType.Location = new System.Drawing.Point(163, 213);
+            comboBox_paymentUnitType.Name = "comboBox_paymentUnitType";
+            comboBox_paymentUnitType.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentUnitType.TabIndex = 8;
             // 
             // comboBox_paymentInvoiceDate
             // 
-            this.comboBox_paymentInvoiceDate.FormattingEnabled = true;
-            this.comboBox_paymentInvoiceDate.Location = new System.Drawing.Point(233, 200);
-            this.comboBox_paymentInvoiceDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentInvoiceDate.Name = "comboBox_paymentInvoiceDate";
-            this.comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentInvoiceDate.TabIndex = 3;
+            comboBox_paymentInvoiceDate.FormattingEnabled = true;
+            comboBox_paymentInvoiceDate.Location = new System.Drawing.Point(163, 120);
+            comboBox_paymentInvoiceDate.Name = "comboBox_paymentInvoiceDate";
+            comboBox_paymentInvoiceDate.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentInvoiceDate.TabIndex = 3;
             // 
             // label_paymentInvoiceDate
             // 
-            this.label_paymentInvoiceDate.AutoSize = true;
-            this.label_paymentInvoiceDate.Location = new System.Drawing.Point(9, 205);
-            this.label_paymentInvoiceDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentInvoiceDate.Name = "label_paymentInvoiceDate";
-            this.label_paymentInvoiceDate.Size = new System.Drawing.Size(83, 17);
-            this.label_paymentInvoiceDate.TabIndex = 1;
-            this.label_paymentInvoiceDate.Text = "Invoice Date";
+            label_paymentInvoiceDate.AutoSize = true;
+            label_paymentInvoiceDate.Location = new System.Drawing.Point(6, 123);
+            label_paymentInvoiceDate.Name = "label_paymentInvoiceDate";
+            label_paymentInvoiceDate.Size = new System.Drawing.Size(83, 17);
+            label_paymentInvoiceDate.TabIndex = 1;
+            label_paymentInvoiceDate.Text = "Invoice Date";
             // 
             // label_paymentAmount
             // 
-            this.label_paymentAmount.AutoSize = true;
-            this.label_paymentAmount.Location = new System.Drawing.Point(9, 252);
-            this.label_paymentAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentAmount.Name = "label_paymentAmount";
-            this.label_paymentAmount.Size = new System.Drawing.Size(58, 17);
-            this.label_paymentAmount.TabIndex = 1;
-            this.label_paymentAmount.Text = "Amount";
+            label_paymentAmount.AutoSize = true;
+            label_paymentAmount.Location = new System.Drawing.Point(6, 151);
+            label_paymentAmount.Name = "label_paymentAmount";
+            label_paymentAmount.Size = new System.Drawing.Size(58, 17);
+            label_paymentAmount.TabIndex = 1;
+            label_paymentAmount.Text = "Amount";
             // 
             // comboBox_paymentAmount
             // 
-            this.comboBox_paymentAmount.FormattingEnabled = true;
-            this.comboBox_paymentAmount.Location = new System.Drawing.Point(233, 252);
-            this.comboBox_paymentAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentAmount.Name = "comboBox_paymentAmount";
-            this.comboBox_paymentAmount.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentAmount.TabIndex = 3;
+            comboBox_paymentAmount.FormattingEnabled = true;
+            comboBox_paymentAmount.Location = new System.Drawing.Point(163, 151);
+            comboBox_paymentAmount.Name = "comboBox_paymentAmount";
+            comboBox_paymentAmount.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentAmount.TabIndex = 3;
             // 
             // label_paymentQuantity
             // 
-            this.label_paymentQuantity.AutoSize = true;
-            this.label_paymentQuantity.Location = new System.Drawing.Point(9, 303);
-            this.label_paymentQuantity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentQuantity.Name = "label_paymentQuantity";
-            this.label_paymentQuantity.Size = new System.Drawing.Size(61, 17);
-            this.label_paymentQuantity.TabIndex = 1;
-            this.label_paymentQuantity.Text = "Quantity";
+            label_paymentQuantity.AutoSize = true;
+            label_paymentQuantity.Location = new System.Drawing.Point(6, 182);
+            label_paymentQuantity.Name = "label_paymentQuantity";
+            label_paymentQuantity.Size = new System.Drawing.Size(61, 17);
+            label_paymentQuantity.TabIndex = 1;
+            label_paymentQuantity.Text = "Quantity";
             // 
             // label_paymentContractName
             // 
-            this.label_paymentContractName.AutoSize = true;
-            this.label_paymentContractName.Location = new System.Drawing.Point(9, 148);
-            this.label_paymentContractName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentContractName.Name = "label_paymentContractName";
-            this.label_paymentContractName.Size = new System.Drawing.Size(100, 17);
-            this.label_paymentContractName.TabIndex = 1;
-            this.label_paymentContractName.Text = "Contract Name";
+            label_paymentContractName.AutoSize = true;
+            label_paymentContractName.Location = new System.Drawing.Point(6, 89);
+            label_paymentContractName.Name = "label_paymentContractName";
+            label_paymentContractName.Size = new System.Drawing.Size(100, 17);
+            label_paymentContractName.TabIndex = 1;
+            label_paymentContractName.Text = "Contract Name";
             // 
             // comboBox_paymentQuantity
             // 
-            this.comboBox_paymentQuantity.FormattingEnabled = true;
-            this.comboBox_paymentQuantity.Location = new System.Drawing.Point(233, 303);
-            this.comboBox_paymentQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentQuantity.Name = "comboBox_paymentQuantity";
-            this.comboBox_paymentQuantity.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentQuantity.TabIndex = 3;
+            comboBox_paymentQuantity.FormattingEnabled = true;
+            comboBox_paymentQuantity.Location = new System.Drawing.Point(163, 182);
+            comboBox_paymentQuantity.Name = "comboBox_paymentQuantity";
+            comboBox_paymentQuantity.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentQuantity.TabIndex = 3;
             // 
             // comboBox_paymentContractName
             // 
-            this.comboBox_paymentContractName.FormattingEnabled = true;
-            this.comboBox_paymentContractName.Location = new System.Drawing.Point(233, 148);
-            this.comboBox_paymentContractName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentContractName.Name = "comboBox_paymentContractName";
-            this.comboBox_paymentContractName.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentContractName.TabIndex = 3;
+            comboBox_paymentContractName.FormattingEnabled = true;
+            comboBox_paymentContractName.Location = new System.Drawing.Point(163, 89);
+            comboBox_paymentContractName.Name = "comboBox_paymentContractName";
+            comboBox_paymentContractName.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentContractName.TabIndex = 3;
             // 
             // label_paymentName
             // 
-            this.label_paymentName.AutoSize = true;
-            this.label_paymentName.Location = new System.Drawing.Point(9, 45);
-            this.label_paymentName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentName.Name = "label_paymentName";
-            this.label_paymentName.Size = new System.Drawing.Size(102, 17);
-            this.label_paymentName.TabIndex = 1;
-            this.label_paymentName.Text = "Payment Name";
+            label_paymentName.AutoSize = true;
+            label_paymentName.Location = new System.Drawing.Point(6, 27);
+            label_paymentName.Name = "label_paymentName";
+            label_paymentName.Size = new System.Drawing.Size(102, 17);
+            label_paymentName.TabIndex = 1;
+            label_paymentName.Text = "Payment Name";
             // 
             // comboBox_paymentName
             // 
-            this.comboBox_paymentName.FormattingEnabled = true;
-            this.comboBox_paymentName.Location = new System.Drawing.Point(233, 45);
-            this.comboBox_paymentName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox_paymentName.Name = "comboBox_paymentName";
-            this.comboBox_paymentName.Size = new System.Drawing.Size(197, 25);
-            this.comboBox_paymentName.TabIndex = 3;
+            comboBox_paymentName.FormattingEnabled = true;
+            comboBox_paymentName.Location = new System.Drawing.Point(163, 27);
+            comboBox_paymentName.Name = "comboBox_paymentName";
+            comboBox_paymentName.Size = new System.Drawing.Size(139, 25);
+            comboBox_paymentName.TabIndex = 3;
             // 
             // label_paymentSetup
             // 
-            this.label_paymentSetup.AutoSize = true;
-            this.label_paymentSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_paymentSetup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label_paymentSetup.Location = new System.Drawing.Point(10, 27);
-            this.label_paymentSetup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_paymentSetup.Name = "label_paymentSetup";
-            this.label_paymentSetup.Size = new System.Drawing.Size(250, 32);
-            this.label_paymentSetup.TabIndex = 0;
-            this.label_paymentSetup.Text = "Payment Data Import";
+            label_paymentSetup.AutoSize = true;
+            label_paymentSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            label_paymentSetup.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            label_paymentSetup.Location = new System.Drawing.Point(7, 16);
+            label_paymentSetup.Name = "label_paymentSetup";
+            label_paymentSetup.Size = new System.Drawing.Size(250, 32);
+            label_paymentSetup.TabIndex = 0;
+            label_paymentSetup.Text = "Payment Data Import";
             // 
             // button_paymentSelectFile
             // 
-            this.button_paymentSelectFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(43)))), ((int)(((byte)(141)))));
-            this.button_paymentSelectFile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_paymentSelectFile.FlatAppearance.BorderSize = 0;
-            this.button_paymentSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_paymentSelectFile.ForeColor = System.Drawing.Color.White;
-            this.button_paymentSelectFile.Location = new System.Drawing.Point(19, 185);
-            this.button_paymentSelectFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_paymentSelectFile.Name = "button_paymentSelectFile";
-            this.button_paymentSelectFile.Size = new System.Drawing.Size(114, 48);
-            this.button_paymentSelectFile.TabIndex = 4;
-            this.button_paymentSelectFile.Text = "Select File";
-            this.defaultToolTip.SetToolTip(this.button_paymentSelectFile, "Select input CSV file");
-            this.button_paymentSelectFile.UseVisualStyleBackColor = false;
-            this.button_paymentSelectFile.Click += new System.EventHandler(this.button_select_payment_file_Click);
+            button_paymentSelectFile.BackColor = System.Drawing.Color.FromArgb(226, 43, 141);
+            button_paymentSelectFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            button_paymentSelectFile.FlatAppearance.BorderSize = 0;
+            button_paymentSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_paymentSelectFile.ForeColor = System.Drawing.Color.White;
+            button_paymentSelectFile.Location = new System.Drawing.Point(13, 111);
+            button_paymentSelectFile.Name = "button_paymentSelectFile";
+            button_paymentSelectFile.Size = new System.Drawing.Size(80, 29);
+            button_paymentSelectFile.TabIndex = 4;
+            button_paymentSelectFile.Text = "Select File";
+            defaultToolTip.SetToolTip(button_paymentSelectFile, "Select input CSV file");
+            button_paymentSelectFile.UseVisualStyleBackColor = false;
+            button_paymentSelectFile.Click += button_select_payment_file_Click;
             // 
             // tmrExpand
             // 
-            this.tmrExpand.Interval = 10;
-            this.tmrExpand.Tick += new System.EventHandler(this.tmrExpand_Tick);
+            tmrExpand.Interval = 10;
+            tmrExpand.Tick += tmrExpand_Tick;
             // 
             // defaultToolTip
             // 
-            this.defaultToolTip.ShowAlways = true;
+            defaultToolTip.ShowAlways = true;
             // 
             // UserControl_PaymentImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel_paymentFieldMapping);
-            this.Controls.Add(this.panel_paymentButtons);
-            this.Controls.Add(this.panel_paymentMessage);
-            this.Controls.Add(this.panel_paymentDataTable);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "UserControl_PaymentImport";
-            this.Size = new System.Drawing.Size(1437, 1070);
-            this.panel_paymentDataTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_payment)).EndInit();
-            this.panel_paymentMessage.ResumeLayout(false);
-            this.panel_paymentMessage.PerformLayout();
-            this.panel_paymentButtons.ResumeLayout(false);
-            this.panel_paymentFieldMapping.ResumeLayout(false);
-            this.panel_paymentFieldMapping.PerformLayout();
-            this.flowLayoutPanel_nonMandatoryFields.ResumeLayout(false);
-            this.panel_NonMandatoryButton.ResumeLayout(false);
-            this.panel_NonMandatoryButton.PerformLayout();
-            this.panel_NonMandatoryFields.ResumeLayout(false);
-            this.panel_NonMandatoryFields.PerformLayout();
-            this.groupBox_paymentMandatoryFields.ResumeLayout(false);
-            this.groupBox_paymentMandatoryFields.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(panel_paymentFieldMapping);
+            Controls.Add(panel_paymentButtons);
+            Controls.Add(panel_paymentMessage);
+            Controls.Add(panel_paymentDataTable);
+            Name = "UserControl_PaymentImport";
+            Size = new System.Drawing.Size(1006, 642);
+            panel_paymentDataTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView_payment).EndInit();
+            panel_paymentMessage.ResumeLayout(false);
+            panel_paymentMessage.PerformLayout();
+            panel_paymentButtons.ResumeLayout(false);
+            panel_paymentFieldMapping.ResumeLayout(false);
+            panel_paymentFieldMapping.PerformLayout();
+            flowLayoutPanel_nonMandatoryFields.ResumeLayout(false);
+            panel_NonMandatoryButton.ResumeLayout(false);
+            panel_NonMandatoryButton.PerformLayout();
+            panel_NonMandatoryFields.ResumeLayout(false);
+            panel_NonMandatoryFields.PerformLayout();
+            groupBox_paymentMandatoryFields.ResumeLayout(false);
+            groupBox_paymentMandatoryFields.PerformLayout();
+            ResumeLayout(false);
 
         }
 

@@ -333,7 +333,7 @@
             groupBox_contractHourlyRateMandatoryFields.Controls.Add(comboBox_contractHourlyRateProjectNo);
             groupBox_contractHourlyRateMandatoryFields.Location = new System.Drawing.Point(184, 62);
             groupBox_contractHourlyRateMandatoryFields.Name = "groupBox_contractHourlyRateMandatoryFields";
-            groupBox_contractHourlyRateMandatoryFields.Size = new System.Drawing.Size(358, 399);
+            groupBox_contractHourlyRateMandatoryFields.Size = new System.Drawing.Size(358, 220);
             groupBox_contractHourlyRateMandatoryFields.TabIndex = 5;
             groupBox_contractHourlyRateMandatoryFields.TabStop = false;
             groupBox_contractHourlyRateMandatoryFields.Text = "Mandatory";
