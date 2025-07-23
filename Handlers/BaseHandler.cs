@@ -1,4 +1,5 @@
 ﻿using LazyCache;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace TimeLog.DataImporter.Handlers
         public List<string> FileColumnHeaders = new List<string>();
         private readonly List<string> _delimiterList = new List<string> { ";", ",", "|" };
         private readonly List<string> _percentageList = new List<string>() ;
-        private readonly IAppCache _cache;
+        private CachingService _cache;
         private int cacheTimeout = 3;
 
         // The state of expanding or collapsing panel
@@ -207,7 +208,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
-            return _cache.GetOrAdd("AllCurrency", () => GetAllCurrencyActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllCurrency", () => GetAllCurrencyActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
 
         private List<CurrencyReadModel> GetAllCurrencyActual(string token)
@@ -268,7 +269,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<LegalEntityReadModel> GetAllLegalEntity(string token)
         {
-            return _cache.GetOrAdd("AllLegalEntity", () => GetAllLegalEntityActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllLegalEntity", () => GetAllLegalEntityActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
 
         private List<LegalEntityReadModel> GetAllLegalEntityActual(string token)
@@ -329,7 +330,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<EmployeeReadModel> GetAllEmployee(string token)
         {
-            return _cache.GetOrAdd("AllEmployee", () => GetAllEmployeeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllEmployee", () => GetAllEmployeeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<EmployeeReadModel> GetAllEmployeeActual(string token)
         {
@@ -393,7 +394,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerReadModel> GetAllCustomer(string token)
         {
-            return _cache.GetOrAdd("AllCustomer", () => GetAllCustomerActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllCustomer", () => GetAllCustomerActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<CustomerReadModel> GetAllCustomerActual(string token)
         {
@@ -458,7 +459,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerStatusReadModel> GetAllCustomerStatus(string token)
         {
-            return _cache.GetOrAdd("AllCustomerStatus", () => GetAllCustomerStatusActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllCustomerStatus", () => GetAllCustomerStatusActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<CustomerStatusReadModel> GetAllCustomerStatusActual(string token)
         {
@@ -517,7 +518,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectReadModel> GetAllProject(string token)
         {
-            return _cache.GetOrAdd("AllProjects", () => GetAllProjectActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllProjects", () => GetAllProjectActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
 
         private List<ProjectReadModel> GetAllProjectActual(string token)
@@ -583,7 +584,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
         {
-            return _cache.GetOrAdd("AllContract"+projectID, () => GetAllContractActual(token, projectID), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllContract"+projectID, () => GetAllContractActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ProjectSubContractReadModel> GetAllContractActual(string token, int projectID)
         {
@@ -649,7 +650,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ContractModelReadModel> GetAllContractModels(string token)
         {
-            return _cache.GetOrAdd("AllContractModels", () => GetAllContractModelsActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllContractModels", () => GetAllContractModelsActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ContractModelReadModel> GetAllContractModelsActual(string token)
         {
@@ -712,7 +713,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HourlyRateReadModel> GetAllDefaultHourlyRate(string token)
         {
-            return _cache.GetOrAdd("AllDefaultHourlyRate", () => GetAllDefaultHourlyRateActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllDefaultHourlyRate", () => GetAllDefaultHourlyRateActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<HourlyRateReadModel> GetAllDefaultHourlyRateActual(string token)
         {
@@ -769,7 +770,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<DepartmentReadModel> GetAllDepartment(string token)
         {
-            return _cache.GetOrAdd("AllDepartment", () => GetAllDepartmentActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllDepartment", () => GetAllDepartmentActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<DepartmentReadModel> GetAllDepartmentActual(string token)
         {
@@ -827,7 +828,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<UnitTypeReadModel> GetAllUnitType(string token)
         {
-            return _cache.GetOrAdd("AllUnit", () => GetAllUnitTypeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllUnit", () => GetAllUnitTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<UnitTypeReadModel> GetAllUnitTypeActual(string token)
         {
@@ -885,7 +886,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<AbsenceCodeReadModel> GetAllAbsenceCode(string token)
         {
-            return _cache.GetOrAdd("AllAbsenceCode", () => GetAllAbsenceCodeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllAbsenceCode", () => GetAllAbsenceCodeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<AbsenceCodeReadModel> GetAllAbsenceCodeActual(string token)
         {
@@ -948,7 +949,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CountryReadModel> GetAllCountry(string token)
         {
-            return _cache.GetOrAdd("AllCountry", () => GetAllCountryActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllCountry", () => GetAllCountryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<CountryReadModel> GetAllCountryActual(string token)
         {
@@ -1006,7 +1007,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<IndustryReadModel> GetAllIndustry(string token)
         {
-            return _cache.GetOrAdd("AllIndustry", () => GetAllIndustryActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllIndustry", () => GetAllIndustryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<IndustryReadModel> GetAllIndustryActual(string token)
         {
@@ -1063,7 +1064,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentTermReadModel> GetAllPaymentTerm(string token)
         {
-            return _cache.GetOrAdd("AllPaymentTerm", () => GetAllPaymentTermActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllPaymentTerm", () => GetAllPaymentTermActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<PaymentTermReadModel> GetAllPaymentTermActual(string token)
         {
@@ -1120,7 +1121,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<EmployeeTypeReadModel> GetAllEmployeeTypes(string token)
         {
-            return _cache.GetOrAdd("AllEmployeeTypes", () => GetAllEmployeeTypesActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllEmployeeTypes", () => GetAllEmployeeTypesActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<EmployeeTypeReadModel> GetAllEmployeeTypesActual(string token)
         {
@@ -1177,7 +1178,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
         {
-            return _cache.GetOrAdd("AllPaymentMethod", () => GetAllPaymentMethodActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllPaymentMethod", () => GetAllPaymentMethodActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<PaymentMethodReadModel> GetAllPaymentMethodActual(string token)
         {
@@ -1234,7 +1235,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
         {
-            return _cache.GetOrAdd("AllExpenseType", () => GetAllExpenseTypeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllExpenseType", () => GetAllExpenseTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ExpenseTypeReadModel> GetAllExpenseTypeActual(string token)
         {
@@ -1291,7 +1292,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectTemplateReadModel> GetAllProjectTemplate(string token)
         {
-            return _cache.GetOrAdd("AllProjectTemplate", () => GetAllProjectTemplateActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllProjectTemplate", () => GetAllProjectTemplateActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ProjectTemplateReadModel> GetAllProjectTemplateActual(string token)
         {
@@ -1349,7 +1350,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectTypeReadModel> GetAllProjectType(string token)
         {
-            return _cache.GetOrAdd("AllProjectType", () => GetAllProjectTypeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllProjectType", () => GetAllProjectTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ProjectTypeReadModel> GetAllProjectTypeActual(string token)
         {
@@ -1406,7 +1407,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectCategoryReadModel> GetAllProjectCategory(string token)
         {
-            return _cache.GetOrAdd("AllProjectCategory", () => GetAllProjectCategoryActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllProjectCategory", () => GetAllProjectCategoryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ProjectCategoryReadModel> GetAllProjectCategoryActual(string token)
         {
@@ -1463,7 +1464,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<TaskTypeReadModel> GetAllTaskType(string token)
         {
-            return _cache.GetOrAdd("AllTaskType", () => GetAllTaskTypeActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllTaskType", () => GetAllTaskTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<TaskTypeReadModel> GetAllTaskTypeActual(string token)
         {
@@ -1528,7 +1529,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token, int contractID)
         {
-            return _cache.GetOrAdd("AllContractHourlyRates"+ contractID, () => GetAllContractHourlyRatesActual(token, contractID), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllContractHourlyRates"+ contractID, () => GetAllContractHourlyRatesActual(token, contractID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ContractHourlyRateReadModel> GetAllContractHourlyRatesActual(string token, int contractID)
         {
@@ -1595,7 +1596,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProductReadModel> GetAllProduct(string token)
         {
-            return _cache.GetOrAdd("AllProduct", () => GetAllProductActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllProduct", () => GetAllProductActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ProductReadModel> GetAllProductActual(string token)
         {
@@ -1660,7 +1661,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<TaskReadModel> GetAllTask(string token, int projectID)
         {
-            return _cache.GetOrAdd("AllTask", () => GetAllTaskActual(token, projectID), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllTask", () => GetAllTaskActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<TaskReadModel> GetAllTaskActual(string token, int projectID)
         {
@@ -1723,7 +1724,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ContactPersonMethodReadModel> GetContactPersonMethod(string token)
         {
-            return _cache.GetOrAdd("ContactPersonMethod", () => GetContactPersonMethodActual(token), TimeSpan.FromMinutes(cacheTimeout));
+            return _cache.GetOrAdd("ContactPersonMethod", () => GetContactPersonMethodActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<ContactPersonMethodReadModel> GetContactPersonMethodActual(string token)
         {
@@ -2508,6 +2509,14 @@ namespace TimeLog.DataImporter.Handlers
         public void InvalidateCache(string cacheName)
         {
             _cache.Remove(cacheName);
+        }
+
+        public void ClearCache()
+        {
+            //LazyCache does not have a nice way to clear the full cache so i found this hack
+            ICacheProvider cacheProvider = _cache.CacheProvider;
+            var memoryCache = (MemoryCache)cacheProvider.GetType().GetField("cache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(cacheProvider);
+            memoryCache.Compact(1.0);
         }
     }
 }
