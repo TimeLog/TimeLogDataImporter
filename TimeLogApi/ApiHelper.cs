@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Windows.Media.Playback;
 
 namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        public string SiteUrl = "https://app8.timelog.com/mdutestsite";
+        //public string SiteUrl = "https://app8.timelog.com/mdutestsite";
         //public string SiteUrl = "http://localhost/tlp";
+        public string SiteUrl = "";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
@@ -48,8 +48,6 @@ namespace TimeLog.DataImporter.TimeLogApi
 
         public string HourlyRateCreateEndpoint = "/api/v1/contract-hourly-rate/create-hourly-rate";
         public string HourlyRateValidateEndpoint = "/api/v1/contract-hourly-rate/validate-hourly-rate";
-
-
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page={0}&$pagesize=500";
         public string GetAllContractEndpoint = "/api/v1/contract?$page={0}&$pagesize=500";
@@ -127,18 +125,18 @@ namespace TimeLog.DataImporter.TimeLogApi
 
                 switch (_apiResponseObject.Code.ToString())
                 {
-                    case "200":
+                    case "100":
                         _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
-                        _apiResponse.Code = 201;
+                        _apiResponse.Code = 100;
                         break;
                     case "102":
                         businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
                         businessRulesApiResponse.Code = 102;
                         break;
-                    case "100":
-                        businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
-                        businessRulesApiResponse.Code = 100;
-                        break;
+                    case "200":
+                        _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
+                        _apiResponse.Code = 201;
+                        break;                                        
                     default:
                         MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
@@ -156,10 +154,23 @@ namespace TimeLog.DataImporter.TimeLogApi
 
                 switch (defaultResponse.Code)
                 {
+                    case 100:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        errorRowCount++;
+                        break;
                     case 200:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.LimeGreen));
                         control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
                         control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        break;
+                    case 201:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
+                                                        + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
+                        errorRowCount++;
                         break;
                     case 401:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
@@ -168,13 +179,6 @@ namespace TimeLog.DataImporter.TimeLogApi
                         errorRowCount++;
                         //return to login page if token has expired
                         RedirectToLoginPage(workerFetcher, control);
-                        break;
-                    case 201:
-                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                        + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
-                        errorRowCount++;
                         break;
                     case 500:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
@@ -186,23 +190,14 @@ namespace TimeLog.DataImporter.TimeLogApi
             } else
             {
 
-                switch (businessRulesResponse.Code)
+                if(businessRulesResponse.Code == 102)
                 {
-                    case 100:
-                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + businessRulesResponse.Message)));
-                        errorRowCount++;
-                        break;
-                    case 102:
-                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                        + " - " + businessRulesResponse.Message + " Details: "
-                                                        + string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message)))));
-                        errorRowCount++;
-                        break;
-                    
+                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
+                                                    + " - " + businessRulesResponse.Message + " Details: "
+                                                    + string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message)))));
+                    errorRowCount++;
                 }
             }
 
