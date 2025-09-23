@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LazyCache;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
 
@@ -18,8 +20,10 @@ namespace TimeLog.DataImporter.Handlers
         #region Variable and enum declarations
 
         public List<string> FileColumnHeaders = new List<string>();
-        private readonly List<string> _delimiterList = new List<string> { ",", ";", "|" };
+        private readonly List<string> _delimiterList = new List<string> { ";", ",", "|" };
         private readonly List<string> _percentageList = new List<string>() ;
+        private CachingService _cache;
+        private int cacheTimeout = 3;
 
         // The state of expanding or collapsing panel
         public enum ExpandState
@@ -33,6 +37,10 @@ namespace TimeLog.DataImporter.Handlers
         #endregion
 
         #region Helper - Get methods
+
+        public BaseHandler(){
+            _cache = new CachingService();
+        }
 
         public DataTable GetFileContent(string selectedDelimiter)
         {
@@ -200,6 +208,11 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CurrencyReadModel> GetAllCurrency(string token)
         {
+            return _cache.GetOrAdd("AllCurrency", () => GetAllCurrencyActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+
+        private List<CurrencyReadModel> GetAllCurrencyActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCurrencyEndpoint, 1);
 
             try
@@ -256,6 +269,11 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<LegalEntityReadModel> GetAllLegalEntity(string token)
         {
+            return _cache.GetOrAdd("AllLegalEntity", () => GetAllLegalEntityActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+
+        private List<LegalEntityReadModel> GetAllLegalEntityActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllLegalEntityEndpoint, 1);
 
             try
@@ -311,6 +329,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<EmployeeReadModel> GetAllEmployee(string token)
+        {
+            return _cache.GetOrAdd("AllEmployee", () => GetAllEmployeeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<EmployeeReadModel> GetAllEmployeeActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeEndpoint, 1);
 
@@ -371,6 +393,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<CustomerReadModel> GetAllCustomer(string token)
+        {
+            return _cache.GetOrAdd("AllCustomer", () => GetAllCustomerActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<CustomerReadModel> GetAllCustomerActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerEndpoint, 1);
 
@@ -433,6 +459,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CustomerStatusReadModel> GetAllCustomerStatus(string token)
         {
+            return _cache.GetOrAdd("AllCustomerStatus", () => GetAllCustomerStatusActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<CustomerStatusReadModel> GetAllCustomerStatusActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerStatusEndpoint, 1);
 
             try
@@ -487,6 +517,11 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<ProjectReadModel> GetAllProject(string token)
+        {
+            return _cache.GetOrAdd("AllProjects", () => GetAllProjectActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+
+        private List<ProjectReadModel> GetAllProjectActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectEndpoint, 1);
 
@@ -546,9 +581,12 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-       
 
         public List<ProjectSubContractReadModel> GetAllContract(string token, int projectID)
+        {
+            return _cache.GetOrAdd("AllContract"+projectID, () => GetAllContractActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ProjectSubContractReadModel> GetAllContractActual(string token, int projectID)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractEndpoint + "&projectID=" + projectID, 1);
 
@@ -610,8 +648,11 @@ namespace TimeLog.DataImporter.Handlers
         }
 
 
-
         public List<ContractModelReadModel> GetAllContractModels(string token)
+        {
+            return _cache.GetOrAdd("AllContractModels", () => GetAllContractModelsActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ContractModelReadModel> GetAllContractModelsActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractModelsEndpoint, 1);
 
@@ -672,6 +713,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<HourlyRateReadModel> GetAllDefaultHourlyRate(string token)
         {
+            return _cache.GetOrAdd("AllDefaultHourlyRate", () => GetAllDefaultHourlyRateActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<HourlyRateReadModel> GetAllDefaultHourlyRateActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetDefaultHourlyRatesEndpoint, 1);
 
             try
@@ -724,6 +769,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<DepartmentReadModel> GetAllDepartment(string token)
+        {
+            return _cache.GetOrAdd("AllDepartment", () => GetAllDepartmentActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<DepartmentReadModel> GetAllDepartmentActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllDepartmentEndpoint, 1);
 
@@ -779,6 +828,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<UnitTypeReadModel> GetAllUnitType(string token)
         {
+            return _cache.GetOrAdd("AllUnit", () => GetAllUnitTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<UnitTypeReadModel> GetAllUnitTypeActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUnitTypeEndpoint, 1);
 
             try
@@ -832,6 +885,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<AbsenceCodeReadModel> GetAllAbsenceCode(string token)
+        {
+            return _cache.GetOrAdd("AllAbsenceCode", () => GetAllAbsenceCodeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<AbsenceCodeReadModel> GetAllAbsenceCodeActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAbsenceCodeEndpoint, 1);
 
@@ -892,6 +949,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<CountryReadModel> GetAllCountry(string token)
         {
+            return _cache.GetOrAdd("AllCountry", () => GetAllCountryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<CountryReadModel> GetAllCountryActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCountryEndpoint, 1);
 
             try
@@ -944,9 +1005,11 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-
-
         public List<IndustryReadModel> GetAllIndustry(string token)
+        {
+            return _cache.GetOrAdd("AllIndustry", () => GetAllIndustryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<IndustryReadModel> GetAllIndustryActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllIndustryEndpoint, 1);
 
@@ -1001,6 +1064,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentTermReadModel> GetAllPaymentTerm(string token)
         {
+            return _cache.GetOrAdd("AllPaymentTerm", () => GetAllPaymentTermActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<PaymentTermReadModel> GetAllPaymentTermActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentTermEndpoint, 1);
 
             try
@@ -1053,6 +1120,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<EmployeeTypeReadModel> GetAllEmployeeTypes(string token)
+        {
+            return _cache.GetOrAdd("AllEmployeeTypes", () => GetAllEmployeeTypesActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<EmployeeTypeReadModel> GetAllEmployeeTypesActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeTypeEndpoint, 1);
 
@@ -1107,6 +1178,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<PaymentMethodReadModel> GetAllPaymentMethod(string token)
         {
+            return _cache.GetOrAdd("AllPaymentMethod", () => GetAllPaymentMethodActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<PaymentMethodReadModel> GetAllPaymentMethodActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, 1);
 
             try
@@ -1160,6 +1235,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ExpenseTypeReadModel> GetAllExpenseType(string token)
         {
+            return _cache.GetOrAdd("AllExpenseType", () => GetAllExpenseTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ExpenseTypeReadModel> GetAllExpenseTypeActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllExpenseTypeEndpoint, 1);
 
             try
@@ -1212,6 +1291,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<ProjectTemplateReadModel> GetAllProjectTemplate(string token)
+        {
+            return _cache.GetOrAdd("AllProjectTemplate", () => GetAllProjectTemplateActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ProjectTemplateReadModel> GetAllProjectTemplateActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTemplateEndpoint, 1);
 
@@ -1267,6 +1350,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectTypeReadModel> GetAllProjectType(string token)
         {
+            return _cache.GetOrAdd("AllProjectType", () => GetAllProjectTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ProjectTypeReadModel> GetAllProjectTypeActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTypeEndpoint, 1);
 
             try
@@ -1320,6 +1407,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProjectCategoryReadModel> GetAllProjectCategory(string token)
         {
+            return _cache.GetOrAdd("AllProjectCategory", () => GetAllProjectCategoryActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ProjectCategoryReadModel> GetAllProjectCategoryActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectCategoryEndpoint, 1);
 
             try
@@ -1372,6 +1463,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<TaskTypeReadModel> GetAllTaskType(string token)
+        {
+            return _cache.GetOrAdd("AllTaskType", () => GetAllTaskTypeActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<TaskTypeReadModel> GetAllTaskTypeActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskTypeEndpoint, 1);
 
@@ -1433,6 +1528,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<ContractHourlyRateReadModel> GetAllContractHourlyRates(string token, int contractID)
+        {
+            return _cache.GetOrAdd("AllContractHourlyRates"+ contractID, () => GetAllContractHourlyRatesActual(token, contractID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ContractHourlyRateReadModel> GetAllContractHourlyRatesActual(string token, int contractID)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractHourlyRatesEndpoint + "&contractID=" + contractID, 1);
 
@@ -1497,6 +1596,10 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<ProductReadModel> GetAllProduct(string token)
         {
+            return _cache.GetOrAdd("AllProduct", () => GetAllProductActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ProductReadModel> GetAllProductActual(string token)
+        {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProductEndpoint, 1);
 
             try
@@ -1556,8 +1659,11 @@ namespace TimeLog.DataImporter.Handlers
             return null;
         }
 
-
         public List<TaskReadModel> GetAllTask(string token, int projectID)
+        {
+            return _cache.GetOrAdd("AllTask", () => GetAllTaskActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<TaskReadModel> GetAllTaskActual(string token, int projectID)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID,  1);
 
@@ -1617,6 +1723,10 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         public List<ContactPersonMethodReadModel> GetContactPersonMethod(string token)
+        {
+            return _cache.GetOrAdd("ContactPersonMethod", () => GetContactPersonMethodActual(token), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+        }
+        private List<ContactPersonMethodReadModel> GetContactPersonMethodActual(string token)
         {
             var _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetContactPersonMethodEndpoint, 1);
              
@@ -2312,19 +2422,20 @@ namespace TimeLog.DataImporter.Handlers
         {
             if (e.Button == MouseButtons.Left)
             {
-                var _position = domainTextBox.GetCharIndexFromPosition(e.Location);
-                var _lineNo = domainTextBox.GetLineFromCharIndex(_position) - 1;
+                dataGridView.ClearSelection();
+                dataGridView.CurrentCell = null;
 
-                for (var i = 0; i < dataGridView.Rows.Count - 1; i++)
+                int selectedIndex = domainTextBox.SelectionStart;
+                int _lineNo = domainTextBox.GetLineFromCharIndex(selectedIndex);
+
+                
+                if (_lineNo > 0 && domainTextBox.Lines[_lineNo].ToLower().StartsWith("row"))
                 {
-                    if (i == _lineNo)
-                    {
-                        dataGridView.Rows[i].Selected = true;
-                        dataGridView.FirstDisplayedScrollingRowIndex = i;
-                        dataGridView.Focus();
-                        break;
-                    }
+                    dataGridView.Rows[_lineNo-1].Selected = true;
+                    dataGridView.FirstDisplayedScrollingRowIndex = _lineNo-1;
+                    dataGridView.Focus();
                 }
+
             }
         }
 
@@ -2394,5 +2505,18 @@ namespace TimeLog.DataImporter.Handlers
         }
 
         #endregion
+
+        public void InvalidateCache(string cacheName)
+        {
+            _cache.Remove(cacheName);
+        }
+
+        public void ClearCache()
+        {
+            //LazyCache does not have a nice way to clear the full cache so i found this hack
+            ICacheProvider cacheProvider = _cache.CacheProvider;
+            var memoryCache = (MemoryCache)cacheProvider.GetType().GetField("cache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(cacheProvider);
+            memoryCache.Compact(1.0);
+        }
     }
 }

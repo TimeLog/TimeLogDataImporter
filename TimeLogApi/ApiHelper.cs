@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace TimeLog.DataImporter.TimeLogApi
 {
     public class ApiHelper
     {
-        public string SiteUrl = "https://app8.timelog.com/mdutestsite";
+        //public string SiteUrl = "https://app8.timelog.com/mdutestsite";
         //public string SiteUrl = "http://localhost/tlp";
+        public string SiteUrl = "";
 
         public string CustomerValidateEndpoint = "/api/v1/customer/validate-new-customer";
         public string CustomerCreateEndpoint = "/api/v1/customer/create";
@@ -47,8 +48,6 @@ namespace TimeLog.DataImporter.TimeLogApi
 
         public string HourlyRateCreateEndpoint = "/api/v1/contract-hourly-rate/create-hourly-rate";
         public string HourlyRateValidateEndpoint = "/api/v1/contract-hourly-rate/validate-hourly-rate";
-
-
 
         public string GetAllCountryEndpoint = "/api/v1/country/get-all?$page={0}&$pagesize=500";
         public string GetAllContractEndpoint = "/api/v1/contract?$page={0}&$pagesize=500";
@@ -120,68 +119,78 @@ namespace TimeLog.DataImporter.TimeLogApi
             {
                 _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
                 _apiResponse.Code = 401;
-            }
-            else
+            } else
             {
                 dynamic _apiResponseObject = JsonConvert.DeserializeObject<dynamic>(responseContent);
 
-                if (_apiResponseObject.Code.ToString() == "200")
+                switch (_apiResponseObject.Code.ToString())
                 {
-                    _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
-                    _apiResponse.Code = 201;
-                }
-                else if (_apiResponseObject.Code.ToString() == "102")
-                {
-                    businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
-                    businessRulesApiResponse.Code = 102;
-                }
-                else
-                {
-                    MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    case "100":
+                        _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
+                        _apiResponse.Code = 100;
+                        break;
+                    case "102":
+                        businessRulesApiResponse = JsonConvert.DeserializeObject<BusinessRulesApiResponse>(responseContent);
+                        businessRulesApiResponse.Code = 102;
+                        break;
+                    case "200":
+                        _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
+                        _apiResponse.Code = 201;
+                        break;                                        
+                    default:
+                        MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
                 }
             }
 
             return _apiResponse;
         }
 
-        public int HandleApiResponse(DefaultApiResponse defaultResponse, DataGridViewRow row, BusinessRulesApiResponse businessRulesResponse, TextBox domainTextBox, int errorRowCount, BackgroundWorker workerFetcher, Control control)
+        public int HandleApiResponse(DefaultApiResponse defaultResponse, DataGridViewRow row, BusinessRulesApiResponse businessRulesResponse, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control)
         {
+            int errorRowCount = 0;
             if (defaultResponse != null)
             {
-                if (defaultResponse.Code == 200)
+
+                switch (defaultResponse.Code)
                 {
-                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.LimeGreen));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                    case 100:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        errorRowCount++;
+                        break;
+                    case 200:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.LimeGreen));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        break;
+                    case 201:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
+                                                        + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
+                        errorRowCount++;
+                        break;
+                    case 401:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        errorRowCount++;
+                        //return to login page if token has expired
+                        RedirectToLoginPage(workerFetcher, control);
+                        break;
+                    case 500:
+                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
+                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        errorRowCount++;
+                        break;
                 }
-                else if (defaultResponse.Code == 401)
-                {
-                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
-                    errorRowCount++;
-                    //return to login page if token has expired
-                    RedirectToLoginPage(workerFetcher, control);
-                }
-                else if (defaultResponse.Code == 201)
-                {
-                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                    + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
-                    errorRowCount++;
-                }
-                else if (defaultResponse.Code == 500)
-                {
-                    control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
-                    errorRowCount++;
-                }
-            }
-            else
+            } else
             {
-                if (businessRulesResponse.Code == 102)
+
+                if(businessRulesResponse.Code == 102)
                 {
                     control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
                     control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));

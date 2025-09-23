@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using TimeLog.DataImporter.Handlers;
 using TimeLog.DataImporter.TimeLogApi;
@@ -15,29 +16,35 @@ namespace TimeLog.DataImporter
             panel_login.BackgroundImage = Properties.Resources.baggrund_min;
         }
 
-        private async void LoginButton_Click(object sender, EventArgs e)
+        private async void loginUsingPat()
         {
             if (string.IsNullOrWhiteSpace(textBox_siteUrl.Text))
             {
-                MessageBox.Show("Please enter site url!");
-            }
-            else
+                MessageBox.Show("Please enter a site url.");
+            } else if (string.IsNullOrWhiteSpace(textbox_PAT.Text))
             {
-#if !DEBUG
+                MessageBox.Show("Please enter a personal access token.");
+            } else
+            {
                 ApiHelper.Instance.SiteUrl = textBox_siteUrl.Text;
-#endif
 
-                var _token = await AuthenticationHandler.Instance.Authenticate();
+                var _token = await AuthenticationHandler.Instance.Authenticate(textbox_PAT.Text.Trim());
 
                 if (!string.IsNullOrEmpty(_token))
                 {
-                    Hide();
+
+                    button_pat_login.Text = "Getting ready...";
+                    button_pat_login.Enabled = false;
 
                     if (MainForm == null)
                     {
                         MainForm = new Main();
                         MainForm.Closed += (s, args) => Close();
                     }
+
+                    button_pat_login.Text = "Login using PAT";
+                    button_pat_login.Enabled = true;
+                    Hide();
 
                     MainForm.Show();
                 }
@@ -46,34 +53,37 @@ namespace TimeLog.DataImporter
 
         private async void button_pat_login_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox_siteUrl.Text))
-            {
-                MessageBox.Show("Please enter a site url.");
-            }
-            else if (string.IsNullOrWhiteSpace(textbox_PAT.Text))
-            {
-                MessageBox.Show("Please enter a personal access token.");
-            }
-            else
-            {
-                ApiHelper.Instance.SiteUrl = textBox_siteUrl.Text;
+            loginUsingPat();
+        }
 
-                var _token = await AuthenticationHandler.Instance.Authenticate(textbox_PAT.Text.Trim());
+        private void textbox_PAT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (button_pat_login.Enabled)
+                    loginUsingPat();
+            }
+        }
 
-                if (!string.IsNullOrEmpty(_token))
+        private void link_PAT_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LinkLabel linkLabel = sender as LinkLabel;
+            string target = "https://login.timelog.com/PersonalToken";
+
+            try
+            {
+                System.Diagnostics.Process.Start(new ProcessStartInfo
                 {
-                    Hide();
+                    FileName = target,
+                    UseShellExecute = true
+                });
 
-                    if (MainForm == null)
-                    {
-                        MainForm = new Main();
-                        MainForm.Closed += (s, args) => Close();
-                    }
-
-                    MainForm.Show();
-                }
+                linkLabel.LinkVisited = true;
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Could not open link: {ex.Message}", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

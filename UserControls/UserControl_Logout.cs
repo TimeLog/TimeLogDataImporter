@@ -1,6 +1,7 @@
-﻿using System;
+﻿using LazyCache;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Windows.Forms;
-using TimeLog.DataImporter.Handlers;
 
 namespace TimeLog.DataImporter.UserControls
 {
@@ -14,9 +15,14 @@ namespace TimeLog.DataImporter.UserControls
 
         private async void button_logout_Click(object sender, EventArgs e)
         {
-            var _errorResult = await AuthenticationHandler.Instance.Logout();
 
-            if (Login.MainForm != null && _errorResult == null)
+            //LazyCache does not have a nice way to clear the full cache so i found this hack
+            var _cache = new CachingService();
+            ICacheProvider cacheProvider = _cache.CacheProvider;
+            var memoryCache = (MemoryCache)cacheProvider.GetType().GetField("cache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(cacheProvider);
+            memoryCache.Compact(1.0);
+
+            if (Login.MainForm != null)
             {
                 Invoke((MethodInvoker)(() => Login.MainForm.Hide()));
                 Invoke((MethodInvoker)(() => Login.MainForm = null));

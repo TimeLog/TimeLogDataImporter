@@ -216,6 +216,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contactPersonImportMessages.Text = string.Empty;
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
+            ContactPersonHandler.Instance.InvalidateCache("AllContractModels");
         }
 
         private void button_clear_Click(object sender, EventArgs e)
@@ -308,16 +309,16 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = ContactPersonHandler.Instance.ValidateContactPerson(_newContactPerson,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contactPersonImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_contactPersonImportMessages, WorkerFetcher, this);
                                 }
                                 else
                                 {
                                     var _defaultApiResponse = ContactPersonHandler.Instance.ImportContactPerson(_newContactPerson,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contactPersonImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_contactPersonImportMessages, WorkerFetcher, this);
                                 }
                             }
                         }

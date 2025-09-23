@@ -132,10 +132,9 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactPersonDataTable.Controls.Add(dataGridView_contactPerson);
             panel_contactPersonDataTable.Dock = DockStyle.Bottom;
             panel_contactPersonDataTable.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            panel_contactPersonDataTable.Location = new System.Drawing.Point(0, 616);
-            panel_contactPersonDataTable.Margin = new Padding(3, 4, 3, 4);
+            panel_contactPersonDataTable.Location = new System.Drawing.Point(0, 462);
             panel_contactPersonDataTable.Name = "panel_contactPersonDataTable";
-            panel_contactPersonDataTable.Size = new System.Drawing.Size(1150, 240);
+            panel_contactPersonDataTable.Size = new System.Drawing.Size(1006, 180);
             panel_contactPersonDataTable.TabIndex = 6;
             // 
             // dataGridView_contactPerson
@@ -144,12 +143,11 @@ namespace TimeLog.DataImporter.UserControls
             dataGridView_contactPerson.BorderStyle = BorderStyle.None;
             dataGridView_contactPerson.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_contactPerson.Dock = DockStyle.Bottom;
-            dataGridView_contactPerson.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridView_contactPerson.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridView_contactPerson.Location = new System.Drawing.Point(0, 0);
-            dataGridView_contactPerson.Margin = new Padding(3, 4, 3, 4);
             dataGridView_contactPerson.Name = "dataGridView_contactPerson";
             dataGridView_contactPerson.RowHeadersWidth = 62;
-            dataGridView_contactPerson.Size = new System.Drawing.Size(1150, 240);
+            dataGridView_contactPerson.Size = new System.Drawing.Size(1006, 180);
             dataGridView_contactPerson.TabIndex = 0;
             defaultToolTip.SetToolTip(dataGridView_contactPerson, "Contact Person input data table");
             // 
@@ -157,10 +155,9 @@ namespace TimeLog.DataImporter.UserControls
             // 
             panel_contactPersonMessage.Controls.Add(textBox_contactPersonImportMessages);
             panel_contactPersonMessage.Dock = DockStyle.Bottom;
-            panel_contactPersonMessage.Location = new System.Drawing.Point(0, 370);
-            panel_contactPersonMessage.Margin = new Padding(3, 4, 3, 4);
+            panel_contactPersonMessage.Location = new System.Drawing.Point(0, 278);
             panel_contactPersonMessage.Name = "panel_contactPersonMessage";
-            panel_contactPersonMessage.Size = new System.Drawing.Size(1150, 246);
+            panel_contactPersonMessage.Size = new System.Drawing.Size(1006, 184);
             panel_contactPersonMessage.TabIndex = 10;
             // 
             // textBox_contactPersonImportMessages
@@ -168,17 +165,17 @@ namespace TimeLog.DataImporter.UserControls
             textBox_contactPersonImportMessages.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             textBox_contactPersonImportMessages.BorderStyle = BorderStyle.None;
             textBox_contactPersonImportMessages.Dock = DockStyle.Bottom;
-            textBox_contactPersonImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            textBox_contactPersonImportMessages.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             textBox_contactPersonImportMessages.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             textBox_contactPersonImportMessages.Location = new System.Drawing.Point(0, 0);
-            textBox_contactPersonImportMessages.Margin = new Padding(3, 4, 3, 4);
             textBox_contactPersonImportMessages.Multiline = true;
             textBox_contactPersonImportMessages.Name = "textBox_contactPersonImportMessages";
             textBox_contactPersonImportMessages.ReadOnly = true;
             textBox_contactPersonImportMessages.ScrollBars = ScrollBars.Vertical;
-            textBox_contactPersonImportMessages.Size = new System.Drawing.Size(1150, 246);
+            textBox_contactPersonImportMessages.Size = new System.Drawing.Size(1006, 184);
             textBox_contactPersonImportMessages.TabIndex = 0;
             defaultToolTip.SetToolTip(textBox_contactPersonImportMessages, "Validation or import status");
+            textBox_contactPersonImportMessages.WordWrap = false;
             textBox_contactPersonImportMessages.MouseClick += textBox_contactPersonImportMessages_MouseClick;
             // 
             // panel_contactPersonButtons
@@ -188,12 +185,11 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactPersonButtons.Controls.Add(button_validate);
             panel_contactPersonButtons.Controls.Add(button_stop);
             panel_contactPersonButtons.Dock = DockStyle.Bottom;
-            panel_contactPersonButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            panel_contactPersonButtons.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             panel_contactPersonButtons.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            panel_contactPersonButtons.Location = new System.Drawing.Point(0, 300);
-            panel_contactPersonButtons.Margin = new Padding(3, 4, 3, 4);
+            panel_contactPersonButtons.Location = new System.Drawing.Point(0, 226);
             panel_contactPersonButtons.Name = "panel_contactPersonButtons";
-            panel_contactPersonButtons.Size = new System.Drawing.Size(1150, 70);
+            panel_contactPersonButtons.Size = new System.Drawing.Size(1006, 52);
             panel_contactPersonButtons.TabIndex = 12;
             // 
             // button_clear
@@ -204,10 +200,9 @@ namespace TimeLog.DataImporter.UserControls
             button_clear.FlatAppearance.BorderSize = 0;
             button_clear.FlatStyle = FlatStyle.Flat;
             button_clear.ForeColor = System.Drawing.Color.White;
-            button_clear.Location = new System.Drawing.Point(16, 16);
-            button_clear.Margin = new Padding(3, 4, 3, 4);
+            button_clear.Location = new System.Drawing.Point(14, 12);
             button_clear.Name = "button_clear";
-            button_clear.Size = new System.Drawing.Size(91, 38);
+            button_clear.Size = new System.Drawing.Size(80, 28);
             button_clear.TabIndex = 12;
             button_clear.Text = "Reset All";
             defaultToolTip.SetToolTip(button_clear, "Reset everything and reload data from TLP");
@@ -222,10 +217,9 @@ namespace TimeLog.DataImporter.UserControls
             button_import.FlatAppearance.BorderSize = 0;
             button_import.FlatStyle = FlatStyle.Flat;
             button_import.ForeColor = System.Drawing.Color.White;
-            button_import.Location = new System.Drawing.Point(1048, 16);
-            button_import.Margin = new Padding(3, 4, 3, 4);
+            button_import.Location = new System.Drawing.Point(917, 12);
             button_import.Name = "button_import";
-            button_import.Size = new System.Drawing.Size(91, 38);
+            button_import.Size = new System.Drawing.Size(80, 28);
             button_import.TabIndex = 7;
             button_import.Text = "Import";
             defaultToolTip.SetToolTip(button_import, "Import all data");
@@ -240,10 +234,9 @@ namespace TimeLog.DataImporter.UserControls
             button_validate.FlatAppearance.BorderSize = 0;
             button_validate.FlatStyle = FlatStyle.Flat;
             button_validate.ForeColor = System.Drawing.Color.White;
-            button_validate.Location = new System.Drawing.Point(851, 16);
-            button_validate.Margin = new Padding(3, 4, 3, 4);
+            button_validate.Location = new System.Drawing.Point(745, 12);
             button_validate.Name = "button_validate";
-            button_validate.Size = new System.Drawing.Size(91, 38);
+            button_validate.Size = new System.Drawing.Size(80, 28);
             button_validate.TabIndex = 8;
             button_validate.Text = "Validate";
             defaultToolTip.SetToolTip(button_validate, "Validate data input before importing data");
@@ -258,10 +251,9 @@ namespace TimeLog.DataImporter.UserControls
             button_stop.FlatAppearance.BorderSize = 0;
             button_stop.FlatStyle = FlatStyle.Flat;
             button_stop.ForeColor = System.Drawing.Color.White;
-            button_stop.Location = new System.Drawing.Point(950, 16);
-            button_stop.Margin = new Padding(3, 4, 3, 4);
+            button_stop.Location = new System.Drawing.Point(831, 12);
             button_stop.Name = "button_stop";
-            button_stop.Size = new System.Drawing.Size(91, 38);
+            button_stop.Size = new System.Drawing.Size(80, 28);
             button_stop.TabIndex = 11;
             button_stop.Text = "Stop";
             defaultToolTip.SetToolTip(button_stop, "Stop validation or import");
@@ -278,12 +270,11 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactPersonFieldMapping.Controls.Add(label_contactPersonSetup);
             panel_contactPersonFieldMapping.Controls.Add(button_contactPersonSelectFile);
             panel_contactPersonFieldMapping.Dock = DockStyle.Fill;
-            panel_contactPersonFieldMapping.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            panel_contactPersonFieldMapping.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             panel_contactPersonFieldMapping.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             panel_contactPersonFieldMapping.Location = new System.Drawing.Point(0, 0);
-            panel_contactPersonFieldMapping.Margin = new Padding(3, 4, 3, 4);
             panel_contactPersonFieldMapping.Name = "panel_contactPersonFieldMapping";
-            panel_contactPersonFieldMapping.Size = new System.Drawing.Size(1150, 300);
+            panel_contactPersonFieldMapping.Size = new System.Drawing.Size(1006, 226);
             panel_contactPersonFieldMapping.TabIndex = 13;
             // 
             // flowLayoutPanel_NonMandatoryFields
@@ -292,20 +283,18 @@ namespace TimeLog.DataImporter.UserControls
             flowLayoutPanel_NonMandatoryFields.Controls.Add(panel_personDetails);
             flowLayoutPanel_NonMandatoryFields.Controls.Add(panel_contactDetailsButton);
             flowLayoutPanel_NonMandatoryFields.Controls.Add(panel_contactDetails);
-            flowLayoutPanel_NonMandatoryFields.Location = new System.Drawing.Point(610, 22);
-            flowLayoutPanel_NonMandatoryFields.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanel_NonMandatoryFields.Location = new System.Drawing.Point(534, 16);
             flowLayoutPanel_NonMandatoryFields.Name = "flowLayoutPanel_NonMandatoryFields";
-            flowLayoutPanel_NonMandatoryFields.Size = new System.Drawing.Size(499, 2152);
+            flowLayoutPanel_NonMandatoryFields.Size = new System.Drawing.Size(437, 781);
             flowLayoutPanel_NonMandatoryFields.TabIndex = 8;
             // 
             // panel_contactPersonDetailsButton
             // 
             panel_contactPersonDetailsButton.Controls.Add(button_personDetails);
             panel_contactPersonDetailsButton.Controls.Add(label_personDetails);
-            panel_contactPersonDetailsButton.Location = new System.Drawing.Point(3, 4);
-            panel_contactPersonDetailsButton.Margin = new Padding(3, 4, 3, 4);
+            panel_contactPersonDetailsButton.Location = new System.Drawing.Point(3, 3);
             panel_contactPersonDetailsButton.Name = "panel_contactPersonDetailsButton";
-            panel_contactPersonDetailsButton.Size = new System.Drawing.Size(487, 42);
+            panel_contactPersonDetailsButton.Size = new System.Drawing.Size(426, 32);
             panel_contactPersonDetailsButton.TabIndex = 0;
             // 
             // button_personDetails
@@ -315,10 +304,9 @@ namespace TimeLog.DataImporter.UserControls
             button_personDetails.Cursor = Cursors.Hand;
             button_personDetails.FlatAppearance.BorderSize = 0;
             button_personDetails.FlatStyle = FlatStyle.Flat;
-            button_personDetails.Location = new System.Drawing.Point(17, 2);
-            button_personDetails.Margin = new Padding(3, 4, 3, 4);
+            button_personDetails.Location = new System.Drawing.Point(15, 2);
             button_personDetails.Name = "button_personDetails";
-            button_personDetails.Size = new System.Drawing.Size(34, 40);
+            button_personDetails.Size = new System.Drawing.Size(30, 30);
             button_personDetails.TabIndex = 9;
             button_personDetails.UseVisualStyleBackColor = false;
             button_personDetails.Click += button_expand_Click;
@@ -327,9 +315,9 @@ namespace TimeLog.DataImporter.UserControls
             // 
             label_personDetails.AutoSize = true;
             label_personDetails.ForeColor = System.Drawing.Color.Black;
-            label_personDetails.Location = new System.Drawing.Point(67, 12);
+            label_personDetails.Location = new System.Drawing.Point(59, 9);
             label_personDetails.Name = "label_personDetails";
-            label_personDetails.Size = new System.Drawing.Size(117, 23);
+            label_personDetails.Size = new System.Drawing.Size(94, 17);
             label_personDetails.TabIndex = 1;
             label_personDetails.Text = "Person Details";
             // 
@@ -354,65 +342,61 @@ namespace TimeLog.DataImporter.UserControls
             panel_personDetails.Controls.Add(comboBox_reportsTo);
             panel_personDetails.Controls.Add(comboBox_jobTitle);
             panel_personDetails.Controls.Add(comboBox_customerNo);
-            panel_personDetails.Location = new System.Drawing.Point(3, 54);
-            panel_personDetails.Margin = new Padding(3, 4, 3, 4);
-            panel_personDetails.MaximumSize = new System.Drawing.Size(487, 390);
-            panel_personDetails.MinimumSize = new System.Drawing.Size(487, 0);
+            panel_personDetails.Location = new System.Drawing.Point(3, 41);
+            panel_personDetails.MaximumSize = new System.Drawing.Size(426, 292);
+            panel_personDetails.MinimumSize = new System.Drawing.Size(426, 0);
             panel_personDetails.Name = "panel_personDetails";
-            panel_personDetails.Size = new System.Drawing.Size(487, 390);
+            panel_personDetails.Size = new System.Drawing.Size(426, 292);
             panel_personDetails.TabIndex = 10;
             // 
             // comboBox_profTitle2
             // 
             comboBox_profTitle2.FormattingEnabled = true;
-            comboBox_profTitle2.Location = new System.Drawing.Point(176, 183);
-            comboBox_profTitle2.Margin = new Padding(3, 4, 3, 4);
+            comboBox_profTitle2.Location = new System.Drawing.Point(154, 137);
             comboBox_profTitle2.Name = "comboBox_profTitle2";
-            comboBox_profTitle2.Size = new System.Drawing.Size(157, 29);
+            comboBox_profTitle2.Size = new System.Drawing.Size(138, 25);
             comboBox_profTitle2.TabIndex = 9;
             // 
             // label_profTitle2
             // 
             label_profTitle2.AutoSize = true;
-            label_profTitle2.Location = new System.Drawing.Point(13, 189);
+            label_profTitle2.Location = new System.Drawing.Point(11, 142);
             label_profTitle2.Name = "label_profTitle2";
-            label_profTitle2.Size = new System.Drawing.Size(150, 23);
+            label_profTitle2.Size = new System.Drawing.Size(119, 17);
             label_profTitle2.TabIndex = 8;
             label_profTitle2.Text = "Professional title 2";
             // 
             // comboBox_profTitle1
             // 
             comboBox_profTitle1.FormattingEnabled = true;
-            comboBox_profTitle1.Location = new System.Drawing.Point(175, 140);
-            comboBox_profTitle1.Margin = new Padding(3, 4, 3, 4);
+            comboBox_profTitle1.Location = new System.Drawing.Point(153, 105);
             comboBox_profTitle1.Name = "comboBox_profTitle1";
-            comboBox_profTitle1.Size = new System.Drawing.Size(157, 29);
+            comboBox_profTitle1.Size = new System.Drawing.Size(138, 25);
             comboBox_profTitle1.TabIndex = 7;
             // 
             // label_proftitle1
             // 
             label_proftitle1.AutoSize = true;
-            label_proftitle1.Location = new System.Drawing.Point(11, 146);
+            label_proftitle1.Location = new System.Drawing.Point(10, 110);
             label_proftitle1.Name = "label_proftitle1";
-            label_proftitle1.Size = new System.Drawing.Size(148, 23);
+            label_proftitle1.Size = new System.Drawing.Size(117, 17);
             label_proftitle1.TabIndex = 6;
             label_proftitle1.Text = "Professional title 1";
             // 
             // comboBox_initials
             // 
             comboBox_initials.FormattingEnabled = true;
-            comboBox_initials.Location = new System.Drawing.Point(175, 99);
-            comboBox_initials.Margin = new Padding(3, 4, 3, 4);
+            comboBox_initials.Location = new System.Drawing.Point(153, 74);
             comboBox_initials.Name = "comboBox_initials";
-            comboBox_initials.Size = new System.Drawing.Size(157, 29);
+            comboBox_initials.Size = new System.Drawing.Size(138, 25);
             comboBox_initials.TabIndex = 5;
             // 
             // label_initials
             // 
             label_initials.AutoSize = true;
-            label_initials.Location = new System.Drawing.Point(12, 102);
+            label_initials.Location = new System.Drawing.Point(10, 76);
             label_initials.Name = "label_initials";
-            label_initials.Size = new System.Drawing.Size(59, 23);
+            label_initials.Size = new System.Drawing.Size(47, 17);
             label_initials.TabIndex = 4;
             label_initials.Text = "Initials";
             label_initials.Click += label2_Click_1;
@@ -420,119 +404,112 @@ namespace TimeLog.DataImporter.UserControls
             // label_customerNo
             // 
             label_customerNo.AutoSize = true;
-            label_customerNo.Location = new System.Drawing.Point(11, 20);
+            label_customerNo.Location = new System.Drawing.Point(10, 15);
             label_customerNo.Name = "label_customerNo";
-            label_customerNo.Size = new System.Drawing.Size(112, 23);
+            label_customerNo.Size = new System.Drawing.Size(89, 17);
             label_customerNo.TabIndex = 1;
             label_customerNo.Text = "Customer No";
             // 
             // label_jobTitle
             // 
             label_jobTitle.AutoSize = true;
-            label_jobTitle.Location = new System.Drawing.Point(11, 62);
+            label_jobTitle.Location = new System.Drawing.Point(10, 46);
             label_jobTitle.Name = "label_jobTitle";
-            label_jobTitle.Size = new System.Drawing.Size(74, 23);
+            label_jobTitle.Size = new System.Drawing.Size(58, 17);
             label_jobTitle.TabIndex = 1;
             label_jobTitle.Text = "Job Title";
             // 
             // label_birthday
             // 
             label_birthday.AutoSize = true;
-            label_birthday.Location = new System.Drawing.Point(16, 312);
+            label_birthday.Location = new System.Drawing.Point(14, 234);
             label_birthday.Name = "label_birthday";
-            label_birthday.Size = new System.Drawing.Size(74, 23);
+            label_birthday.Size = new System.Drawing.Size(59, 17);
             label_birthday.TabIndex = 1;
             label_birthday.Text = "Birthday";
             // 
             // label_owner
             // 
             label_owner.AutoSize = true;
-            label_owner.Location = new System.Drawing.Point(14, 231);
+            label_owner.Location = new System.Drawing.Point(12, 173);
             label_owner.Name = "label_owner";
-            label_owner.Size = new System.Drawing.Size(61, 23);
+            label_owner.Size = new System.Drawing.Size(48, 17);
             label_owner.TabIndex = 1;
             label_owner.Text = "Owner";
             // 
             // comboBox_department
             // 
             comboBox_department.FormattingEnabled = true;
-            comboBox_department.Location = new System.Drawing.Point(172, 347);
-            comboBox_department.Margin = new Padding(3, 4, 3, 4);
+            comboBox_department.Location = new System.Drawing.Point(150, 260);
             comboBox_department.Name = "comboBox_department";
-            comboBox_department.Size = new System.Drawing.Size(157, 29);
+            comboBox_department.Size = new System.Drawing.Size(138, 25);
             comboBox_department.TabIndex = 3;
             // 
             // label_reportsTo
             // 
             label_reportsTo.AutoSize = true;
-            label_reportsTo.Location = new System.Drawing.Point(17, 273);
+            label_reportsTo.Location = new System.Drawing.Point(15, 205);
             label_reportsTo.Name = "label_reportsTo";
-            label_reportsTo.Size = new System.Drawing.Size(91, 23);
+            label_reportsTo.Size = new System.Drawing.Size(73, 17);
             label_reportsTo.TabIndex = 1;
             label_reportsTo.Text = "Reports To";
             // 
             // comboBox_birthday
             // 
             comboBox_birthday.FormattingEnabled = true;
-            comboBox_birthday.Location = new System.Drawing.Point(173, 308);
-            comboBox_birthday.Margin = new Padding(3, 4, 3, 4);
+            comboBox_birthday.Location = new System.Drawing.Point(151, 231);
             comboBox_birthday.Name = "comboBox_birthday";
-            comboBox_birthday.Size = new System.Drawing.Size(157, 29);
+            comboBox_birthday.Size = new System.Drawing.Size(138, 25);
             comboBox_birthday.TabIndex = 3;
             // 
             // label_department
             // 
             label_department.AutoSize = true;
-            label_department.Location = new System.Drawing.Point(15, 351);
+            label_department.Location = new System.Drawing.Point(13, 263);
             label_department.Name = "label_department";
-            label_department.Size = new System.Drawing.Size(102, 23);
+            label_department.Size = new System.Drawing.Size(81, 17);
             label_department.TabIndex = 1;
             label_department.Text = "Department";
             // 
             // comboBox_owner
             // 
             comboBox_owner.FormattingEnabled = true;
-            comboBox_owner.Location = new System.Drawing.Point(175, 228);
-            comboBox_owner.Margin = new Padding(3, 4, 3, 4);
+            comboBox_owner.Location = new System.Drawing.Point(153, 171);
             comboBox_owner.Name = "comboBox_owner";
-            comboBox_owner.Size = new System.Drawing.Size(157, 29);
+            comboBox_owner.Size = new System.Drawing.Size(138, 25);
             comboBox_owner.TabIndex = 3;
             // 
             // comboBox_reportsTo
             // 
             comboBox_reportsTo.FormattingEnabled = true;
-            comboBox_reportsTo.Location = new System.Drawing.Point(174, 269);
-            comboBox_reportsTo.Margin = new Padding(3, 4, 3, 4);
+            comboBox_reportsTo.Location = new System.Drawing.Point(152, 202);
             comboBox_reportsTo.Name = "comboBox_reportsTo";
-            comboBox_reportsTo.Size = new System.Drawing.Size(157, 29);
+            comboBox_reportsTo.Size = new System.Drawing.Size(138, 25);
             comboBox_reportsTo.TabIndex = 3;
             // 
             // comboBox_jobTitle
             // 
             comboBox_jobTitle.FormattingEnabled = true;
-            comboBox_jobTitle.Location = new System.Drawing.Point(175, 58);
-            comboBox_jobTitle.Margin = new Padding(3, 4, 3, 4);
+            comboBox_jobTitle.Location = new System.Drawing.Point(153, 44);
             comboBox_jobTitle.Name = "comboBox_jobTitle";
-            comboBox_jobTitle.Size = new System.Drawing.Size(157, 29);
+            comboBox_jobTitle.Size = new System.Drawing.Size(138, 25);
             comboBox_jobTitle.TabIndex = 3;
             // 
             // comboBox_customerNo
             // 
             comboBox_customerNo.FormattingEnabled = true;
-            comboBox_customerNo.Location = new System.Drawing.Point(175, 16);
-            comboBox_customerNo.Margin = new Padding(3, 4, 3, 4);
+            comboBox_customerNo.Location = new System.Drawing.Point(153, 12);
             comboBox_customerNo.Name = "comboBox_customerNo";
-            comboBox_customerNo.Size = new System.Drawing.Size(157, 29);
+            comboBox_customerNo.Size = new System.Drawing.Size(138, 25);
             comboBox_customerNo.TabIndex = 3;
             // 
             // panel_contactDetailsButton
             // 
             panel_contactDetailsButton.Controls.Add(button_contactDetails);
             panel_contactDetailsButton.Controls.Add(label_ContactDetails);
-            panel_contactDetailsButton.Location = new System.Drawing.Point(3, 452);
-            panel_contactDetailsButton.Margin = new Padding(3, 4, 3, 4);
+            panel_contactDetailsButton.Location = new System.Drawing.Point(3, 339);
             panel_contactDetailsButton.Name = "panel_contactDetailsButton";
-            panel_contactDetailsButton.Size = new System.Drawing.Size(487, 42);
+            panel_contactDetailsButton.Size = new System.Drawing.Size(426, 32);
             panel_contactDetailsButton.TabIndex = 11;
             // 
             // button_contactDetails
@@ -542,10 +519,9 @@ namespace TimeLog.DataImporter.UserControls
             button_contactDetails.Cursor = Cursors.Hand;
             button_contactDetails.FlatAppearance.BorderSize = 0;
             button_contactDetails.FlatStyle = FlatStyle.Flat;
-            button_contactDetails.Location = new System.Drawing.Point(17, 1);
-            button_contactDetails.Margin = new Padding(3, 4, 3, 4);
+            button_contactDetails.Location = new System.Drawing.Point(15, 1);
             button_contactDetails.Name = "button_contactDetails";
-            button_contactDetails.Size = new System.Drawing.Size(34, 40);
+            button_contactDetails.Size = new System.Drawing.Size(30, 30);
             button_contactDetails.TabIndex = 2;
             button_contactDetails.UseVisualStyleBackColor = false;
             button_contactDetails.Click += button_expand_Click;
@@ -554,9 +530,9 @@ namespace TimeLog.DataImporter.UserControls
             // 
             label_ContactDetails.AutoSize = true;
             label_ContactDetails.ForeColor = System.Drawing.Color.Black;
-            label_ContactDetails.Location = new System.Drawing.Point(58, 11);
+            label_ContactDetails.Location = new System.Drawing.Point(51, 8);
             label_ContactDetails.Name = "label_ContactDetails";
-            label_ContactDetails.Size = new System.Drawing.Size(126, 23);
+            label_ContactDetails.Size = new System.Drawing.Size(99, 17);
             label_ContactDetails.TabIndex = 1;
             label_ContactDetails.Text = "Contact Details";
             // 
@@ -587,66 +563,62 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactDetails.Controls.Add(comboBox_zipCode);
             panel_contactDetails.Controls.Add(comboBox_city);
             panel_contactDetails.Controls.Add(comboBox_state);
-            panel_contactDetails.Location = new System.Drawing.Point(3, 502);
-            panel_contactDetails.Margin = new Padding(3, 4, 3, 4);
-            panel_contactDetails.MaximumSize = new System.Drawing.Size(487, 520);
-            panel_contactDetails.MinimumSize = new System.Drawing.Size(487, 0);
+            panel_contactDetails.Location = new System.Drawing.Point(3, 377);
+            panel_contactDetails.MaximumSize = new System.Drawing.Size(426, 390);
+            panel_contactDetails.MinimumSize = new System.Drawing.Size(426, 0);
             panel_contactDetails.Name = "panel_contactDetails";
-            panel_contactDetails.Size = new System.Drawing.Size(487, 520);
+            panel_contactDetails.Size = new System.Drawing.Size(426, 390);
             panel_contactDetails.TabIndex = 1;
             panel_contactDetails.Paint += panel_contactDetails_Paint;
             // 
             // comboBox_mobilePhone
             // 
             comboBox_mobilePhone.FormattingEnabled = true;
-            comboBox_mobilePhone.Location = new System.Drawing.Point(137, 56);
-            comboBox_mobilePhone.Margin = new Padding(3, 4, 3, 4);
+            comboBox_mobilePhone.Location = new System.Drawing.Point(120, 42);
             comboBox_mobilePhone.Name = "comboBox_mobilePhone";
-            comboBox_mobilePhone.Size = new System.Drawing.Size(151, 29);
+            comboBox_mobilePhone.Size = new System.Drawing.Size(133, 25);
             comboBox_mobilePhone.TabIndex = 9;
             // 
             // comboBox_homePhone
             // 
             comboBox_homePhone.FormattingEnabled = true;
-            comboBox_homePhone.Location = new System.Drawing.Point(137, 97);
-            comboBox_homePhone.Margin = new Padding(3, 4, 3, 4);
+            comboBox_homePhone.Location = new System.Drawing.Point(120, 73);
             comboBox_homePhone.Name = "comboBox_homePhone";
-            comboBox_homePhone.Size = new System.Drawing.Size(151, 29);
+            comboBox_homePhone.Size = new System.Drawing.Size(133, 25);
             comboBox_homePhone.TabIndex = 8;
             // 
             // label_homePhone
             // 
             label_homePhone.AutoSize = true;
-            label_homePhone.Location = new System.Drawing.Point(13, 98);
+            label_homePhone.Location = new System.Drawing.Point(11, 74);
             label_homePhone.Name = "label_homePhone";
-            label_homePhone.Size = new System.Drawing.Size(111, 23);
+            label_homePhone.Size = new System.Drawing.Size(88, 17);
             label_homePhone.TabIndex = 7;
             label_homePhone.Text = "Home Phone";
             // 
             // label_mobilePhone
             // 
             label_mobilePhone.AutoSize = true;
-            label_mobilePhone.Location = new System.Drawing.Point(12, 59);
+            label_mobilePhone.Location = new System.Drawing.Point(10, 44);
             label_mobilePhone.Name = "label_mobilePhone";
-            label_mobilePhone.Size = new System.Drawing.Size(117, 23);
+            label_mobilePhone.Size = new System.Drawing.Size(92, 17);
             label_mobilePhone.TabIndex = 6;
             label_mobilePhone.Text = "Mobile Phone";
             // 
             // comboBox_country
             // 
             comboBox_country.FormattingEnabled = true;
-            comboBox_country.Location = new System.Drawing.Point(136, 477);
-            comboBox_country.Margin = new Padding(3, 4, 3, 4);
+            comboBox_country.Location = new System.Drawing.Point(119, 358);
             comboBox_country.Name = "comboBox_country";
-            comboBox_country.Size = new System.Drawing.Size(151, 29);
+            comboBox_country.Size = new System.Drawing.Size(133, 25);
             comboBox_country.TabIndex = 5;
             // 
             // label_country
             // 
             label_country.AutoSize = true;
-            label_country.Location = new System.Drawing.Point(15, 483);
+            label_country.Location = new System.Drawing.Point(13, 362);
             label_country.Name = "label_country";
-            label_country.Size = new System.Drawing.Size(105, 23);
+            label_country.Size = new System.Drawing.Size(83, 17);
             label_country.TabIndex = 4;
             label_country.Text = "Country ISO";
             label_country.Click += label2_Click;
@@ -654,27 +626,27 @@ namespace TimeLog.DataImporter.UserControls
             // label_phone
             // 
             label_phone.AutoSize = true;
-            label_phone.Location = new System.Drawing.Point(11, 20);
+            label_phone.Location = new System.Drawing.Point(10, 15);
             label_phone.Name = "label_phone";
-            label_phone.Size = new System.Drawing.Size(87, 23);
+            label_phone.Size = new System.Drawing.Size(69, 17);
             label_phone.TabIndex = 1;
             label_phone.Text = "Phone No";
             // 
             // label_fax
             // 
             label_fax.AutoSize = true;
-            label_fax.Location = new System.Drawing.Point(14, 138);
+            label_fax.Location = new System.Drawing.Point(12, 104);
             label_fax.Name = "label_fax";
-            label_fax.Size = new System.Drawing.Size(64, 23);
+            label_fax.Size = new System.Drawing.Size(51, 17);
             label_fax.TabIndex = 1;
             label_fax.Text = "Fax No";
             // 
             // label_address
             // 
             label_address.AutoSize = true;
-            label_address.Location = new System.Drawing.Point(15, 233);
+            label_address.Location = new System.Drawing.Point(13, 175);
             label_address.Name = "label_address";
-            label_address.Size = new System.Drawing.Size(70, 23);
+            label_address.Size = new System.Drawing.Size(57, 17);
             label_address.TabIndex = 1;
             label_address.Text = "Address";
             label_address.Click += label_address_Click;
@@ -682,154 +654,144 @@ namespace TimeLog.DataImporter.UserControls
             // label_address2
             // 
             label_address2.AutoSize = true;
-            label_address2.Location = new System.Drawing.Point(16, 273);
+            label_address2.Location = new System.Drawing.Point(14, 205);
             label_address2.Name = "label_address2";
-            label_address2.Size = new System.Drawing.Size(84, 23);
+            label_address2.Size = new System.Drawing.Size(68, 17);
             label_address2.TabIndex = 1;
             label_address2.Text = "Address 2";
             // 
             // label_address3
             // 
             label_address3.AutoSize = true;
-            label_address3.Location = new System.Drawing.Point(15, 316);
+            label_address3.Location = new System.Drawing.Point(13, 237);
             label_address3.Name = "label_address3";
-            label_address3.Size = new System.Drawing.Size(84, 23);
+            label_address3.Size = new System.Drawing.Size(68, 17);
             label_address3.TabIndex = 1;
             label_address3.Text = "Address 3";
             // 
             // label_zipCode
             // 
             label_zipCode.AutoSize = true;
-            label_zipCode.Location = new System.Drawing.Point(16, 359);
+            label_zipCode.Location = new System.Drawing.Point(14, 269);
             label_zipCode.Name = "label_zipCode";
-            label_zipCode.Size = new System.Drawing.Size(79, 23);
+            label_zipCode.Size = new System.Drawing.Size(62, 17);
             label_zipCode.TabIndex = 1;
             label_zipCode.Text = "Zip Code";
             // 
             // label_city
             // 
             label_city.AutoSize = true;
-            label_city.Location = new System.Drawing.Point(16, 401);
+            label_city.Location = new System.Drawing.Point(14, 301);
             label_city.Name = "label_city";
-            label_city.Size = new System.Drawing.Size(40, 23);
+            label_city.Size = new System.Drawing.Size(31, 17);
             label_city.TabIndex = 1;
             label_city.Text = "City";
             // 
             // label_state
             // 
             label_state.AutoSize = true;
-            label_state.Location = new System.Drawing.Point(16, 441);
+            label_state.Location = new System.Drawing.Point(14, 331);
             label_state.Name = "label_state";
-            label_state.Size = new System.Drawing.Size(49, 23);
+            label_state.Size = new System.Drawing.Size(39, 17);
             label_state.TabIndex = 1;
             label_state.Text = "State";
             // 
             // label_email
             // 
             label_email.AutoSize = true;
-            label_email.Location = new System.Drawing.Point(15, 180);
+            label_email.Location = new System.Drawing.Point(13, 135);
             label_email.Name = "label_email";
-            label_email.Size = new System.Drawing.Size(51, 23);
+            label_email.Size = new System.Drawing.Size(40, 17);
             label_email.TabIndex = 1;
             label_email.Text = "Email";
             // 
             // comboBox_phoneNo
             // 
             comboBox_phoneNo.FormattingEnabled = true;
-            comboBox_phoneNo.Location = new System.Drawing.Point(137, 16);
-            comboBox_phoneNo.Margin = new Padding(3, 4, 3, 4);
+            comboBox_phoneNo.Location = new System.Drawing.Point(120, 12);
             comboBox_phoneNo.Name = "comboBox_phoneNo";
-            comboBox_phoneNo.Size = new System.Drawing.Size(151, 29);
+            comboBox_phoneNo.Size = new System.Drawing.Size(133, 25);
             comboBox_phoneNo.TabIndex = 3;
             // 
             // comboBox_faxNo
             // 
             comboBox_faxNo.FormattingEnabled = true;
-            comboBox_faxNo.Location = new System.Drawing.Point(137, 138);
-            comboBox_faxNo.Margin = new Padding(3, 4, 3, 4);
+            comboBox_faxNo.Location = new System.Drawing.Point(120, 104);
             comboBox_faxNo.Name = "comboBox_faxNo";
-            comboBox_faxNo.Size = new System.Drawing.Size(151, 29);
+            comboBox_faxNo.Size = new System.Drawing.Size(133, 25);
             comboBox_faxNo.TabIndex = 3;
             // 
             // comboBox_email
             // 
             comboBox_email.FormattingEnabled = true;
-            comboBox_email.Location = new System.Drawing.Point(137, 180);
-            comboBox_email.Margin = new Padding(3, 4, 3, 4);
+            comboBox_email.Location = new System.Drawing.Point(120, 135);
             comboBox_email.Name = "comboBox_email";
-            comboBox_email.Size = new System.Drawing.Size(151, 29);
+            comboBox_email.Size = new System.Drawing.Size(133, 25);
             comboBox_email.TabIndex = 3;
             // 
             // comboBox_address
             // 
             comboBox_address.FormattingEnabled = true;
-            comboBox_address.Location = new System.Drawing.Point(136, 225);
-            comboBox_address.Margin = new Padding(3, 4, 3, 4);
+            comboBox_address.Location = new System.Drawing.Point(119, 169);
             comboBox_address.Name = "comboBox_address";
-            comboBox_address.Size = new System.Drawing.Size(151, 29);
+            comboBox_address.Size = new System.Drawing.Size(133, 25);
             comboBox_address.TabIndex = 3;
             // 
             // comboBox_address2
             // 
             comboBox_address2.FormattingEnabled = true;
-            comboBox_address2.Location = new System.Drawing.Point(136, 267);
-            comboBox_address2.Margin = new Padding(3, 4, 3, 4);
+            comboBox_address2.Location = new System.Drawing.Point(119, 200);
             comboBox_address2.Name = "comboBox_address2";
-            comboBox_address2.Size = new System.Drawing.Size(151, 29);
+            comboBox_address2.Size = new System.Drawing.Size(133, 25);
             comboBox_address2.TabIndex = 3;
             // 
             // comboBox_address3
             // 
             comboBox_address3.FormattingEnabled = true;
-            comboBox_address3.Location = new System.Drawing.Point(136, 310);
-            comboBox_address3.Margin = new Padding(3, 4, 3, 4);
+            comboBox_address3.Location = new System.Drawing.Point(119, 232);
             comboBox_address3.Name = "comboBox_address3";
-            comboBox_address3.Size = new System.Drawing.Size(151, 29);
+            comboBox_address3.Size = new System.Drawing.Size(133, 25);
             comboBox_address3.TabIndex = 3;
             // 
             // comboBox_zipCode
             // 
             comboBox_zipCode.FormattingEnabled = true;
-            comboBox_zipCode.Location = new System.Drawing.Point(136, 353);
-            comboBox_zipCode.Margin = new Padding(3, 4, 3, 4);
+            comboBox_zipCode.Location = new System.Drawing.Point(119, 265);
             comboBox_zipCode.Name = "comboBox_zipCode";
-            comboBox_zipCode.Size = new System.Drawing.Size(151, 29);
+            comboBox_zipCode.Size = new System.Drawing.Size(133, 25);
             comboBox_zipCode.TabIndex = 3;
             // 
             // comboBox_city
             // 
             comboBox_city.FormattingEnabled = true;
-            comboBox_city.Location = new System.Drawing.Point(136, 395);
-            comboBox_city.Margin = new Padding(3, 4, 3, 4);
+            comboBox_city.Location = new System.Drawing.Point(119, 296);
             comboBox_city.Name = "comboBox_city";
-            comboBox_city.Size = new System.Drawing.Size(151, 29);
+            comboBox_city.Size = new System.Drawing.Size(133, 25);
             comboBox_city.TabIndex = 3;
             // 
             // comboBox_state
             // 
             comboBox_state.FormattingEnabled = true;
-            comboBox_state.Location = new System.Drawing.Point(136, 435);
-            comboBox_state.Margin = new Padding(3, 4, 3, 4);
+            comboBox_state.Location = new System.Drawing.Point(119, 326);
             comboBox_state.Name = "comboBox_state";
-            comboBox_state.Size = new System.Drawing.Size(151, 29);
+            comboBox_state.Size = new System.Drawing.Size(133, 25);
             comboBox_state.TabIndex = 3;
             // 
             // label_delimiter
             // 
             label_delimiter.AutoSize = true;
-            label_delimiter.Location = new System.Drawing.Point(11, 100);
+            label_delimiter.Location = new System.Drawing.Point(10, 75);
             label_delimiter.Name = "label_delimiter";
-            label_delimiter.Size = new System.Drawing.Size(79, 23);
+            label_delimiter.Size = new System.Drawing.Size(62, 17);
             label_delimiter.TabIndex = 1;
             label_delimiter.Text = "Delimiter";
             // 
             // comboBox_delimiter
             // 
             comboBox_delimiter.FormattingEnabled = true;
-            comboBox_delimiter.Location = new System.Drawing.Point(94, 96);
-            comboBox_delimiter.Margin = new Padding(3, 4, 3, 4);
+            comboBox_delimiter.Location = new System.Drawing.Point(82, 72);
             comboBox_delimiter.Name = "comboBox_delimiter";
-            comboBox_delimiter.Size = new System.Drawing.Size(63, 29);
+            comboBox_delimiter.Size = new System.Drawing.Size(56, 25);
             comboBox_delimiter.TabIndex = 7;
             // 
             // groupBox_contactPersonMandatoryFields
@@ -838,11 +800,9 @@ namespace TimeLog.DataImporter.UserControls
             groupBox_contactPersonMandatoryFields.Controls.Add(comboBox_contactPersonLastName);
             groupBox_contactPersonMandatoryFields.Controls.Add(label_contactPersonFirstName);
             groupBox_contactPersonMandatoryFields.Controls.Add(comboBox_contactPersonFirstName);
-            groupBox_contactPersonMandatoryFields.Location = new System.Drawing.Point(193, 100);
-            groupBox_contactPersonMandatoryFields.Margin = new Padding(3, 4, 3, 4);
+            groupBox_contactPersonMandatoryFields.Location = new System.Drawing.Point(169, 75);
             groupBox_contactPersonMandatoryFields.Name = "groupBox_contactPersonMandatoryFields";
-            groupBox_contactPersonMandatoryFields.Padding = new Padding(3, 4, 3, 4);
-            groupBox_contactPersonMandatoryFields.Size = new System.Drawing.Size(400, 220);
+            groupBox_contactPersonMandatoryFields.Size = new System.Drawing.Size(350, 99);
             groupBox_contactPersonMandatoryFields.TabIndex = 5;
             groupBox_contactPersonMandatoryFields.TabStop = false;
             groupBox_contactPersonMandatoryFields.Text = "Mandatory";
@@ -850,46 +810,44 @@ namespace TimeLog.DataImporter.UserControls
             // label_contactPersonLastName
             // 
             label_contactPersonLastName.AutoSize = true;
-            label_contactPersonLastName.Location = new System.Drawing.Point(7, 82);
+            label_contactPersonLastName.Location = new System.Drawing.Point(6, 62);
             label_contactPersonLastName.Name = "label_contactPersonLastName";
-            label_contactPersonLastName.Size = new System.Drawing.Size(91, 23);
+            label_contactPersonLastName.Size = new System.Drawing.Size(72, 17);
             label_contactPersonLastName.TabIndex = 5;
             label_contactPersonLastName.Text = "Last Name";
             // 
             // comboBox_contactPersonLastName
             // 
             comboBox_contactPersonLastName.FormattingEnabled = true;
-            comboBox_contactPersonLastName.Location = new System.Drawing.Point(158, 78);
-            comboBox_contactPersonLastName.Margin = new Padding(3, 4, 3, 4);
+            comboBox_contactPersonLastName.Location = new System.Drawing.Point(138, 58);
             comboBox_contactPersonLastName.Name = "comboBox_contactPersonLastName";
-            comboBox_contactPersonLastName.Size = new System.Drawing.Size(151, 29);
+            comboBox_contactPersonLastName.Size = new System.Drawing.Size(133, 25);
             comboBox_contactPersonLastName.TabIndex = 4;
             // 
             // label_contactPersonFirstName
             // 
             label_contactPersonFirstName.AutoSize = true;
-            label_contactPersonFirstName.Location = new System.Drawing.Point(7, 42);
+            label_contactPersonFirstName.Location = new System.Drawing.Point(6, 32);
             label_contactPersonFirstName.Name = "label_contactPersonFirstName";
-            label_contactPersonFirstName.Size = new System.Drawing.Size(93, 23);
+            label_contactPersonFirstName.Size = new System.Drawing.Size(74, 17);
             label_contactPersonFirstName.TabIndex = 1;
             label_contactPersonFirstName.Text = "First Name";
             // 
             // comboBox_contactPersonFirstName
             // 
             comboBox_contactPersonFirstName.FormattingEnabled = true;
-            comboBox_contactPersonFirstName.Location = new System.Drawing.Point(158, 38);
-            comboBox_contactPersonFirstName.Margin = new Padding(3, 4, 3, 4);
+            comboBox_contactPersonFirstName.Location = new System.Drawing.Point(138, 28);
             comboBox_contactPersonFirstName.Name = "comboBox_contactPersonFirstName";
-            comboBox_contactPersonFirstName.Size = new System.Drawing.Size(151, 29);
+            comboBox_contactPersonFirstName.Size = new System.Drawing.Size(133, 25);
             comboBox_contactPersonFirstName.TabIndex = 3;
             // 
             // label_contactPersonSetup
             // 
             label_contactPersonSetup.AutoSize = true;
-            label_contactPersonSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label_contactPersonSetup.Location = new System.Drawing.Point(7, 22);
+            label_contactPersonSetup.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            label_contactPersonSetup.Location = new System.Drawing.Point(6, 16);
             label_contactPersonSetup.Name = "label_contactPersonSetup";
-            label_contactPersonSetup.Size = new System.Drawing.Size(226, 41);
+            label_contactPersonSetup.Size = new System.Drawing.Size(179, 32);
             label_contactPersonSetup.TabIndex = 0;
             label_contactPersonSetup.Text = "Contact Person";
             // 
@@ -900,10 +858,9 @@ namespace TimeLog.DataImporter.UserControls
             button_contactPersonSelectFile.FlatAppearance.BorderSize = 0;
             button_contactPersonSelectFile.FlatStyle = FlatStyle.Flat;
             button_contactPersonSelectFile.ForeColor = System.Drawing.Color.White;
-            button_contactPersonSelectFile.Location = new System.Drawing.Point(15, 148);
-            button_contactPersonSelectFile.Margin = new Padding(3, 4, 3, 4);
+            button_contactPersonSelectFile.Location = new System.Drawing.Point(13, 111);
             button_contactPersonSelectFile.Name = "button_contactPersonSelectFile";
-            button_contactPersonSelectFile.Size = new System.Drawing.Size(91, 38);
+            button_contactPersonSelectFile.Size = new System.Drawing.Size(80, 28);
             button_contactPersonSelectFile.TabIndex = 4;
             button_contactPersonSelectFile.Text = "Select File";
             defaultToolTip.SetToolTip(button_contactPersonSelectFile, "Select input CSV file");
@@ -925,7 +882,7 @@ namespace TimeLog.DataImporter.UserControls
             label1.ForeColor = System.Drawing.Color.Black;
             label1.Location = new System.Drawing.Point(45, 8);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(113, 20);
+            label1.Size = new System.Drawing.Size(90, 15);
             label1.TabIndex = 1;
             label1.Text = "Invoice Address";
             // 
@@ -951,15 +908,14 @@ namespace TimeLog.DataImporter.UserControls
             // 
             // UserControl_ContactPersonImport
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel_contactPersonFieldMapping);
             Controls.Add(panel_contactPersonButtons);
             Controls.Add(panel_contactPersonMessage);
             Controls.Add(panel_contactPersonDataTable);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "UserControl_ContactPersonImport";
-            Size = new System.Drawing.Size(1150, 856);
+            Size = new System.Drawing.Size(1006, 642);
             Load += UserControl1_Load;
             panel_contactPersonDataTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView_contactPerson).EndInit();

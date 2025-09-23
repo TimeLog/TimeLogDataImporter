@@ -244,16 +244,16 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = HourlyRateHandler.Instance.ValidateHourlyRate(_newContractHourlyRate,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_contractHourlyRateImportMessages, WorkerFetcher, this);
                                 }
                                 else
                                 {
                                     var _defaultApiResponse = HourlyRateHandler.Instance.ImportHourlyRate(_newContractHourlyRate,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_contractHourlyRateImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_contractHourlyRateImportMessages, WorkerFetcher, this);
                                 }
                             }
                         }
@@ -354,9 +354,6 @@ namespace TimeLog.DataImporter.UserControls
            
         }
 
-
-
-
         #endregion
 
         #region Get default values from API
@@ -387,9 +384,6 @@ namespace TimeLog.DataImporter.UserControls
                 }
             }
         }
-
-
-
 
         #endregion
 
@@ -430,9 +424,6 @@ namespace TimeLog.DataImporter.UserControls
             HourlyRateHandler.Instance.MapNonMandatorySelectedColumnToTable(_fileContent, dataGridView_contractHourlyRate, _contractHourlyRateTable, comboBox_contractHourlyRateProductNo, _contractHourlyRateProductNo);
 
         }
-
-
-
 
         #endregion
 

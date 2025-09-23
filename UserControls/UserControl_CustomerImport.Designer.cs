@@ -248,6 +248,7 @@ namespace TimeLog.DataImporter.UserControls
             this.textBox_customerImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_customerImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_customerImportMessages.TabIndex = 0;
+            this.textBox_customerImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_customerImportMessages, "Validation or import status");
             this.textBox_customerImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_customerImportMessages_MouseClick);
             // 

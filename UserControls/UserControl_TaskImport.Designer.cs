@@ -170,6 +170,7 @@
             this.textBox_taskImportMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_taskImportMessages.Size = new System.Drawing.Size(1437, 307);
             this.textBox_taskImportMessages.TabIndex = 0;
+            this.textBox_taskImportMessages.WordWrap = false;
             this.defaultToolTip.SetToolTip(this.textBox_taskImportMessages, "Validation or import status");
             this.textBox_taskImportMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_taskImportMessages_MouseClick);
             // 

@@ -205,6 +205,7 @@ namespace TimeLog.DataImporter.UserControls
             textBox_projectImportMessages.Text = string.Empty;
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
+            ProjectHandler.Instance.InvalidateCache("AllProjects");
         }
 
         private void button_clear_Click(object sender, EventArgs e)
@@ -290,16 +291,16 @@ namespace TimeLog.DataImporter.UserControls
                                     var _defaultApiResponse = ProjectHandler.Instance.ValidateProject(_newProject,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_projectImportMessages, WorkerFetcher, this);
                                 }
                                 else
                                 {
                                     var _defaultApiResponse = ProjectHandler.Instance.ImportProject(_newProject,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
 
-                                    _errorRowCount = ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
-                                        textBox_projectImportMessages, _errorRowCount, WorkerFetcher, this);
+                                    _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
+                                        textBox_projectImportMessages, WorkerFetcher, this);
                                 }
                             }
                         }
