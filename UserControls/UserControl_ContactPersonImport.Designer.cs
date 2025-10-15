@@ -788,6 +788,7 @@ namespace TimeLog.DataImporter.UserControls
             // 
             // comboBox_delimiter
             // 
+            comboBox_delimiter.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_delimiter.FormattingEnabled = true;
             comboBox_delimiter.Location = new System.Drawing.Point(82, 72);
             comboBox_delimiter.Name = "comboBox_delimiter";

@@ -423,6 +423,7 @@
             // 
             // comboBox_delimiter
             // 
+            comboBox_delimiter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox_delimiter.FormattingEnabled = true;
             comboBox_delimiter.Location = new System.Drawing.Point(82, 72);
             comboBox_delimiter.Name = "comboBox_delimiter";
