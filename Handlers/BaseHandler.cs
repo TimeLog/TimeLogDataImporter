@@ -1661,7 +1661,7 @@ namespace TimeLog.DataImporter.Handlers
 
         public List<TaskReadModel> GetAllTask(string token, int projectID)
         {
-            return _cache.GetOrAdd("AllTask", () => GetAllTaskActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
+            return _cache.GetOrAdd("AllTask"+projectID, () => GetAllTaskActual(token, projectID), DateTimeOffset.Now.AddMinutes(cacheTimeout));
         }
         private List<TaskReadModel> GetAllTaskActual(string token, int projectID)
         {
