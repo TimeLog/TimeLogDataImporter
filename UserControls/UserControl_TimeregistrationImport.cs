@@ -309,7 +309,8 @@ namespace TimeLog.DataImporter.UserControls
 
                                     _errorRowCount += ApiHelper.Instance.HandleApiResponse(_defaultApiResponse, _row, _businessRulesApiResponse,
                                         textBox_timeregistrationImportMessages, WorkerFetcher, this);
-                                } else
+                                } 
+                                else
                                 {
                                     var _defaultApiResponse = TimeregistrationHandler.Instance.ImportTimeregistration(_newTimeregistration,
                                         AuthenticationHandler.Instance.Token, out var _businessRulesApiResponse);
@@ -322,10 +323,12 @@ namespace TimeLog.DataImporter.UserControls
                     }
 
                     TimeregistrationHandler.Instance.DisplayErrorRowCountAndSuccessMessage(_errorRowCount, button_import, button_validate, _senderButton, textBox_timeregistrationImportMessages, this);
-                } catch (FormatException _ex)
+                }
+                catch (FormatException _ex)
                 {
                     MessageBox.Show(_ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                } catch (Exception _ex)
+                } 
+                catch (Exception _ex)
                 {
                     MessageBox.Show(_ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -383,25 +386,30 @@ namespace TimeLog.DataImporter.UserControls
                             try
                             {
                                 _result = _tasks.FirstOrDefault(x => x.No.ToLower().Trim().Equals(_fieldValue.ToLower().Trim()))?.TaskID ?? -1;
-                            } catch (Exception _)
+                            } 
+                            catch (Exception _)
                             {
                                 _result = -1;
                             }
                         }
-                    } else
+                    } 
+                    else
                     {
                         _result = 0;
                     }
-                } else if (columnName == _projectNo)
+                } 
+                else if (columnName == _projectNo)
                 {
                     if (!string.IsNullOrWhiteSpace(_fieldValue))
                     {
                         _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(ProjectList, _fieldValue);
-                    } else
+                    } 
+                    else
                     {
                         _result = 0;
                     }
-                } else if (columnName == _contractName)
+                } 
+                else if (columnName == _contractName)
                 {
                     if (!string.IsNullOrWhiteSpace(_fieldValue))
                     {
@@ -413,28 +421,34 @@ namespace TimeLog.DataImporter.UserControls
                             try
                             {
                                 _result = _projectContracts.FirstOrDefault(x => x.ContractName.ToLower().Trim().Equals(_fieldValue.ToLower().Trim()))?.ContractID ?? -1;
-                            } catch (Exception _)
+                            } 
+                            catch (Exception _)
                             {
                                 _result = -1;
                             }
                         }
-                    } else
+                    } 
+                    else
                     {
                         _result = 0;
                     }
 
-                } else if (columnName == _userInitials)
+                } 
+                else if (columnName == _userInitials)
                 {
                     _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(UserList, _fieldValue);
-                } else if (columnName == _groupType)
+                } 
+                else if (columnName == _groupType)
                 {
                     _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(GroupTypeList, _fieldValue);
-                } else if (columnName == _absenceCode)
+                } 
+                else if (columnName == _absenceCode)
                 {
                     if (!string.IsNullOrWhiteSpace(_fieldValue))
                     {
                         _result = TimeregistrationHandler.Instance.GetIDFromFieldValue(AbsenceCodeList, _fieldValue);
-                    } else
+                    } 
+                    else
                     {
                         _result = 0;
                     }
