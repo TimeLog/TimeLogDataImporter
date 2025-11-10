@@ -293,7 +293,7 @@ namespace TimeLog.DataImporter.UserControls
                                 ProjectSubContractID = (int) MapFieldValueToID(ContractName, _row, false),
                                 IsReadyForInvoicing = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsReadyForInvoicing, _row),
                                 TaskTypeID = MapFieldValueToID(TaskType, _row, true),
-                                HourlyRateID = MapFieldValueToID(ContractHourlyRate, _row, true),
+                                HourlyRateID = MapFieldValueToID(ContractHourlyRate, _row, false),
                                 ParentTaskID = MapFieldValueToID(ParentTaskNo, _row, true),
                                 IsBillable = TaskHandler.Instance.CheckAndGetBoolean(dataGridView_task, IsBillable, _row),
                                 PaymentRecognitionModel = (PaymentRecognitionModelTypes)(int) MapFieldValueToID(PaymentRecognitionModel, _row, false),
@@ -404,15 +404,23 @@ namespace TimeLog.DataImporter.UserControls
                 }
                 else if (columnName == ContractHourlyRate)
                 {
-                    _result = TaskHandler.Instance.GetIDFromFieldValue(ContractHourlyRateList, _fieldValue);
-                    if (_result == -1)
+                    if (string.IsNullOrWhiteSpace(_fieldValue))
                     {
+                        //If no hourly rate is entered use the default hourly rate (0)
                         _result = 0;
+                    }
+                    else
+                    {
+                        _result = TaskHandler.Instance.GetIDFromFieldValue(ContractHourlyRateList, _fieldValue);
                     }
                 }
                 else if (columnName == ContractName)
                 {
                     _result = TaskHandler.Instance.GetIDFromFieldValue(ContractNameList, _fieldValue);
+                    if (_result != -1)
+                    {
+                        GetAllContractHourlyRateFromApi(_result);
+                    }
                 }
                 else if (columnName == PaymentRecognitionModel)
                 {
@@ -572,6 +580,21 @@ namespace TimeLog.DataImporter.UserControls
                 }
             }
         }
+
+        private void GetAllContractHourlyRateFromApi(int contractID)
+        {
+            ContractHourlyRateList.Clear();
+            var _apiResponse = TaskHandler.Instance.GetAllContractHourlyRates(AuthenticationHandler.Instance.Token, contractID);
+
+            if (_apiResponse != null)
+            {
+                foreach (var _contractHourlyRate in _apiResponse)
+                {
+                    ContractHourlyRateList.Add(new KeyValuePair<int, string>(_contractHourlyRate.ContractHourlyRateID, _contractHourlyRate.Name));
+                }
+            }
+        }
+
 
         #endregion
 
