@@ -40,7 +40,8 @@ namespace TimeLog.DataImporter.Handlers
                 }
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Employee", new string[] { });
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
@@ -66,7 +67,8 @@ namespace TimeLog.DataImporter.Handlers
                 }
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Employee", new string[] { });
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
                 string _responseContent = _r.ReadToEnd();
@@ -120,10 +122,12 @@ namespace TimeLog.DataImporter.Handlers
                     }
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain cost price ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain cost price list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -178,10 +182,12 @@ namespace TimeLog.DataImporter.Handlers
 
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain holiday calendar ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain holiday calendar list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -234,10 +240,12 @@ namespace TimeLog.DataImporter.Handlers
                     }
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain allowance legislation ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain allowance legislation list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -290,10 +298,12 @@ namespace TimeLog.DataImporter.Handlers
                     }
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain normal working time ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain normal working time list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -346,10 +356,12 @@ namespace TimeLog.DataImporter.Handlers
                     }
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain salary group time ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain salary group time list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -402,10 +414,12 @@ namespace TimeLog.DataImporter.Handlers
                     }
                     return _apiResponse;
                 }
-            } catch (WebException _webEx)
+            } 
+            catch (WebException _webEx)
             {
                 MessageBox.Show("Failed to obtain user role ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } catch (RuntimeBinderException ex)
+            } 
+            catch (RuntimeBinderException ex)
             {
                 MessageBox.Show("Failed to obtain user role list. Do to an internal error if the issue persists please contact support", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

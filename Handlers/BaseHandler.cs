@@ -220,7 +220,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<CurrencyReadModel> _apiResponse = new List<CurrencyReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -240,7 +240,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -281,7 +281,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<LegalEntityReadModel> _apiResponse = new List<LegalEntityReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -301,7 +301,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -341,7 +341,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<EmployeeReadModel> _apiResponse = new List<EmployeeReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -364,7 +364,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -405,7 +405,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<CustomerReadModel> _apiResponse = new List<CustomerReadModel>();
 
@@ -429,7 +429,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                              _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -470,7 +470,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<CustomerStatusReadModel> _apiResponse = new List<CustomerStatusReadModel>();
 
@@ -491,7 +491,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
                             foreach (var _entity in _jsonDeserializedObject.Entities)
@@ -530,7 +530,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProjectReadModel> _apiResponse = new List<ProjectReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -553,7 +553,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -595,7 +595,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProjectSubContractReadModel> _apiResponse = new List<ProjectSubContractReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -618,7 +618,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -661,7 +661,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ContractModelReadModel> _apiResponse = new List<ContractModelReadModel>();
                     //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -724,7 +724,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<HourlyRateReadModel> _apiResponse = new List<HourlyRateReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -744,7 +744,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -781,7 +781,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<DepartmentReadModel> _apiResponse = new List<DepartmentReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -801,7 +801,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -839,7 +839,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<UnitTypeReadModel> _apiResponse = new List<UnitTypeReadModel>();
                     //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -897,7 +897,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<AbsenceCodeReadModel> _apiResponse = new List<AbsenceCodeReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -920,7 +920,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -960,7 +960,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<CountryReadModel> _apiResponse = new List<CountryReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -980,7 +980,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1018,7 +1018,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<IndustryReadModel> _apiResponse = new List<IndustryReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1038,7 +1038,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1075,7 +1075,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<PaymentTermReadModel> _apiResponse = new List<PaymentTermReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1095,7 +1095,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1132,7 +1132,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<EmployeeTypeReadModel> _apiResponse = new List<EmployeeTypeReadModel>();
                     //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1189,7 +1189,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<PaymentMethodReadModel> _apiResponse = new List<PaymentMethodReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1209,7 +1209,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1246,7 +1246,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ExpenseTypeReadModel> _apiResponse = new List<ExpenseTypeReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1266,7 +1266,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1304,7 +1304,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProjectTemplateReadModel> _apiResponse = new List<ProjectTemplateReadModel>();
                     //var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1361,7 +1361,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProjectTypeReadModel> _apiResponse = new List<ProjectTypeReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1381,7 +1381,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1418,7 +1418,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProjectCategoryReadModel> _apiResponse = new List<ProjectCategoryReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1438,7 +1438,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1475,7 +1475,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<TaskTypeReadModel> _apiResponse = new List<TaskTypeReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1499,7 +1499,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1540,7 +1540,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ContractHourlyRateReadModel> _apiResponse = new List<ContractHourlyRateReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1565,7 +1565,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1607,7 +1607,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ProductReadModel> _apiResponse = new List<ProductReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1631,7 +1631,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1672,7 +1672,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<TaskReadModel> _apiResponse = new List<TaskReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1695,7 +1695,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
@@ -1735,7 +1735,7 @@ namespace TimeLog.DataImporter.Handlers
                 string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
-                if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities != null && _jsonDeserializedObject.Entities.Count > 0)
+                if (_jsonDeserializedObject?.Entities?.Count > 0)
                 {
                     List<ContactPersonMethodReadModel> _apiResponse = new List<ContactPersonMethodReadModel>();
                     var _totalPages = Convert.ToInt32(_jsonDeserializedObject.Properties.TotalPage.Value);
@@ -1755,7 +1755,7 @@ namespace TimeLog.DataImporter.Handlers
                         _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
-                        if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
+                        if (_jsonDeserializedObject?.Entities?.Count > 0)
                         {
                             _currentPage = Convert.ToInt32(_jsonDeserializedObject.Properties.PageNumber.Value);
 
