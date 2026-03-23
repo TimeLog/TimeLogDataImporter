@@ -92,6 +92,18 @@ namespace TimeLog.DataImporter.UserControls
             _employeeTable = EmployeeHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_employee.DataSource = _employeeTable;
             button_import.Enabled = false;
+
+            var checkBox_showOnlyErrors = new CheckBox
+            {
+                Name = "checkBox_showOnlyErrors",
+                Text = "Show errors only",
+                AutoSize = true,
+                Location = new System.Drawing.Point(110, 17),
+                Anchor = AnchorStyles.Left,
+                ForeColor = System.Drawing.Color.FromArgb(64, 64, 64)
+            };
+            checkBox_showOnlyErrors.CheckedChanged += checkBox_showOnlyErrors_CheckedChanged;
+            button_validate.Parent.Controls.Add(checkBox_showOnlyErrors);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -220,7 +232,8 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_employeeImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            ApiHelper.Instance.ClearLog();
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
 
@@ -232,7 +245,8 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_employeeImportMessages.Text = string.Empty;
-            _senderButton = (Button) sender;
+            ApiHelper.Instance.ClearLog();
+            _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
             EmployeeHandler.Instance.InvalidateCache("AllEmployee");
         }
@@ -827,6 +841,13 @@ namespace TimeLog.DataImporter.UserControls
         {
             EmployeeHandler.Instance.MapValuesToComboBoxByCheckboxStatus(dataGridView_employee, _employeeTable, comboBox_allowanceLegislation,
                 AllowanceLegislation, checkBox_defaultAllowanceLegislation, AllowanceLegislationList, EmployeeHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
+        }
+
+        private void checkBox_showOnlyErrors_CheckedChanged(object sender, EventArgs e)
+        {
+            ApiHelper.Instance.ShowOnlyErrors = ((CheckBox)sender).Checked;
+            ApiHelper.Instance.RefreshLogDisplay(textBox_employeeImportMessages);
+            ApiHelper.Instance.RefreshGridFilter(dataGridView_employee, ((CheckBox)sender).Checked);
         }
 
         #endregion

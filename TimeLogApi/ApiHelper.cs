@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Windows.Forms;
 
 namespace TimeLog.DataImporter.TimeLogApi
 {
+    public record LogEntry(bool IsError, string Message);
+
     public class ApiHelper
     {
         //public string SiteUrl = "https://app8.timelog.com/mdutestsite";
@@ -85,6 +88,15 @@ namespace TimeLog.DataImporter.TimeLogApi
         private static ApiHelper _apiHelper;
         private static readonly object ApiHelperLock = new object();
 
+        private readonly List<LogEntry> _logEntries = [];
+        private readonly object _logEntriesLock = new object();
+
+        /// <summary>
+        /// When true, only error entries are shown in the message TextBox.
+        /// Bind this to a CheckBox in each UserControl.
+        /// </summary>
+        public bool ShowOnlyErrors { get; set; } = false;
+
         private ApiHelper()
         {
         }
@@ -97,6 +109,49 @@ namespace TimeLog.DataImporter.TimeLogApi
                 {
                     return _apiHelper ??= new ApiHelper();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Call this at the start of every validate/import run to reset stored log entries.
+        /// </summary>
+        public void ClearLog()
+        {
+            lock (_logEntriesLock)
+            {
+                _logEntries.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Rebuilds the TextBox from stored log entries, respecting the current ShowOnlyErrors flag.
+        /// Call this from the CheckBox.CheckedChanged event handler.
+        /// </summary>
+        public void RefreshLogDisplay(TextBox textBox)
+        {
+            textBox.Clear();
+            lock (_logEntriesLock)
+            {
+                foreach (var entry in _logEntries)
+                {
+                    if (!ShowOnlyErrors || entry.IsError)
+                    {
+                        textBox.AppendText(Environment.NewLine + entry.Message);
+                    }
+                }
+            }
+        }
+
+        private void StoreAndAppend(bool isError, string message, TextBox domainTextBox, Control control)
+        {
+            lock (_logEntriesLock)
+            {
+                _logEntries.Add(new LogEntry(isError, message));
+            }
+
+            if (!ShowOnlyErrors || isError)
+            {
+                control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine + message)));
             }
         }
 
@@ -146,57 +201,70 @@ namespace TimeLog.DataImporter.TimeLogApi
             return _apiResponse;
         }
 
+        /// <summary>
+        /// Shows or hides DataGridView rows based on the current ShowOnlyErrors flag.
+        /// Rows colored LimeGreen (success) are hidden when showOnlyErrors is true.
+        /// </summary>
+        public void RefreshGridFilter(DataGridView grid, bool showOnlyErrors)
+        {
+            // Clearing CurrentCell releases the CurrencyManager's position lock,
+            // which otherwise throws InvalidOperationException when hiding the current row.
+            grid.CurrentCell = null;
+
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                if (row.IsNewRow) continue;
+                row.Visible = !showOnlyErrors || row.DefaultCellStyle.BackColor != Color.LimeGreen;
+            }
+        }
+
         public int HandleApiResponse(DefaultApiResponse defaultResponse, DataGridViewRow row, BusinessRulesApiResponse businessRulesResponse, TextBox domainTextBox, BackgroundWorker workerFetcher, Control control)
         {
             int errorRowCount = 0;
             if (defaultResponse != null)
             {
-
                 switch (defaultResponse.Code)
                 {
                     case 100:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        StoreAndAppend(true, $"Row {row.Index + 1} - {defaultResponse.Message}", domainTextBox, control);
                         errorRowCount++;
                         break;
                     case 200:
-                        control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.LimeGreen));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        control.Invoke((MethodInvoker)(() =>
+                        {
+                            row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                            if (ShowOnlyErrors)
+                            {
+                                try { row.Visible = false; }
+                                catch (InvalidOperationException) { /* current row — leave visible */ }
+                            }
+                        }));
+                        StoreAndAppend(false, $"Row {row.Index + 1} - {defaultResponse.Message}", domainTextBox, control);
                         break;
                     case 201:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                        + " - " + defaultResponse.Message + " Details: " + string.Join(" | ", defaultResponse.Details))));
+                        StoreAndAppend(true, $"Row {row.Index + 1} - {defaultResponse.Message} Details: {string.Join(" | ", defaultResponse.Details)}", domainTextBox, control);
                         errorRowCount++;
                         break;
                     case 401:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        StoreAndAppend(true, $"Row {row.Index + 1} - {defaultResponse.Message}", domainTextBox, control);
                         errorRowCount++;
-                        //return to login page if token has expired
                         RedirectToLoginPage(workerFetcher, control);
                         break;
                     case 500:
                         control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                        control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1) + " - " + defaultResponse.Message)));
+                        StoreAndAppend(true, $"Row {row.Index + 1} - {defaultResponse.Message}", domainTextBox, control);
                         errorRowCount++;
                         break;
                 }
             } else
             {
-
-                if(businessRulesResponse.Code == 102)
+                if (businessRulesResponse.Code == 102)
                 {
                     control.Invoke((MethodInvoker)(() => row.DefaultCellStyle.BackColor = Color.Red));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText(Environment.NewLine)));
-                    control.Invoke((MethodInvoker)(() => domainTextBox.AppendText("Row " + (row.Index + 1)
-                                                    + " - " + businessRulesResponse.Message + " Details: "
-                                                    + string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message)))));
+                    StoreAndAppend(true, $"Row {row.Index + 1} - {businessRulesResponse.Message} Details: {string.Join(" | ", businessRulesResponse.Details.Select(x => x.Message))}", domainTextBox, control);
                     errorRowCount++;
                 }
             }

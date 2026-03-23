@@ -70,10 +70,18 @@ namespace TimeLog.DataImporter.Handlers
             }
             catch (WebException _webEx)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
+                string _responseContent = "Unknown error";
 
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                if (_webEx.Response != null) { 
+                    using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
+                    _responseContent = _r.ReadToEnd();
+                }
+                else
+                {
+                    _responseContent = _webEx.Message;
+                }
+
+                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
             }
         }
 

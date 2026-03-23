@@ -2420,23 +2420,36 @@ namespace TimeLog.DataImporter.Handlers
 
         public void HighlightDataTableRowByTextBoxClick(MouseEventArgs e, DataGridView dataGridView, TextBox domainTextBox)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                dataGridView.ClearSelection();
-                dataGridView.CurrentCell = null;
+            if (e.Button != MouseButtons.Left) return;
 
-                int selectedIndex = domainTextBox.SelectionStart;
-                int _lineNo = domainTextBox.GetLineFromCharIndex(selectedIndex);
+            dataGridView.ClearSelection();
+            dataGridView.CurrentCell = null;
 
-                
-                if (_lineNo > 0 && domainTextBox.Lines[_lineNo].ToLower().StartsWith("row"))
-                {
-                    dataGridView.Rows[_lineNo-1].Selected = true;
-                    dataGridView.FirstDisplayedScrollingRowIndex = _lineNo-1;
-                    dataGridView.Focus();
-                }
+            int lineNo = domainTextBox.GetLineFromCharIndex(domainTextBox.SelectionStart);
 
-            }
+            if (lineNo < 0 || lineNo >= domainTextBox.Lines.Length) return;
+
+            string line = domainTextBox.Lines[lineNo];
+
+            if (!line.StartsWith("Row ", StringComparison.OrdinalIgnoreCase)) return;
+
+            int dashIndex = line.IndexOf(" - ");
+            if (dashIndex <= 4) return;
+
+            if (!int.TryParse(line[4..dashIndex], out int rowNumber)) return;
+
+            int rowIndex = rowNumber - 1;
+            if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count) return;
+
+            var targetRow = dataGridView.Rows[rowIndex];
+
+            // If the row is hidden by the error filter, reveal it before navigating
+            if (!targetRow.Visible)
+                targetRow.Visible = true;
+
+            targetRow.Selected = true;
+            dataGridView.FirstDisplayedScrollingRowIndex = rowIndex;
+            dataGridView.Focus();
         }
 
         public void ExpandCollapseFieldByButtonClick(object sender, ExpandState[] expandStates, Button[] expandButtons, Timer tmrExpand)

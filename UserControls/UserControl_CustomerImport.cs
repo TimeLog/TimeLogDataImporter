@@ -1050,6 +1050,12 @@ namespace TimeLog.DataImporter.UserControls
                 _VATPercentage, checkBox_defaultVATPercentage, VATPercentageList, CustomerHandler.Instance.FileColumnHeaders.Cast<object>().ToArray());
         }
 
+        private void checkBox_showOnlyErrors_CheckedChanged(object sender, EventArgs e)
+        {
+            ApiHelper.Instance.ShowOnlyErrors = ((CheckBox)sender).Checked;
+            ApiHelper.Instance.RefreshLogDisplay(textBox_customerImportMessages);
+            ApiHelper.Instance.RefreshGridFilter(dataGridView_customer, ((CheckBox)sender).Checked);
+        }
         #endregion
     }
 }

@@ -399,7 +399,6 @@ namespace TimeLog.DataImporter.UserControls
             label_initials.Size = new System.Drawing.Size(47, 17);
             label_initials.TabIndex = 4;
             label_initials.Text = "Initials";
-            label_initials.Click += label2_Click_1;
             // 
             // label_customerNo
             // 
@@ -569,7 +568,6 @@ namespace TimeLog.DataImporter.UserControls
             panel_contactDetails.Name = "panel_contactDetails";
             panel_contactDetails.Size = new System.Drawing.Size(426, 390);
             panel_contactDetails.TabIndex = 1;
-            panel_contactDetails.Paint += panel_contactDetails_Paint;
             // 
             // comboBox_mobilePhone
             // 
@@ -621,7 +619,6 @@ namespace TimeLog.DataImporter.UserControls
             label_country.Size = new System.Drawing.Size(83, 17);
             label_country.TabIndex = 4;
             label_country.Text = "Country ISO";
-            label_country.Click += label2_Click;
             // 
             // label_phone
             // 
@@ -649,7 +646,6 @@ namespace TimeLog.DataImporter.UserControls
             label_address.Size = new System.Drawing.Size(57, 17);
             label_address.TabIndex = 1;
             label_address.Text = "Address";
-            label_address.Click += label_address_Click;
             // 
             // label_address2
             // 

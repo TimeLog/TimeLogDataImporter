@@ -95,6 +95,18 @@ namespace TimeLog.DataImporter.UserControls
             _timeregistrationTable = TimeregistrationHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_timeregistration.DataSource = _timeregistrationTable;
             button_import.Enabled = false;
+
+            var checkBox_showOnlyErrors = new CheckBox
+            {
+                Name = "checkBox_showOnlyErrors",
+                Text = "Show errors only",
+                AutoSize = true,
+                Location = new System.Drawing.Point(110, 17),
+                Anchor = AnchorStyles.Left,
+                ForeColor = System.Drawing.Color.FromArgb(64, 64, 64)
+            };
+            checkBox_showOnlyErrors.CheckedChanged += checkBox_showOnlyErrors_CheckedChanged;
+            button_validate.Parent.Controls.Add(checkBox_showOnlyErrors);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -206,6 +218,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_timeregistrationImportMessages.Text = string.Empty;
+            ApiHelper.Instance.ClearLog();
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -218,6 +231,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_timeregistrationImportMessages.Text = string.Empty;
+            ApiHelper.Instance.ClearLog();
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -677,6 +691,11 @@ namespace TimeLog.DataImporter.UserControls
 
         #endregion
 
-
+        private void checkBox_showOnlyErrors_CheckedChanged(object sender, EventArgs e)
+        {
+            ApiHelper.Instance.ShowOnlyErrors = ((CheckBox)sender).Checked;
+            ApiHelper.Instance.RefreshLogDisplay(textBox_timeregistrationImportMessages);
+            ApiHelper.Instance.RefreshGridFilter(dataGridView_timeregistration, ((CheckBox)sender).Checked);
+        }
     }
 }

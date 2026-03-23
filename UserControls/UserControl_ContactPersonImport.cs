@@ -77,6 +77,18 @@ namespace TimeLog.DataImporter.UserControls
             _contactPersonTable = ContactPersonHandler.Instance.InitializeDomainDataTable(MandatoryFields);
             dataGridView_contactPerson.DataSource = _contactPersonTable;
             button_import.Enabled = false;
+
+            var checkBox_showOnlyErrors = new CheckBox
+            {
+                Name = "checkBox_showOnlyErrors",
+                Text = "Show errors only",
+                AutoSize = true,
+                Location = new System.Drawing.Point(110, 17),
+                Anchor = AnchorStyles.Left,
+                ForeColor = System.Drawing.Color.FromArgb(64, 64, 64)
+            };
+            checkBox_showOnlyErrors.CheckedChanged += checkBox_showOnlyErrors_CheckedChanged;
+            button_validate.Parent.Controls.Add(checkBox_showOnlyErrors);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -202,6 +214,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_validate_Click(object sender, EventArgs e)
         {
             textBox_contactPersonImportMessages.Text = string.Empty;
+            ApiHelper.Instance.ClearLog();
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
         }
@@ -214,6 +227,7 @@ namespace TimeLog.DataImporter.UserControls
         private void button_import_Click(object sender, EventArgs e)
         {
             textBox_contactPersonImportMessages.Text = string.Empty;
+            ApiHelper.Instance.ClearLog();
             _senderButton = (Button)sender;
             WorkerFetcher.RunWorkerAsync();
             ContactPersonHandler.Instance.InvalidateCache("AllContractModels");
@@ -632,24 +646,11 @@ namespace TimeLog.DataImporter.UserControls
 
         #endregion
 
-        private void panel_contactDetails_Paint(object sender, PaintEventArgs e)
+        private void checkBox_showOnlyErrors_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label_address_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
+            ApiHelper.Instance.ShowOnlyErrors = ((CheckBox)sender).Checked;
+            ApiHelper.Instance.RefreshLogDisplay(textBox_contactPersonImportMessages);
+            ApiHelper.Instance.RefreshGridFilter(dataGridView_contactPerson, ((CheckBox)sender).Checked);
         }
     }
 }
