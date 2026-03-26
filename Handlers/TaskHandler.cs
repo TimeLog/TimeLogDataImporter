@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using TimeLog.DataImporter.TimeLogApi;
@@ -31,7 +29,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult == "null")
                 {
@@ -40,15 +38,11 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Task", new string[] { });
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
-
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
-
         public DefaultApiResponse ImportTask(TaskCreateModel task, string token, out BusinessRulesApiResponse businessRulesApiResponse)
         {
             var _data = JsonConvert.SerializeObject(task, Newtonsoft.Json.Formatting.None,
@@ -68,7 +62,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult != "null")
                 {
@@ -77,15 +71,10 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Task", new string[] { });
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
-
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
-
-        
     }
 }

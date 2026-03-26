@@ -1,9 +1,8 @@
-﻿using Microsoft.CSharp.RuntimeBinder;
+using Microsoft.CSharp.RuntimeBinder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Windows.Forms;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model;
@@ -32,7 +31,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult == "null")
                 {
@@ -41,12 +40,9 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate Employee", new string[] { });
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
-
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
 
@@ -59,7 +55,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult != "null")
                 {
@@ -68,12 +64,9 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Import Employee", new string[] { });
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
-
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
 
@@ -84,7 +77,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -104,7 +97,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCostPriceEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -123,7 +116,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain cost price ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
@@ -143,7 +136,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -163,7 +156,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllHolidayCalendarEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -183,7 +176,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain holiday calendar ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
@@ -202,7 +195,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -222,7 +215,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAllowanceLegislationEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -241,7 +234,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain allowance legislation ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
@@ -260,7 +253,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -280,7 +273,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllNormalWorkingTimeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -299,7 +292,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain normal working time ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
@@ -318,7 +311,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -338,7 +331,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllSalaryGroupEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -357,7 +350,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain salary group time ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
@@ -376,7 +369,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -396,7 +389,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUserRolesEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities.Count > 0)
@@ -415,7 +408,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             } 
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain user role ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 

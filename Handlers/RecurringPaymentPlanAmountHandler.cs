@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Net;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TimeLog.DataImporter.TimeLogApi;
 using TimeLog.DataImporter.TimeLogApi.Model.Contracts;
@@ -32,7 +30,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult == "null")
                 {
@@ -41,12 +39,9 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to Validate RecurringPaymentPlanAmount update", new string[] { });
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                string _responseContent = _r.ReadToEnd();
-
-                return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
 
@@ -59,7 +54,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                var _jsonResult = ApiHelper.Instance.WebClient(token).UploadString(_address, "POST", _data);
+                var _jsonResult = ApiHelper.Instance.UploadString(token, _address, _data);
 
                 if (_jsonResult != "null")
                 {
@@ -68,20 +63,9 @@ namespace TimeLog.DataImporter.Handlers
 
                 return new DefaultApiResponse(500, "Internal Application Error: Fail to update RecurringPaymentPlanAmount", new string[] { });
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _ex)
             {
-                string _responseContent = "Unknown error";
-
-                if (_webEx.Response != null) { 
-                    using StreamReader _r = new StreamReader(_webEx.Response.GetResponseStream());
-                    _responseContent = _r.ReadToEnd();
-                }
-                else
-                {
-                    _responseContent = _webEx.Message;
-                }
-
-                    return ApiHelper.Instance.ProcessApiResponseContent(_webEx, _responseContent, out businessRulesApiResponse);
+                return ApiHelper.Instance.ProcessApiResponseContent(_ex, out businessRulesApiResponse);
             }
         }
 

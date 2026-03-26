@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Windows.Forms;
 
@@ -97,6 +99,8 @@ namespace TimeLog.DataImporter.TimeLogApi
         /// </summary>
         public bool ShowOnlyErrors { get; set; } = false;
 
+        private static readonly HttpClient _httpClient = new HttpClient();
+
         private ApiHelper()
         {
         }
@@ -155,22 +159,48 @@ namespace TimeLog.DataImporter.TimeLogApi
             }
         }
 
-        public WebClient WebClient(string token)
+        public string DownloadString(string token, string url)
         {
-            var _client = new WebClient();
-            _client.Encoding = Encoding.UTF8;
-            _client.Headers.Add("Authorization", "Bearer " + token);
-            _client.Headers.Add("Accept", "*/*");
-            _client.Headers.Add("Content-Type", "application/json");
-            return _client;
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+
+            var response = _httpClient.SendAsync(request).GetAwaiter().GetResult();
+            var responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiHttpException(response.StatusCode, responseContent);
+            }
+
+            return responseContent;
         }
 
-        public DefaultApiResponse ProcessApiResponseContent(WebException webEx, string responseContent, out BusinessRulesApiResponse businessRulesApiResponse)
+        public string UploadString(string token, string url, string data)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+            request.Content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            var response = _httpClient.SendAsync(request).GetAwaiter().GetResult();
+            var responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApiHttpException(response.StatusCode, responseContent);
+            }
+
+            return responseContent;
+        }
+
+        public DefaultApiResponse ProcessApiResponseContent(ApiHttpException ex, out BusinessRulesApiResponse businessRulesApiResponse)
         {
             DefaultApiResponse _apiResponse = null;
             businessRulesApiResponse = null;
+            string responseContent = ex.ResponseContent;
 
-            if (webEx.Message == "The remote server returned an error: (401) Unauthorized.")
+            if (ex.StatusCode == HttpStatusCode.Unauthorized)
             {
                 _apiResponse = JsonConvert.DeserializeObject<DefaultApiResponse>(responseContent);
                 _apiResponse.Code = 401;
@@ -193,7 +223,7 @@ namespace TimeLog.DataImporter.TimeLogApi
                         _apiResponse.Code = 201;
                         break;                                        
                     default:
-                        MessageBox.Show(webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                 }
             }
@@ -280,6 +310,19 @@ namespace TimeLog.DataImporter.TimeLogApi
             workerFetcher.CancelAsync();
             control.Invoke((MethodInvoker)(() => Login.MainForm.Hide()));
             control.Invoke((MethodInvoker)(() => Program.LoginForm.Show()));
+        }
+    }
+
+    public class ApiHttpException : Exception
+    {
+        public HttpStatusCode StatusCode { get; }
+        public string ResponseContent { get; }
+
+        public ApiHttpException(HttpStatusCode statusCode, string responseContent)
+            : base($"The remote server returned an error: ({(int)statusCode}) {statusCode}.")
+        {
+            StatusCode = statusCode;
+            ResponseContent = responseContent;
         }
     }
 }

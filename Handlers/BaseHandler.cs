@@ -1,4 +1,4 @@
-﻿using LazyCache;
+using LazyCache;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using TimeLog.DataImporter.TimeLogApi;
@@ -217,7 +216,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -237,7 +236,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCurrencyEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -259,7 +258,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default currency ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -278,7 +277,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -298,7 +297,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllLegalEntityEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -320,7 +319,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default legal entity ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -338,7 +337,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -361,7 +360,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -384,7 +383,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse.Where(x=>x.IsActive && x.UserType.Equals("Employee")).ToList();
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default primary and secondary KAM ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -402,7 +401,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -426,7 +425,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -449,7 +448,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default customer ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -467,7 +466,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -488,7 +487,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCustomerStatusEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -508,7 +507,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default customer status ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -527,7 +526,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -550,7 +549,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -573,7 +572,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -592,7 +591,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -615,7 +614,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -639,7 +638,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project sub contract ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -658,7 +657,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -681,7 +680,7 @@ namespace TimeLog.DataImporter.Handlers
                     //while (_totalPages > _currentPage)
                     //{
                     //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractModelsEndpoint, _currentPage + 1);
-                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                    //    _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                     //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                     //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -703,7 +702,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default contract model list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -721,7 +720,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -741,7 +740,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetDefaultHourlyRatesEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -760,7 +759,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default hourly rate ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -778,7 +777,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -798,7 +797,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllDepartmentEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -818,7 +817,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default department ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -836,7 +835,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -856,7 +855,7 @@ namespace TimeLog.DataImporter.Handlers
                     //while (_totalPages > _currentPage)
                     //{
                     //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllUnitTypeEndpoint, _currentPage + 1);
-                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                    //    _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                     //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                     //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -876,7 +875,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default Unit Type list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -894,7 +893,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -917,7 +916,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllAbsenceCodeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -939,7 +938,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain absence code list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -957,7 +956,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -977,7 +976,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllCountryEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -997,7 +996,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default country ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1015,7 +1014,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1035,7 +1034,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllIndustryEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1054,7 +1053,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default industry ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1072,7 +1071,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1092,7 +1091,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentTermEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1111,7 +1110,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default payment term ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1129,7 +1128,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1149,7 +1148,7 @@ namespace TimeLog.DataImporter.Handlers
                     //while (_totalPages > _currentPage)
                     //{
                     //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllEmployeeTypeEndpoint, _currentPage + 1);
-                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                    //    _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                     //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                     //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -1168,7 +1167,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default EmployyType ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1186,7 +1185,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1206,7 +1205,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1225,7 +1224,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1243,7 +1242,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1263,7 +1262,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllExpenseTypeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1282,7 +1281,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default expense type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1301,7 +1300,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1321,7 +1320,7 @@ namespace TimeLog.DataImporter.Handlers
                     //while (_totalPages > _currentPage)
                     //{
                     //    _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTemplateEndpoint, _currentPage + 1);
-                    //    _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                    //    _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                     //    _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                     //    if (_jsonDeserializedObject != null && _jsonDeserializedObject.Entities.Count > 0)
@@ -1340,7 +1339,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project template ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1358,7 +1357,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1378,7 +1377,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectTypeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1397,7 +1396,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1415,7 +1414,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1435,7 +1434,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProjectCategoryEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1454,7 +1453,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default project category ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1472,7 +1471,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1496,7 +1495,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskTypeEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1519,7 +1518,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default task type ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1537,7 +1536,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1562,7 +1561,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllContractHourlyRatesEndpoint + "&contractID=" + contractID, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1586,7 +1585,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain contract hourly rate ID list for contractID: " + contractID + ". " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1604,7 +1603,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1628,7 +1627,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllProductEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1651,7 +1650,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default product ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1669,7 +1668,7 @@ namespace TimeLog.DataImporter.Handlers
 
             try
             {
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1692,7 +1691,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllTaskEndpoint + "&projectID=" + projectID, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1714,7 +1713,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain project task list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1732,7 +1731,7 @@ namespace TimeLog.DataImporter.Handlers
              
             try
             {                
-                string _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                string _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
                 dynamic _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
 
                 if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1752,7 +1751,7 @@ namespace TimeLog.DataImporter.Handlers
                     while (_totalPages > _currentPage)
                     {
                         _address = ApiHelper.Instance.SiteUrl + string.Format(ApiHelper.Instance.GetAllPaymentMethodEndpoint, _currentPage + 1);
-                        _jsonResult = ApiHelper.Instance.WebClient(token).DownloadString(_address);
+                        _jsonResult = ApiHelper.Instance.DownloadString(token, _address);
 
                         _jsonDeserializedObject = JsonConvert.DeserializeObject<dynamic>(_jsonResult);
                         if (_jsonDeserializedObject?.Entities?.Count > 0)
@@ -1771,7 +1770,7 @@ namespace TimeLog.DataImporter.Handlers
                     return _apiResponse;
                 }
             }
-            catch (WebException _webEx)
+            catch (ApiHttpException _webEx)
             {
                 MessageBox.Show("Failed to obtain default payment method ID list. " + _webEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
